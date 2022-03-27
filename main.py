@@ -1,7 +1,6 @@
-from cgi import test
 import pygame
 import game_settings as gs
-from block import Block
+from level_generator import getBlocks 
 #Initialising PyGame
 pygame.init()
 
@@ -13,18 +12,22 @@ pygame.display.set_caption("2D Minecraft")
 game_running = True
 
 #Array to keep track of all the blocks in the world
-workd_blocks = []
-
+world_blocks = getBlocks("level")
 
 #main game loop:
 while game_running:
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
             game_running = False
-    screen.fill('white')
+    #Create the sky 
+    screen.fill(gs.customColours["sky"])
 
-
+    for block in world_blocks:
+        screen.blit(block, block.blockPosition)
 
     pygame.display.update()
+    
+
+    
 
 
