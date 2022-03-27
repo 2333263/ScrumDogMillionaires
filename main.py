@@ -19,6 +19,7 @@ while game_running:
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
             game_running = False
+        
     #Create the sky 
     screen.fill(gs.customColours["sky"])
 
