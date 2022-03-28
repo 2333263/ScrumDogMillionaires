@@ -15,12 +15,16 @@ itemIDs = {
     3 : "Cloud"
 }
 
+
 #In future this will need to be updated to use the file names for the textures
 textureNames = {
+    "Grass" : "grass.png",
+    "Stone" : "stone.png",
+    "Dirt" : "dirt.png",
+    "Cloud" : "cloud.png"
+}
+
+colorNames = {
     #Capitalised colours to align with Item.item_name
     "Sky" : (135, 206, 250),
-    "Grass" : (14, 154, 60),
-    "Stone" : (105, 105, 105),
-    "Cloud" : (255, 255, 255),
-    "Dirt" : (135, 83, 44)
 }

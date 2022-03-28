@@ -52,11 +52,14 @@ while game_running:
     textRect.center = (4.5 * gs.block_size, gs.block_size)
     
     #Create the sky 
-    screen.fill(gs.textureNames["Sky"])
+    screen.fill(gs.colorNames["Sky"])
 
     #Draw all the created blocks to the screen 
     for block in world_blocks:
-        screen.blit(block, block.blockPosition)
+        current_block = pygame.image.load("Tiles/" + block.textureName)
+        current_block = pygame.transform.scale(current_block, (gs.block_size, gs.block_size))
+        screen.blit(current_block, block.blockPosition)
+
     
     screen.blit(text, textRect)
     pygame.display.update()

@@ -16,6 +16,8 @@ def getBlocks(level_name):
             #Create a block using the current number in the level
             currItemID = int(gs.level_array[i][j])
             if(gs.itemIDs.__contains__(currItemID)):
-                block_array.append(Block(gs.block_size, (curr_width, curr_height), gs.textureNames[gs.itemIDs[currItemID]], currItemID))
+                b = Block(gs.block_size, (curr_width, curr_height),  currItemID, gs.textureNames[gs.itemIDs[currItemID]]) 
+                block_array.append(b)
+            
 
     return block_array

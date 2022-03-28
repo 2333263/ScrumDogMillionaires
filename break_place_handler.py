@@ -33,6 +33,9 @@ def block_place(python_pos, world_block): #Block placing logic, and inventory ha
             inv.decrease()
 
             #Remove block from world
-            temp_block = Block(gs.block_size, pos, gs.textureNames[inv.get_selected().item_name], inv.selected)
-            world_block.append(temp_block)
+            if(gs.textureNames.__contains__(gs.itemIDs[inv.selected])):
+                curr_textre = gs.textureNames[gs.itemIDs[inv.selected]]
+                temp_block = Block(gs.block_size, pos,  inv.selected, gs.textureNames[gs.itemIDs[inv.selected]])
 
+                world_block.append(temp_block)
+        
