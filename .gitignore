@@ -15,3 +15,7 @@ __pycache__/game_settings.cpython-39.pyc
 __pycache__/inventory_handler.cpython-39.pyc
 __pycache__/item.cpython-39.pyc
 __pycache__/level_generator.cpython-39.pyc
+*.pyc
+*.pyc
+__pycache__/inventory_handler.cpython-38.pyc
+__pycache__/break_place_handler.cpython-38.pyc
