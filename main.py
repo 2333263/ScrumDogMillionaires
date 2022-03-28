@@ -44,6 +44,7 @@ while game_running:
             elif events.button == 5:
                 inv.select_previous()
     
+    #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
     font = pygame.font.Font('freesansbold.ttf', 16)
     text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.get_selected().getCount()), True, "white")

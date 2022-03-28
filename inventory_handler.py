@@ -9,25 +9,10 @@ hotbar_arr.append(Item('Cloud', 3))
 global selected;
 selected = 0;
 
-
 def add_block(block):
-    #func will need to change when we move away from colours
+    #Updates based on ItemID - need to ensure hotbar arr has all items added first
+    hotbar_arr[block.itemID].increase()
 
-    if(block.itemID == 0):
-        #Grass
-        hotbar_arr[0].increase()
-        
-    elif(block.itemID == 1):
-        #Dirt
-        hotbar_arr[1].increase()
-
-    elif (block.itemID == 2):
-        #Stone
-        hotbar_arr[2].increase()
-
-    elif (block.itemID == 3):
-        #Cloud
-        hotbar_arr[3].increase()
 
 def decrease():
     #decreases currently selected item
