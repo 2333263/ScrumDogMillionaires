@@ -1,2 +1,2 @@
 #TODO
-inventory_array = 
+inventory_array = []
