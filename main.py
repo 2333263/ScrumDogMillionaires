@@ -32,7 +32,7 @@ while game_running:
         if events.type == pygame.MOUSEBUTTONDOWN:
             if events.button == 1:
                 bph.block_break(pygame.mouse.get_pos(),world_blocks)
-            if events.button == 3:
+            elif events.button == 3:
                 bph.block_place(pygame.mouse.get_pos(),world_blocks)
 
     #Create the sky 
