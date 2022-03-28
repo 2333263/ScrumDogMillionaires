@@ -1,11 +1,12 @@
 from item import Item
+from game_settings import itemIDs
 
 #Init inv with item objects
 hotbar_arr = []
-hotbar_arr.append(Item('Grass', 0))
-hotbar_arr.append(Item('Dirt', 1))
-hotbar_arr.append(Item('Stone', 2))
-hotbar_arr.append(Item('Cloud', 3))
+
+for item in itemIDs:
+    hotbar_arr.append(Item(itemIDs[item], item))
+
 global selected;
 selected = 0;
 
