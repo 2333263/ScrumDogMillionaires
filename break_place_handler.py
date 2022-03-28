@@ -19,7 +19,7 @@ def block_break(python_pos,world_block): #Block breaking logic, and inventory ha
             inv.add_block(block)
 
 
-def block_place(python_pos,world_block): #Block placing logic, and inventory handler requesting
+def block_place(python_pos, world_block): #Block placing logic, and inventory handler requesting
     pos = getPos(python_pos)
     found = False
     for block in world_block:
@@ -33,6 +33,6 @@ def block_place(python_pos,world_block): #Block placing logic, and inventory han
             inv.decrease()
 
             #Remove block from world
-            temp_block = Block(gs.block_size, pos, gs.customColours[inv.get_selected().item_name])
+            temp_block = Block(gs.block_size, pos, gs.textureNames[inv.get_selected().item_name], inv.selected)
             world_block.append(temp_block)
 

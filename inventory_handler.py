@@ -3,8 +3,9 @@ from item import Item
 #Init inv with item objects
 hotbar_arr = []
 hotbar_arr.append(Item('Grass', 0))
-hotbar_arr.append(Item('Stone', 1))
-hotbar_arr.append(Item('Cloud', 2))
+hotbar_arr.append(Item('Dirt', 1))
+hotbar_arr.append(Item('Stone', 2))
+hotbar_arr.append(Item('Cloud', 3))
 global selected;
 selected = 0;
 
@@ -12,16 +13,21 @@ selected = 0;
 def add_block(block):
     #func will need to change when we move away from colours
 
-    if(block.blockColour == (14, 154, 60)):
+    if(block.itemID == 0):
         #Grass
         hotbar_arr[0].increase()
-        #print(hotbar_arr[0].item_name, ' : ',hotbar_arr[0].amount)
-    elif (block.blockColour == (105, 105, 105)):
-        #Stone
+        
+    elif(block.itemID == 1):
+        #Dirt
         hotbar_arr[1].increase()
-    elif (block.blockColour == (255, 255, 255)):
-        #Cloud
+
+    elif (block.itemID == 2):
+        #Stone
         hotbar_arr[2].increase()
+
+    elif (block.itemID == 3):
+        #Cloud
+        hotbar_arr[3].increase()
 
 def decrease():
     #decreases currently selected item
@@ -48,7 +54,6 @@ def select_next():
         selected += 1
     else:
         selected = 0
-
 
 
 def select_previous():

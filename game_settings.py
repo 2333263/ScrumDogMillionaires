@@ -8,11 +8,19 @@ block_size = 24
 width = round(block_size * len(level_array[0])) - block_size
 height = round(block_size * len(level_array))
 
-customColours = {
+itemIDs = {
+    0 : "Grass",
+    1 : "Dirt",
+    2 : "Stone",
+    3 : "Cloud"
+}
+
+#In future this will need to be updated to use the file names for the textures
+textureNames = {
     #Capitalised colours to align with Item.item_name
     "Sky" : (135, 206, 250),
     "Grass" : (14, 154, 60),
     "Stone" : (105, 105, 105),
     "Cloud" : (255, 255, 255),
-    "Air" : (255, 255, 255, 0)
+    "Dirt" : (135, 83, 44)
 }

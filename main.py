@@ -22,13 +22,12 @@ while game_running:
         if events.type == pygame.QUIT:
             game_running = False
 
-        #Logic for player interaction
-
-        #1 -- left click
-        #2 -- middle click
-        #3 -- right click
-        #4 -- scroll up
-        #5 -- scroll down
+        # Logic for player interaction
+        # 1 -- left click
+        # 2 -- middle click
+        # 3 -- right click
+        # 4 -- scroll up
+        # 5 -- scroll down
         if events.type == pygame.MOUSEBUTTONDOWN:
             #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
             if events.button == 1:
@@ -44,11 +43,19 @@ while game_running:
             #Scroll DOWN to select previous item in hotbar
             elif events.button == 5:
                 inv.select_previous()
-
+    
+    #Create a font that displays the current block and count, also create a rectangle to draw the font to
+    font = pygame.font.Font('freesansbold.ttf', 16)
+    text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.get_selected().getCount()), True, "white")
+    textRect = text.get_rect()
+    textRect.center = (4.5 * gs.block_size, gs.block_size)
+    
     #Create the sky 
-    screen.fill(gs.customColours["Sky"])
+    screen.fill(gs.textureNames["Sky"])
 
+    #Draw all the created blocks to the screen 
     for block in world_blocks:
         screen.blit(block, block.blockPosition)
-
+    
+    screen.blit(text, textRect)
     pygame.display.update()
