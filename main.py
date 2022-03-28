@@ -31,14 +31,10 @@ while game_running:
         #5 -- scroll down
         if events.type == pygame.MOUSEBUTTONDOWN:
             if events.button == 1:
-                break_block = bph.block_break(pygame.mouse.get_pos(),world_blocks)
-    
+                bph.block_break(pygame.mouse.get_pos(),world_blocks)
             if events.button == 3:
-                #Returns X,Y relative to block size !!! NOT PYGAME COORDS !!!
-                pos = math.floor(pygame.mouse.get_pos()[0]/gs.block_size),math.floor(pygame.mouse.get_pos()[1]/gs.block_size)
-                
+                bph.block_place(pygame.mouse.get_pos(),world_blocks)
 
-        
     #Create the sky 
     screen.fill(gs.customColours["sky"])
 
