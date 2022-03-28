@@ -1,8 +1,8 @@
 import pygame
 import game_settings as gs
 from level_generator import getBlocks
-import math
 import break_place_handler as bph
+import inventory_handler as inv
 #Initialising PyGame
 pygame.init()
 
@@ -35,8 +35,16 @@ while game_running:
             elif events.button == 3:
                 bph.block_place(pygame.mouse.get_pos(),world_blocks)
 
+            #Scroll UP to select next item in hotbar
+            elif events.button == 4:
+                inv.select_next()
+
+            #Scroll DOWN to select previous item in hotbar
+            elif events.button == 5:
+                inv.select_previous()
+
     #Create the sky 
-    screen.fill(gs.customColours["sky"])
+    screen.fill(gs.customColours["Sky"])
 
     for block in world_blocks:
         screen.blit(block, block.blockPosition)
