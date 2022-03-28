@@ -30,10 +30,12 @@ while game_running:
         #4 -- scroll up
         #5 -- scroll down
         if events.type == pygame.MOUSEBUTTONDOWN:
+            #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
             if events.button == 1:
-                bph.block_break(pygame.mouse.get_pos(),world_blocks)
+                bph.block_break(pygame.mouse.get_pos(),world_blocks) #break the block
+                
             elif events.button == 3:
-                bph.block_place(pygame.mouse.get_pos(),world_blocks)
+                bph.block_place(pygame.mouse.get_pos(),world_blocks) #place the block
 
             #Scroll UP to select next item in hotbar
             elif events.button == 4:
@@ -50,8 +52,3 @@ while game_running:
         screen.blit(block, block.blockPosition)
 
     pygame.display.update()
-    
-
-    
-
-

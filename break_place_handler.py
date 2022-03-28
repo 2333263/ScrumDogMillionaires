@@ -1,4 +1,6 @@
 import game_settings as gs
+import block
+import inventory_handler
 import math
 from block import Block
 import inventory_handler as inv
