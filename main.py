@@ -1,7 +1,6 @@
 import pygame
 import game_settings as gs
 from level_generator import getBlocks
-import math
 import break_place_handler as bph
 #Initialising PyGame
 pygame.init()
@@ -31,9 +30,10 @@ while game_running:
         #5 -- scroll down
         if events.type == pygame.MOUSEBUTTONDOWN:
             if events.button == 1:
-                bph.block_break(pygame.mouse.get_pos(),world_blocks)
+                bph.block_break(pygame.mouse.get_pos(),world_blocks) #break the block
+                
             elif events.button == 3:
-                bph.block_place(pygame.mouse.get_pos(),world_blocks)
+                bph.block_place(pygame.mouse.get_pos(),world_blocks) #place the block
 
     #Create the sky 
     screen.fill(gs.customColours["sky"])

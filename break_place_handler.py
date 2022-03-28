@@ -12,7 +12,7 @@ def block_break(python_pos,world_block): #Block breaking logic, and inventory ha
     pos = getPos(python_pos)
     for block in world_block:
         if block.blockPosition == pos:
-            world_block.remove(block)
+            world_block.remove(block) #remove the block from the world at position we click
     #inventory TODO
 
 def block_place(python_pos,world_block): #Block placing logic, and inventory handler requesting
@@ -23,4 +23,4 @@ def block_place(python_pos,world_block): #Block placing logic, and inventory han
             found = True
     if found == False:
         temp_block = Block(gs.block_size, pos, gs.customColours["grass"])
-        world_block.append(temp_block)  
+        world_block.append(temp_block)  #add block to the world at position we click
