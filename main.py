@@ -2,6 +2,7 @@ import pygame
 import game_settings as gs
 from level_generator import getBlocks
 import math
+import break_place_handler as bph
 #Initialising PyGame
 pygame.init()
 
@@ -13,7 +14,7 @@ pygame.display.set_caption("2D Minecraft")
 game_running = True
 
 #Array to keep track of all the blocks in the world
-world_blocks = getBlocks("level")
+world_blocks = getBlocks(gs.level_name)
 
 #main game loop:
 while game_running:
@@ -30,11 +31,14 @@ while game_running:
         #5 -- scroll down
         if events.type == pygame.MOUSEBUTTONDOWN:
             if events.button == 1:
-                #Returns X,Y relative to block size !!! NOT PYGAME COORDS !!!
-                pos = math.floor(pygame.mouse.get_pos()[0]/gs.block_size),math.floor(pygame.mouse.get_pos()[1]/gs.block_size);
+                temp_block = bph.block_break(pygame.mouse.get_pos(),world_blocks)
+                for block in world_blocks:
+                    if block.blockPosition == temp_block.blockPosition:
+                        print("true")
+                        block = temp_block
             if events.button == 3:
                 #Returns X,Y relative to block size !!! NOT PYGAME COORDS !!!
-                pos = math.floor(pygame.mouse.get_pos()[0]/gs.block_size),math.floor(pygame.mouse.get_pos()[1]/gs.block_size);
+                pos = math.floor(pygame.mouse.get_pos()[0]/gs.block_size),math.floor(pygame.mouse.get_pos()[1]/gs.block_size)
                 
 
         
