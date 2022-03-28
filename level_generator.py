@@ -1,4 +1,3 @@
-import pygame
 import game_settings as gs
 from block import Block
 
@@ -12,12 +11,12 @@ def getBlocks(level_name):
             if(gs.level_array[i][j] == ' '):
                 continue
             elif(gs.level_array[i][j] == 'G'):
-                temp_block = Block(gs.block_size, (curr_width, curr_height), gs.customColours["grass"])
+                temp_block = Block(gs.block_size, (curr_width, curr_height), gs.customColours["Grass"])
                 block_array.append(temp_block)
             elif(gs.level_array[i][j] == 'S'):
-                temp_block = Block(gs.block_size, (curr_width, curr_height), gs.customColours["stone"])
+                temp_block = Block(gs.block_size, (curr_width, curr_height), gs.customColours["Stone"])
                 block_array.append(temp_block)
             elif(gs.level_array[i][j] == 'C'):
-                temp_block = Block(gs.block_size, (curr_width, curr_height), gs.customColours["cloud"])
+                temp_block = Block(gs.block_size, (curr_width, curr_height), gs.customColours["Cloud"])
                 block_array.append(temp_block)   
     return block_array
