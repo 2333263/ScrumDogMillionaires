@@ -30,9 +30,10 @@ while game_running:
         #5 -- scroll down
         if events.type == pygame.MOUSEBUTTONDOWN:
             if events.button == 1:
+                #Returns X,Y relative to block size !!! NOT PYGAME COORDS !!!
                 pos = math.floor(pygame.mouse.get_pos()[0]/gs.block_size),math.floor(pygame.mouse.get_pos()[1]/gs.block_size);
-                print(pos)
-            if events.button == 2:
+            if events.button == 3:
+                #Returns X,Y relative to block size !!! NOT PYGAME COORDS !!!
                 pos = math.floor(pygame.mouse.get_pos()[0]/gs.block_size),math.floor(pygame.mouse.get_pos()[1]/gs.block_size);
                 
 
