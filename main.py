@@ -3,6 +3,7 @@ import game_settings as gs
 from level_generator import getBlocks
 import break_place_handler as bph
 import inventory_handler as inv
+import player_movement as pm
 #Initialising PyGame
 pygame.init()
 
@@ -15,6 +16,8 @@ game_running = True
 
 #Array to keep track of all the blocks in the world
 world_blocks = getBlocks(gs.level_name)
+
+player=pm.Player((0,gs.height/8),gs.block_size,(0,0,0))
 
 #main game loop:
 while game_running:
@@ -45,10 +48,20 @@ while game_running:
             elif events.button == 5:
                 inv.select_previous()
 
+    if(events.type==pygame.KEYUP):
+        player.StopMoveOnX()
+        player.update(world_blocks)   
+    elif(events.type==pygame.KEYDOWN):
+        player.MoveOnX()
+        player.update(world_blocks)
+    player.update(world_blocks)      
+     
+   
     #Create the sky 
     screen.fill(gs.customColours["Sky"])
 
     for block in world_blocks:
         screen.blit(block, block.blockPosition)
 
+    screen.blit(player.image,(player.rect.x,player.rect.y))
     pygame.display.update()
