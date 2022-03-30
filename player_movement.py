@@ -19,22 +19,22 @@ class Player(pygame.sprite.Sprite):
        self.image=Image
        self.direction=pygame.math.Vector2(0,0)
        self.gravity=1
+       self.character=Image
 
     def updatePlayerPos(self,pos):
         self.playerPos=pos
 
+
+    
+        
     def MoveOnX(self):
         keys=pygame.key.get_pressed()
         if(keys[pygame.K_LEFT]):
-            #if(self.direction.x==1):
-            #temp=self.image.copy()
-            #self.image=pygame.transform.flip(temp,True, False)
+            self.image=pygame.transform.flip(self.character,True, False)
             self.direction.x=-1
             
         if(keys[pygame.K_RIGHT]):
-            #if(self.direction.x==-1):
-            #temp=self.image.copy()
-            #self.image=pygame.transform.flip( temp,True, False)
+            self.image=self.character
             self.direction.x=1
     def use_gravity(self):
         self.direction.y=self.gravity
