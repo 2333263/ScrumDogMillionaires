@@ -18,6 +18,7 @@ game_running = True
 world_blocks = getBlocks(gs.level_name)
 
 player=pm.Player((0,gs.height/8),gs.block_size,(0,0,0))
+player.update(world_blocks)
 
 #main game loop:
 while game_running:
@@ -50,10 +51,8 @@ while game_running:
 
     if(events.type==pygame.KEYUP):
         player.StopMoveOnX()
-        player.update(world_blocks)   
     elif(events.type==pygame.KEYDOWN):
         player.MoveOnX()
-        player.update(world_blocks)
     player.update(world_blocks)      
      
    
