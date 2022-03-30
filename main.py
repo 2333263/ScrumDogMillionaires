@@ -17,7 +17,7 @@ game_running = True
 #Array to keep track of all the blocks in the world
 world_blocks = getBlocks(gs.level_name)
 
-player=pm.Player((0,gs.height/8),gs.block_size,(0,0,0))
+player=pm.Player((100,gs.height/8),gs.block_size,(0,0,0))
 player.update(world_blocks)
 
 #main game loop:
@@ -48,7 +48,9 @@ while game_running:
             #Scroll DOWN to select previous item in hotbar
             elif events.button == 5:
                 inv.select_previous()
-
+        elif(events.type==pygame.KEYDOWN):
+            if(events.key==pygame.K_UP):
+                player.jump()
     if(events.type==pygame.KEYUP):
         player.StopMoveOnX()
     elif(events.type==pygame.KEYDOWN):
