@@ -49,7 +49,7 @@ while game_running:
                 inv.select_previous()
          #if a key is pressed and that key is the up arrow, run the jump method in the player class
         elif(events.type==pygame.KEYDOWN):
-            if(events.key==pygame.K_UP):
+            if(events.key==pygame.K_UP or events.key==pygame.K_SPACE):
                 player.jump()
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
