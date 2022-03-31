@@ -1,27 +1,19 @@
 from item import Item
+from game_settings import itemIDs
 
 #Init inv with item objects
 hotbar_arr = []
-hotbar_arr.append(Item('Grass', 0))
-hotbar_arr.append(Item('Stone', 1))
-hotbar_arr.append(Item('Cloud', 2))
+
+for item in itemIDs:
+    hotbar_arr.append(Item(itemIDs[item], item))
+
 global selected;
 selected = 0;
 
-
 def add_block(block):
-    #func will need to change when we move away from colours
+    #Updates based on ItemID - need to ensure hotbar arr has all items added first
+    hotbar_arr[block.itemID].increase()
 
-    if(block.blockColour == (14, 154, 60)):
-        #Grass
-        hotbar_arr[0].increase()
-        #print(hotbar_arr[0].item_name, ' : ',hotbar_arr[0].amount)
-    elif (block.blockColour == (105, 105, 105)):
-        #Stone
-        hotbar_arr[1].increase()
-    elif (block.blockColour == (255, 255, 255)):
-        #Cloud
-        hotbar_arr[2].increase()
 
 def decrease():
     #decreases currently selected item
@@ -48,7 +40,6 @@ def select_next():
         selected += 1
     else:
         selected = 0
-
 
 
 def select_previous():

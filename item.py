@@ -11,3 +11,6 @@ class Item:
 
     def decrease(self):
         self.amount -= 1
+    
+    def getCount(self):
+        return self.amount
