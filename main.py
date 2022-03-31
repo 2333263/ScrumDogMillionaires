@@ -5,8 +5,10 @@ import break_place_handler as bph
 import inventory_handler as inv
 import player_movement as pm
 
-#Initialising PyGame
+#Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
+clock = pygame.time.Clock()
+
 
 #Creating the pygame screen
 screen = pygame.display.set_mode((gs.width, gs.height))
@@ -23,6 +25,8 @@ player=pm.Player((100,gs.height/8),gs.block_size)
 
 #main game loop:
 while game_running:
+    clock.tick(60) #Sets the frame to update 60 times a second
+    
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
             game_running = False
@@ -55,7 +59,7 @@ while game_running:
             if(events.key==pygame.K_UP or events.key==pygame.K_SPACE):
                 player.jump()
 
-                
+
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
     #update the player position
