@@ -48,10 +48,14 @@ while game_running:
             #Scroll DOWN to select previous item in hotbar
             elif events.button == 5:
                 inv.select_previous()
-             #if a key is pressed and that key is the up arrow, run the jump method in the player class
+
+
+        #if a key is pressed and that key is the up arrow, run the jump method in the player class
         elif(events.type==pygame.KEYDOWN):
             if(events.key==pygame.K_UP or events.key==pygame.K_SPACE):
                 player.jump()
+
+                
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
     #update the player position
@@ -59,12 +63,11 @@ while game_running:
      
    
     #Create the sky 
-    screen.fill(gs.customColours["Sky"])
+    screen.fill(gs.colorNames["Sky"])
 
     for block in world_blocks:
         screen.blit(block, block.blockPosition)
-    #blits the player to the screen based on the location of the player
-    screen.blit(player.image,(player.rect.x,player.rect.y))
+    
     
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
@@ -82,6 +85,7 @@ while game_running:
         current_block = pygame.transform.scale(current_block, (gs.block_size, gs.block_size))
         screen.blit(current_block, block.blockPosition)
 
-    
+    #blits the player to the screen based on the location of the player
+    screen.blit(player.image,(player.rect.x,player.rect.y))
     screen.blit(text, textRect)
     pygame.display.update()
