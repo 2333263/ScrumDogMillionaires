@@ -3,6 +3,7 @@ import game_settings as gs
 from level_generator import getBlocks
 import break_place_handler as bph
 import inventory_handler as inv
+import player_movement as pm
 #Initialising PyGame
 pygame.init()
 
@@ -15,6 +16,8 @@ game_running = True
 
 #Array to keep track of all the blocks in the world
 world_blocks = getBlocks(gs.level_name)
+#initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
+player=pm.Player((100,gs.height/8),gs.block_size)
 
 #main game loop:
 while game_running:
@@ -44,11 +47,21 @@ while game_running:
             #Scroll DOWN to select previous item in hotbar
             elif events.button == 5:
                 inv.select_previous()
-
+         #if a key is pressed and that key is the up arrow, run the jump method in the player class
+        elif(events.type==pygame.KEYDOWN):
+            if(events.key==pygame.K_UP or events.key==pygame.K_SPACE):
+                player.jump()
+    #runs the move on X which checks if the player is pressing an arrow key to move
+    player.MoveOnX()
+    #update the player position
+    player.update(world_blocks)      
+     
+   
     #Create the sky 
     screen.fill(gs.customColours["Sky"])
 
     for block in world_blocks:
         screen.blit(block, block.blockPosition)
-
+    #blits the player to the screen based on the location of the player
+    screen.blit(player.image,(player.rect.x,player.rect.y))
     pygame.display.update()
