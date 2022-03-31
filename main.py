@@ -16,9 +16,8 @@ game_running = True
 
 #Array to keep track of all the blocks in the world
 world_blocks = getBlocks(gs.level_name)
-
-player=pm.Player((100,gs.height/8),gs.block_size,(0,0,0))
-player.update(world_blocks)
+#initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
+player=pm.Player((100,gs.height/8),gs.block_size)
 
 #main game loop:
 while game_running:
@@ -48,13 +47,13 @@ while game_running:
             #Scroll DOWN to select previous item in hotbar
             elif events.button == 5:
                 inv.select_previous()
+         #if a key is pressed and that key is the up arrow, run the jump method in the player class
         elif(events.type==pygame.KEYDOWN):
             if(events.key==pygame.K_UP):
                 player.jump()
-    if(events.type==pygame.KEYUP):
-        player.StopMoveOnX()
-    elif(events.type==pygame.KEYDOWN):
-        player.MoveOnX()
+    #runs the move on X which checks if the player is pressing an arrow key to move
+    player.MoveOnX()
+    #update the player position
     player.update(world_blocks)      
      
    
@@ -63,6 +62,6 @@ while game_running:
 
     for block in world_blocks:
         screen.blit(block, block.blockPosition)
-
+    #blits the player to the screen based on the location of the player
     screen.blit(player.image,(player.rect.x,player.rect.y))
     pygame.display.update()
