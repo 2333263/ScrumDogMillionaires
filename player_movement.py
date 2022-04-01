@@ -2,8 +2,9 @@ import pygame
 #import pymunk
 import game_settings as gs
 import math
-
 # defintes a class player with several attributes
+
+
 class Player(pygame.sprite.Sprite):
     def __init__(self,pos,size):
        super().__init__()
@@ -21,7 +22,7 @@ class Player(pygame.sprite.Sprite):
        #swap the sprite drawn from the surface to the image
        self.image=Image
        #declare a change in direction vector
-       self.direction=pygame.math.Vector2(0,0)
+       self.direction=pygame.math.Vector2(0.0,0.0)
        self.gravity=1
        #save a copy of the sprite for later
        self.character=Image
@@ -40,14 +41,14 @@ class Player(pygame.sprite.Sprite):
         if(keys[pygame.K_LEFT] or keys[pygame.K_a]):
             #flip the sprite so its facing left
             self.image=pygame.transform.flip(self.character,True, False)
-            #set the change in directions vector to -1 in position x
-            self.direction.x=-1
+            #set the change in directions vector to -2 in position x
+            self.direction.x=-2
         #if the right arrow is being pressed
         if(keys[pygame.K_RIGHT] or keys[pygame.K_d]):
             #set the sprite to be the direction of the original image
             self.image=self.character
-            #set the change in directions vector to 1 in position x
-            self.direction.x=1
+            #set the change in directions vector to 2 in position x
+            self.direction.x=2
         #if neither the left nor right arrow is being pressed
         if(not keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT] and not keys[pygame.K_d] and not keys[pygame.K_a]):
             #run the stop Move on X method which sets the direction vector as position x to 0
@@ -68,11 +69,11 @@ class Player(pygame.sprite.Sprite):
         #add 1/15th of gravity to the current change in direction (this causes an arc when jumping)
         self.direction.y+=self.gravity/15
         #when the player reaches his arc set jumped to false so normal gravity functions
-        if(self.direction.y>=0):
+        if(math.floor(self.direction.y)==0):
     
             self.jumped=False
             
-    def update(self, allBlocks):
+    def update(self, allBlocks, dt):
         #if the player is jumping use the jump arc gravity instead of normal gravity
         if(self.jumped==True):
             self.jumpArc()
@@ -81,10 +82,13 @@ class Player(pygame.sprite.Sprite):
             self.use_gravity()
         #check if there are any collisions
         self.findCollision(allBlocks)
-        
         #change the position of the player based on the values in the change direction vector
-        self.rect.x+=self.direction.x
-        self.rect.y += self.direction.y
+        if(dt>0):
+            self.rect.x += self.direction.x*dt
+            self.rect.y += self.direction.y*dt
+        else:
+            self.rect.x += self.direction.x
+            self.rect.y += self.direction.y
     def StopMoveOnX(self):
         self.direction.x=0
     def findCollision(self,allBlocks):
@@ -96,7 +100,7 @@ class Player(pygame.sprite.Sprite):
                     self.direction.y=0  #blocks below
                 #checks to see if theyre at a world border
             elif(self.rect.x<0 and self.direction.x<0 or self.rect.x+gs.block_size>gs.width and self.direction.x>0): #world borders
-                    self.direction.y=0
+                    #self.direction.y=0
                     self.direction.x=0
             #checks to see if there are any collisions to the left or right of the player
             if(self.direction.x>0 and self.rect.x+gs.block_size==block.blockPosition[0] or self.direction.x<0 and self.rect.x==block.blockPosition[0]+gs.block_size):

@@ -63,15 +63,12 @@ while game_running:
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
     #update the player position
-    player.update(world_blocks)      
+    player.update(world_blocks,clock.tick())
      
    
     #Create the sky 
     screen.fill(gs.colorNames["Sky"])
 
-    for block in world_blocks:
-        screen.blit(block, block.blockPosition)
-    
     
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
@@ -79,17 +76,22 @@ while game_running:
     text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.get_selected().getCount()), True, "white")
     textRect = text.get_rect()
     textRect.center = (4.5 * gs.block_size, gs.block_size)
+    #add a frame rate counter to top right corner
+    text2 = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
+
     
     #Create the sky 
     screen.fill(gs.colorNames["Sky"])
 
-    #Draw all the created blocks to the screen 
+    #Draw all the created blocks to the screen
     for block in world_blocks:
-        current_block = pygame.image.load("Tiles/" + block.textureName)
-        current_block = pygame.transform.scale(current_block, (gs.block_size, gs.block_size))
-        screen.blit(current_block, block.blockPosition)
+        #current_block = pygame.image.load("Tiles/" + block.textureName)
+        #current_block = pygame.transform.scale(current_block, (gs.block_size, gs.block_size))
+        screen.blit(block.Image, block.blockPosition)
 
     #blits the player to the screen based on the location of the player
-    screen.blit(player.image,(player.rect.x,player.rect.y))
+
     screen.blit(text, textRect)
+    screen.blit(text2, (gs.width-100, 5))
+    screen.blit(player.image, (player.rect.x, player.rect.y))
     pygame.display.update()
