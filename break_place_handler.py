@@ -13,7 +13,7 @@ def block_break(python_pos,world_block): #Block breaking logic, and inventory ha
     pos = getPos(python_pos)
     for block in world_block:
         if block.blockPosition == pos:
-            #Add block to world
+            #Remove block from world
             world_block.remove(block)
             #Add block to inventory
             inv.add_block(block)
@@ -32,7 +32,7 @@ def block_place(python_pos, world_block): #Block placing logic, and inventory ha
             #Decrease inventory item
             inv.decrease()
 
-            #Remove block from world
+            #Add block to world
             if(gs.textureNames.__contains__(gs.itemIDs[inv.selected])):
                 curr_textre = gs.textureNames[gs.itemIDs[inv.selected]]
                 temp_block = Block(gs.block_size, pos,  inv.selected, gs.textureNames[gs.itemIDs[inv.selected]])
