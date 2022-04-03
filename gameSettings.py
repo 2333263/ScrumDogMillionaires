@@ -1,12 +1,13 @@
-level_name = "level"
+#When random world gen is done, could just feel level into levelName to avoid exsessive code changes
+levelName = "level"
 
-with open('Levels/'+level_name+'.txt') as f:
-    level_array = f.readlines()
+with open('Levels/' + levelName + '.txt') as f:
+    levelArray = f.readlines()
 
-block_size = 24
+blockSize = 24
 
-width = round(block_size * len(level_array[0])) - block_size
-height = round(block_size * len(level_array))
+width = round(blockSize * len(levelArray[0])) - blockSize
+height = round(blockSize * len(levelArray))
 
 itemIDs = {
     0 : "Grass",

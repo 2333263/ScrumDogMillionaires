@@ -1,9 +1,9 @@
 import pygame
-import game_settings as gs
-from level_generator import getBlocks
-import break_place_handler as bph
-import inventory_handler as inv
-import player_movement as pm
+import gameSettings as gs
+from levelGenerator import getBlocks
+import breakPlaceHandler as bph
+import inventoryHandler as inv
+import playerMovement as pm
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
@@ -15,21 +15,21 @@ screen = pygame.display.set_mode((gs.width, gs.height))
 pygame.display.set_caption("2D Minecraft")
 
 #Game runing variable
-game_running = True
+gameRunning = True
 
 #Array to keep track of all the blocks in the world
-world_blocks = getBlocks(gs.level_name)
+worldBlocks = getBlocks(gs.levelName)
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
-player=pm.Player((100,gs.height/8),gs.block_size)
+player=pm.Player((100,gs.height/8), gs.blockSize)
 
 #main game loop:
-while game_running:
+while gameRunning:
     clock.tick(60) #Sets the frame to update 60 times a second
     
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
-            game_running = False
+            gameRunning = False
 
         # Logic for player interaction
         # 1 -- left click
@@ -40,18 +40,18 @@ while game_running:
         if events.type == pygame.MOUSEBUTTONDOWN:
             #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
             if events.button == 1:
-                bph.block_break(pygame.mouse.get_pos(),world_blocks) #break the block
+                bph.blockBreak(pygame.mouse.get_pos(), worldBlocks) #break the block
                 
             elif events.button == 3:
-                bph.block_place(pygame.mouse.get_pos(),world_blocks) #place the block
+                bph.blockPlace(pygame.mouse.get_pos(), worldBlocks) #place the block
 
             #Scroll UP to select next item in hotbar
             elif events.button == 4:
-                inv.select_next()
+                inv.selectNext()
 
             #Scroll DOWN to select previous item in hotbar
             elif events.button == 5:
-                inv.select_previous()
+                inv.selectPrevious()
 
 
         #if a key is pressed and that key is the up arrow, run the jump method in the player class
@@ -63,7 +63,7 @@ while game_running:
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
     #update the player position
-    player.update(world_blocks,clock.tick())
+    player.update(worldBlocks, clock.tick())
      
    
     #Create the sky 
@@ -73,9 +73,9 @@ while game_running:
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
     font = pygame.font.Font('freesansbold.ttf', 16)
-    text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.get_selected().getCount()), True, "white")
+    text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.getSelected().getCount()), True, "white")
     textRect = text.get_rect()
-    textRect.center = (4.5 * gs.block_size, gs.block_size)
+    textRect.center = (4.5 * gs.blockSize, gs.blockSize)
     #add a frame rate counter to top right corner
     text2 = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
 
@@ -84,9 +84,9 @@ while game_running:
     screen.fill(gs.colorNames["Sky"])
 
     #Draw all the created blocks to the screen
-    for block in world_blocks:
-        #current_block = pygame.image.load("Tiles/" + block.textureName)
-        #current_block = pygame.transform.scale(current_block, (gs.block_size, gs.block_size))
+    for block in worldBlocks:
+        #currentBlock = pygame.image.load("Tiles/" + block.textureName)
+        #currentBlock = pygame.transform.scale(currentBlock, (gs.blockSize, gs.blockSize))
         screen.blit(block.Image, block.blockPosition)
 
     #blits the player to the screen based on the location of the player
