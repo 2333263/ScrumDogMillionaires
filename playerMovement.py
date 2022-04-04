@@ -61,7 +61,7 @@ class Player(pygame.sprite.Sprite):
         #if the player is not moving in the y direction
         if(self.direction.y==0):
             #set the change of direction to -3 in the y direction (ie go up by 3 places)
-            self.direction.y=-3
+            self.direction.y=-2
             #set jump to true
             self.jumped=True
 
