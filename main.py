@@ -40,10 +40,10 @@ while gameRunning:
         if events.type == pygame.MOUSEBUTTONDOWN:
             #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
             if events.button == 1:
-                bph.blockBreak(pygame.mouse.get_pos(), worldBlocks) #break the block
+                bph.blockBreak(pygame.mouse.get_pos(), worldBlocks, player) #break the block
                 
             elif events.button == 3:
-                bph.blockPlace(pygame.mouse.get_pos(), worldBlocks) #place the block
+                bph.blockPlace(pygame.mouse.get_pos(), worldBlocks, player) #place the block
 
             #Scroll UP to select next item in hotbar
             elif events.button == 4:
@@ -65,7 +65,6 @@ while gameRunning:
     #update the player position
     player.update(worldBlocks, clock.tick())
      
-   
     #Create the sky 
     screen.fill(gs.colorNames["Sky"])
 
