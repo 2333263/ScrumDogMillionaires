@@ -32,3 +32,5 @@ colorNames = {
     #Capitalised colours to align with Item.item_name
     "Sky" : (135, 206, 250),
 }
+
+immovableBlocks = [3, 4]

@@ -18,7 +18,7 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
     if distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = getPos(python_pos)
         for block in world_block:
-            if block.blockPosition == pos and block.itemID != 4:
+            if block.blockPosition == pos and block.itemID not in gs.immovableBlocks:
                 #Remove block from world
                 world_block.remove(block)
                 #Add block to inventory
