@@ -24,7 +24,7 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
 
 
 def blockPlace(python_pos, world_block, player): #Block placing logic, and inventory handler requesting
-    if distance(player, python_pos) <= 5 * gs.blockSize:
+    if distance(player, python_pos) <= 6 * gs.blockSize:
         pos = getPos(python_pos)
         found = False
         for block in world_block:
