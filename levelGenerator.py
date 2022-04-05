@@ -12,11 +12,17 @@ def getBlocks(levelName):
             #if its an air block or an extra line skip it 
             if(gs.levelArray[i][j] == ' ' or gs.levelArray[i][j] == '\n'):
                 continue
-                
+            
+
+
             #Create a block using the current number in the level
             currItemID = int(gs.levelArray[i][j])
             if(gs.itemIDs.__contains__(currItemID)):
-                b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
+                if(currItemID == 3):
+                    #Do cloud stuff
+                    b = Block(gs.blockSize * 4, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
+                else:
+                    b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
                 blockArray.append(b)
             
 
