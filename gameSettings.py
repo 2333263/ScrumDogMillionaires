@@ -14,7 +14,8 @@ itemIDs = {
     0 : "Grass",
     1 : "Dirt",
     2 : "Stone",
-    3 : "Cloud"
+    3 : "Cloud",
+    4 : "Bedrock"
 }
 
 
@@ -23,7 +24,8 @@ textureNames = {
     "Grass" : "grass.png",
     "Stone" : "stone.png",
     "Dirt" : "dirt.png",
-    "Cloud" : "cloud.png"
+    "Cloud" : "cloud.png",
+    "Bedrock" : "bedrock.png"
 }
 
 colorNames = {

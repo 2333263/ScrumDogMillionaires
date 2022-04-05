@@ -64,9 +64,6 @@ while gameRunning:
     player.MoveOnX()
     #update the player position
     player.update(worldBlocks, clock.tick())
-     
-    #Create the sky 
-    screen.fill(gs.colorNames["Sky"])
 
     
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
