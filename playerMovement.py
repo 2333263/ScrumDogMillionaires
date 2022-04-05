@@ -7,25 +7,25 @@ import math
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,pos,size):
-       super().__init__()
-       pygame.sprite.Sprite.__init__(self)
-       self.playerSize=size
-       self.playerPos=pos
-       #create a surface of size (seize and 2 size)
-       self.image=pygame.Surface((size,2*size))
-       self.jumped=False
-       #create a rect based on the size of the surface
-       self.rect = self.image.get_rect(topleft=pos)
-       #loads the sprite from the file
-       Image=pygame.image.load("sprite the knight 648 x 1296/IMG-4203.PNG")
-       Image=pygame.transform.scale(Image,(size,2*size))
-       #swap the sprite drawn from the surface to the image
-       self.image=Image
-       #declare a change in direction vector
-       self.direction=pygame.math.Vector2(0.0,0.0)
-       self.gravity=1
-       #save a copy of the sprite for later
-       self.character=Image
+        #Any reference to playerPos or player.pos is deprecated, please use player.getPlayerPos() instead. This returns a tuple of x and y coordinates.
+        super().__init__()
+        pygame.sprite.Sprite.__init__(self)
+        self.playerSize=size
+        #create a surface of size (seize and 2 size)
+        self.image=pygame.Surface((size,2*size))
+        self.jumped=False
+        #create a rect based on the size of the surface
+        self.rect = self.image.get_rect(topleft=pos)
+        #loads the sprite from the file
+        Image=pygame.image.load("sprite the knight 648 x 1296/IMG-4203.PNG")
+        Image=pygame.transform.scale(Image,(size,2*size))
+        #swap the sprite drawn from the surface to the image
+        self.image=Image
+        #declare a change in direction vector
+        self.direction=pygame.math.Vector2(0.0,0.0)
+        self.gravity=1
+        #save a copy of the sprite for later
+        self.character=Image
 
 
     #updates the player position based on the current pos, this is not longer used

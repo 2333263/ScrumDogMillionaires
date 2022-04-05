@@ -5,6 +5,7 @@ with open('Levels/' + levelName + '.txt') as f:
     levelArray = f.readlines()
 
 blockSize = 24
+playerRange = 7
 
 width = round(blockSize * len(levelArray[0])) - blockSize
 height = round(blockSize * len(levelArray))

@@ -25,7 +25,7 @@ player=pm.Player((100,gs.height/8), gs.blockSize)
 
 #main game loop:
 while gameRunning:
-    clock.tick(60) #Sets the frame to update 60 times a second
+    clock.tick(144) #Sets the frame to update 60 times a second
     
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
