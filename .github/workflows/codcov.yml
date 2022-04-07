@@ -14,7 +14,7 @@ jobs:
        run: |
         pip install pygame
         pip install coverage
-     - name: Generate Report
+     #- name: Generate Report
        #run: |
         #coverage run -m unittest
      - name: Upload Coverage to Codecov
