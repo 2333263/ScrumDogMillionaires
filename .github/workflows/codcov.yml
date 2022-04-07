@@ -1,0 +1,17 @@
+name: Codecov
+on: [push, pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch
+        uses: actions/checkout@master
+      - name: Test
+        run: |
+          python3 main.py
+
+      - name: Upload
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./lib.c.gcov
+          token: ${{ secrets.bc68f237-0cf7-4061-bc42-c9e9fc41c703 }} 
