@@ -11,7 +11,7 @@ jobs:
       with:
         fetch-depth: ‘2’
         files: ./lib.c.gcov
-        token: ${{ secrets.bc68f237-0cf7-4061-bc42-c9e9fc41c703 }}
+        token: ${{ secrets.CODECOV_TOKEN }}
     - name: Setup Python
       uses: actions/setup-python@master
       with:
