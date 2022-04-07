@@ -1,3 +1,4 @@
+!pip install pygame
 import pygame
 import gameSettings as gs
 from levelGenerator import getBlocks
