@@ -7,4 +7,4 @@ class TestMethods(unittest.TestCase):
       self.assertEqual("test1","test1")
 
       
-Test=TestMods()
+Test=TestMethods()
