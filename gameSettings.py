@@ -18,8 +18,14 @@ itemIDs = {
     4 : "Bedrock"
 }
 
+converterIDs = {
+    'G' : 0,
+    'D' : 1,
+    'S' : 2,
+    'C' : 3,
+    'B' : 4
+}
 
-#In future this will need to be updated to use the file names for the textures
 textureNames = {
     "Grass" : "grass.png",
     "Stone" : "stone.png",
