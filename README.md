@@ -1,13 +1,15 @@
 # Scrum-Dog-Millionaires
 2D Side Scoller based on Minecraft Dynamics
 
-Group Members: 
-2303289
-2302891
-2393033
-2332853
-2356823
-2420656
+Justin Knopfmacher - 2356115 (scrum master)
+Lior Becker - 2333263
+Luciano Meixieira - 2332853
+Michaela Klug - 2393033
+Benjamin Servant - 2420656
+Wen Guan Gavin Chen -2302891
+Damion Harvey - 2303289
+Stuart Groves - 2356823
+Jeremy Stott - 2368841
 
 
 
