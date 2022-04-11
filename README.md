@@ -20,3 +20,4 @@ Damion Harvey - 2303289
 Stuart Groves - 2356823  
 Jeremy Stott - 2368841  
 
+[![codecov](https://codecov.io/gh/2333263/Scrum-Dog-Millionaires/branch/main/graph/badge.svg?token=S5G6FCJHRC)](https://codecov.io/gh/2333263/Scrum-Dog-Millionaires)
