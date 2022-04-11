@@ -21,4 +21,4 @@ Stuart Groves - 2356823
 Jeremy Stott - 2368841  
 
 [![codecov](https://codecov.io/gh/2333263/Scrum-Dog-Millionaires/branch/main/graph/badge.svg?token=S5G6FCJHRC)](https://codecov.io/gh/2333263/Scrum-Dog-Millionaires)
-[![CircleCI](https://circleci.com/gh/2333263/Scrum-Dog-Millionaires/tree/main.svg?style=svg)](https://circleci.com/gh/2333263/Scrum-Dog-Millionaires/tree/main)
+[![CircleCI](https://circleci.com/gh/2333263/Scrum-Dog-Millionaires/tree/main.svg?style=svg&circle-token=c398761ebf54fe0e6565a048c5d2b7573cdbf79b)](https://circleci.com/gh/2333263/Scrum-Dog-Millionaires/tree/main)
