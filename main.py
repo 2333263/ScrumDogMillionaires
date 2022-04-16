@@ -7,6 +7,8 @@ import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerMovement as pm
 import craftingMenu as cm
+import json
+
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
@@ -25,7 +27,14 @@ gameRunning = True
 #Array to keep track of all the blocks in the world
 worldBlocks = getBlocks(gs.levelName)
 
-craftingItems = ["pickaxe", "wood", "sticks"]
+f = open('recipes.json')
+data = json.load(f)
+
+craftingItems = []
+for i in range(len(data)):
+    craftingItems.append(data[i]['toolName'])
+    
+f.close()
 cm.createCraftingList(craftingItems, manager)
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
