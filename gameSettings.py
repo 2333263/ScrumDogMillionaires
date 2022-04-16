@@ -25,6 +25,17 @@ itemIDs = {
     9 : "Wooden Planks"
 }
 
+#IDs for the crafting table
+#when json file is loaded into an array, say like data, data[0] will refer to the wooden planks recipe
+#data[0]['toolName'] would return wooden planks 
+
+craftingIDs = {
+    0 : "wooden planks", 
+    1 : "wooden pickaxe", 
+    2 : "wood and stone pickaxe", 
+    3 : "stone pickaxe"
+}
+
 converterIDs = {
     'G' : 0,
     'D' : 1,
