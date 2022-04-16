@@ -5,6 +5,7 @@ import math
 from block import Block
 import inventoryHandler as inv
 
+
 def distance(player, python_pos):
     playerPos = getPos(player.getPlayerPos())
     blockPos = getPos(python_pos)
@@ -32,7 +33,7 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
         for block in world_block:
             if block.blockPosition == pos:
                 if(block.itemID in gs.clickableBlocks):
-                    print("Open")
+                    gs.drawCrafting = True
                 found = True
         if found == False:
             #Only allow placing if player has more blocks

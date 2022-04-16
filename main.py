@@ -1,10 +1,12 @@
+from matplotlib.pyplot import draw
 import pygame
+import pygame_gui
 import gameSettings as gs
 from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerMovement as pm
-
+import craftingMenu as cm
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
@@ -13,6 +15,9 @@ clock = pygame.time.Clock()
 #Creating the pygame screen
 screen = pygame.display.set_mode((gs.width, gs.height))
 pygame.display.set_caption("2D Minecraft")
+
+#Creating a window manager for the GUI library 
+manager = pygame_gui.UIManager((gs.width, gs.height))
 
 #Game runing variable
 gameRunning = True
@@ -25,11 +30,15 @@ player=pm.Player((100,gs.height/8), gs.blockSize)
 
 #main game loop:
 while gameRunning:
-    clock.tick(60) #Sets the frame to update 60 times a second
-    
+    timer = clock.tick(60) #Sets the frame to update 60 times a second
+    delta_time = timer/1000 #Gets a time for the game
+
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
             gameRunning = False
+
+        manager.process_events(events)
+
 
         # Logic for player interaction
         # 1 -- left click
@@ -44,7 +53,8 @@ while gameRunning:
                 
             elif events.button == 3:
                 bph.blockPlace(pygame.mouse.get_pos(), worldBlocks, player) #place the block
-
+                
+                #Maybe add the crafting button here
             #Scroll UP to select next item in hotbar
             elif events.button == 4:
                 inv.selectNext()
@@ -59,13 +69,14 @@ while gameRunning:
             if(events.key==pygame.K_UP or events.key==pygame.K_SPACE):
                 player.jump()
 
+    manager.update(delta_time)
 
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
     #update the player position
     player.update(worldBlocks, clock.tick())
 
-    
+
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
     font = pygame.font.Font('freesansbold.ttf', 16)
@@ -75,10 +86,9 @@ while gameRunning:
     #add a frame rate counter to top right corner
     text2 = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
 
-    
     #Create the sky 
     screen.fill(gs.colorNames["Sky"])
-
+    
     #Draw all the created blocks to the screen
     for block in worldBlocks:
         #currentBlock = pygame.image.load("Tiles/" + block.textureName)
@@ -86,8 +96,11 @@ while gameRunning:
         screen.blit(block.Image, block.blockPosition)
 
     #blits the player to the screen based on the location of the player
-
     screen.blit(text, textRect)
     screen.blit(text2, (gs.width-100, 5))
     screen.blit(player.image, (player.rect.x, player.rect.y))
+
+    if(gs.drawCrafting):
+        manager.draw_ui(screen)
+    
     pygame.display.update()

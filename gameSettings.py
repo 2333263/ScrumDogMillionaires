@@ -7,6 +7,8 @@ with open('Levels/' + levelName + '.txt') as f:
 blockSize = 24
 playerRange = 7
 
+drawCrafting = False
+
 width = round(blockSize * len(levelArray[0])) - blockSize
 height = round(blockSize * len(levelArray))
 
