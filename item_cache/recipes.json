@@ -1,0 +1,17 @@
+{"recipes":
+    {
+
+    "wooden planks": [{"itemID" : 7, "numBlocks": 1, "craftAmount": 4}], 
+
+    "wooden pickaxe":[ {"itemID" : 9, "numBlocks": 5, "craftAmount": 1}], 
+
+    "wood and stone pickaxe": [
+            {"itemID" : 9, "numBlocks" : 3},
+            {"itemID" : 2, "numBlocks" : 3}, 
+            {"craftAmount": 1}
+        ],
+
+    "stone pickaxe": [
+        {"itemID" : 2, "numBlocks" : 5, "craftAmount": 1}]
+    }
+}
