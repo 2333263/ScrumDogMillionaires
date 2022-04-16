@@ -31,9 +31,10 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
         found = False
         for block in world_block:
             if block.blockPosition == pos:
+                if(block.itemID in gs.clickableBlocks):
+                    print("Open")
                 found = True
         if found == False:
-
             #Only allow placing if player has more blocks
             if (inv.getSelected().amount >0):
                 #Decrease inventory item

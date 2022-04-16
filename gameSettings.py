@@ -4,7 +4,7 @@ levelName = "level"
 with open('Levels/' + levelName + '.txt') as f:
     levelArray = f.readlines()
 
-blockSize = 24
+blockSize = 42
 playerRange = 7
 
 width = round(blockSize * len(levelArray[0])) - blockSize
@@ -15,7 +15,12 @@ itemIDs = {
     1 : "Dirt",
     2 : "Stone",
     3 : "Cloud",
-    4 : "Bedrock"
+    4 : "Bedrock",
+    5 : "Crafting Table",
+    6 : "Leaves",
+    7 : "Logs",
+    8 : "Wooden Pickaxe",
+    9 : "Wooden Planks"
 }
 
 converterIDs = {
@@ -23,7 +28,10 @@ converterIDs = {
     'D' : 1,
     'S' : 2,
     'C' : 3,
-    'B' : 4
+    'B' : 4,
+    'T' : 5,
+    'V' : 6,
+    'L' : 7
 }
 
 textureNames = {
@@ -31,7 +39,11 @@ textureNames = {
     "Stone" : "stone.png",
     "Dirt" : "dirt.png",
     "Cloud" : "cloud.png",
-    "Bedrock" : "bedrock.png"
+    "Bedrock" : "bedrock.png",
+    "Crafting Table" : "crafting.png",
+    "Leaves" : "leaves_dense.png",
+    "Logs" : "wood_log.png",
+    "Wooden Pickaxe" : "wooden_pickaxe.png"
 }
 
 colorNames = {
@@ -39,4 +51,5 @@ colorNames = {
     "Sky" : (135, 206, 250),
 }
 
-immovableBlocks = [3, 4]
+immovableBlocks = [3, 4, 5]
+clickableBlocks = [5]
