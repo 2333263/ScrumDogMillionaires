@@ -14,6 +14,8 @@ jobs:
        run: |
         pip install pygame
         pip install coverage
+        pip install pygame_gui
+        pip install numpy
      - name: Generate Report
        run: |
         coverage run test.py
