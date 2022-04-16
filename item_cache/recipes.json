@@ -1,59 +1,56 @@
-{    
-    "recipes": 
-    [
-        {
-            "toolName" : "wooden planks", 
-            "craftingAmount" : 4,
-            "resources" : 
-            [
-                {
-                    "itemID" : 7, 
-                    "numBlocks" : 5
-                }
-            ]
+[
+    {
+        "toolName" : "wooden planks", 
+        "craftingAmount" : 4,
+        "resources" : 
+        [
+            {
+                "itemID" : 7, 
+                "numBlocks" : 5
+            }
+        ]
 
-        }, 
+    }, 
 
-        {
-            "toolName" : "wooden pickaxe", 
-            "craftingAmount" : 1,
-            "resources" : 
-            [
-                {
-                    "itemID": 9,
-                    "numBlocks" : 5
-                }
-            ]
-        }, 
+    {
+        "toolName" : "wooden pickaxe", 
+        "craftingAmount" : 1,
+        "resources" : 
+        [
+            {
+                "itemID": 9,
+                "numBlocks" : 5
+            }
+        ]
+    }, 
 
-        {
-            "toolName" : "wood and stone pickaxe", 
-            "craftingAmount" : 1, 
-            "resources" :
-            [
-                {
-                    "itemID": 9, 
-                    "numBlocks": 3
-                }, 
+    {
+        "toolName" : "wood and stone pickaxe", 
+        "craftingAmount" : 1, 
+        "resources" :
+        [
+            {
+                "itemID": 9, 
+                "numBlocks": 3
+            }, 
 
-                {
-                    "itemID" : 2, 
-                    "numBlocks" : 3
-                }
-            ]
-        },
+            {
+                "itemID" : 2, 
+                "numBlocks" : 3
+            }
+        ]
+    },
 
-        {
-            "toolName" : "stone pickaxe", 
-            "craftingAmount" : 1, 
-            "resources" : 
-            [
-                {
-                    "itemID" : 2, 
-                    "numBlocks" : 5
-                }
-            ]
-        }
+    {
+        "toolName" : "stone pickaxe", 
+        "craftingAmount" : 1, 
+        "resources" : 
+        [
+            {
+                "itemID" : 2, 
+                "numBlocks" : 5
+            }
+        ]
+    }
 
-    ]
-}
+]
