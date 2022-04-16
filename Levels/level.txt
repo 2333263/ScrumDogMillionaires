@@ -1,11 +1,11 @@
                 C                  
-                            C     
+                                   
 C                                  
-                                   
-                                   
-                G                  
-                DGGG               
-   G        T  GDDDDG              
+                             V     
+                            VVV    
+                G          VVLVV   
+                DGGG         L     
+   G        T  GDDDDG        L     
 GGGDGGG  GGGGGGDDDDDDGGGGGGGGGGGGGG
 DDDDSS   SDDDDDDDDDDDDDDDDDDDDDDDDD
 SSSSS   SSSSSSDDDDDDDDDDDDDDDDDDDSS

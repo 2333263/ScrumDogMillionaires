@@ -16,7 +16,9 @@ itemIDs = {
     2 : "Stone",
     3 : "Cloud",
     4 : "Bedrock",
-    5 : "Crafting Table"
+    5 : "Crafting Table",
+    6 : "Leaves",
+    7 : "Logs"
 }
 
 converterIDs = {
@@ -25,7 +27,9 @@ converterIDs = {
     'S' : 2,
     'C' : 3,
     'B' : 4,
-    'T' : 5
+    'T' : 5,
+    'V' : 6,
+    'L' : 7
 }
 
 textureNames = {
@@ -34,7 +38,9 @@ textureNames = {
     "Dirt" : "dirt.png",
     "Cloud" : "cloud.png",
     "Bedrock" : "bedrock.png",
-    "Crafting Table" : "crafting.png"
+    "Crafting Table" : "crafting.png",
+    "Leaves" : "leaves_dense.png",
+    "Logs" : "wood_log.png"
 }
 
 colorNames = {
