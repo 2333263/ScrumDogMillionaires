@@ -8,6 +8,7 @@ blockSize = 24
 playerRange = 7
 
 drawCrafting = False
+craftingPos = (0, 0)
 
 width = round(blockSize * len(levelArray[0])) - blockSize
 height = round(blockSize * len(levelArray))

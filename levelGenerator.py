@@ -20,6 +20,9 @@ def getBlocks(levelName):
                 if(currItemID == 3):
                     #Do cloud stuff
                     b = Block(gs.blockSize * 6, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
+                elif(currItemID == 5):
+                    b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
+                    gs.craftingPos = (currWidth, currHeight)
                 else:
                     b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
                 blockArray.append(b)

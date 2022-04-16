@@ -33,7 +33,10 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
         for block in world_block:
             if block.blockPosition == pos:
                 if(block.itemID in gs.clickableBlocks):
-                    gs.drawCrafting = True
+                    if(gs.drawCrafting):
+                        gs.drawCrafting = False
+                    else:
+                        gs.drawCrafting = True
                 found = True
         if found == False:
             #Only allow placing if player has more blocks
