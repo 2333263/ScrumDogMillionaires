@@ -20,7 +20,7 @@ gameRunning = True
 worldBlocks = getBlocks(gs.levelName)
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
-player=pm.Player((100,gs.height/8), gs.blockSize)
+player=pm.Player((gs.width/2 - gs.blockSize * 4,gs.height/8), gs.blockSize)
 
 #main game loop:
 while gameRunning:
