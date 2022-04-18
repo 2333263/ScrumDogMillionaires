@@ -1,4 +1,3 @@
-from matplotlib.pyplot import draw
 import pygame
 import pygame_gui
 import gameSettings as gs
