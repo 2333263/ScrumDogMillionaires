@@ -1,24 +1,17 @@
 import pygame
-import pygame_gui
 import gameSettings as gs
 from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerMovement as pm
-import craftingMenu as cm
-import json
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
-deltaClock = pygame.time.Clock()
-
 
 #Creating the pygame screen
 screen = pygame.display.set_mode((gs.width, gs.height))
 pygame.display.set_caption("2D Minecraft")
-
-manager = pygame_gui.UIManager((gs.width, gs.height))
 
 #Game runing variable
 gameRunning = True
@@ -26,29 +19,16 @@ gameRunning = True
 #Array to keep track of all the blocks in the world
 worldBlocks = getBlocks(gs.levelName)
 
-f = open('recipes.json')
-data = json.load(f)
-
-craftingItems = []
-for i in range(len(data)):
-    craftingItems.append(data[i]['toolName'])
-    
-f.close()
-cm.createCraftingList(craftingItems, manager)
-
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
 player=pm.Player((100,gs.height/8), gs.blockSize)
 
 #main game loop:
 while gameRunning:
     clock.tick(60) #Sets the frame to update 60 times a second
-    deltaTime = deltaClock.tick(60)/1000.0
 
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
             gameRunning = False
-
-        manager.process_events(events)
 
         # Logic for player interaction
         # 1 -- left click
@@ -64,7 +44,6 @@ while gameRunning:
             elif events.button == 3:
                 bph.blockPlace(pygame.mouse.get_pos(), worldBlocks, player) #place the block
                 
-                #Maybe add the crafting button here
             #Scroll UP to select next item in hotbar
             elif events.button == 4:
                 inv.selectNext()
@@ -79,7 +58,6 @@ while gameRunning:
             if(events.key==pygame.K_UP or events.key==pygame.K_SPACE):
                 player.jump()
 
-    manager.update(deltaTime)
 
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
@@ -108,10 +86,5 @@ while gameRunning:
     screen.blit(text2, (gs.width-100, 5))
     screen.blit(player.image, (player.rect.x, player.rect.y))
 
-
-    if(gs.drawCrafting):
-        pygame.draw.rect(screen, (105, 105, 105), pygame.Rect(gs.craftingPos[0] - 45, gs.craftingPos[1] - 130, 120, 100))
-        manager.draw_ui(screen)
-       
-    
+    #Finally update the  screen with all the above changes     
     pygame.display.update()
