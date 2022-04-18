@@ -20,7 +20,7 @@ gameRunning = True
 worldBlocks = getBlocks(gs.levelName)
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
-player=pm.Player((gs.width/2 - gs.blockSize * 4,gs.height/8), gs.blockSize)
+player=pm.Player((gs.width/2 - gs.blockSize * 4,gs.height/3), gs.blockSize)
 
 #main game loop:
 while gameRunning:
@@ -83,7 +83,7 @@ while gameRunning:
 
     #blits the player to the screen based on the location of the player
     screen.blit(text, textRect)
-    screen.blit(text2, (gs.width-100, 5))
+    screen.blit(text2, (gs.width - 100, 5))
     screen.blit(player.image, (player.rect.x, player.rect.y))
 
     #Finally update the  screen with all the above changes     
