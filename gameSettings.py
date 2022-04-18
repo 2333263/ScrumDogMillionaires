@@ -4,11 +4,10 @@ levelName = "level"
 with open('Levels/' + levelName + '.txt') as f:
     levelArray = f.readlines()
 
-blockSize = 24
+blockSize = 30
 playerRange = 7
 
 drawCrafting = False
-craftingPos = (0, 0)
 
 width = round(blockSize * len(levelArray[0])) - blockSize
 height = round(blockSize * len(levelArray))
@@ -22,8 +21,7 @@ itemIDs = {
     5 : "Crafting Table",
     6 : "Leaves",
     7 : "Logs",
-    8 : "Wooden Pickaxe",
-    9 : "Wooden Planks"
+    8 : "Wooden Planks"
 }
 
 #IDs for the crafting table
@@ -31,21 +29,20 @@ itemIDs = {
 #data[0]['toolName'] would return wooden planks 
 
 craftingIDs = {
-    0 : "wooden planks", 
-    1 : "wooden pickaxe", 
-    2 : "wood and stone pickaxe", 
-    3 : "stone pickaxe"
+    0 : "wooden_planks", 
+    1 : "wooden_pickaxe", 
+    2 : "stone_pickaxe"
 }
 
 converterIDs = {
-    'G' : 0,
-    'D' : 1,
-    'S' : 2,
-    'C' : 3,
-    'B' : 4,
-    'T' : 5,
-    'V' : 6,
-    'L' : 7
+    'G' : 0, #Grass
+    'D' : 1, #Dirt
+    'S' : 2, #Stone
+    'C' : 3, #Clouds
+    'B' : 4, #Bedrock 
+    'T' : 5, #Crafting Table
+    'V' : 6, #Leaves 
+    'L' : 7 #Logs
 }
 
 textureNames = {
@@ -56,8 +53,7 @@ textureNames = {
     "Bedrock" : "bedrock.png",
     "Crafting Table" : "crafting.png",
     "Leaves" : "leaves_dense.png",
-    "Logs" : "wood_log.png",
-    "Wooden Pickaxe" : "wooden_pickaxe.png"
+    "Logs" : "wood_log.png"
 }
 
 colorNames = {
