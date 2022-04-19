@@ -6,7 +6,7 @@ class Block(pygame.Surface):
         self.blockPosition = blockPosition
         self.itemID = itemID
         self.textureName = textureName
-        self.Image = pygame.image.load("Textures/Blocks/" + self.textureName)
+        self.Image = pygame.image.load(self.textureName)
         self.Image = pygame.transform.scale(self.Image, (blockSize, blockSize))
 
 

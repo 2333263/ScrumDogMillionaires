@@ -46,14 +46,14 @@ converterIDs = {
 }
 
 textureNames = {
-    "Grass" : "grass.png",
-    "Stone" : "stone.png",
-    "Dirt" : "dirt.png",
-    "Cloud" : "cloud.png",
-    "Bedrock" : "bedrock.png",
-    "Crafting Table" : "crafting.png",
-    "Leaves" : "leaves_dense.png",
-    "Logs" : "wood_log.png"
+    "Grass" : "Textures/Blocks/grass.png",
+    "Stone" : "Textures/Blocks/stone.png",
+    "Dirt" : "Textures/Blocks/dirt.png",
+    "Cloud" : "Textures/Blocks/cloud.png",
+    "Bedrock" : "Textures/Blocks/bedrock.png",
+    "Crafting Table" : "Textures/Blocks/crafting.png",
+    "Leaves" : "Textures/Blocks/leaves_dense.png",
+    "Logs" : "Textures/Blocks/wood_log.png"
 }
 
 colorNames = {
