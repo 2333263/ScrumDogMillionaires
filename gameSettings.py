@@ -55,7 +55,8 @@ textureNames = {
     "Crafting Table" : "Textures/Blocks/crafting.png",
     "Leaves" : "Textures/Blocks/leaves_dense.png",
     "Logs" : "Textures/Blocks/wood_log.png",
-    "Crafting Background" : "Textures/Menus/crafting_background.png"
+    "Crafting Background" : "Textures/Menus/crafting_background.png",
+    "Wooden Planks" : "Textures/Blocks/wood_planks.png"
 }
 
 colorNames = {

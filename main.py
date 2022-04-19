@@ -26,7 +26,7 @@ player=pm.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
 crafter = Crafting((100, 100), "", "", screen)
 crafter.setupScreen()
 
-
+print(pygame.font.get_fonts())
 #main game loop:
 while gameRunning:
     clock.tick(60) #Sets the frame to update 60 times a second
