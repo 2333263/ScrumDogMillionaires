@@ -9,7 +9,6 @@ import playerMovement as pm
 pygame.init()
 clock = pygame.time.Clock()
 
-
 #Creating the pygame screen
 screen = pygame.display.set_mode((gs.width, gs.height))
 pygame.display.set_caption("2D Minecraft")
@@ -21,12 +20,12 @@ gameRunning = True
 worldBlocks = getBlocks(gs.levelName)
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
-player=pm.Player((100,gs.height/8), gs.blockSize)
+player=pm.Player((gs.width/2 - gs.blockSize * 4,gs.height/3), gs.blockSize)
 
 #main game loop:
 while gameRunning:
     clock.tick(60) #Sets the frame to update 60 times a second
-    
+
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
             gameRunning = False
@@ -44,7 +43,7 @@ while gameRunning:
                 
             elif events.button == 3:
                 bph.blockPlace(pygame.mouse.get_pos(), worldBlocks, player) #place the block
-
+                
             #Scroll UP to select next item in hotbar
             elif events.button == 4:
                 inv.selectNext()
@@ -65,7 +64,7 @@ while gameRunning:
     #update the player position
     player.update(worldBlocks, clock.tick())
 
-    
+
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
     font = pygame.font.Font('freesansbold.ttf', 16)
@@ -75,19 +74,17 @@ while gameRunning:
     #add a frame rate counter to top right corner
     text2 = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
 
-    
     #Create the sky 
     screen.fill(gs.colorNames["Sky"])
-
+    
     #Draw all the created blocks to the screen
     for block in worldBlocks:
-        #currentBlock = pygame.image.load("Tiles/" + block.textureName)
-        #currentBlock = pygame.transform.scale(currentBlock, (gs.blockSize, gs.blockSize))
         screen.blit(block.Image, block.blockPosition)
 
     #blits the player to the screen based on the location of the player
-
     screen.blit(text, textRect)
-    screen.blit(text2, (gs.width-100, 5))
+    screen.blit(text2, (gs.width - 100, 5))
     screen.blit(player.image, (player.rect.x, player.rect.y))
+
+    #Finally update the  screen with all the above changes     
     pygame.display.update()
