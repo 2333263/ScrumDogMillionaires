@@ -4,6 +4,7 @@ from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerMovement as pm
+import CraftingMenu as cm 
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
@@ -85,6 +86,9 @@ while gameRunning:
     screen.blit(text, textRect)
     screen.blit(text2, (gs.width - 100, 5))
     screen.blit(player.image, (player.rect.x, player.rect.y))
+
+
+    crafter = cm.Crafting((100, 100), "", "", screen)
 
     #Finally update the  screen with all the above changes     
     pygame.display.update()
