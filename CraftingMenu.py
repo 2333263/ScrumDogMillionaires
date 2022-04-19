@@ -9,10 +9,24 @@ class Crafting():
         self.allItems = allItems
         self.playerItems = playerItems
         self.screen = screen
+        self.menuItems = pygame.sprite.Group()
 
     def setupScreen(self) :
-        self.menuItems = pygame.sprite.Group()
-        for i in range(5):
-            butt = cr(i, True, (100 * i/2, 100))
+        shelf = blockSize
+        xc = 100
+        for i in range(8):
+            if( i == 4):
+                shelf = blockSize * 2
+                xc = 100
+
+            xc += blockSize
+            butt = cr(i, (xc , shelf))
             self.menuItems.add(butt)
+
+    def checkClick(self, pos):
+        for sp in self.menuItems:
+            if (sp.rect.collidepoint(pos)):
+                self.menuItems.remove(sp)
+
+    def makeScreen(self):
         self.menuItems.draw(self.screen)
