@@ -24,7 +24,7 @@ class Crafting():
         self.menuBackround.add(self.rightArrow)
         self.menuBackround.add(Text("CRAFTING", 21, "white",  "Arial", ((craftingTablePos[0] + blockSize/2) - 55, craftingTablePos[1] - blockSize * 9.5)))
 
-        self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - 25, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
+        self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - blockSize/1.2, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
 
     def setupScreen(self) :
         print()
@@ -36,11 +36,11 @@ class Crafting():
                 if(sp == self.leftArrow):
                     if(self.curr >= 1):
                         self.curr -= 1
-                        self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - 25, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
+                        self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - blockSize/1.2, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
                 elif(sp == self.rightArrow):
-                    if(self.curr <= 8):
+                    if(self.curr <= 7):
                         self.curr += 1    
-                        self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - 25, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
+                        self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - blockSize/1.2, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
     def makeScreen(self):
         self.menuBackround.draw(self.screen)
         self.currentItem.draw(self.screen)
