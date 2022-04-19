@@ -21,10 +21,12 @@ gameRunning = True
 worldBlocks = getBlocks(gs.levelName)
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
-player=pm.Player((gs.width/2 - gs.blockSize * 4,gs.height/3), gs.blockSize)
+player=pm.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
 
 crafter = Crafting((100, 100), "", "", screen)
 crafter.setupScreen()
+
+
 #main game loop:
 while gameRunning:
     clock.tick(60) #Sets the frame to update 60 times a second
@@ -92,6 +94,6 @@ while gameRunning:
    
     if(gs.drawCrafting):
         crafter.makeScreen()
-        
+
     #Finally update the  screen with all the above changes     
     pygame.display.update()

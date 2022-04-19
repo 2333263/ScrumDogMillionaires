@@ -8,6 +8,7 @@ blockSize = 30
 playerRange = 7
 
 drawCrafting = False
+craftingTablePos = [0, 0]
 
 width = round(blockSize * len(levelArray[0])) - blockSize
 height = round(blockSize * len(levelArray))
@@ -21,13 +22,13 @@ itemIDs = {
     5 : "Crafting Table",
     6 : "Leaves",
     7 : "Logs",
-    8 : "Wooden Planks"
+    8 : "Wooden Planks",
+    9 : "Crafting Background"
 }
 
 #IDs for the crafting table
 #when json file is loaded into an array, say like data, data[0] will refer to the wooden planks recipe
 #data[0]['toolName'] would return wooden planks 
-
 craftingIDs = {
     0 : "wooden_planks", 
     1 : "wooden_pickaxe", 
@@ -53,7 +54,8 @@ textureNames = {
     "Bedrock" : "Textures/Blocks/bedrock.png",
     "Crafting Table" : "Textures/Blocks/crafting.png",
     "Leaves" : "Textures/Blocks/leaves_dense.png",
-    "Logs" : "Textures/Blocks/wood_log.png"
+    "Logs" : "Textures/Blocks/wood_log.png",
+    "Crafting Background" : "Textures/Menus/crafting_background.png"
 }
 
 colorNames = {

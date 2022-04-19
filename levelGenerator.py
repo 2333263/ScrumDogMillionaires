@@ -22,7 +22,8 @@ def getBlocks(levelName):
                     b = Block(gs.blockSize * 6, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
                 elif(currItemID == 5):
                     b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
-                    gs.craftingPos = (currWidth, currHeight)
+                    gs.craftingTablePos[0] = currWidth
+                    gs.craftingTablePos[1] = currHeight
                 else:
                     b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
                 blockArray.append(b)
