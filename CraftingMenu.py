@@ -1,18 +1,18 @@
 from numpy import block
 import pygame
 from gameSettings import itemIDs, textureNames, blockSize
+from CraftButtonHandler import Craft as cr
 
-class Crafting(pygame.sprite.Sprite):
+class Crafting():
     def __init__(self,  pos, allItems, playerItems, screen):
-       # Call the parent class (Sprite) constructor
-        pygame.sprite.Sprite.__init__(self)
+        self.pos = pos 
+        self.allItems = allItems
+        self.playerItems = playerItems
+        self.screen = screen
 
-        img = pygame.image.load('Textures/Tools/wooden_pickaxe.png')
-        img.convert()
-        img = pygame.transform.scale(img, (blockSize, blockSize))
-        
-        self.rect = img.get_rect()
-        self.rect.center = 400, 400
-        pygame.draw.rect(img, "red", [10, 10, blockSize + 10, blockSize + 10], 10)
-        
-        screen.blit(img, self.rect)
+    def setupScreen(self) :
+        self.menuItems = pygame.sprite.Group()
+        for i in range(5):
+            butt = cr(i, True, (100 * i/2, 100))
+            self.menuItems.add(butt)
+        self.menuItems.draw(self.screen)
