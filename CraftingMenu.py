@@ -6,8 +6,7 @@ from CraftButtonHandler import Craft as cr
 from TextHandler import Text
 
 class Crafting():
-    def __init__(self,  pos, allItems, playerItems, screen):
-        self.pos = pos 
+    def __init__(self, allItems, playerItems, screen):
         self.allItems = allItems
         self.playerItems = playerItems
         self.screen = screen
@@ -26,11 +25,8 @@ class Crafting():
 
         self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - blockSize/1.2, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
 
-    def setupScreen(self) :
-        print()
 
     def checkClick(self, pos):
-        print("clicked")
         for sp in self.menuBackround:
             if (sp.rect.collidepoint(pos)):
                 if(sp == self.leftArrow):
@@ -41,6 +37,7 @@ class Crafting():
                     if(self.curr <= 7):
                         self.curr += 1    
                         self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - blockSize/1.2, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
+    
     def makeScreen(self):
         self.menuBackround.draw(self.screen)
         self.currentItem.draw(self.screen)

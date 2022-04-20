@@ -56,7 +56,8 @@ textureNames = {
     "Leaves" : "Textures/Blocks/leaves_dense.png",
     "Logs" : "Textures/Blocks/wood_log.png",
     "Crafting Background" : "Textures/Menus/crafting_background.png",
-    "Wooden Planks" : "Textures/Blocks/wood_planks.png"
+    "Wooden Planks" : "Textures/Blocks/wood_planks.png",
+    "Coal Ore" : "Textures/Blocks/coal_ore.png"
 }
 
 colorNames = {
