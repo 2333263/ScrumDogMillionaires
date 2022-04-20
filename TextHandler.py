@@ -1,6 +1,5 @@
 import pygame
 from gameSettings import blockSize
-
 pygame.font.init()
 
 class Text(pygame.sprite.Sprite):

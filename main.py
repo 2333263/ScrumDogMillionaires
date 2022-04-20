@@ -24,7 +24,7 @@ worldBlocks = getBlocks(gs.levelName)
 player=pm.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
 
 crafter = Crafting("", "", screen)
-crafter.setupScreen()
+#crafter.setupScreen()
 
 print(pygame.font.get_fonts())
 #main game loop:
@@ -72,7 +72,7 @@ while gameRunning:
 
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
-    font = pygame.font.Font('freesansbold.ttf', 16)
+    font = pygame.font.Font('Minecraft.ttf', 16)
     text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.getSelected().getCount()), True, "white")
     textRect = text.get_rect()
     textRect.center = (4.5 * gs.blockSize, gs.blockSize)
@@ -91,7 +91,7 @@ while gameRunning:
     screen.blit(text2, (gs.width - 100, 5))
     screen.blit(player.image, (player.rect.x, player.rect.y))
 
-   
+
     if(gs.drawCrafting):
         crafter.makeScreen()
 
