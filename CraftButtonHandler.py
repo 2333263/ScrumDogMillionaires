@@ -10,7 +10,7 @@ class Craft(pygame.sprite.Sprite):
         self.itemID = itemID
         self.pos = pos
 
-        self.image = pygame.image.load(textureNames[itemIDs[itemID]]).convert()
+        self.image = pygame.image.load(textureNames[itemIDs[itemID]]).convert_alpha()
         self.image = pygame.transform.scale(self.image, (width, height))
 
         self.rect = self.image.get_rect()

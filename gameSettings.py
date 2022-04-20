@@ -23,16 +23,18 @@ itemIDs = {
     6 : "Leaves",
     7 : "Logs",
     8 : "Wooden Planks",
-    9 : "Crafting Background"
+    9 : "Crafting Background",
+    10 : "Wooden Pickaxe",
+    11 : "Stone Pickaxe"
 }
 
 #IDs for the crafting table
 #when json file is loaded into an array, say like data, data[0] will refer to the wooden planks recipe
 #data[0]['toolName'] would return wooden planks 
 craftingIDs = {
-    0 : "wooden_planks", 
-    1 : "wooden_pickaxe", 
-    2 : "stone_pickaxe"
+    0 : "Wooden Planks", 
+    1 : "Wooden Pickaxe", 
+    2 : "Stone Pickaxe"
 }
 
 converterIDs = {
@@ -47,6 +49,7 @@ converterIDs = {
 }
 
 textureNames = {
+    #Blocks
     "Grass" : "Textures/Blocks/grass.png",
     "Stone" : "Textures/Blocks/stone.png",
     "Dirt" : "Textures/Blocks/dirt.png",

@@ -3,10 +3,10 @@ from gameSettings import blockSize
 pygame.font.init()
 
 class Text(pygame.sprite.Sprite):
-    def __init__(self, text, fontSize, color, font, pos):
+    def __init__(self, text, fontSize, color, pos):
         # Call the parent class (Sprite) constructor
         pygame.sprite.Sprite.__init__(self)
-
+       
         my_font = pygame.font.Font("Minecraft.ttf", fontSize)  
         self.image = my_font.render(text, True, color)
 
