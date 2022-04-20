@@ -57,7 +57,14 @@ textureNames = {
     "Logs" : "Textures/Blocks/wood_log.png",
     "Crafting Background" : "Textures/Menus/crafting_background.png",
     "Wooden Planks" : "Textures/Blocks/wood_planks.png",
-    "Coal Ore" : "Textures/Blocks/coal_ore.png"
+    "Coal Ore" : "Textures/Blocks/coal_ore.png",
+    "copper_ore" : "Textures/Blocks/copper_ore.png",
+    "gold_ore" : "Textures/Blocks/gold_ore.png",
+    "iron_ore" : "Textures/Blocks/iron_ore.png",
+    "leaves_twig" : "Textures/Blocks/leaves_twig.png",
+    "stone_bricks" : "Textures/Blocks/stone_bricks.png",
+    "wood_log" : "Textures/Blocks/wood_log.png"
+    
 }
 
 colorNames = {

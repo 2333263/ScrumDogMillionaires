@@ -1,6 +1,6 @@
 from numpy import block
 import pygame
-from sklearn.linear_model import GammaRegressor
+
 from gameSettings import itemIDs, textureNames, blockSize, craftingTablePos
 from CraftButtonHandler import Craft as cr
 from TextHandler import Text

@@ -24,7 +24,7 @@ worldBlocks = getBlocks(gs.levelName)
 player=pm.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
 
 crafter = Crafting("", "", screen)
-crafter.setupScreen()
+#crafter.setupScreen()
 
 print(pygame.font.get_fonts())
 #main game loop:
