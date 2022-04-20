@@ -1,9 +1,6 @@
 import pygame
-#import pymunk
 import gameSettings as gs
 import math
-# defintes a class player with several attributes
-
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,pos,size):
@@ -19,22 +16,21 @@ class Player(pygame.sprite.Sprite):
         #loads the sprite from the file
         Image=pygame.image.load("Textures/Player/sprite.png")
         Image=pygame.transform.scale(Image,(size,2*size))
+      
         #swap the sprite drawn from the surface to the image
         self.image=Image
         #declare a change in direction vector
         self.direction=pygame.math.Vector2(0.0,0.0)
-        self.gravity=1
+        self.gravity = 1
         #save a copy of the sprite for later
         self.character=Image
 
+    def getPlayerPos(self):
+        return self.rect.x, self.rect.y
 
     #updates the player position based on the current pos, this is not longer used
     def updatePlayerPos(self,pos):
         self.playerPos=pos
-
-    #get the players current position
-    def getPlayerPos(self):
-        return self.rect.x, self.rect.y
 
     def MoveOnX(self):
         #gets a list of all keys currently being pressed
@@ -55,7 +51,8 @@ class Player(pygame.sprite.Sprite):
         if(not keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT] and not keys[pygame.K_d] and not keys[pygame.K_a]):
             #run the stop Move on X method which sets the direction vector as position x to 0
             self.stopMoveOnX()
-        #sets the change in direction vector to the same as gravity in the y position
+        
+    #sets the change in direction vector to the same as gravity in the y position
     def useGravity(self):
         self.direction.y=self.gravity
 
@@ -72,29 +69,18 @@ class Player(pygame.sprite.Sprite):
         self.direction.y+=self.gravity/15
         #when the player reaches his arc set jumped to false so normal gravity functions
         if(math.floor(self.direction.y)==0):
-    
             self.jumped=False
-            
-    def update(self, allBlocks, dt):
+
+
+    def update(self, dt, allBlocks):
         #if the player is jumping use the jump arc gravity instead of normal gravity
         if(self.jumped==True):
             self.jumpArc()
         else:
             #otherwise use normal gravity
             self.useGravity()
-        #check if there are any collisions
-        self.findCollision(allBlocks)
-        #change the position of the player based on the values in the change direction vector
-        if(dt>0):
-            self.rect.x += self.direction.x*dt
-            self.rect.y += self.direction.y*dt
-        else:
-            self.rect.x += self.direction.x
-            self.rect.y += self.direction.y
-    def stopMoveOnX(self):
-        self.direction.x=0
-    def findCollision(self,allBlocks):
-        #loop through all blocks
+        # #check if there are any collisions
+
         for block in allBlocks:
             #this bit checks to see if the player is standing on any blocks, we use floor and ceiling to ensure that it works even if the player is between 2 blocks, but only if theyre not jumping
             if(not self.jumped and math.floor((self.rect.y+2*gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize):
@@ -110,11 +96,19 @@ class Player(pygame.sprite.Sprite):
                 or math.floor((self.rect.y+gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize or math.ceil((self.rect.y + gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize):
                     self.direction.x=0 #blocks left and right
             #same as first if, but its the blocks above the player when they jump
-            elif(self.jumped and math.ceil((self.rect.y)/gs.blockSize)==(block.blockPosition[1] + gs.blockSize)/gs.blockSize):
+            if(self.jumped and math.ceil((self.rect.y)/gs.blockSize)==(block.blockPosition[1] + gs.blockSize)/gs.blockSize):
                   if(math.floor(self.rect.x/gs.blockSize)==block.blockPosition[0]/gs.blockSize or math.ceil(self.rect.x / gs.blockSize)==block.blockPosition[0]/gs.blockSize) :
                     self.direction.y=0
                     self.jumped=False
 
-          
-                
+       
+        if(dt>0):
+            self.rect.x += self.direction.x * dt
+            self.rect.y += self.direction.y * dt
+        else:
+            self.rect.x += self.direction.x 
+            self.rect.y += self.direction.y 
+        
 
+    def stopMoveOnX(self):
+        self.direction.x=0

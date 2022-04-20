@@ -3,7 +3,7 @@ import gameSettings as gs
 from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
-import playerMovement as pm
+import playerHandler as ph
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
@@ -19,8 +19,9 @@ gameRunning = True
 #Array to keep track of all the blocks in the world
 worldBlocks = getBlocks(gs.levelName)
 
+
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
-player=pm.Player((gs.width/2 - gs.blockSize * 4,gs.height/3), gs.blockSize)
+player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
 
 #main game loop:
 while gameRunning:
@@ -62,7 +63,7 @@ while gameRunning:
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
     #update the player position
-    player.update(worldBlocks, clock.tick())
+    player.update(clock.tick(), worldBlocks)
 
 
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
@@ -75,15 +76,19 @@ while gameRunning:
     text2 = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
 
     #Create the sky 
-    screen.fill(gs.colorNames["Sky"])
+    #screen.fill(gs.colorNames["Sky"])
     
+    bg = pygame.image.load(gs.textureNames["Sky"]).convert()
+    bg = pygame.transform.scale(bg, (gs.width, gs.height))
+    screen.blit(bg, (0, 0))
+
     #Draw all the created blocks to the screen
-    for block in worldBlocks:
-        screen.blit(block.Image, block.blockPosition)
+    worldBlocks.draw(screen)
 
     #blits the player to the screen based on the location of the player
     screen.blit(text, textRect)
     screen.blit(text2, (gs.width - 100, 5))
+
     screen.blit(player.image, (player.rect.x, player.rect.y))
 
     #Finally update the  screen with all the above changes     
