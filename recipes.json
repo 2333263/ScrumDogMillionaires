@@ -1,39 +1,39 @@
 [
     {
-        "toolName" : "wooden_planks", 
+        "toolName" : "wooden_planks",
         "craftingAmount" : 4,
-        "resources" : 
+        "recipe" :
         [
             {
-                "itemID" : 7, 
+                "itemID" : 7,
                 "numBlocks" : 5
             }
         ]
 
-    }, 
+    },
 
     {
-        "toolName" : "wooden_pickaxe", 
+        "toolName" : "wooden_pickaxe",
         "craftingAmount" : 1,
-        "resources" : 
+        "recipe" :
         [
             {
                 "itemID": 9,
                 "numBlocks" : 5
             }
         ]
-    }, 
+    },
 
 
     {
-        "toolName" : "stone_pickaxe", 
-        "craftingAmount" : 1, 
-        "resources" : 
+        "toolName" : "stone_pickaxe",
+        "craftingAmount" : 1,
+        "recipe" :
         [
             {
-                "itemID" : 2, 
+                "itemID" : 2,
                 "numBlocks" : 3
-            }, 
+            },
             {
                 "itemID": 9,
                 "numBlocks" : 2
