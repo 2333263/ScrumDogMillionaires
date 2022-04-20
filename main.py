@@ -4,6 +4,7 @@ from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerHandler as ph
+import Camera as cam
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
@@ -22,7 +23,7 @@ worldBlocks = getBlocks(gs.levelName)
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
 player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
-
+camera=cam.Camera(player)
 #main game loop:
 while gameRunning:
     clock.tick(60) #Sets the frame to update 60 times a second
@@ -37,13 +38,14 @@ while gameRunning:
         # 3 -- right click
         # 4 -- scroll up
         # 5 -- scroll down
+        
         if events.type == pygame.MOUSEBUTTONDOWN:
             #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
             if events.button == 1:
-                bph.blockBreak(pygame.mouse.get_pos(), worldBlocks, player) #break the block
+                bph.blockBreak(pygame.mouse.get_pos()+camera.getOffsets(), worldBlocks, player) #break the block
                 
             elif events.button == 3:
-                bph.blockPlace(pygame.mouse.get_pos(), worldBlocks, player) #place the block
+                bph.blockPlace(pygame.mouse.get_pos()+camera.getOffsets(), worldBlocks, player) #place the block
                 
             #Scroll UP to select next item in hotbar
             elif events.button == 4:
@@ -83,13 +85,18 @@ while gameRunning:
     screen.blit(bg, (0, 0))
 
     #Draw all the created blocks to the screen
-    worldBlocks.draw(screen)
-
+    #worldBlocks.draw(screen)
+    
     #blits the player to the screen based on the location of the player
     screen.blit(text, textRect)
     screen.blit(text2, (gs.width - 100, 5))
 
-    screen.blit(player.image, (player.rect.x, player.rect.y))
+    #screen.blit(player.image, (player.rect.x, player.rect.y))
 
-    #Finally update the  screen with all the above changes     
+    #Finally update the  screen with all the above changes  
+    # 
+    # 
+    # 
+    
+    camera.draw(screen,worldBlocks)   
     pygame.display.update()

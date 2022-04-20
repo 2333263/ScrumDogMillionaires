@@ -16,7 +16,6 @@ class Player(pygame.sprite.Sprite):
         #loads the sprite from the file
         Image=pygame.image.load("Textures/Player/sprite.png")
         Image=pygame.transform.scale(Image,(size,2*size))
-      
         #swap the sprite drawn from the surface to the image
         self.image=Image
         #declare a change in direction vector
@@ -87,9 +86,9 @@ class Player(pygame.sprite.Sprite):
                 if(math.floor(self.rect.x/gs.blockSize)==block.blockPosition[0]/gs.blockSize or math.ceil(self.rect.x / gs.blockSize)==block.blockPosition[0]/gs.blockSize) :
                     self.direction.y=0  #blocks below
                 #checks to see if theyre at a world border
-            elif(self.rect.x < 0 and self.direction.x < 0 or self.rect.x + gs.blockSize > gs.width and self.direction.x > 0): #world borders
+           # elif(self.rect.x < 0 and self.direction.x < 0 or self.rect.x + gs.blockSize > gs.width and self.direction.x > 0): #world borders
                     #self.direction.y=0
-                    self.direction.x=0
+            #        self.direction.x=0
             #checks to see if there are any collisions to the left or right of the player
             if(self.direction.x>0 and self.rect.x+gs.blockSize==block.blockPosition[0] or self.direction.x<0 and self.rect.x==block.blockPosition[0]+gs.blockSize):
                 if(math.floor(self.rect.y/gs.blockSize)==block.blockPosition[1]/gs.blockSize or math.ceil(self.rect.y / gs.blockSize)==block.blockPosition[1]/gs.blockSize
@@ -106,8 +105,8 @@ class Player(pygame.sprite.Sprite):
             self.rect.x += self.direction.x * dt
             self.rect.y += self.direction.y * dt
         else:
-            self.rect.x += self.direction.x 
-            self.rect.y += self.direction.y 
+            self.rect.x += self.direction.x
+            self.rect.y += self.direction.y
         
 
     def stopMoveOnX(self):
