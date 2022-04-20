@@ -1,9 +1,11 @@
 import gameSettings as gs
 from block import Block
+import pygame
 
 def getBlocks(levelName):
-    blockArray = []
     gs.levelName = levelName
+    worldGroup = pygame.sprite.Group()
+    
     #Loop over every character
     for i in range(len(gs.levelArray)):
         for j in range(len(gs.levelArray[i])):
@@ -17,15 +19,13 @@ def getBlocks(levelName):
             #Create a block using the current number in the level
             currItemID = int(gs.converterIDs[gs.levelArray[i][j]])
             if(gs.itemIDs.__contains__(currItemID)):
-                if(currItemID == 3):
-                    #Do cloud stuff
+                if(currItemID == 3): #Deal with clouds 
                     b = Block(gs.blockSize * 6, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
-                elif(currItemID == 5):
+                elif(currItemID == 5): #Deal with crafting table
                     b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
                     gs.craftingPos = (currWidth, currHeight)
-                else:
+                else: #Deal with all other blocks in the world
                     b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
-                blockArray.append(b)
-            
-
-    return blockArray
+                worldGroup.add(b)
+         
+    return worldGroup

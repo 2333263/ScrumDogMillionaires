@@ -49,5 +49,5 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
                     currTexture = gs.textureNames[gs.itemIDs[inv.selected]]
                     tempBlock = Block(gs.blockSize, pos,  inv.selected, currTexture)
 
-                    world_block.append(tempBlock)
+                    world_block.add(tempBlock)
         
