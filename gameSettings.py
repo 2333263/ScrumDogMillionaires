@@ -64,7 +64,56 @@ textureNames = {
     "Twig Leaves" : "Textures/Blocks/leaves_twig.png",
     "Stone Bricks" : "Textures/Blocks/stone_bricks.png",
 
-
+    #ITEMS:
+    "Charcoal" : "Textures/Items/charcoal.png",
+    "Diamond" : "Textures/Items/diamond.png",
+    "Emerald" : "Textures/Items/emerald.png",
+    "Flint" : "Textures/Items/flint.png",
+    "Gold Ingot" : "Textures/Items/gold_ingot.png",
+    "Iron Ingot" : "Textures/Items/iron_ingot.png",
+    "Lapis Lazuli" : "Textures/Items/lapis_lazuli.png",
+    "Netherite Ingot" : "Textures/Items/netherite_ingot.png",
+    "Stick" : "Textures/Items/stick.png",
+    
+    #TOOLS:
+    #fishingrods
+    "Fishing Rod" : "Textures/Tools/fishing_rod.png",
+    #wood
+    "Wooden Sword" : "Textures/Tools/wooden_sword.png",
+    "Wooden Shovel" : "Textures/Tools/wooden_shovel.png",
+    "Wooden Pickaxe" : "Textures/Tools/wooden_pickaxe.png",
+    "Wooden Hoe" : "Textures/Tools/wooden_hoe.png",
+    "Wooden Axe" : "Textures/Tools/wooden_axe.png",
+    #stone
+    "Stone Sword" : "Textures/Tools/stone_sword.png",
+    "Stone Shovel" : "Textures/Tools/stone_shovel.png",
+    "Stone Pickaxe" : "Textures/Tools/stone_pickaxe.png",
+    "Stone Hoe" : "Textures/Tools/stone_hoe.png",
+    "Stone Axe" : "Textures/Tools/stone_axe.png",
+    #netherite
+    "Netherite Sword" : "Textures/Tools/netherite_sword.png",
+    "Netherite Shovel" : "Textures/Tools/netherite_shovel.png",
+    "Netherite Pickaxe" : "Textures/Tools/netherite_pickaxe.png",
+    "Netherite Hoe" : "Textures/Tools/netherite_hoe.png",
+    "Netherite Axe" : "Textures/Tools/netherite_axe.png",
+    #iron
+    "Iron Sword" : "Textures/Tools/iron_sword.png",
+    "Iron Shovel" : "Textures/Tools/iron_shovel.png",
+    "Iron Pickaxe" : "Textures/Tools/iron_pickaxe.png",
+    "Iron Hoe" : "Textures/Tools/iron_hoe.png",
+    "Iron Axe" : "Textures/Tools/iron_axe.png",
+    #gold
+    "Golden Sword" : "Textures/Tools/golden_sword.png",
+    "Golden Shovel" : "Textures/Tools/golden_shovel.png",
+    "Golden Pickaxe" : "Textures/Tools/golden_pickaxe.png",
+    "Golden Hoe" : "Textures/Tools/golden_hoe.png",
+    "Golden Axe" : "Textures/Tools/golden_axe.png",
+    #diamond
+    "Diamond Sword" : "Textures/Tools/diamond_sword.png",
+    "Diamond Shovel" : "Textures/Tools/diamond_shovel.png",
+    "Diamond Pickaxe" : "Textures/Tools/diamond_pickaxe.png",
+    "Diamond Hoe" : "Textures/Tools/diamond_hoe.png",
+    "Diamond Axe" : "Textures/Tools/diamond_axe.png",
 }
 
 colorNames = {
