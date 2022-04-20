@@ -4,7 +4,7 @@ import gameSettings as gs
 #create camera class
 class Camera(pygame.sprite.Group):
     def __init__(self,player):
-        super().__init__(
+        super().__init__()
         self.offset=pygame.math.Vector2()
         self.hWidth=gs.width/2
         self.hHeight=gs.height/2
