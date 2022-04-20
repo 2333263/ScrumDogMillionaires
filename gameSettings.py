@@ -56,7 +56,15 @@ textureNames = {
     "Leaves" : "Textures/Blocks/leaves_dense.png",
     "Logs" : "Textures/Blocks/wood_log.png",
     "Crafting Background" : "Textures/Menus/crafting_background.png",
-    "Wooden Planks" : "Textures/Blocks/wood_planks.png"
+    "Wooden Planks" : "Textures/Blocks/wood_planks.png",
+    "Coal Ore" : "Textures/Blocks/coal_ore.png",
+    "Copper Ore" : "Textures/Blocks/copper_ore.png",
+    "Gold Ore" : "Textures/Blocks/gold_ore.png",
+    "Iron Ore" : "Textures/Blocks/iron_ore.png",
+    "Twig Leaves" : "Textures/Blocks/leaves_twig.png",
+    "Stone Bricks" : "Textures/Blocks/stone_bricks.png",
+
+
 }
 
 colorNames = {
@@ -66,3 +74,11 @@ colorNames = {
 
 immovableBlocks = [3, 4, 5]
 clickableBlocks = [5]
+
+
+#TEMPORARY 
+req = {
+    7 : 1, 
+    1 : 1,
+    2 : 6
+}

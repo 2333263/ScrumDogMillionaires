@@ -1,4 +1,4 @@
-from matplotlib.pyplot import text
+
 from numpy import block
 import pygame
 from gameSettings import itemIDs, textureNames, blockSize
