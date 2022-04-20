@@ -1,7 +1,5 @@
 import pygame
-
-
-from gameSettings import itemIDs, textureNames, blockSize, craftingTablePos
+from gameSettings import itemIDs, textureNames, blockSize, craftingTablePos, req
 from CraftButtonHandler import Craft as cr
 from TextHandler import Text
 from inventoryHandler import getInventoryItems
@@ -26,6 +24,7 @@ class Crafting():
         self.menuBackround.add(self.rightArrow)
         self.menuBackround.add(Text("CRAFTING", 21, "white",  "Arial", ((craftingTablePos[0] + blockSize/2) - 55, craftingTablePos[1] - blockSize * 9.5)))
 
+        self.currentRequirements.add(self.getRequirements(""))
        
         #self.currentItem.add(cr(self.curr, ((craftingTablePos[0] + blockSize/2) - blockSize/1.2, craftingTablePos[1] - blockSize * 6), blockSize * 1.8, blockSize * 1.8))
 
@@ -50,12 +49,15 @@ class Crafting():
                     return True
         return False
 
-
-    def getRequirements(self):
-        print()
-       
-
+    def getRequirements(self, item):
+        textItems = pygame.sprite.Group()
+        ps = 1
+        for resource in req:
+            textItems.add(Text(itemIDs[resource] + " : " + str(req[resource]), 16, "white", "Mc", ((craftingTablePos[0] + blockSize/2) - blockSize/1.2, craftingTablePos[1] - blockSize * 5)))
+            ps+= 2
+        return textItems
 
     def makeScreen(self):
         self.menuBackround.draw(self.screen)
         self.currentItem.draw(self.screen)
+        self.currentRequirements.draw(self.screen)
