@@ -3,7 +3,6 @@ import gameSettings as gs
 from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
-import playerMovement as pm
 import playerHandler as ph
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
@@ -20,9 +19,9 @@ gameRunning = True
 #Array to keep track of all the blocks in the world
 worldBlocks = getBlocks(gs.levelName)
 
-#initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
-#player=pm.Player((gs.width/2 - gs.blockSize * 4,gs.height/3), gs.blockSize)
+print(worldBlocks)
 
+#initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
 player = ph.Player((gs.width/2 - gs.blockSize * 4,gs.height/3), gs.blockSize)
 
 #main game loop:
@@ -81,8 +80,6 @@ while gameRunning:
     screen.fill(gs.colorNames["Sky"])
     
     #Draw all the created blocks to the screen
-    #worldBlocks.add(player)
-    
     worldBlocks.draw(screen)
 
     #blits the player to the screen based on the location of the player
@@ -90,7 +87,6 @@ while gameRunning:
     screen.blit(text2, (gs.width - 100, 5))
 
     screen.blit(player.image, (player.rect.x, player.rect.y))
-    #screen.blit(player.image, (player.rect.x, player.rect.y))
-
+    print(player.rect.y)
     #Finally update the  screen with all the above changes     
     pygame.display.update()
