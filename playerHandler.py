@@ -16,6 +16,7 @@ class Player(pygame.sprite.Sprite):
         #loads the sprite from the file
         Image=pygame.image.load("Textures/Player/sprite.png")
         Image=pygame.transform.scale(Image,(size,2*size))
+      
         #swap the sprite drawn from the surface to the image
         self.image=Image
         #declare a change in direction vector
@@ -80,19 +81,26 @@ class Player(pygame.sprite.Sprite):
             self.useGravity()
         # #check if there are any collisions
 
-        collided_block = pygame.sprite.spritecollide(self, allBlocks, False, collided = None)
+        for block in allBlocks:
+            #this bit checks to see if the player is standing on any blocks, we use floor and ceiling to ensure that it works even if the player is between 2 blocks, but only if theyre not jumping
+            if(not self.jumped and math.floor((self.rect.y+2*gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize):
+                if(math.floor(self.rect.x/gs.blockSize)==block.blockPosition[0]/gs.blockSize or math.ceil(self.rect.x / gs.blockSize)==block.blockPosition[0]/gs.blockSize) :
+                    self.direction.y=0  #blocks below
+                #checks to see if theyre at a world border
+            elif(self.rect.x < 0 and self.direction.x < 0 or self.rect.x + gs.blockSize > gs.width and self.direction.x > 0): #world borders
+                    #self.direction.y=0
+                    self.direction.x=0
+            #checks to see if there are any collisions to the left or right of the player
+            if(self.direction.x>0 and self.rect.x+gs.blockSize==block.blockPosition[0] or self.direction.x<0 and self.rect.x==block.blockPosition[0]+gs.blockSize):
+                if(math.floor(self.rect.y/gs.blockSize)==block.blockPosition[1]/gs.blockSize or math.ceil(self.rect.y / gs.blockSize)==block.blockPosition[1]/gs.blockSize
+                or math.floor((self.rect.y+gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize or math.ceil((self.rect.y + gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize):
+                    self.direction.x=0 #blocks left and right
+            #same as first if, but its the blocks above the player when they jump
+            if(self.jumped and math.ceil((self.rect.y)/gs.blockSize)==(block.blockPosition[1] + gs.blockSize)/gs.blockSize):
+                  if(math.floor(self.rect.x/gs.blockSize)==block.blockPosition[0]/gs.blockSize or math.ceil(self.rect.x / gs.blockSize)==block.blockPosition[0]/gs.blockSize) :
+                    self.direction.y=0
+                    self.jumped=False
 
-        for collision in collided_block:
-            if (self.direction.x < 0 and collision.rect.left < self.rect.x): #left
-                self.direction.x = 0
-            if (self.direction.x > 0 and collision.rect.x > self.rect.x ): #right
-                self.direction.x = 0
-
-            
-            if (self.direction.y < 0 and collision.rect.y - gs.blockSize >= self.rect.y and not self.jumped): #up
-                self.direction.y = 0
-            if (self.direction.y > 0 and collision.rect.y  <= self.rect.y + 2 * gs.blockSize and not self.jumped): #down
-                self.direction.y = 0
        
         if(dt>0):
             self.rect.x += self.direction.x * dt
