@@ -65,7 +65,7 @@ while gameRunning:
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
     #update the player position
-    player.update(clock.tick())
+    player.update(clock.tick(), worldBlocks)
 
 
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
