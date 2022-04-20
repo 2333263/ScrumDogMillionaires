@@ -16,7 +16,7 @@ itemIDs = {
     0 : "Grass",
     1 : "Dirt",
     2 : "Stone",
-    3 : "Cloud",
+    # 3 : "Cloud",
     4 : "Bedrock",
     5 : "Crafting Table",
     6 : "Leaves",
@@ -38,7 +38,7 @@ converterIDs = {
     'G' : 0, #Grass
     'D' : 1, #Dirt
     'S' : 2, #Stone
-    'C' : 3, #Clouds
+    # 'C' : 3, #Clouds
     'B' : 4, #Bedrock 
     'T' : 5, #Crafting Table
     'V' : 6, #Leaves 
@@ -49,7 +49,7 @@ textureNames = {
     "Grass" : "Textures/Blocks/grass.png",
     "Stone" : "Textures/Blocks/stone.png",
     "Dirt" : "Textures/Blocks/dirt.png",
-    "Cloud" : "Textures/Blocks/cloud.png",
+    "Sky" : "Textures/Blocks/sky.png",
     "Bedrock" : "Textures/Blocks/bedrock.png",
     "Crafting Table" : "Textures/Blocks/crafting.png",
     "Leaves" : "Textures/Blocks/leaves_dense.png",

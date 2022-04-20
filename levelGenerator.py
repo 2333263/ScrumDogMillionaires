@@ -19,8 +19,6 @@ def getBlocks(levelName):
             #Create a block using the current number in the level
             currItemID = int(gs.converterIDs[gs.levelArray[i][j]])
             if(gs.itemIDs.__contains__(currItemID)):
-                # if(currItemID == 3): #Deal with clouds 
-                #     b = Block(gs.blockSize * 6, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
                 if(currItemID == 5): #Deal with crafting table
                     b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
                     gs.craftingPos = (currWidth, currHeight)

@@ -76,8 +76,12 @@ while gameRunning:
     text2 = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
 
     #Create the sky 
-    screen.fill(gs.colorNames["Sky"])
+    #screen.fill(gs.colorNames["Sky"])
     
+    bg = pygame.image.load(gs.textureNames["Sky"]).convert()
+    bg = pygame.transform.scale(bg, (gs.width, gs.height))
+    screen.blit(bg, (0, 0))
+
     #Draw all the created blocks to the screen
     worldBlocks.draw(screen)
 
