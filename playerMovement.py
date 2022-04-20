@@ -110,7 +110,7 @@ class Player(pygame.sprite.Sprite):
                 or math.floor((self.rect.y+gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize or math.ceil((self.rect.y + gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize):
                     self.direction.x=0 #blocks left and right
             #same as first if, but its the blocks above the player when they jump
-            if(self.jumped and math.ceil((self.rect.y)/gs.blockSize)==(block.blockPosition[1] + gs.blockSize)/gs.blockSize):
+            elif(self.jumped and math.ceil((self.rect.y)/gs.blockSize)==(block.blockPosition[1] + gs.blockSize)/gs.blockSize):
                   if(math.floor(self.rect.x/gs.blockSize)==block.blockPosition[0]/gs.blockSize or math.ceil(self.rect.x / gs.blockSize)==block.blockPosition[0]/gs.blockSize) :
                     self.direction.y=0
                     self.jumped=False

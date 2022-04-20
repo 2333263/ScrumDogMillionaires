@@ -80,21 +80,18 @@ class Player(pygame.sprite.Sprite):
             self.useGravity()
         # #check if there are any collisions
 
-        collided_block = pygame.sprite.spritecollideany(self, allBlocks, collided = None)
+        collided_block = pygame.sprite.spritecollide(self, allBlocks, False, collided = None)
 
-        # if(collision != None):
-        #     self.handleCollision(collision)
-    
-        if(collided_block != None):
-            if (self.direction.x < 0 and collided_block.rect.x < self.rect.x): #left
+        for collision in collided_block:
+            if (self.direction.x < 0 and collision.rect.left < self.rect.x): #left
                 self.direction.x = 0
-            elif (self.direction.x >= 0 and collided_block.rect.x > self.rect.x): #right
+            if (self.direction.x > 0 and collision.rect.x > self.rect.x ): #right
                 self.direction.x = 0
-        
 
-            if (self.direction.y > 0 and collided_block.rect.top - gs.blockSize < self.rect.y ): #up
+            
+            if (self.direction.y < 0 and collision.rect.y - gs.blockSize >= self.rect.y and not self.jumped): #up
                 self.direction.y = 0
-            elif (self.direction.y < 0 and collided_block.rect.top >= self.rect.bottom): #down
+            if (self.direction.y > 0 and collision.rect.y  <= self.rect.y + 2 * gs.blockSize and not self.jumped): #down
                 self.direction.y = 0
        
         if(dt>0):

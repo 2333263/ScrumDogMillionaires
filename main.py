@@ -19,7 +19,6 @@ gameRunning = True
 #Array to keep track of all the blocks in the world
 worldBlocks = getBlocks(gs.levelName)
 
-print(worldBlocks)
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
 player = ph.Player((gs.width/2 - gs.blockSize * 4,gs.height/3), gs.blockSize)
@@ -87,6 +86,6 @@ while gameRunning:
     screen.blit(text2, (gs.width - 100, 5))
 
     screen.blit(player.image, (player.rect.x, player.rect.y))
-    print(player.rect.y)
+
     #Finally update the  screen with all the above changes     
     pygame.display.update()
