@@ -87,7 +87,7 @@ def drawHotBar(screen):
         currTexture = hotbarArr[i].texture
         currTexture=pygame.transform.scale(currTexture,(50,50))
         screen.blit(currTexture,(22+(i)*85,45))
-        font = pygame.font.Font('freesansbold.ttf', 16)
+        font = pygame.font.Font('Minecraft.ttf', 16)
         count=hotbarArr[i].getCount()
         text2 = font.render(str(count), 1, (255, 255,255))
         shift=0
