@@ -10,6 +10,6 @@ class Text(pygame.sprite.Sprite):
         self.image = my_font.render(text, True, color)
 
         self.rect = self.image.get_rect()
-        self.rect.x = pos[0]
-        self.rect.y = pos[1]
+        self.rect.centerx = pos[0]
+        self.rect.centery = pos[1]
         
