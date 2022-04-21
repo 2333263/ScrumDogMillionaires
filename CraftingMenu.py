@@ -1,10 +1,11 @@
-from numpy import block
+from matplotlib.pyplot import get
 import pygame
 from gameSettings import itemIDs, textureNames, blockSize, craftingTablePos
 from CraftButtonHandler import Button 
 from TextHandler import Text
 from item import Item
 import recipeHandler as rh
+from inventoryHandler import getHotBar 
 
 class Crafting():
     def __init__(self, screen):
@@ -15,7 +16,7 @@ class Crafting():
         self.craftables = self.populatePossibleItems()
         self.itemName = pygame.sprite.GroupSingle()
         self.itemRecipe = pygame.sprite.Group()
-
+        self.itemsNeeded = dict()
        
     def makeScreen(self):
         self.menuBackround.draw(self.screen)
@@ -66,7 +67,6 @@ class Crafting():
 
         for  item in (recipeItems):
             if(item == -1):
-                #countX += 1
                 continue
 
             if(countX != 0 and (countX)%3 == 0):
@@ -80,8 +80,20 @@ class Crafting():
     def checkClick(self, pos):
         for menuItem in self.craftables:
             if (menuItem.rect.collidepoint(pos)):
-                print(str(menuItem.itemID ) + " clicked")
                 tempText = Text(itemIDs[menuItem.itemID] , int(blockSize/2), pygame.Color(76, 76, 76), (craftingTablePos[0] +  blockSize * 2.88, craftingTablePos[1] - blockSize * 5))
                 self.itemName.add(tempText)
                 self.populateRecipe(menuItem.itemID)
-             
+        
+                print(self.isCraftable(menuItem.itemID, getHotBar()))
+
+
+   #Takes in the current item and the player inventory and checks if the player has enough items 
+    def isCraftable(self, itemID, playerInventory):
+        self.itemsNeeded = self.recipies.getRecipe(itemID) 
+        print(self.itemsNeeded)
+        for resource in self.itemsNeeded:
+            for item in playerInventory:
+                if(item.itemID == resource):
+                    if(item.amount < self.itemsNeeded[resource]):
+                        return False
+        return True

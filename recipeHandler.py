@@ -17,13 +17,14 @@ class RecipeHandler():
 
     # returns a dictionary of the resources needed to make the recipe in the form: {itemID : number of blocks needed}
     def getRecipe(self, itemID):
-        craftID = 0
-        for c, resource in enumerate(self.data):
-            if(resource["itemID"] == itemID):
-                craftID = c
-        for resource in self.data[craftID]['recipe']:
-            self.recipe[resource['itemID']] = resource['numBlocks']
-        return self.recipe
+        for recipe in self.data:
+            if(recipe["itemID"] == itemID):
+                tempDict = dict()
+                for itemNeeded in recipe["recipe"]:
+                    tempDict[itemNeeded["itemID"]] = itemNeeded["numBlocks"]
+                return tempDict
+        
+    
 
     # returns the crafting amount of the new recipe we are crafting
     def getCraftingAmount(self, craftingID):

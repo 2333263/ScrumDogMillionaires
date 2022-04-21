@@ -52,3 +52,6 @@ def selectPrevious():
         selected = len(hotbarArr) - 1
     else:
         selected-=1
+
+def getHotBar():
+    return hotbarArr
