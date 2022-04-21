@@ -4,7 +4,7 @@ levelName = "level"
 with open('Levels/' + levelName + '.txt') as f:
     levelArray = f.readlines()
 
-blockSize = 35
+blockSize = 38
 playerRange = 7
 
 drawCrafting = False
