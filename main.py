@@ -91,5 +91,7 @@ while gameRunning:
 
     screen.blit(player.image, (player.rect.x, player.rect.y))
 
+    
+
     #Finally update the  screen with all the above changes     
     pygame.display.update()
