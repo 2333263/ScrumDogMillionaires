@@ -40,14 +40,14 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
                 found = True
         if found == False:
             #Only allow placing if player has more blocks
-            if (inv.getSelected().amount >0):
+            if (len(inv.hotbarArr)!=0 and inv.getSelected().amount >0):
                 #Decrease inventory item
-                inv.decrease()
+                
 
                 #Add block to world
-                if(gs.textureNames.__contains__(gs.itemIDs[inv.selected])):
-                    currTexture = gs.textureNames[gs.itemIDs[inv.selected]]
-                    tempBlock = Block(gs.blockSize, pos,  inv.selected, currTexture)
+                if(gs.textureNames.__contains__(gs.itemIDs[inv.hotbarArr[inv.selected].getItemId()])):
+                    currTexture = gs.textureNames[gs.itemIDs[inv.hotbarArr[inv.selected].getItemId()]]
+                    tempBlock = Block(gs.blockSize, pos,  inv.hotbarArr[inv.selected].getItemId(), currTexture)
 
                     world_block.add(tempBlock)
-        
+                inv.decrease()

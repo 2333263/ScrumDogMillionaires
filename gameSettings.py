@@ -16,7 +16,7 @@ itemIDs = {
     0 : "Grass",
     1 : "Dirt",
     2 : "Stone",
-    # 3 : "Cloud",
+   #  3 : "Cloud",
     4 : "Bedrock",
     5 : "Crafting Table",
     6 : "Leaves",
@@ -38,7 +38,7 @@ converterIDs = {
     'G' : 0, #Grass
     'D' : 1, #Dirt
     'S' : 2, #Stone
-    # 'C' : 3, #Clouds
+    #'C' : 3, #Clouds
     'B' : 4, #Bedrock 
     'T' : 5, #Crafting Table
     'V' : 6, #Leaves 
@@ -53,13 +53,14 @@ textureNames = {
     "Bedrock" : "Textures/Blocks/bedrock.png",
     "Crafting Table" : "Textures/Blocks/crafting.png",
     "Leaves" : "Textures/Blocks/leaves_dense.png",
-    "Logs" : "Textures/Blocks/wood_log.png"
+    "Logs" : "Textures/Blocks/wood_log.png",
+    "Wooden Planks" : "Textures/Blocks/wood_planks.png",
+    
 }
 
 colorNames = {
     #Capitalised colours to align with Item.item_name
     "Sky" : (135, 206, 250),
 }
-
 immovableBlocks = [3, 4, 5]
 clickableBlocks = [5]

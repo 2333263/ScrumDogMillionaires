@@ -71,9 +71,9 @@ while gameRunning:
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
     font = pygame.font.Font('freesansbold.ttf', 16)
-    text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.getSelected().getCount()), True, "white")
-    textRect = text.get_rect()
-    textRect.center = (4.5 * gs.blockSize, gs.blockSize)
+   # text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.getSelected().getCount()), True, "white")
+    #textRect = text.get_rect()
+    #textRect.center = (4.5 * gs.blockSize, gs.blockSize)
     #add a frame rate counter to top right corner
     text2 = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
 
@@ -88,7 +88,9 @@ while gameRunning:
     #worldBlocks.draw(screen)
     
     #blits the player to the screen based on the location of the player
-    screen.blit(text, textRect)
+    #screen.blit(text, textRect)
+    inv.drawHotBar(screen)
+
     screen.blit(text2, (gs.width - 100, 5))
 
     #screen.blit(player.image, (player.rect.x, player.rect.y))
@@ -100,3 +102,6 @@ while gameRunning:
     
     camera.draw(screen,worldBlocks)   
     pygame.display.update()
+
+
+        

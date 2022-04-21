@@ -12,4 +12,6 @@ class Block(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = blockPosition[0]
         self.rect.y = blockPosition[1]
+
+    
  
