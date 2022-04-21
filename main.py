@@ -98,6 +98,7 @@ while gameRunning:
 
     if(gs.drawCrafting):
         crafter.makeScreen()
+        #crafter.populateRecipe(11).draw(screen)
     
 
     #Finally update the  screen with all the above changes     
