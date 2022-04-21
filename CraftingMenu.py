@@ -123,8 +123,8 @@ class Crafting():
                             if(getItemCount(item) == 0):
                                 self.canCraft = False
                                 self.resetTable()
-                               
-                    addBlock(tempItem)
+                    for i in range(self.recipies.getCraftingAmount(self.createdItem)):           
+                        addBlock(tempItem)
                         
 
                 

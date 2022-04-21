@@ -27,8 +27,12 @@ class RecipeHandler():
     
 
     # returns the crafting amount of the new recipe we are crafting
-    def getCraftingAmount(self, craftingID):
-        return self.data[craftingID]['craftingAmount']
+    def getCraftingAmount(self, itemID):
+        craftID = 0
+        for c, resource in enumerate(self.data):
+            if(resource["itemID"] == itemID):
+                craftID = c
+        return self.data[craftID]['craftingAmount']
 
     def getAllItemIDs(self):
         nameArr = []
