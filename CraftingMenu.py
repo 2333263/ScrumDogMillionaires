@@ -125,6 +125,7 @@ class Crafting():
                                 self.resetTable()
                     for i in range(self.recipies.getCraftingAmount(self.createdItem)):           
                         addBlock(tempItem)
+                    self.resetTable()
                         
 
                 
