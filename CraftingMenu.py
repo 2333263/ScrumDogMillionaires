@@ -5,7 +5,7 @@ from CraftButtonHandler import Button
 from TextHandler import Text
 from item import Item
 import recipeHandler as rh
-from inventoryHandler import getHotBar 
+from inventoryHandler import getHotBar, addBlock, decreaseSpec, getItemCount
 
 class Crafting():
     def __init__(self, screen):
@@ -17,12 +17,17 @@ class Crafting():
         self.itemName = pygame.sprite.GroupSingle()
         self.itemRecipe = pygame.sprite.Group()
         self.itemsNeeded = dict()
-       
+        self.canCraft = False
+        self.createdItem = -1
+        self.craftButton = pygame.sprite.Group()
+
+
     def makeScreen(self):
         self.menuBackround.draw(self.screen)
         self.craftables.draw(self.screen)
         self.itemName.draw(self.screen)
         self.itemRecipe.draw(self.screen)
+        self.craftButton.draw(self.screen)
 
 
     def makeBackground(self):
@@ -77,20 +82,58 @@ class Crafting():
             self.itemRecipe.add(tempBut)
             countX += 1
 
+    def resetTable(self):
+        self.itemRecipe.empty()
+        self.craftButton.empty()
+
     def checkClick(self, pos):
         for menuItem in self.craftables:
             if (menuItem.rect.collidepoint(pos)):
                 tempText = Text(itemIDs[menuItem.itemID] , int(blockSize/2), pygame.Color(76, 76, 76), (craftingTablePos[0] +  blockSize * 2.88, craftingTablePos[1] - blockSize * 5))
                 self.itemName.add(tempText)
                 self.populateRecipe(menuItem.itemID)
+                self.createdItem = menuItem.itemID
         
-                print(self.isCraftable(menuItem.itemID, getHotBar()))
+                if(self.isCraftable(menuItem.itemID, getHotBar())):
+                    self.craftButton.empty()
+                    craftBut = Text("CRAFT", int(blockSize/2), "lime", (craftingTablePos[0] + blockSize/2.25, craftingTablePos[1] - blockSize * 1), pygame.Color(198, 198, 198))
+                    self.craftButton.add(craftBut)
+                    self.canCraft = True 
 
+                else:
+                    self.craftButton.empty()
+                    craftBut = Text("CRAFT", int(blockSize/2), "red", (craftingTablePos[0] + blockSize/2.25, craftingTablePos[1] - blockSize * 1), pygame.Color(198, 198, 198))
+                    self.craftButton.add(craftBut)
+                    self.canCraft = False 
+        
+
+    def makeItem(self, pos):
+        for sp in self.craftButton:
+            if (sp.rect.collidepoint(pos) and self.canCraft):
+                if(self.createdItem != -1):
+                    tempItem = Item(itemIDs[self.createdItem], self.createdItem)
+                    for item in self.itemsNeeded:
+                        for i in range(self.itemsNeeded[item]):
+                            if(getItemCount(item) > 0):
+                                decreaseSpec(item)
+                            else:
+                                self.canCraft = False
+                                self.resetTable()
+                                return
+                            if(getItemCount(item) == 0):
+                                self.canCraft = False
+                                self.resetTable()
+                               
+                    addBlock(tempItem)
+                        
+
+                
+
+       
 
    #Takes in the current item and the player inventory and checks if the player has enough items 
     def isCraftable(self, itemID, playerInventory):
         self.itemsNeeded = self.recipies.getRecipe(itemID) 
-        print(self.itemsNeeded)
         for resource in self.itemsNeeded:
             for item in playerInventory:
                 if(item.itemID == resource):

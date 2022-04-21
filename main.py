@@ -47,6 +47,7 @@ while gameRunning:
             if events.button == 1:
                 bph.blockBreak(pygame.mouse.get_pos(), worldBlocks, player) #break the block
                 crafter.checkClick(pygame.mouse.get_pos())
+                crafter.makeItem(pygame.mouse.get_pos())
             elif events.button == 3:
                 bph.blockPlace(pygame.mouse.get_pos(), worldBlocks, player) #place the block
                 
@@ -98,6 +99,8 @@ while gameRunning:
 
     if(gs.drawCrafting):
         crafter.makeScreen()
+    else:
+        crafter.resetTable()
     
 
     #Finally update the  screen with all the above changes     
