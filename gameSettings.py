@@ -119,7 +119,8 @@ textureNames = {
     "Diamond Axe" : "Textures/Tools/diamond_axe.png",
 
     #MENUS
-    "Sky" : "Textures/Screens/sky.png"
+    "Sky" : "Textures/Screens/sky.png",
+    "Crafting Background" : "Textures/Screens/CraftingMenu.png"
 }
 
 immovableBlocks = [3, 4, 5]
