@@ -1,3 +1,4 @@
+from numpy import block
 import pygame
 from gameSettings import itemIDs, textureNames, blockSize, craftingTablePos
 from CraftButtonHandler import Button 
@@ -16,15 +17,14 @@ class Crafting():
         
        
     def makeScreen(self):
-        self.menuBackround.add(self.itemName)
         self.menuBackround.draw(self.screen)
         self.craftables.draw(self.screen)
         self.itemName.draw(self.screen)
 
     def makeBackground(self):
         tempBackround = pygame.sprite.Group()
-        leftArrow = Text("<", 35, pygame.Color(76, 76, 76),  (craftingTablePos[0] - blockSize * 4, craftingTablePos[1] - blockSize * 5.5/2))
-        rightArrow = Text(">", 35, pygame.Color(76, 76, 76),  (craftingTablePos[0] , craftingTablePos[1] - blockSize * 5.5/2))
+        leftArrow = Text("<", int(blockSize), pygame.Color(76, 76, 76),  (craftingTablePos[0] - blockSize * 4, craftingTablePos[1] - blockSize * 5.5/2))
+        rightArrow = Text(">", int(blockSize), pygame.Color(76, 76, 76),  (craftingTablePos[0] , craftingTablePos[1] - blockSize * 5.5/2))
        
 
         tempBackround.add(Button(9, (craftingTablePos[0] - blockSize * 4.5, craftingTablePos[1] - blockSize * 5.5), blockSize * 10, blockSize * 5))
@@ -57,6 +57,6 @@ class Crafting():
         for menuItem in self.craftables:
             if (menuItem.rect.collidepoint(pos)):
                 print(str(menuItem.itemID ) + " clicked")
-                tempText = Text(itemIDs[menuItem.itemID] , 16, pygame.Color(76, 76, 76), (craftingTablePos[0] +  blockSize * 2.88, craftingTablePos[1] - blockSize * 5), pygame.Color(198, 198, 198))
+                tempText = Text("  " + itemIDs[menuItem.itemID] + "  " , int(blockSize/2), pygame.Color(76, 76, 76), (craftingTablePos[0] +  blockSize * 2.88, craftingTablePos[1] - blockSize * 5))
                 self.itemName.add(tempText)
              
