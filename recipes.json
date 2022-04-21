@@ -57,6 +57,28 @@
         [2, 2, 2,
         -1, 8, -1,
         -1, 8, -1]
+    },
+
+    {
+        "craftingID" : 3,
+        "toolName" : "Stone Shovel",
+        "itemID" : 12,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 2,
+                "numBlocks" : 1
+            },
+            {
+                "itemID": 8,
+                "numBlocks" : 2
+            }
+        ],
+        "shape":
+        [-1, 2, -1,
+         -1, 8, -1,
+         -1, 8, -1]
     }
 
 ]

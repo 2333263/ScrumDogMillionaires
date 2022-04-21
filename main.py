@@ -46,7 +46,7 @@ while gameRunning:
             #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
             if events.button == 1:
                 bph.blockBreak(pygame.mouse.get_pos(), worldBlocks, player) #break the block
-                
+                crafter.checkClick(pygame.mouse.get_pos())
             elif events.button == 3:
                 bph.blockPlace(pygame.mouse.get_pos(), worldBlocks, player) #place the block
                 
@@ -73,7 +73,7 @@ while gameRunning:
 
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
-    font = pygame.font.Font('freesansbold.ttf', 16)
+    font = pygame.font.Font('Minecraft.ttf', 16)
     text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.getSelected().getCount()), True, "white")
     textRect = text.get_rect()
     textRect.center = (4.5 * gs.blockSize, gs.blockSize)

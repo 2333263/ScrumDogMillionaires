@@ -11,18 +11,52 @@ class Crafting():
         self.allItems = self.recipies.getAllItemIDs()
         self.screen = screen
         self.menuBackround = self.makeBackground()
-
+        self.craftables = self.populatePossibleItems()
+        self.itemName = pygame.sprite.GroupSingle()
         
        
     def makeScreen(self):
+        self.menuBackround.add(self.itemName)
         self.menuBackround.draw(self.screen)
+        self.craftables.draw(self.screen)
+        self.itemName.draw(self.screen)
 
     def makeBackground(self):
         tempBackround = pygame.sprite.Group()
-        leftArrow = Text("<", 35, "white",  (craftingTablePos[0] - blockSize * 3.5, craftingTablePos[1] - blockSize * 5.5/2))
-        rightArrow = Text(">", 35, "white",  (craftingTablePos[0] + blockSize * 4.5, craftingTablePos[1] - blockSize * 5.5/2))
+        leftArrow = Text("<", 35, pygame.Color(76, 76, 76),  (craftingTablePos[0] - blockSize * 4, craftingTablePos[1] - blockSize * 5.5/2))
+        rightArrow = Text(">", 35, pygame.Color(76, 76, 76),  (craftingTablePos[0] , craftingTablePos[1] - blockSize * 5.5/2))
+       
 
         tempBackround.add(Button(9, (craftingTablePos[0] - blockSize * 4.5, craftingTablePos[1] - blockSize * 5.5), blockSize * 10, blockSize * 5))
         tempBackround.add(leftArrow)
         tempBackround.add(rightArrow)
+        
+        
         return tempBackround
+
+    def populatePossibleItems(self):
+        craftableItems = self.recipies.getAllItemIDs()
+        tempItemList = pygame.sprite.Group()
+
+        baseX, baseY = (craftingTablePos[0] - blockSize * 3.55), (craftingTablePos[1] - blockSize * 4.4)
+        countX, countY = 0, 0
+
+
+        for  item in (craftableItems):
+            if(countX != 0 and (countX)%3 == 0):
+                countX = 0
+                countY += 1
+    
+            tempBut = Button(item, (baseX + blockSize * 1.1 * countX, baseY+ blockSize * 1.1 * countY), blockSize/1.2, blockSize/1.2)
+            tempItemList.add(tempBut)
+            countX += 1
+        
+        return tempItemList
+
+    def checkClick(self, pos):
+        for menuItem in self.craftables:
+            if (menuItem.rect.collidepoint(pos)):
+                print(str(menuItem.itemID ) + " clicked")
+                tempText = Text(itemIDs[menuItem.itemID] , 16, pygame.Color(76, 76, 76), (craftingTablePos[0] +  blockSize * 2.88, craftingTablePos[1] - blockSize * 5), pygame.Color(198, 198, 198))
+                self.itemName.add(tempText)
+             

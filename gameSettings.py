@@ -25,7 +25,8 @@ itemIDs = {
     8 : "Wooden Planks",
     9 : "Crafting Background",
     10 : "Wooden Pickaxe",
-    11 : "Stone Pickaxe"
+    11 : "Stone Pickaxe",
+    12 : "Stone Shovel"
 }
 
 #IDs for the crafting table
@@ -34,7 +35,8 @@ itemIDs = {
 craftingIDs = {
     0 : "Wooden Planks", 
     1 : "Wooden Pickaxe", 
-    2 : "Stone Pickaxe"
+    2 : "Stone Pickaxe",
+    3 : "Stone Shovel"
 }
 
 converterIDs = {
