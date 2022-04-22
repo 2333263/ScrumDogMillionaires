@@ -106,7 +106,7 @@ while gameRunning:
 
     playerCraftingDistance = abs(player.getPlayerPos()[0] - gs.craftingTablePos[0]) + abs(player.getPlayerPos()[1] - gs.craftingTablePos[1]) 
 
-    if(playerCraftingDistance > 120):
+    if(playerCraftingDistance > gs.blockSize * 6):
         gs.drawCrafting = False
 
     if(gs.drawCrafting):
