@@ -21,7 +21,8 @@ def getBlocks(levelName):
             if(gs.itemIDs.__contains__(currItemID)):
                 if(currItemID == 5): #Deal with crafting table
                     b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
-                    gs.craftingPos = (currWidth, currHeight)
+                    gs.craftingTablePos[0] = currWidth
+                    gs.craftingTablePos[1] = currHeight
                 else: #Deal with all other blocks in the world
                     b = Block(gs.blockSize, (currWidth, currHeight), currItemID, gs.textureNames[gs.itemIDs[currItemID]])
                 worldGroup.add(b)

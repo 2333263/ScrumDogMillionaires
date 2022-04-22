@@ -11,7 +11,7 @@
                             VVV                    V      
                 G          VVLVV                   VVV    
                 DGGG         LV                   VVVV    
-   G        T  GDDDDG        L                   VVLVV    
+   G           GDDDDG  T     L                   VVLVV    
 GGGDGGG  GGGGGGDDDDDDGGGGGGGGGGGGGGGGGGGG        V L  V   
 DDDDSS   SDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDGGG       L      
 SSSSS   SSSSSSDDDDDDDDDDDDDDDDDDDSSDDDSSSDDDGGGGGGGGGGGGGG

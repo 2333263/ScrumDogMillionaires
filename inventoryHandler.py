@@ -50,6 +50,7 @@ def decreaseSpec(i):
 
 
 
+
 def getSelected():
     #Returns the selected item
     return hotbarArr[selected]
@@ -103,3 +104,9 @@ def drawHotBar(screen):
                     
         
         
+
+def getHotBar():
+    return hotbarArr
+
+def getItemCount(itemID):
+    return hotbarArr[itemID].amount

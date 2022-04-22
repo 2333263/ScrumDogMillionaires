@@ -3,9 +3,9 @@
 import gameSettings as gs
 import pygame
 class Item:
-    def __init__(self, itemName, itemId):
+    def __init__(self, itemName, itemID):
         self.itemName = itemName
-        self.itemId = itemId
+        self.itemID = itemID
         self.amount = 0
         self.texture=pygame.image.load(gs.textureNames[self.itemName])
 
