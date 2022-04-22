@@ -96,10 +96,9 @@ while gameRunning:
     
     #blits the player to the screen based on the location of the player
     #screen.blit(text, textRect)
-    inv.drawHotBar(screen)
 
-    screen.blit(text2, (gs.width - 100, 5))
 
+    
     #screen.blit(player.image, (player.rect.x, player.rect.y))
 
     #Finally update the  screen with all the above changes  
@@ -108,6 +107,8 @@ while gameRunning:
     # 
     
     camera.draw(screen,worldBlocks)   
+    screen.blit(text2, (gs.width - 100, 5))
+    inv.drawHotBar(screen)
     if(gs.drawCrafting):
         crafter.makeScreen()
     else:

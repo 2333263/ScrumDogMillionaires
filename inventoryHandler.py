@@ -86,27 +86,36 @@ def drawHotBar(screen):
     skip=0
     for i in range(10):
         pygame.draw.rect(screen,(0,0,0),[12+i*85,30,70,80],0)
-
-    for i in range(len(hotbarArr)):
-        currTexture = hotbarArr[i].texture
-        currTexture=pygame.transform.scale(currTexture,(50,50))
-        screen.blit(currTexture,(22+(i)*85,45))
-        font = pygame.font.Font('Minecraft.ttf', 16)
-        count=hotbarArr[i].getCount()
-        text2 = font.render(str(count), 1, (255, 255,255))
-        shift=0
-        if(count>=10) :
-            shift-=5
-        if(count>=100):
-             shift-=5
-        screen.blit(text2,(42+(i)*85+shift,95))
-        if (i==selected):
-            pygame.draw.rect(screen, (255, 255, 0), (12+(i)*85, 30, 70, 80), 3)
-
-
-                    
-        
-        
+        if(i<len(hotbarArr)):
+            currTexture = hotbarArr[i].texture
+            currTexture=pygame.transform.scale(currTexture,(50,50))
+            screen.blit(currTexture,(22+(i)*85,45))
+            font = pygame.font.Font('Minecraft.ttf', 16)
+            count=hotbarArr[i].getCount()
+            text2 = font.render(str(count), 1, (255, 255,255))
+            shift=0
+            if(count>=10) :
+                shift-=5
+            if(count>=100):
+                shift-=5
+            screen.blit(text2,(42+(i)*85+shift,95))
+            if (i==selected):
+                pygame.draw.rect(screen, (255, 255, 0), (12+(i)*85, 30, 70, 80), 3)
+    #for i in range(len(hotbarArr)):
+    #    currTexture = hotbarArr[i].texture
+    #    currTexture=pygame.transform.scale(currTexture,(50,50))
+    #    screen.blit(currTexture,(22+(i)*85,45))
+    #    font = pygame.font.Font('Minecraft.ttf', 16)
+    #    count=hotbarArr[i].getCount()
+    #    text2 = font.render(str(count), 1, (255, 255,255))
+    #    shift=0
+    #    if(count>=10) :
+    #        shift-=5
+    #    if(count>=100):
+    #         shift-=5
+    #    screen.blit(text2,(42+(i)*85+shift,95))
+    #    if (i==selected):
+     #       pygame.draw.rect(screen, (255, 255, 0), (12+(i)*85, 30, 70, 80), 3)
 
 def getHotBar():
     return hotbarArr
