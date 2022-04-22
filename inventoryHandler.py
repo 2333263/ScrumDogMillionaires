@@ -1,4 +1,4 @@
-from matplotlib.pyplot import hot
+#from matplotlib.pyplot import hot
 from item import Item
 import pygame
 import gameSettings as gs
