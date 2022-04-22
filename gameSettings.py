@@ -4,7 +4,7 @@ levelName = "level"
 with open('Levels/' + levelName + '.txt') as f:
     levelArray = f.readlines()
 
-blockSize = 25
+blockSize = 20
 playerRange = 7
 
 width = round(blockSize * len(levelArray[0])) - blockSize
@@ -12,7 +12,6 @@ height = round(blockSize * len(levelArray))
 
 drawCrafting = False
 craftingTablePos = [0, 0]
-craftDistance = width
 
 itemIDs = {
     0 : "Grass",
