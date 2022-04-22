@@ -26,6 +26,7 @@ def decreaseSpec(i):
     # decreases a specific item based on id
     hotbarArr[i].decrease()
 
+
 def getSelected():
     #Returns the selected item
     return hotbarArr[selected]
@@ -52,3 +53,9 @@ def selectPrevious():
         selected = len(hotbarArr) - 1
     else:
         selected-=1
+
+def getHotBar():
+    return hotbarArr
+
+def getItemCount(itemID):
+    return hotbarArr[itemID].amount

@@ -4,6 +4,8 @@ from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerHandler as ph
+import CraftingMenu as cm
+
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
@@ -23,6 +25,9 @@ worldBlocks = getBlocks(gs.levelName)
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
 player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
 
+#Initialise the crafting table screen 
+crafter = cm.Crafting(screen)
+
 #main game loop:
 while gameRunning:
     clock.tick(60) #Sets the frame to update 60 times a second
@@ -41,7 +46,8 @@ while gameRunning:
             #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
             if events.button == 1:
                 bph.blockBreak(pygame.mouse.get_pos(), worldBlocks, player) #break the block
-                
+                crafter.checkClick(pygame.mouse.get_pos())
+                crafter.makeItem(pygame.mouse.get_pos())
             elif events.button == 3:
                 bph.blockPlace(pygame.mouse.get_pos(), worldBlocks, player) #place the block
                 
@@ -68,7 +74,7 @@ while gameRunning:
 
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
     #Create a font that displays the current block and count, also create a rectangle to draw the font to
-    font = pygame.font.Font('freesansbold.ttf', 16)
+    font = pygame.font.Font('Minecraft.ttf', 16)
     text = font.render('Block Selected: ' + gs.itemIDs[inv.selected] + ' : ' + str(inv.getSelected().getCount()), True, "white")
     textRect = text.get_rect()
     textRect.center = (4.5 * gs.blockSize, gs.blockSize)
@@ -90,6 +96,12 @@ while gameRunning:
     screen.blit(text2, (gs.width - 100, 5))
 
     screen.blit(player.image, (player.rect.x, player.rect.y))
+
+    if(gs.drawCrafting):
+        crafter.makeScreen()
+    else:
+        crafter.resetTable()
+    
 
     #Finally update the  screen with all the above changes     
     pygame.display.update()
