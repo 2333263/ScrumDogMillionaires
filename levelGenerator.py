@@ -28,3 +28,13 @@ def getBlocks(levelName):
                 worldGroup.add(b)
          
     return worldGroup
+
+def getBlockPos(itemID, blocks):
+    blockPositions = []
+    for block in blocks:
+        if(block.itemID == itemID):
+            blockPositions.append(block.blockPosition)
+    return blockPositions
+
+
+

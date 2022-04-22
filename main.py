@@ -7,7 +7,6 @@ import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
 
-
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
@@ -100,15 +99,16 @@ while gameRunning:
 
     
     #screen.blit(player.image, (player.rect.x, player.rect.y))
-
-    #Finally update the  screen with all the above changes  
-    # 
-    # 
-    # 
     
     camera.draw(screen,worldBlocks)   
     screen.blit(text2, (gs.width - 100, 5))
     inv.drawHotBar(screen)
+
+    playerCraftingDistance = abs(player.getPlayerPos()[0] - gs.craftingTablePos[0]) + abs(player.getPlayerPos()[1] - gs.craftingTablePos[1]) 
+
+    if(playerCraftingDistance > 120):
+        gs.drawCrafting = False
+
     if(gs.drawCrafting):
         crafter.makeScreen()
     else:

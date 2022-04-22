@@ -13,5 +13,7 @@ class Block(pygame.sprite.Sprite):
         self.rect.x = blockPosition[0]
         self.rect.y = blockPosition[1]
 
+
+
     
  
