@@ -17,7 +17,7 @@ selected = 0;
 def addBlock(block):
     tempItem=Item(itemIDs[block.itemID],block.itemID)
     for i in hotbarArr:
-         if( i.itemId==block.itemID):
+         if( i.itemID==block.itemID):
                 i.increase()
                 return
     
@@ -40,11 +40,14 @@ def decrease():
             selectPrevious()
    
 
-def decreaseSpec(i):
+def decreaseSpec(itemID):
     # decreases a specific item based on id
-    hotbarArr[i].decrease()
-    if(hotbarArr[i].getCount()<=0):
-        hotbarArr.pop(i)
+    for i in range(len( hotbarArr)):
+        if( hotbarArr[i].itemID==itemID):
+            hotbarArr[i].decrease()
+            if( hotbarArr[i].getCount()<=0):
+                hotbarArr.pop(i)
+            return
   
 
 
@@ -109,4 +112,7 @@ def getHotBar():
     return hotbarArr
 
 def getItemCount(itemID):
-    return hotbarArr[itemID].amount
+    for i in hotbarArr:
+         if( i.itemID==itemID):
+            return i.amount
+    return 0

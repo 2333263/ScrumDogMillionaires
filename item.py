@@ -10,7 +10,7 @@ class Item:
         self.texture=pygame.image.load(gs.textureNames[self.itemName])
 
     def getItemId(self):
-        return self.itemId
+        return self.itemID
 
     def increase(self):
         self.amount += 1

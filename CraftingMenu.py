@@ -1,6 +1,5 @@
-#from matplotlib.pyplot import get
 import pygame
-from gameSettings import itemIDs, textureNames, blockSize, craftingTablePos
+from gameSettings import itemIDs, blockSize, craftingTablePos
 from CraftButtonHandler import Button 
 from TextHandler import Text
 from item import Item
@@ -127,17 +126,18 @@ class Crafting():
                         addBlock(tempItem)
                     self.resetTable()
                         
-
-                
-
-       
-
    #Takes in the current item and the player inventory and checks if the player has enough items 
     def isCraftable(self, itemID, playerInventory):
+        if(len(playerInventory)==0):
+            return False
         self.itemsNeeded = self.recipies.getRecipe(itemID) 
         for resource in self.itemsNeeded:
+            found = False
             for item in playerInventory:
                 if(item.itemID == resource):
+                    found = True
                     if(item.amount < self.itemsNeeded[resource]):
                         return False
+            if (not found):
+                return False
         return True
