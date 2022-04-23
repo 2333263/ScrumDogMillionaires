@@ -12,7 +12,8 @@ pygame.init()
 clock = pygame.time.Clock()
 
 #Creating the pygame screen
-screen = pygame.display.set_mode((gs.width, gs.height))
+
+screen = pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
 pygame.display.set_caption("2D Minecraft")
 
 #Game runing variable
@@ -20,7 +21,7 @@ gameRunning = True
 
 #Array to keep track of all the blocks in the world
 worldBlocks = getBlocks(gs.levelName)
-
+collisionblocks=worldBlocks
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
 player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
@@ -71,7 +72,7 @@ while gameRunning:
     #runs the move on X which checks if the player is pressing an arrow key to move
     player.MoveOnX()
     #update the player position
-    player.update(clock.tick(), worldBlocks)
+    player.update(clock.tick(),  collisionblocks)
 
 
     #VERY TEMPORARY, here to make the placing easier when debugging itemIDs 
@@ -81,7 +82,7 @@ while gameRunning:
     #textRect = text.get_rect()
     #textRect.center = (4.5 * gs.blockSize, gs.blockSize)
     #add a frame rate counter to top right corner
-    text2 = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
+    fpsText = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
 
     #Create the sky 
     #screen.fill(gs.colorNames["Sky"])
@@ -100,8 +101,8 @@ while gameRunning:
     
     #screen.blit(player.image, (player.rect.x, player.rect.y))
     
-    camera.draw(screen,worldBlocks)   
-    screen.blit(text2, (gs.width - 100, 5))
+    collisionblocks=camera.draw(screen,worldBlocks)   
+    screen.blit(fpsText, (gs.blockSize*gs.noXBlocks-100, 5))
     inv.drawHotBar(screen)
 
     playerCraftingDistance = abs(player.getPlayerPos()[0] - gs.craftingTablePos[0]) + abs(player.getPlayerPos()[1] - gs.craftingTablePos[1]) 
@@ -111,6 +112,7 @@ while gameRunning:
 
     if(gs.drawCrafting):
         crafter.makeScreen()
+        
     else:
         crafter.resetTable()
     

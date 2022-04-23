@@ -6,7 +6,8 @@ with open('Levels/' + levelName + '.txt') as f:
 
 blockSize = 20
 playerRange = 7
-
+noXBlocks=64
+noYBlocks=9/16*noXBlocks
 width = round(blockSize * len(levelArray[0])) - blockSize
 height = round(blockSize * len(levelArray))
 
