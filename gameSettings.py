@@ -4,7 +4,7 @@ levelName = "level"
 with open('Levels/' + levelName + '.txt') as f:
     levelArray = f.readlines()
 
-blockSize = 20 #tested values: [12, 16, 20,24 ]otherwise collision issues (possibly all multiples of 4 work)
+blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
 playerRange = 7
 noXBlocks=64
 noYBlocks=9/16*noXBlocks

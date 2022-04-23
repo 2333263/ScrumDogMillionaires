@@ -21,7 +21,7 @@ gameRunning = True
 
 #Array to keep track of all the blocks in the world
 worldBlocks = getBlocks(gs.levelName)
-collisionblocks=worldBlocks
+collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
 
 #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
 player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
@@ -101,7 +101,7 @@ while gameRunning:
     
     #screen.blit(player.image, (player.rect.x, player.rect.y))
     
-    collisionblocks=camera.draw(screen,worldBlocks)   
+    collisionblocks=camera.draw(screen,worldBlocks)   #draws all blocks in the viewable screen and returns all blocks within a small range to be used for collison in the next time step
     screen.blit(fpsText, (gs.blockSize*gs.noXBlocks-100, 5))
     inv.drawHotBar(screen)
 

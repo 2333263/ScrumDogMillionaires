@@ -27,7 +27,7 @@ class Camera(pygame.sprite.Group):
     #also offsets the players position and blits it
     def draw(self, screen, worldBlocks):
         self.scroll()
-        collideabeBlocks=[]
+        collideabeBlocks=[] #list of blocks player can collide with, done here so that we only loop through the block array once per time step
         for i in worldBlocks:
             if(self.isColideable(i)):
                 collideabeBlocks.append(i)
@@ -42,12 +42,12 @@ class Camera(pygame.sprite.Group):
         self.scroll()
         return self.offset
 
-    def isColideable(self, block):
-        if(abs(block.rect.x-self.Player.rect.x)/gs.blockSize<=3):
-            if(abs(block.rect.y-self.Player.rect.y)/gs.blockSize<=3):
+    def isColideable(self, block): #checks if block is close enough to player for them to be able to collide with them to not waste compute time on the collison calculations on far away blocks
+        if(abs(block.rect.x-self.Player.rect.x)/gs.blockSize<=2):
+            if(abs(block.rect.y-self.Player.rect.y)/gs.blockSize<=2):
                 return True
         return False
-    def isOnScreen(self,block):
+    def isOnScreen(self,block): #checks if block is close enough to player to be visible on screen to save compute time by not drawing objects that are outside the viewable window
         if(abs(block.rect.x-self.Player.rect.x)/gs.blockSize<=gs.noXBlocks/1.5):
             if(abs(block.rect.y-self.Player.rect.y)/gs.blockSize<=gs.noXBlocks/2):
                 return True
