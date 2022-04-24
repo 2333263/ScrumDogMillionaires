@@ -12,7 +12,7 @@ width = round(blockSize * len(levelArray[0])) - blockSize
 height = round(blockSize * len(levelArray))
 
 drawCrafting = False
-craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2)]
+craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]
 
 itemIDs = {
     0 : "Grass",
