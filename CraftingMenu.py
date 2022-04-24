@@ -35,10 +35,10 @@ class Crafting():
         # When there are more items to craft that require more pages, uncomment the below 4 lines and make sure to have a page tracker
         # leftArrow = Text("<", int(self.relativeSize), pygame.Color(76, 76, 76),  (craftingTablePos[0] - self.relativeSize * 4, craftingTablePos[1] - self.relativeSize * 5.5/2))
         # rightArrow = Text(">", int(self.relativeSize), pygame.Color(76, 76, 76),  (craftingTablePos[0] , craftingTablePos[1] - self.relativeSize * 5.5/2))
-        close = Text("X", int(self.relativeSize/2), pygame.Color(76, 76, 76),  (craftingTablePos[0] + self.relativeSize * 5,  craftingTablePos[1] - 4.9* self.relativeSize ))
+        
         tempBackround.add(Button(9, (craftingTablePos[0] - self.relativeSize * 4.5, craftingTablePos[1] -
                           self.relativeSize * 5.5), self.relativeSize * 10, self.relativeSize * 5))
-        tempBackround.add(close)
+        
         # tempBackround.add(rightArrow)
 
         return tempBackround
@@ -148,5 +148,5 @@ class Crafting():
                 return False
         return True
     
-    def closeTable():
+
         
