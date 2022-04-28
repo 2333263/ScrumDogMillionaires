@@ -13,8 +13,8 @@ import playerHandler as ph
 
 #Testing the level Generator
 class TestWorld(unittest.TestCase):
-      def test_getBlock(self):
-            self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
+   def test_getBlock(self):
+      self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
 
 
 class TestItem(unittest.TestCase):
@@ -233,9 +233,9 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.update(2,tempGroup)
       self.assertEqual(self.TempPlayer.rect.y,tempPosY+2)
       self.assertEqual(self.TempPlayer.rect.x,tempPosX+2)
-      
+
    def test_StopOnX(self):
       self.TempPlayer.stopMoveOnX()
       self.assertEqual(self.TempPlayer.direction.x,0)
-      
+
 unittest.main()
