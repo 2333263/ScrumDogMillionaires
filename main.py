@@ -74,7 +74,8 @@ while gameRunning:
 
     if(not gs.drawCrafting):
         #runs the move on X which checks if the player is pressing an arrow key to move
-        player.MoveOnX()
+        fakeKeys={}
+        player.MoveOnX(fakeKeys)
         #update the player position
         player.update(clock.tick(),  collisionblocks)
 

@@ -31,9 +31,12 @@ class Player(pygame.sprite.Sprite):
     def updatePlayerPos(self,pos):
         self.playerPos=pos
 
-    def MoveOnX(self):
+    def MoveOnX(self,fakeKeys):
         #gets a list of all keys currently being pressed
-        keys=pygame.key.get_pressed()
+        if(len(fakeKeys)==0):
+            keys=pygame.key.get_pressed()
+        else:
+            keys=fakeKeys
         #if the left arrow is being pressed
         if(keys[pygame.K_LEFT] or keys[pygame.K_a]):
             #flip the sprite so its facing left
