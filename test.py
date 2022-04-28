@@ -4,7 +4,7 @@ import gameSettings as gs
 import block
 import pygame
 import CraftButtonHandler
-
+import TextHandler 
 
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -64,5 +64,12 @@ class TestCraftingButton(unittest.TestCase):
       self.assertLessEqual(self.tempButton.pos[1], gs.height)
 
    
+class TestTextHandler(unittest.TestCase):
+   testText = TextHandler.Text("TestCase", 12, "red", (0, 0))
+   def test_text(self):
+      self.assertIsInstance(self.testText.words, str)
+      self.assertIsInstance(self.testText.my_font, pygame.font.Font)
+      self.assertIsInstance(self.testText.rect, pygame.rect.Rect)
+
 
 unittest.main()
