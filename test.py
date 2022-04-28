@@ -240,11 +240,10 @@ class TestPlayer(unittest.TestCase):
 
 
 class TestCraftingMenu (unittest.TestCase):
-      screen = pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+      screen = pygame.display
       crafter = CraftingMenu.Crafting(screen)
       def test_relativeSize(self):
              self.assertTrue(self.crafter.relativeSize >= 0 and self.crafter.relativeSize <= gs.blockSize*3)
-             self.assertGreaterEqual(self.crafter.relativeSize, 0)
       def test_allItems(self):
              self.assertIsInstance(list(),  type(self.crafter.allItems))
       def test_menuBackround(self):
