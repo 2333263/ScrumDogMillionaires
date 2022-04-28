@@ -5,6 +5,7 @@ import block
 import pygame
 import CraftButtonHandler
 import TextHandler 
+import recipeHandler
 
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -75,6 +76,17 @@ class TestTextHandler(unittest.TestCase):
       self.assertIsInstance(self.testText.words, str)
       self.assertIsInstance(self.testText.my_font, pygame.font.Font)
       self.assertIsInstance(self.testText.rect, pygame.rect.Rect)
+
+   def test_positions(self):
+      self.assertGreaterEqual(self.testText.pos[0], 0)
+      self.assertGreaterEqual(self.testText.pos[1], 0)
+
+      self.assertLessEqual(self.testText.pos[0], gs.width)
+      self.assertLessEqual(self.testText.pos[1], gs.height)
+
+class TestRecipeHandler(unittest.TestCase):
+   tempHandler = recipeHandler.RecipeHandler()
+   
 
 
 unittest.main()
