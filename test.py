@@ -1,5 +1,6 @@
 from typing import List
 import unittest
+from xmlrpc.client import Boolean, boolean
 import item 
 import gameSettings as gs
 import levelGenerator as lg
@@ -9,13 +10,14 @@ import CraftButtonHandler
 import TextHandler 
 import recipeHandler
 import playerHandler as ph
+import CraftingMenu
+from inventoryHandler import getHotBar
 
 
 #Testing the level Generator
 class TestWorld(unittest.TestCase):
    def test_getBlock(self):
       self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
-
 
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -39,8 +41,6 @@ class TestItem(unittest.TestCase):
    def test_name(self):
       self.assertIsInstance(self.tempItem.itemName, str)
 
-
-
 class TestBlock(unittest.TestCase):
    tempBlock = block.Block(gs.blockSize, (0, 0), 0, gs.textureNames[gs.itemIDs[0]])
    def test_itemIDs(self):
@@ -60,7 +60,6 @@ class TestBlock(unittest.TestCase):
       self.assertIsInstance(self.tempBlock.rect, pygame.rect.Rect)
       #Add check for texture object
 
-
 class TestCraftingButton(unittest.TestCase):
    tempButton = CraftButtonHandler.Button(0, (0, 0), 50, 50)
    pygame.init()
@@ -79,7 +78,6 @@ class TestCraftingButton(unittest.TestCase):
    def test_rectangle(self):
       self.assertIsInstance(self.tempButton.rect, pygame.rect.Rect)
 
-   
 class TestTextHandler(unittest.TestCase):
    testText = TextHandler.Text("TestCase", 12, "red", (0, 0))
    def test_text(self):
@@ -113,7 +111,6 @@ class TestRecipeHandler(unittest.TestCase):
 
    def test_craftingShape(self):
       self.assertIsInstance(self.tempHandler.getCraftingShape(11), list)
-
 
 class TestPlayer(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
@@ -240,5 +237,37 @@ class TestPlayer(unittest.TestCase):
    def test_StopOnX(self):
       self.TempPlayer.stopMoveOnX()
       self.assertEqual(self.TempPlayer.direction.x,0)
+
+
+class TestCraftingMenu (unittest.TestCase):
+      screen = pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+      crafter = CraftingMenu.Crafting(screen)
+      def test_relativeSize(self):
+             self.assertTrue(self.crafter.relativeSize >= 0 and self.crafter.relativeSize <= gs.blockSize*3)
+             self.assertGreaterEqual(self.crafter.relativeSize, 0)
+      def test_allItems(self):
+             self.assertIsInstance(list(),  type(self.crafter.allItems))
+      def test_menuBackround(self):
+             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.menuBackround))
+      def test_craftables(self):
+             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.craftables))
+      def test_itemName(self):
+             self.assertIsInstance(pygame.sprite.GroupSingle(),  type(self.crafter.itemName))
+      def test_itemRecipe(self):
+             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.itemRecipe))
+      def test_itemsNeeded(self):
+             self.assertIsInstance(dict(),  type(self.crafter.itemsNeeded))
+      def test_canCraft(self):
+             self.assertEqual(self.crafter.canCraft, False)
+      def test_createdItem(self):
+             self.assertGreaterEqual(self.crafter.createdItem, -1)
+      def test_craftButton(self):#10
+             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.craftButton))
+      def test_makeBackground(self):
+             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.makeBackground()))
+      def test_populatePossibleItems(self):
+             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.populatePossibleItems()))
+      def test_isCraftable(self):
+             self.assertIsInstance(True,  type(self.crafter.isCraftable(self.crafter.craftables.sprites, getHotBar())))
 
 unittest.main()
