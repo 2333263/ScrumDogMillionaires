@@ -3,6 +3,8 @@ import item
 import gameSettings as gs
 import block
 import pygame
+import CraftButtonHandler
+
 
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -44,5 +46,23 @@ class TestBlock(unittest.TestCase):
    def test_texture(self):
       self.assertIsInstance(self.tempBlock.textureName,  str)
       #Add check for texture object
+
+
+class TestCraftingButton(unittest.TestCase):
+   tempButton = CraftButtonHandler.Button(0, (0, 0), 50, 50)
+   pygame.init()
+   def test_itemIDs(self):
+      self.assertIsInstance(self.tempButton.itemID, int)
+      self.assertGreaterEqual(self.tempButton.itemID, 0)
+      self.assertLessEqual(self.tempButton.itemID, len(gs.itemIDs) + 1)
+   
+   def test_positions(self):
+      self.assertGreaterEqual(self.tempButton.pos[0], 0)
+      self.assertGreaterEqual(self.tempButton.pos[1], 0)
+
+      self.assertLessEqual(self.tempButton.pos[0], gs.width)
+      self.assertLessEqual(self.tempButton.pos[1], gs.height)
+
+   
 
 unittest.main()
