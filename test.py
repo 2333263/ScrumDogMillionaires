@@ -95,7 +95,22 @@ class TestTextHandler(unittest.TestCase):
 
 class TestRecipeHandler(unittest.TestCase):
    tempHandler = recipeHandler.RecipeHandler()
+   def test_initialiser(self):
+      self.assertIsInstance(self.tempHandler.recipe, dict)
    
+   def test_recipeInfo(self):
+      self.assertIsInstance(self.tempHandler.getRecipeInfo(11), dict)
 
+   def test_getRecipe(self):
+      self.assertIsInstance(self.tempHandler.getRecipe(11), dict)
+
+   def test_CraftingAmount(self):
+      self.assertIsInstance(self.tempHandler.getCraftingAmount(11), int)
+
+   def test_getItemIDs(self):
+      self.assertIsInstance(self.tempHandler.getAllItemIDs(), list)
+
+   def test_craftingShape(self):
+      self.assertIsInstance(self.tempHandler.getCraftingShape(11), list)
 
 unittest.main()
