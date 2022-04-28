@@ -2,6 +2,7 @@
 #Allows inventory to work with items that may not be Block objects
 import gameSettings as gs
 import pygame
+
 class Item:
     def __init__(self, itemName, itemID):
         self.itemName = itemName
