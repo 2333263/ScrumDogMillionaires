@@ -164,6 +164,7 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.useGravity()
       self.assertEqual(self.TempPlayer.direction.y,self.TempPlayer.gravity)
       self.TempPlayer.direction.y=0
+
    def test_jump(self):
       #jumped is false by default in case we spawn the player above the world
       self.assertEqual(self.TempPlayer.jumped,False)
@@ -171,6 +172,7 @@ class TestPlayer(unittest.TestCase):
       self.assertEqual(self.TempPlayer.jumped,True)
       self.assertEqual(self.TempPlayer.direction.y,-2)
       self.TempPlayer.jumped=False
+
    def test_jumping_acceleration(self):
       self.TempPlayer.jumpArc()
       #check if player is jumped get set to false when direction.y==0
@@ -180,6 +182,7 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.jumpArc()
       self.assertEqual(self.TempPlayer.direction.y,-5+1/15)
       self.TempPlayer.direction.y=0
+
    def test_update(self):
       tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]])
       tempGroup=pygame.sprite.Group()
@@ -230,6 +233,7 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.update(2,tempGroup)
       self.assertEqual(self.TempPlayer.rect.y,tempPosY+2)
       self.assertEqual(self.TempPlayer.rect.x,tempPosX+2)
+      
    def test_StopOnX(self):
       self.TempPlayer.stopMoveOnX()
       self.assertEqual(self.TempPlayer.direction.x,0)
