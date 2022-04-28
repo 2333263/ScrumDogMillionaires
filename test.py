@@ -12,7 +12,6 @@ import recipeHandler
 
 #Testing the level Generator
 class TestWorld(unittest.TestCase):
-      
       def test_getBlock(self):
             self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
 

@@ -9,27 +9,27 @@ from inventoryHandler import getHotBar, addBlock, decreaseSpec, getItemCount
 
 class Crafting():
     def __init__(self, screen):
-        self.relativeSize = blockSize * 3
-        self.recipies = rh.RecipeHandler()
-        self.allItems = self.recipies.getAllItemIDs()
-        self.screen = screen
-        self.menuBackround = self.makeBackground()
-        self.craftables = self.populatePossibleItems()
-        self.itemName = pygame.sprite.GroupSingle()
-        self.itemRecipe = pygame.sprite.Group()
-        self.itemsNeeded = dict()
-        self.canCraft = False
-        self.createdItem = -1
+        self.relativeSize = blockSize * 3 #must be between 0 and window size
+        self.recipies = rh.RecipeHandler() #already tested 
+        self.allItems = self.recipies.getAllItemIDs() #Must be a list 
+        self.screen = screen #Must be of data type pygame screen 
+        self.menuBackround = self.makeBackground() #Must be a sprite group 
+        self.craftables = self.populatePossibleItems() ##Must be a list 
+        self.itemName = pygame.sprite.GroupSingle() #Must be a single sprite group 
+        self.itemRecipe = pygame.sprite.Group() #Must be a sprite group 
+        self.itemsNeeded = dict() #Must be a dict 
+        self.canCraft = False #Must be a boolean 
+        self.createdItem = -1 #Must be greater than or equal to -1 
         self.craftButton = pygame.sprite.Group()
         
-    def makeScreen(self):
+    def makeScreen(self): #No tests needed
         self.menuBackround.draw(self.screen)
         self.craftables.draw(self.screen)
         self.itemName.draw(self.screen)
         self.itemRecipe.draw(self.screen)
         self.craftButton.draw(self.screen)
 
-    def makeBackground(self):
+    def makeBackground(self): #Check this returns a sprite group
         tempBackround = pygame.sprite.Group()
 
         # When there are more items to craft that require more pages, uncomment the below 4 lines and make sure to have a page tracker
@@ -43,7 +43,7 @@ class Crafting():
 
         return tempBackround
 
-    def populatePossibleItems(self):
+    def populatePossibleItems(self): #Check this returns a list
         craftableItems = self.recipies.getAllItemIDs()
         tempItemList = pygame.sprite.Group()
 
@@ -63,7 +63,7 @@ class Crafting():
 
         return tempItemList
 
-    def populateRecipe(self, itemID):
+    def populateRecipe(self, itemID): #No test
         self.itemRecipe.empty()
         recipeItems = self.recipies.getCraftingShape(itemID)
 
@@ -84,11 +84,11 @@ class Crafting():
             self.itemRecipe.add(tempBut)
             countX += 1
 
-    def resetTable(self):
+    def resetTable(self): #No test
         self.itemRecipe.empty()
         self.craftButton.empty()
 
-    def checkClick(self, pos):
+    def checkClick(self, pos): #No test
         for menuItem in self.craftables:
             if (menuItem.rect.collidepoint(pos)):
                 tempText = Text(itemIDs[menuItem.itemID], int(self.relativeSize/2), pygame.Color(76, 76, 76),
@@ -111,7 +111,7 @@ class Crafting():
                     self.craftButton.add(craftBut)
                     self.canCraft = False
 
-    def makeItem(self, pos):
+    def makeItem(self, pos): #No test
         for sp in self.craftButton:
             if (sp.rect.collidepoint(pos) and self.canCraft):
                 if(self.createdItem != -1):
@@ -133,7 +133,7 @@ class Crafting():
                     self.resetTable()
 
    # Takes in the current item and the player inventory and checks if the player has enough items
-    def isCraftable(self, itemID, playerInventory):
+    def isCraftable(self, itemID, playerInventory): #Test return boolean
         if(len(playerInventory) == 0):
             return False
         self.itemsNeeded = self.recipies.getRecipe(itemID)
