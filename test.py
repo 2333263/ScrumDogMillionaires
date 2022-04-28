@@ -124,7 +124,7 @@ class TestPlayer(unittest.TestCase):
 
    def test_pos(self):
       self.assertEqual(self.TempPlayer.getPlayerPos(),(8*gs.blockSize,8*gs.blockSize))
-
+#this is a comment
    def test_MoveX(self):
       self.TempPlayer.MoveOnX({})
       self.assertNotEqual(len(self.TempPlayer.keys),0)
