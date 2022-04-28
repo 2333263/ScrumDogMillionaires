@@ -1,21 +1,19 @@
+from typing import List
 import unittest
 import item 
-
-# class TestMethods(unittest.TestCase):
-#    def test_add(self):
-#       tempOneItem = item.Item("Grass", 0)
-#       tempTwoItem = item.Item("Grass", 0)
-#       self.assertEqual(tempOneItem.itemName, tempTwoItem.itemName)
+import gameSettings as gs
+import levelGenerator as lg
+import block as b
+import pygame 
 
 
-class TestItem(unittest.TestCase):
-   tempItem = item.Item("Grass", 0)
-   def test_itemID(self):
-      self.assertTrue(type(self.tempItem.itemID) is int)
+
+#Testing the level Generator
+class TestWorld(unittest.TestCase):
       
-   def test_amount(self):
-      self.assertTrue(type(self.tempItem.amount) is int)
-      self.assertGreaterEqual(self.tempItem.amount, 0)
+      def test_getBlock(self):
+            self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
+
 
 
 unittest.main()
