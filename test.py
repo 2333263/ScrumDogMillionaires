@@ -12,6 +12,7 @@ class TestItem(unittest.TestCase):
       self.assertIsInstance(self.tempItem.itemID, int)
       self.assertGreaterEqual(self.tempItem.itemID, 0)
       self.assertLessEqual(self.tempItem.itemID, len(gs.itemIDs) + 1)
+      self.assertEqual(self.tempItem.getItemId(), self.tempItem.itemID)
 
    def test_amount(self):
       self.assertIsInstance(self.tempItem.amount, int)
@@ -45,6 +46,7 @@ class TestBlock(unittest.TestCase):
 
    def test_texture(self):
       self.assertIsInstance(self.tempBlock.textureName,  str)
+      self.assertIsInstance(self.tempBlock.rect, pygame.rect.Rect)
       #Add check for texture object
 
 
@@ -62,6 +64,9 @@ class TestCraftingButton(unittest.TestCase):
 
       self.assertLessEqual(self.tempButton.pos[0], gs.width)
       self.assertLessEqual(self.tempButton.pos[1], gs.height)
+
+   def test_rectangle(self):
+      self.assertIsInstance(self.tempButton.rect, pygame.rect.Rect)
 
    
 class TestTextHandler(unittest.TestCase):
