@@ -126,9 +126,9 @@ class TestPlayer(unittest.TestCase):
       self.assertEqual(self.TempPlayer.getPlayerPos(),(8*gs.blockSize,8*gs.blockSize))
 #this is a comment
    def test_MoveX(self):
-      empty={}
-      self.TempPlayer.MoveOnX(empty)
-      self.assertNotEqual(len(self.TempPlayer.keys),0)
+      #empty={}
+      #self.TempPlayer.MoveOnX(empty)
+      #self.assertNotEqual(len(self.TempPlayer.keys),0)
       self.simulatedKeys={
          pygame.K_LEFT: False, 
          pygame.K_RIGHT: False,
