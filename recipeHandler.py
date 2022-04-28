@@ -24,8 +24,6 @@ class RecipeHandler():
                     tempDict[itemNeeded["itemID"]] = itemNeeded["numBlocks"]
                 return tempDict
         
-    
-
     # returns the crafting amount of the new recipe we are crafting
     def getCraftingAmount(self, itemID):
         craftID = 0

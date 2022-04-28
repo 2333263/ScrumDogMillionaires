@@ -13,8 +13,8 @@ import playerHandler as ph
 
 #Testing the level Generator
 class TestWorld(unittest.TestCase):
-      def test_getBlock(self):
-            self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
+   def test_getBlock(self):
+      self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
 
 
 class TestItem(unittest.TestCase):
@@ -96,8 +96,23 @@ class TestTextHandler(unittest.TestCase):
 
 class TestRecipeHandler(unittest.TestCase):
    tempHandler = recipeHandler.RecipeHandler()
+   def test_initialiser(self):
+      self.assertIsInstance(self.tempHandler.recipe, dict)
    
+   def test_recipeInfo(self):
+      self.assertIsInstance(self.tempHandler.getRecipeInfo(11), dict)
 
+   def test_getRecipe(self):
+      self.assertIsInstance(self.tempHandler.getRecipe(11), dict)
+
+   def test_CraftingAmount(self):
+      self.assertIsInstance(self.tempHandler.getCraftingAmount(11), int)
+
+   def test_getItemIDs(self):
+      self.assertIsInstance(self.tempHandler.getAllItemIDs(), list)
+
+   def test_craftingShape(self):
+      self.assertIsInstance(self.tempHandler.getCraftingShape(11), list)
 
 
 class TestPlayer(unittest.TestCase):
@@ -151,6 +166,7 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.useGravity()
       self.assertEqual(self.TempPlayer.direction.y,self.TempPlayer.gravity)
       self.TempPlayer.direction.y=0
+
    def test_jump(self):
       #jumped is false by default in case we spawn the player above the world
       self.assertEqual(self.TempPlayer.jumped,False)
@@ -158,6 +174,7 @@ class TestPlayer(unittest.TestCase):
       self.assertEqual(self.TempPlayer.jumped,True)
       self.assertEqual(self.TempPlayer.direction.y,-2)
       self.TempPlayer.jumped=False
+
    def test_jumping_acceleration(self):
       self.TempPlayer.jumpArc()
       #check if player is jumped get set to false when direction.y==0
@@ -167,6 +184,7 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.jumpArc()
       self.assertEqual(self.TempPlayer.direction.y,-5+1/15)
       self.TempPlayer.direction.y=0
+
    def test_update(self):
       tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]])
       tempGroup=pygame.sprite.Group()
@@ -217,8 +235,9 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.update(2,tempGroup)
       self.assertEqual(self.TempPlayer.rect.y,tempPosY+2)
       self.assertEqual(self.TempPlayer.rect.x,tempPosX+2)
+
    def test_StopOnX(self):
       self.TempPlayer.stopMoveOnX()
       self.assertEqual(self.TempPlayer.direction.x,0)
-      
+
 unittest.main()
