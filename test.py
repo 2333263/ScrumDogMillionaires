@@ -1,11 +1,21 @@
+from typing import List
 import unittest
 import item 
 import gameSettings as gs
+import levelGenerator as lg
 import block
 import pygame
 import CraftButtonHandler
 import TextHandler 
 import recipeHandler
+
+
+#Testing the level Generator
+class TestWorld(unittest.TestCase):
+      
+      def test_getBlock(self):
+            self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
+
 
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
