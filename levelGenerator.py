@@ -29,13 +29,13 @@ def getBlocks(levelName):
          
     return worldGroup
 
-#we dont need this getBlockPros function because we dont use it-From Gavin
-# def getBlockPos(itemID, blocks):
-#     blockPositions = []
-#     for block in blocks:
-#         if(block.itemID == itemID):
-#             blockPositions.append(block.blockPosition)
-#     return blockPositions
+
+def getBlockPos(itemID, blocks):
+    blockPositions = []
+    for block in blocks:
+        if(block.itemID == itemID):
+            blockPositions.append(block.blockPosition)
+    return blockPositions
 
 
 
