@@ -59,7 +59,6 @@ class TestBlock(unittest.TestCase):
       self.assertIsInstance(self.tempBlock.textureName,  str)
       self.assertIsInstance(self.tempBlock.rect, pygame.rect.Rect)
       #Add check for texture object
-
 class TestCraftingButton(unittest.TestCase):
    tempButton = CraftButtonHandler.Button(0, (0, 0), 50, 50)
    pygame.init()
@@ -238,7 +237,6 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.stopMoveOnX()
       self.assertEqual(self.TempPlayer.direction.x,0)
 
-
 class TestCraftingMenu (unittest.TestCase):
       screen = pygame.display
       crafter = CraftingMenu.Crafting(screen)
@@ -268,5 +266,42 @@ class TestCraftingMenu (unittest.TestCase):
              self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.populatePossibleItems()))
       def test_isCraftable(self):
              self.assertIsInstance(True,  type(self.crafter.isCraftable(self.crafter.craftables.sprites, getHotBar())))
+
+class TestGameSettings(unittest.TestCase):
+   def test_properties(self):
+      self.assertIsInstance(gs.levelName, str)
+
+      self.assertIsInstance(gs.blockSize, int)
+      self.assertGreaterEqual(gs.blockSize, 1)
+
+      self.assertIsInstance(gs.playerRange, int)
+      self.assertGreaterEqual(gs.playerRange, 1)
+
+      self.assertIsInstance(gs.noXBlocks, int)
+      self.assertGreaterEqual(gs.noXBlocks, 1)
+
+      self.assertIsInstance(gs.noYBlocks, float)
+      self.assertGreaterEqual(gs.noYBlocks, 1)
+
+      self.assertIsInstance(gs.width, int)
+      self.assertGreaterEqual(gs.width, 1)
+      self.assertIsInstance(gs.height, int)
+      self.assertGreaterEqual(gs.height, 1)
+
+      self.assertIsInstance(gs.drawCrafting, boolean)
+      self.assertIsInstance(gs.levelName, str)
+
+      self.assertIsInstance(gs.craftingTablePos[0], int)
+      self.assertGreaterEqual(gs.craftingTablePos[0], 1)
+      self.assertIsInstance(gs.craftingTablePos[1], int)
+      self.assertGreaterEqual(gs.craftingTablePos[1], 1)
+
+      self.assertIsInstance(gs.itemIDs, dict)
+      self.assertIsInstance(gs.craftingIDs, dict)
+      self.assertIsInstance(gs.converterIDs, dict)
+      self.assertIsInstance(gs.textureNames, dict)
+
+      self.assertIsInstance(gs.immovableBlocks, list)
+      self.assertIsInstance(gs.clickableBlocks, list)
 
 unittest.main()
