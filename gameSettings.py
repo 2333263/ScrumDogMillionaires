@@ -30,6 +30,55 @@ itemIDs = {
     12 : "Stone Shovel"
 }
 
+blockHardness = {
+    0 : 0,
+    1 : 0,
+    2 : 10,
+    3 : 999,
+    4 : 999,
+    5 : 999,
+    6 : 0,
+    7 : 0,
+    8 : 0,
+    9 : 999,
+    10 : 0,
+    11 : 0,
+    12 : 0
+}
+
+itemHardness = {
+    0 : 0,
+    1 : 0,
+    2 : 0,
+    3 : 0,
+    4 : 0,
+    5 : 0,
+    6 : 0,
+    7 : 0,
+    8 : 0,
+    9 : 0,
+    10 : 10,
+    11 : 20,
+    12 : 20
+}
+
+isPlaceable = {
+    0 : True,
+    1 : True,
+    2 : True,
+    3 : True,
+    4 : True,
+    5 : True,
+    6 : True,
+    7 : True,
+    8 : True,
+    9 : True,
+    10 : False,
+    11 : False,
+    12 : False
+}
+
+
 #IDs for the crafting table
 #when json file is loaded into an array, say like data, data[0] will refer to the wooden planks recipe
 #data[0]['toolName'] would return wooden planks 
@@ -37,7 +86,7 @@ craftingIDs = {
     0 : "Wooden Planks", 
     1 : "Wooden Pickaxe", 
     2 : "Stone Pickaxe",
-    3 : "Stone Shovel"
+    3 : "Stone Shovel" 
 }
 
 converterIDs = {
@@ -125,5 +174,5 @@ textureNames = {
     "Sky" : "Textures/Screens/sky.png",
     "Crafting Background" : "Textures/Screens/CraftingMenu.png"
 }
-immovableBlocks = [3, 4, 5]
+immovableBlocks = [3, 5]
 clickableBlocks = [5]

@@ -5,15 +5,15 @@ import gameSettings as gs
 #Init inv with item objects
 hotbarArr = []
 itemIDs=gs.itemIDs
-#Will have to change this when we add full inventory
-#Should only allow +- 10 different item types in the hotbar
+#Hotbar can be the entire inv, with only the first 10 items beings being displaying in the on-screen hotbar. The player should then be able to change to order of the items.
 for item in itemIDs:
     if(Item(itemIDs[item],item).getCount()>0):
      hotbarArr.append(Item(itemIDs[item], item))
 
-global selected;
-selected = 0;
+global selected
+selected = 0
 
+#Add placeable block (Dirt, Stone, etc...)
 def addBlock(block):
     tempItem=Item(itemIDs[block.itemID],block.itemID)
     for i in hotbarArr:
@@ -23,6 +23,18 @@ def addBlock(block):
     
     hotbarArr.append(tempItem)
     hotbarArr[len(hotbarArr)-1].increase()
+
+#Add non placeable item or tool (Coal, Ingots, Stone Pickaxe etc...)
+def addItem(item):
+    tempItem=Item(itemIDs[item.itemID],item.itemID, gs.itemHardness[item.itemID])
+    for i in hotbarArr:
+         if( i.itemID==item.itemID):
+                i.increase()
+                return
+    
+    hotbarArr.append(tempItem)
+    hotbarArr[len(hotbarArr)-1].increase()
+
 
 
 def decrease():
