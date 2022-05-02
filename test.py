@@ -42,7 +42,7 @@ class TestItem(unittest.TestCase):
       self.assertIsInstance(self.tempItem.itemName, str)
 
 class TestBlock(unittest.TestCase):
-   tempBlock = block.Block(gs.blockSize, (0, 0), 0, gs.textureNames[gs.itemIDs[0]])
+   tempBlock = block.Block(gs.blockSize, (0, 0), 0, gs.textureNames[gs.itemIDs[0]],0)
    def test_itemIDs(self):
       self.assertIsInstance(self.tempBlock.itemID, int)
       self.assertGreaterEqual(self.tempBlock.itemID, 0)
@@ -183,7 +183,7 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.direction.y=0
 
    def test_update(self):
-      tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]])
+      tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
       tempGroup=pygame.sprite.Group()
       tempGroup.add(tempBlock)
       self.TempPlayer.jumped=True
