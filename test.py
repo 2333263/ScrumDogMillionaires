@@ -317,6 +317,7 @@ class TestInventoryHandler(unittest.TestCase):
    tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
    tempBlock4=block.Block(gs.blockSize, (50, 7), 3, gs.textureNames[gs.itemIDs[1]],0)
    tempItem = item.Item("Cloud", 4)
+   screen=pygame.Surface((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
    def test_AddBlock(self):
       ih.addBlock(self.tempBlock)
       #self.hotbar=ih.getHotBar()
@@ -372,6 +373,13 @@ class TestInventoryHandler(unittest.TestCase):
       ih.addItem(self.tempItem)
       ih.addItem(self.tempItem)
       self.assertEqual(self.hotbar[2].itemID,self.tempItem.itemID)
+   def test_Draw(self):
+      try:
+         ih.drawHotBar(self.screen)
+         self.assertTrue(True)
+      except:
+         self.assertTrue(False)
+
 
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
@@ -404,6 +412,6 @@ class TestCamera(unittest.TestCase):
       tempGroup.add(self.tempBlock2)
       tempGroup.add(self.tempBlock3)
       tempGroup.add(self.tempBlock4)
-
       self.assertEqual(self.Cam.draw(self.screen,tempGroup),[self.tempBlock])
+
 unittest.main()
