@@ -2,6 +2,7 @@ from select import select
 from typing import List
 import unittest
 from xmlrpc.client import Boolean, boolean
+import Camera
 import item 
 import gameSettings as gs
 import levelGenerator as lg
@@ -41,6 +42,9 @@ class TestItem(unittest.TestCase):
 
    def test_name(self):
       self.assertIsInstance(self.tempItem.itemName, str)
+      self.assertEqual(self.tempItem.getItemName(),"Grass")
+   def test_Hardness(self):
+      self.assertEqual(self.tempItem.getHardness(),0)
 
 class TestBlock(unittest.TestCase):
    tempBlock = block.Block(gs.blockSize, (0, 0), 0, gs.textureNames[gs.itemIDs[0]],0)
@@ -367,4 +371,23 @@ class TestInventoryHandler(unittest.TestCase):
    def test_addItem(self):
       ih.addItem(self.tempItem)
       self.assertEqual(self.hotbar[2].itemID,self.tempItem.itemID)
+
+class TestCamera(unittest.TestCase):
+   TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
+   Cam=Camera.Camera(TempPlayer)
+   tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
+   def test_Offset(self):
+      self.Cam.scroll()
+      self.assertEqual(self.Cam.offset,pygame.math.Vector2(-558,-176))
+      self.assertEqual(self.Cam.getOffsets(),self.Cam.offset)
+   def test_Collide(self):
+      self.assertFalse(self.Cam.isColideable(self.tempBlock))
+      self.tempBlock.rect.x=8*gs.blockSize
+      self.tempBlock.rect.y=8*gs.blockSize
+      self.assertTrue(self.Cam.isColideable(self.tempBlock))
+   def test_onScreen(self):
+      self.assertTrue(self.Cam.isOnScreen(self.tempBlock))
+      self.tempBlock.rect.x=1000
+      self.tempBlock.rect.y=1000
+      self.assertFalse(self.Cam.isOnScreen(self.tempBlock))
 unittest.main()
