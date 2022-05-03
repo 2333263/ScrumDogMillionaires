@@ -1,3 +1,4 @@
+from select import select
 from typing import List
 import unittest
 from xmlrpc.client import Boolean, boolean
@@ -11,7 +12,7 @@ import TextHandler
 import recipeHandler
 import playerHandler as ph
 import CraftingMenu
-from inventoryHandler import getHotBar
+import inventoryHandler as ih
 
 
 #Testing the level Generator
@@ -265,7 +266,7 @@ class TestCraftingMenu (unittest.TestCase):
       def test_populatePossibleItems(self):
              self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.populatePossibleItems()))
       def test_isCraftable(self):
-             self.assertIsInstance(True,  type(self.crafter.isCraftable(self.crafter.craftables.sprites, getHotBar())))
+             self.assertIsInstance(True,  type(self.crafter.isCraftable(self.crafter.craftables.sprites,ih.getHotBar())))
 
 class TestGameSettings(unittest.TestCase):
    def test_properties(self):
@@ -304,4 +305,62 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.immovableBlocks, list)
       self.assertIsInstance(gs.clickableBlocks, list)
 
+
+class TestInventoryHandler(unittest.TestCase):
+   hotbar=ih.getHotBar()
+   tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
+   tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
+   tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
+   tempBlock4=block.Block(gs.blockSize, (50, 7), 3, gs.textureNames[gs.itemIDs[1]],0)
+   def test_AddBlock(self):
+      ih.addBlock(self.tempBlock)
+      #self.hotbar=ih.getHotBar()
+      self.assertEqual(self.hotbar[0].itemID,self.tempBlock.itemID)
+      self.assertEqual(self.hotbar[0].getCount(),1)
+      ih.addBlock(self.tempBlock)
+      #self.hotbar=ih.getHotBar()
+      self.assertEqual(self.hotbar[0].getCount(),2)
+   def test_Decrease(self):
+      #selected is 0 currently
+      self.assertEqual(self.hotbar[0].getCount(),2)
+      ih.decrease()
+      self.assertEqual(self.hotbar[0].getCount(),1)
+      ih.addBlock(self.tempBlock2)
+      self.assertEqual(self.hotbar[1].getCount(),1)
+      ih.selected=1
+      ih.decrease()
+      self.assertNotIn(self.tempBlock2,self.hotbar)
+      self.assertEqual(ih.selected,0)
+      ih.decrease()
+      self.assertEqual(self.hotbar,[])
+   def test_DecreaseSpec(self):
+      ih.addBlock(self.tempBlock)
+      ih.addBlock(self.tempBlock2)
+      ih.addBlock(self.tempBlock2)
+      ih.addBlock(self.tempBlock3)
+      ih.addBlock(self.tempBlock3)
+      self.assertEqual(self.hotbar[1].getCount(),2)
+      ih.decreaseSpec(self.tempBlock2.itemID)
+      self.assertEqual(self.hotbar[1].getCount(),1)
+      ih.decreaseSpec(self.tempBlock2.itemID)
+      self.assertNotEqual(self.hotbar[1].itemID,self.tempBlock2.itemID)
+   def test_Selected(self):
+      self.assertEqual(ih.selected,0)
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
+      ih.selected=1
+      self.assertEqual(ih.selected,1)
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+      ih.selected=0
+      ih.selectNext()
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+      ih.selectNext()
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
+      ih.selectPrevious()
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+      ih.selectPrevious()
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
+   def test_itemCount(self):
+      ih.addBlock(self.tempBlock)
+      self.assertEqual(ih.getItemCount(self.tempBlock.itemID),2)
+      self.assertEqual(ih.getItemCount(self.tempBlock2.itemID),0)
 unittest.main()

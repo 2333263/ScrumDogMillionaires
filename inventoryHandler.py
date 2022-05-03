@@ -65,8 +65,8 @@ def getSelected():
     return hotbarArr[selected]
 
 
-def setSelected(i):
-    selected = i
+#def setSelected(i):
+    #selected = i
 
 def selectNext():
     #Changes the selected item to the next element in hotbarArr
