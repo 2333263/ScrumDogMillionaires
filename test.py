@@ -1,6 +1,8 @@
+from select import select
 from typing import List
 import unittest
 from xmlrpc.client import Boolean, boolean
+import Camera
 import item 
 import gameSettings as gs
 import levelGenerator as lg
@@ -11,7 +13,7 @@ import TextHandler
 import recipeHandler
 import playerHandler as ph
 import CraftingMenu
-from inventoryHandler import getHotBar
+import inventoryHandler as ih
 
 
 #Testing the level Generator
@@ -40,9 +42,12 @@ class TestItem(unittest.TestCase):
 
    def test_name(self):
       self.assertIsInstance(self.tempItem.itemName, str)
+      self.assertEqual(self.tempItem.getItemName(),"Grass")
+   def test_Hardness(self):
+      self.assertEqual(self.tempItem.getHardness(),0)
 
 class TestBlock(unittest.TestCase):
-   tempBlock = block.Block(gs.blockSize, (0, 0), 0, gs.textureNames[gs.itemIDs[0]])
+   tempBlock = block.Block(gs.blockSize, (0, 0), 0, gs.textureNames[gs.itemIDs[0]],0)
    def test_itemIDs(self):
       self.assertIsInstance(self.tempBlock.itemID, int)
       self.assertGreaterEqual(self.tempBlock.itemID, 0)
@@ -59,6 +64,9 @@ class TestBlock(unittest.TestCase):
       self.assertIsInstance(self.tempBlock.textureName,  str)
       self.assertIsInstance(self.tempBlock.rect, pygame.rect.Rect)
       #Add check for texture object
+
+   def test_hardness(self):
+      self.assertEqual(self.tempBlock.getHardness(),0)
 class TestCraftingButton(unittest.TestCase):
    tempButton = CraftButtonHandler.Button(0, (0, 0), 50, 50)
    pygame.init()
@@ -183,7 +191,7 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.direction.y=0
 
    def test_update(self):
-      tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]])
+      tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
       tempGroup=pygame.sprite.Group()
       tempGroup.add(tempBlock)
       self.TempPlayer.jumped=True
@@ -265,7 +273,7 @@ class TestCraftingMenu (unittest.TestCase):
       def test_populatePossibleItems(self):
              self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.populatePossibleItems()))
       def test_isCraftable(self):
-             self.assertIsInstance(True,  type(self.crafter.isCraftable(self.crafter.craftables.sprites, getHotBar())))
+             self.assertIsInstance(True,  type(self.crafter.isCraftable(self.crafter.craftables.sprites,ih.getHotBar())))
 
 class TestGameSettings(unittest.TestCase):
    def test_properties(self):
@@ -303,5 +311,110 @@ class TestGameSettings(unittest.TestCase):
 
       self.assertIsInstance(gs.immovableBlocks, list)
       self.assertIsInstance(gs.clickableBlocks, list)
+
+
+class TestInventoryHandler(unittest.TestCase):
+   hotbar=ih.getHotBar()
+   tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
+   tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
+   tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
+   tempBlock4=block.Block(gs.blockSize, (50, 7), 3, gs.textureNames[gs.itemIDs[1]],0)
+   tempItem = item.Item("Cloud", 4)
+   screen=pygame.Surface((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+   def test_AddBlock(self):
+      ih.addBlock(self.tempBlock)
+      #self.hotbar=ih.getHotBar()
+      self.assertEqual(self.hotbar[0].itemID,self.tempBlock.itemID)
+      self.assertEqual(self.hotbar[0].getCount(),1)
+      ih.addBlock(self.tempBlock)
+      #self.hotbar=ih.getHotBar()
+      self.assertEqual(self.hotbar[0].getCount(),2)
+   def test_Decrease(self):
+      #selected is 0 currently
+      self.assertEqual(self.hotbar[0].getCount(),2)
+      ih.decrease()
+      self.assertEqual(self.hotbar[0].getCount(),1)
+      ih.addBlock(self.tempBlock2)
+      self.assertEqual(self.hotbar[1].getCount(),1)
+      ih.selected=1
+      ih.decrease()
+      self.assertNotIn(self.tempBlock2,self.hotbar)
+      self.assertEqual(ih.selected,0)
+      ih.decrease()
+      self.assertEqual(self.hotbar,[])
+   def test_DecreaseSpec(self):
+      ih.addBlock(self.tempBlock)
+      ih.addBlock(self.tempBlock2)
+      ih.addBlock(self.tempBlock2)
+      ih.addBlock(self.tempBlock3)
+      ih.addBlock(self.tempBlock3)
+      self.assertEqual(self.hotbar[1].getCount(),2)
+      ih.decreaseSpec(self.tempBlock2.itemID)
+      self.assertEqual(self.hotbar[1].getCount(),1)
+      ih.decreaseSpec(self.tempBlock2.itemID)
+      self.assertNotEqual(self.hotbar[1].itemID,self.tempBlock2.itemID)
+   def test_Selected(self):
+      self.assertEqual(ih.selected,0)
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
+      ih.selected=1
+      self.assertEqual(ih.selected,1)
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+      ih.selected=0
+      ih.selectNext()
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+      ih.selectNext()
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
+      ih.selectPrevious()
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+      ih.selectPrevious()
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
+   def test_itemCount(self):
+      ih.addBlock(self.tempBlock)
+      self.assertEqual(ih.getItemCount(self.tempBlock.itemID),2)
+      self.assertEqual(ih.getItemCount(self.tempBlock2.itemID),0)
+   def test_addItem(self):
+      ih.addItem(self.tempItem)
+      ih.addItem(self.tempItem)
+      self.assertEqual(self.hotbar[2].itemID,self.tempItem.itemID)
+   def test_Draw(self):
+      try:
+         ih.drawHotBar(self.screen)
+         self.assertTrue(True)
+      except:
+         self.assertTrue(False)
+
+
+class TestCamera(unittest.TestCase):
+   TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
+   Cam=Camera.Camera(TempPlayer)
+   #pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+   screen = pygame.Surface((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+   tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
+   tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
+   tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
+   tempBlock4=block.Block(gs.blockSize, (50, 7), 3, gs.textureNames[gs.itemIDs[1]],0)
+   def test_Offset(self):
+      self.Cam.scroll()
+      self.assertEqual(self.Cam.offset,pygame.math.Vector2(-558,-176))
+      self.assertEqual(self.Cam.getOffsets(),self.Cam.offset)
+   def test_Collide(self):
+      self.assertFalse(self.Cam.isColideable(self.tempBlock))
+      self.tempBlock.rect.x=8*gs.blockSize
+      self.tempBlock.rect.y=8*gs.blockSize
+      self.assertTrue(self.Cam.isColideable(self.tempBlock))
+   def test_onScreen(self):
+      self.assertTrue(self.Cam.isOnScreen(self.tempBlock))
+      self.tempBlock.rect.x=1000
+      self.tempBlock.rect.y=1000
+      self.assertFalse(self.Cam.isOnScreen(self.tempBlock))
+   def test_draw(self):
+      self.tempBlock.rect.x=8*gs.blockSize
+      self.tempBlock.rect.y=8*gs.blockSize
+      tempGroup=pygame.sprite.Group()
+      tempGroup.add(self.tempBlock)
+      tempGroup.add(self.tempBlock2)
+      tempGroup.add(self.tempBlock3)
+      tempGroup.add(self.tempBlock4)
+      self.assertEqual(self.Cam.draw(self.screen,tempGroup),[self.tempBlock])
 
 unittest.main()

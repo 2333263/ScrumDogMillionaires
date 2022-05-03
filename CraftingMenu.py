@@ -1,10 +1,10 @@
 import pygame
-from gameSettings import itemIDs, blockSize, craftingTablePos
+from gameSettings import itemIDs, blockSize, craftingTablePos, isPlaceable, itemHardness
 from CraftButtonHandler import Button
 from TextHandler import Text
 from item import Item
 import recipeHandler as rh
-from inventoryHandler import getHotBar, addBlock, decreaseSpec, getItemCount
+from inventoryHandler import getHotBar, addBlock, addItem, decreaseSpec, getItemCount
 
 
 class Crafting():
@@ -129,7 +129,13 @@ class Crafting():
                                 self.canCraft = False
                                 self.resetTable()
                     for i in range(self.recipies.getCraftingAmount(self.createdItem)):
-                        addBlock(tempItem)
+                        #If item is a placeable object, it is then counted as a block
+                        if (isPlaceable[tempItem.getItemId()]):
+                            addBlock(tempItem)
+                        #Else the item is added as an item with an item hardness, defined in gameSettings.py
+                        else:
+                            newTempItem = Item(tempItem.itemName, tempItem.itemID, itemHardness[tempItem.getItemId()])
+                            addItem(newTempItem)
                     self.resetTable()
 
    # Takes in the current item and the player inventory and checks if the player has enough items
