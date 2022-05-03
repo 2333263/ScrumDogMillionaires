@@ -370,12 +370,18 @@ class TestInventoryHandler(unittest.TestCase):
       self.assertEqual(ih.getItemCount(self.tempBlock2.itemID),0)
    def test_addItem(self):
       ih.addItem(self.tempItem)
+      ih.addItem(self.tempItem)
       self.assertEqual(self.hotbar[2].itemID,self.tempItem.itemID)
 
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
+   #pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+   screen = pygame.Surface((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
+   tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
+   tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
+   tempBlock4=block.Block(gs.blockSize, (50, 7), 3, gs.textureNames[gs.itemIDs[1]],0)
    def test_Offset(self):
       self.Cam.scroll()
       self.assertEqual(self.Cam.offset,pygame.math.Vector2(-558,-176))
@@ -390,4 +396,14 @@ class TestCamera(unittest.TestCase):
       self.tempBlock.rect.x=1000
       self.tempBlock.rect.y=1000
       self.assertFalse(self.Cam.isOnScreen(self.tempBlock))
+   def test_draw(self):
+      self.tempBlock.rect.x=8*gs.blockSize
+      self.tempBlock.rect.y=8*gs.blockSize
+      tempGroup=pygame.sprite.Group()
+      tempGroup.add(self.tempBlock)
+      tempGroup.add(self.tempBlock2)
+      tempGroup.add(self.tempBlock3)
+      tempGroup.add(self.tempBlock4)
+
+      self.assertEqual(self.Cam.draw(self.screen,tempGroup),[self.tempBlock])
 unittest.main()
