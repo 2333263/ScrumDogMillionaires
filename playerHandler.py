@@ -28,9 +28,6 @@ class Player(pygame.sprite.Sprite):
     def getPlayerPos(self):
         return self.rect.x, self.rect.y
 
-    #updates the player position based on the current pos, this is not longer used
-    def updatePlayerPos(self,pos):
-        self.playerPos=pos
 
     def MoveOnX(self,fakeKeys):
         #gets a list of all keys currently being pressed

@@ -64,6 +64,9 @@ class TestBlock(unittest.TestCase):
       self.assertIsInstance(self.tempBlock.textureName,  str)
       self.assertIsInstance(self.tempBlock.rect, pygame.rect.Rect)
       #Add check for texture object
+
+   def test_hardness(self):
+      self.assertEqual(self.tempBlock.getHardness(),0)
 class TestCraftingButton(unittest.TestCase):
    tempButton = CraftButtonHandler.Button(0, (0, 0), 50, 50)
    pygame.init()
