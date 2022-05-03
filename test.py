@@ -312,6 +312,7 @@ class TestInventoryHandler(unittest.TestCase):
    tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
    tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
    tempBlock4=block.Block(gs.blockSize, (50, 7), 3, gs.textureNames[gs.itemIDs[1]],0)
+   tempItem = item.Item("Cloud", 4)
    def test_AddBlock(self):
       ih.addBlock(self.tempBlock)
       #self.hotbar=ih.getHotBar()
@@ -363,4 +364,7 @@ class TestInventoryHandler(unittest.TestCase):
       ih.addBlock(self.tempBlock)
       self.assertEqual(ih.getItemCount(self.tempBlock.itemID),2)
       self.assertEqual(ih.getItemCount(self.tempBlock2.itemID),0)
+   def test_addItem(self):
+      ih.addItem(self.tempItem)
+      self.assertEqual(self.hotbar[2].itemID,self.tempItem.itemID)
 unittest.main()
