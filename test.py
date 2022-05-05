@@ -442,6 +442,12 @@ class TestBreakPlace(unittest.TestCase):
       print("ADD THIS")
    def test_blockBreak(self):
       try:
+         for block in self.spriteGroup:
+            if(block==self.tempBlock):
+               block.rect.x=8*gs.blockSize
+               block.rect.y=8*gs.blockSize
+         #ih.addItem(self.tempItem)
+         self.pos=(8*gs.blockSize,8*gs.blockSize)
          bph.blockBreak(self.pos,self.spriteGroup,self.TempPlayer)
          self.assertTrue(True)
       except:
