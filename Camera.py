@@ -23,7 +23,7 @@ class Camera(pygame.sprite.Group):
        self.offset.x=self.Player.rect.centerx-self.hWidth
        self.offset.y=self.Player.rect.centery-self.hHeight
     #this function takles in all blocks and the screen
-    #offsets the position of the blocks and blits them
+    #off the position of the blocks and blits them
     #also offsets the players position and blits it
     def draw(self, screen, worldBlocks):
         self.scroll()

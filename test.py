@@ -1,3 +1,4 @@
+from platform import python_branch
 from select import select
 from typing import List
 import unittest
@@ -14,7 +15,7 @@ import recipeHandler
 import playerHandler as ph
 import CraftingMenu
 import inventoryHandler as ih
-
+import breakPlaceHandler as bph
 
 #Testing the level Generator
 class TestWorld(unittest.TestCase):
@@ -416,5 +417,44 @@ class TestCamera(unittest.TestCase):
       tempGroup.add(self.tempBlock3)
       tempGroup.add(self.tempBlock4)
       self.assertEqual(self.Cam.draw(self.screen,tempGroup),[self.tempBlock])
+class TestBreakPlace(unittest.TestCase):
+   TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
+   pos=(8,8)
+   tempBlock = block.Block(gs.blockSize, (8*gs.blockSize, 7*gs.blockSize), 0, gs.textureNames[gs.itemIDs[0]],1)
+   tempItem = item.Item("Wooden Pickaxe", 3)
+   tempItem.hardness=3
+   spriteGroup=pygame.sprite.Group()
+   spriteGroup.add(tempBlock)
+  # hotbar=ih.getHotBar()
+  # ih.addBlock(tempBlock)
+  # print(ih.getSelected())
+   def test_getPos(self):
+      self.assertEqual(bph.getPos(self.pos),(0,0))
+   def test_Distance(self):
+      self.assertEqual(int(bph.distance(self.TempPlayer,self.pos)),226)
+   def test_checkBreak(self):
+      self.assertTrue(bph.checkBreakable(self.tempBlock,self.tempItem))
+      self.tempItem.hardness=0
+      self.assertFalse(bph.checkBreakable(self.tempBlock,self.tempItem))
+   def test_notEmpty(self):
+      #self.hotbar.append(self.tempBlock)
+      #self.assertTrue(bph.notEmpty(self.hotbar[0]))
+      print("ADD THIS")
+   def test_blockBreak(self):
+      try:
+         bph.blockBreak(self.pos,self.spriteGroup,self.TempPlayer)
+         self.assertTrue(True)
+      except:
+         self.assertTrue(False)
+   def test_blockPlace(self):
+      craftableBlock=block.Block(gs.blockSize, (10*gs.blockSize, 10*gs.blockSize), 5, gs.textureNames[gs.itemIDs[0]],1)
+      self.spriteGroup.add(craftableBlock)
+      bph.blockPlace(self.pos,self.spriteGroup,self.TempPlayer)
+      self.assertFalse(gs.drawCrafting)
+      bph.blockPlace((craftableBlock.rect.x,craftableBlock.rect.y),self.spriteGroup,self.TempPlayer)
+      self.assertTrue(gs.drawCrafting)
+      self.pos=(8000,8000)
+      bph.blockPlace(self.pos,self.spriteGroup,self.TempPlayer)
+      
 
 unittest.main()
