@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from platform import python_branch
 from select import select
 from typing import List
@@ -269,13 +270,32 @@ class TestCraftingMenu (unittest.TestCase):
              self.assertGreaterEqual(self.crafter.createdItem, -1)
       def test_craftButton(self):#10
              self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.craftButton))
+#       def test_makeScreen(self):
+#              self.assertIsInstance(NULL,  type(self.crafter.makeBackground()))
       def test_makeBackground(self):
              self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.makeBackground()))
       def test_populatePossibleItems(self):
              self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.populatePossibleItems()))
+      def test_populateRecipe(self):
+             self.crafter.populateRecipe(self.crafter.craftables)
+             self.assertTrue(self.crafter.itemRecipe.__sizeof__() >= 0)
+      def test_resetTable(self):
+             self.crafter.populateRecipe(gs.itemIDs);
+             self.assertEqual(self.crafter.itemRecipe.has(), False)
+             self.assertEqual(self.crafter.craftButton.has(), False)
+      def test_checkClick(self):
+             self.crafter.checkClick((0,0))
+             self.assertTrue(self.crafter.craftButton.has()>= 0)
+      def test_makeItem(self):
+             self.crafter.makeItem((0,0))
+             self.assertEqual(self.crafter.itemRecipe.has(), False)
+             self.assertEqual(self.crafter.craftButton.has(), False)
       def test_isCraftable(self):
-             self.assertIsInstance(True,  type(self.crafter.isCraftable(self.crafter.craftables.sprites,ih.getHotBar())))
-
+             for menuItem in self.crafter.craftables:
+                    if(self.crafter.isCraftable(menuItem.itemID,ih.getHotBar())):
+                          self.assertIsInstance(True,  type(self.crafter.isCraftable(menuItem.itemID,ih.getHotBar())))
+                    else:
+                          self.assertIsInstance(False,  type(self.crafter.isCraftable(menuItem.itemID,ih.getHotBar())))
 class TestGameSettings(unittest.TestCase):
    def test_properties(self):
       self.assertIsInstance(gs.levelName, str)
