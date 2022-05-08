@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="704.9px" preserveAspectRatio="none" style="width:1192px;height:704px;background:#FFFFFF;" version="1.1" viewBox="0 0 1192 704" width="1192.8px" zoomAndPan="magnify"><defs/><g><!--MD5=[6a7bbfa3d72452af17f24c65754d4e2c]
+cluster Files--><g id="cluster_Files"><path d="M767.9,4.2 L792.4,4.2 A2.625,2.625 0 0 1 794.15,5.95 L799.05,20.7266 L952.7,20.7266 A1.75,1.75 0 0 1 954.45,22.4766 L954.45,72.45 A1.75,1.75 0 0 1 952.7,74.2 L767.9,74.2 A1.75,1.75 0 0 1 766.15,72.45 L766.15,5.95 A1.75,1.75 0 0 1 767.9,4.2 " style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;"/><line style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;" x1="766.15" x2="799.05" y1="20.7266" y2="20.7266"/><text fill="#000000" font-family="sans-serif" font-size="9.8" font-weight="bold" lengthAdjust="spacing" textLength="23.8" x="768.95" y="15.7732">Files</text></g><!--MD5=[e56f7492f04ae9d94986440eb8a25ddd]
+entity Sprites--><g id="elem_Sprites"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="58.8" x="777.35" y="29.4"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="822.15" y="32.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="820.75" y="34.3"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="820.75" y="37.1"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="30.8" x="787.85" y="53.5732">Sprites</text></g><!--MD5=[eccc74c5d4e81b373d80cabf52c45d8c]
+entity Recipe Json--><g id="elem_Recipe Json"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="81.9" x="861" y="29.4"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="928.9" y="32.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="927.5" y="34.3"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="927.5" y="37.1"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="53.9" x="871.5" y="53.5732">Recipe Json</text></g><!--MD5=[ec467500b4fd5e3c9827eac1bb8e0f6b]
+entity Game Settings--><g id="elem_Game Settings"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="93.1" x="787.5" y="667.8"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="866.6" y="671.3"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="865.2" y="672.7"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="865.2" y="675.5"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="65.1" x="798" y="691.9732">Game Settings</text></g><!--MD5=[20a1033d75ee8087235cacd9e4898522]
+entity Crafting--><g id="elem_Crafting"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="63" x="939.05" y="189"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="988.05" y="192.5"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="986.65" y="193.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="986.65" y="196.7"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="35" x="949.55" y="213.1732">Crafting</text></g><!--MD5=[45d7808020dbd92216b02228f7e599f6]
+entity Block--><g id="elem_Block"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="51.8" x="684.25" y="508.2"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="722.05" y="511.7"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="720.65" y="513.1"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="720.65" y="515.9"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="23.8" x="694.75" y="532.3732">Block</text></g><!--MD5=[ab59c2c83936ce77a0901c710a4c2b89]
+entity Item--><g id="elem_Item"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="46.2" x="799.05" y="508.2"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="831.25" y="511.7"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="829.85" y="513.1"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="829.85" y="515.9"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="18.2" x="809.55" y="532.3732">Item</text></g><!--MD5=[3d6f32cb5b891463c0dffd3944c7a07b]
+entity Breaking and Placing--><g id="elem_Breaking and Placing"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="121.8" x="106.75" y="29.4"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="214.55" y="32.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="213.15" y="34.3"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="213.15" y="37.1"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="93.8" x="117.25" y="53.5732">Breaking and Placing</text></g><!--MD5=[de2effd8dc5bf946a609466312d0f75f]
+entity Player--><g id="elem_Player"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="56" x="608.65" y="189"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="650.65" y="192.5"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="649.25" y="193.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="649.25" y="196.7"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="28" x="619.15" y="213.1732">Player</text></g><!--MD5=[6bcad810eaef885ccefa2942ddd222fc]
+entity Player Movement--><g id="elem_Player Movement"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="104.3" x="450.8" y="189"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="541.1" y="192.5"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="539.7" y="193.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="539.7" y="196.7"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="76.3" x="461.3" y="213.1732">Player Movement</text></g><!--MD5=[c8f729b8e352a0860913e8756c4779b6]
+entity Camera--><g id="elem_Camera"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="63" x="334.25" y="189"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="383.25" y="192.5"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="381.85" y="193.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="381.85" y="196.7"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="35" x="344.75" y="213.1732">Camera</text></g><!--MD5=[6a30fd0128a7413820ab77e27b80c321]
+entity Game World--><g id="elem_Game World"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="83.3" x="46.9" y="189"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="116.2" y="192.5"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="114.8" y="193.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="114.8" y="196.7"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="55.3" x="57.4" y="213.1732">Game World</text></g><!--MD5=[c3a82e844d23968b7ce72d3a5f9fb6d3]
+entity Inventory--><g id="elem_Inventory"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="68.6" x="750.05" y="348.6"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="804.65" y="352.1"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="803.25" y="353.5"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="803.25" y="356.3"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="40.6" x="760.55" y="372.7732">Inventory</text></g><!--MD5=[9c626053e623f48c145be2aac1d12849]
+entity User Interface--><g id="elem_User Interface"><rect fill="#F1F1F1" height="33.3266" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="89.6" x="1026.55" y="189"/><rect fill="#F1F1F1" height="7" style="stroke:#181818;stroke-width:0.3499999999999999;" width="10.5" x="1102.15" y="192.5"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="1100.75" y="193.9"/><rect fill="#F1F1F1" height="1.4" style="stroke:#181818;stroke-width:0.3499999999999999;" width="2.8" x="1100.75" y="196.7"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="61.6" x="1037.05" y="213.1732">User Interface</text></g><!--MD5=[1a8f18ec5d3b3f418f4294ccc7f67a9b]
+entity GT1--><g id="elem_GT1"><ellipse cx="820.05" cy="126" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="52.5" x="793.8" y="148.0732">Get Texture</text></g><!--MD5=[f1ff46596a9076ec4408fb4820ef3e2e]
+entity GT2--><g id="elem_GT2"><ellipse cx="693.35" cy="126" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="52.5" x="667.1" y="148.0732">Get Texture</text></g><!--MD5=[8aa48eece13b069ef17ea2b2a2e0d94a]
+entity GBlockInfo--><g id="elem_GBlockInfo"><ellipse cx="710.15" cy="604.8" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="91" x="664.65" y="626.8732">Get Block Properties</text></g><!--MD5=[eaef40ceae70d53d702928da1ceb95c0]
+entity GBItemInfo--><g id="elem_GBItemInfo"><ellipse cx="834.05" cy="604.8" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="85.4" x="791.35" y="626.8732">Get Item Properties</text></g><!--MD5=[88072e861a9acb9d8434eb03350cf594]
+entity GBlock--><g id="elem_GBlock"><ellipse cx="734.65" cy="445.2" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="42.7" x="713.3" y="467.2732">Get Block</text></g><!--MD5=[42405b7584953efb4ee1e909ccfc963b]
+entity GItem--><g id="elem_GItem"><ellipse cx="815.85" cy="445.2" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="37.1" x="797.3" y="467.2732">Get Item</text></g><!--MD5=[da147cd71508b1913a41bb6b4b01a772]
+entity StoreRetrieveBlock--><g id="elem_StoreRetrieveBlock"><ellipse cx="167.65" cy="126" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="90.3" x="122.5" y="148.0732">Store/Retrieve Block</text></g><!--MD5=[d26c08427d166fc46bfdb907375634c7]
+entity SelectItemBlock--><g id="elem_SelectItemBlock"><ellipse cx="708.75" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="74.9" x="671.3" y="307.6732">Select Item/Block</text></g><!--MD5=[a9ca98f5762c40b68b842c463b31ef35]
+entity BreakPlaceBlock--><g id="elem_BreakPlaceBlock"><ellipse cx="482.65" cy="126" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="79.8" x="442.75" y="148.0732">Break/Place Block</text></g><!--MD5=[f912c3dc76be78071eecc274b3d6d7ff]
+entity PlaceBlock--><g id="elem_PlaceBlock"><ellipse cx="29.75" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="51.1" x="4.2" y="307.6732">Place Block</text></g><!--MD5=[801d9971c74be9d07ffc18d022fa1b86]
+entity Craft--><g id="elem_Craft"><ellipse cx="815.85" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="69.3" x="781.2" y="307.6732">Craft Item/Block</text></g><!--MD5=[e25fa1a09df03286a4013fc67ada0c07]
+entity GetRecipes--><g id="elem_GetRecipes"><ellipse cx="913.15" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="54.6" x="885.85" y="307.6732">Get Recipes</text></g><!--MD5=[74aef968b7954e707f3796f5a35ab757]
+entity StoreRetrieveBlockItem--><g id="elem_StoreRetrieveBlockItem"><ellipse cx="955.85" cy="445.2" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="111.3" x="900.2" y="467.2732">Store/Retrieve Item/Block</text></g><!--MD5=[e695e324c98b06ff9a909a7ff6eb89cf]
+entity CreateWorld--><g id="elem_CreateWorld"><ellipse cx="326.55" cy="604.8" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="58.8" x="297.15" y="626.8732">Create World</text></g><!--MD5=[56ee8b33924492548bd9da39795eb7ef]
+entity DisplayWorld--><g id="elem_DisplayWorld"><ellipse cx="240.45" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="60.9" x="210" y="307.6732">Display World</text></g><!--MD5=[0e27917c4a4f58a74db95a6dbb62aec7]
+entity DisplayPlayer--><g id="elem_DisplayPlayer"><ellipse cx="435.05" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="63" x="403.55" y="307.6732">Display Player</text></g><!--MD5=[beea72e0d01653e4c9f99928df8e17cd]
+entity DisplayUI--><g id="elem_DisplayUI"><ellipse cx="523.95" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="43.4" x="502.25" y="307.6732">Display UI</text></g><!--MD5=[941f54ee38a768d85a8ad4c4b4555377]
+entity DisplayCrafting--><g id="elem_DisplayCrafting"><ellipse cx="1060.85" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="70" x="1025.85" y="307.6732">Display Crafting</text></g><!--MD5=[206894d240f45f21cb6119ef6cf55bbc]
+entity DisplayInventory--><g id="elem_DisplayInventory"><ellipse cx="1100.05" cy="445.2" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="75.6" x="1062.25" y="467.2732">Display Inventory</text></g><!--MD5=[d02a314c5cb346a67fc9e5d60c3c32f5]
+entity MovePlayer--><g id="elem_MovePlayer"><ellipse cx="608.65" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="54.6" x="581.35" y="307.6732">Move Player</text></g><!--MD5=[4daaf7b57585d605806b27786f9cfadf]
+entity MoveCamera--><g id="elem_MoveCamera"><ellipse cx="337.05" cy="285.6" fill="#F1F1F1" rx="5.6" ry="5.6" style="stroke:#181818;stroke-width:0.3499999999999999;"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="61.6" x="306.25" y="307.6732">Move Camera</text></g><!--MD5=[833bae06c0cf30466acbc405d55ed788]
+link Sprites to GT1--><g id="link_Sprites_GT1"><path d="M809.508,63.147 C812.49,80.724 817.082,107.821 819.077,119.553 " fill="none" id="Sprites-GT1" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[31406db7eb95a52c6e3387555d623df7]
+reverse link GT1 to Game Settings--><g id="link_GT1_Game Settings"><path d="M833.546,126.238 C899.892,124.74 1188.25,127.281 1188.25,284.9 C1188.25,284.9 1188.25,284.9 1188.25,525.7 C1188.25,658.882 976.899,680.708 880.719,683.739 " fill="none" id="GT1-backto-Game Settings" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M828.7556,132.3004 A6.3,6.3 0 0 0 828.4343 120.4647" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[b04ad571f909b26a9d4513388aff1f63]
+link Sprites to GT2--><g id="link_Sprites_GT2"><path d="M783.251,63.147 C756.784,81.445 715.414,110.047 699.692,120.911 " fill="none" id="Sprites-GT2" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[51160945cc9d277d81098ce725fef6d8]
+reverse link GT2 to Player--><g id="link_GT2_Player"><path d="M685.104,138.103 C675.458,151.438 659.428,173.607 648.466,188.769 " fill="none" id="GT2-backto-Player" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M683.2092,130.6121 A6.3,6.3 0 0 0 692.8037 137.55" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[6cbb0df46079e74cba3e8104e07a3a5e]
+link Block to GBlockInfo--><g id="link_Block_GBlockInfo"><path d="M710.15,541.947 C710.15,556.57 710.15,577.787 710.15,591.262 " fill="none" id="Block-to-GBlockInfo" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M716.0701,596.1983 A6.3,6.3 0 0 0 704.2299 596.1983" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[3c272064933e94207695fb4d13fb9d77]
+link GBlockInfo to Game Settings--><g id="link_GBlockInfo_Game Settings"><path d="M716.464,609.497 C733.18,620.074 779.31,649.264 808.577,667.779 " fill="none" id="GBlockInfo-Game Settings" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[2f4c065f2b491914fbcaa0c0a9dced04]
+link Item to GBItemInfo--><g id="link_Item_GBItemInfo"><path d="M824.614,541.947 C826.833,556.57 830.053,577.787 832.104,591.262 " fill="none" id="Item-to-GBItemInfo" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M838.7048,595.3345 A6.3,6.3 0 0 0 826.9987 597.1108" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[a3942f16af6aea663a47f2af12875deb]
+link GBItemInfo to Game Settings--><g id="link_GBItemInfo_Game Settings"><path d="M834.05,611.135 C834.05,622.797 834.05,649.929 834.05,667.569 " fill="none" id="GBItemInfo-Game Settings" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[d6d32cedfe030439373b336cb5000e96]
+link Inventory to GBlock--><g id="link_Inventory_GBlock"><path d="M774.053,382.347 C764.519,397.383 750.568,419.384 742.077,432.782 " fill="none" id="Inventory-to-GBlock" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M744.4431,440.1054 A6.3,6.3 0 0 0 734.4457 433.7619" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[118a765e966355423c34d4af725f384a]
+link GBlock to Block--><g id="link_GBlock_Block"><path d="M732.886,451.535 C729.246,463.197 720.769,490.329 715.253,507.969 " fill="none" id="GBlock-Block" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[dfa6cd361c6b793f4677081cbc43bb1d]
+link Inventory to GItem--><g id="link_Inventory_GItem"><path d="M790.874,382.347 C796.838,397.18 805.518,418.789 810.915,432.222 " fill="none" id="Inventory-to-GItem" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M818.2286,434.545 A6.3,6.3 0 0 0 807.2435 438.9627" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[325b17ebab9b6016a31cb1a9784fdd6b]
+link GItem to Item--><g id="link_GItem_Item"><path d="M816.305,451.535 C817.243,463.197 819.42,490.329 820.834,507.969 " fill="none" id="GItem-Item" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[25af1755c2324c2326503938705c752b]
+link Breaking and Placing to StoreRetrieveBlock--><g id="link_Breaking and Placing_StoreRetrieveBlock"><path d="M167.65,63.147 C167.65,77.77 167.65,98.987 167.65,112.462 " fill="none" id="Breaking and Placing-to-StoreRetrieveBlock" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M173.5701,117.3983 A6.3,6.3 0 0 0 161.7299 117.3983" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[9e217f0be4295e8271d6a435f23b87a2]
+link StoreRetrieveBlock to Inventory--><g id="link_StoreRetrieveBlock_Inventory"><path d="M166.243,132.468 C160.51,157.521 141.519,257.838 192.15,306.6 C232.491,345.457 629.496,360.178 749.91,363.769 " fill="none" id="StoreRetrieveBlock-Inventory" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[e74f0ae00824837c9572152c9f65e0cd]
+link SelectItemBlock to Inventory--><g id="link_SelectItemBlock_Inventory"><path d="M714.189,291.935 C725.424,303.597 751.59,330.729 768.6,348.369 " fill="none" id="SelectItemBlock-Inventory" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[40106af54c5523aa758db7b9d86448e4]
+link Player to SelectItemBlock--><g id="link_Player_SelectItemBlock"><path d="M651.588,222.747 C665.672,238.063 686.399,260.596 698.635,273.903 " fill="none" id="Player-to-SelectItemBlock" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M706.3617,273.5584 A6.3,6.3 0 0 0 697.6499 281.5767" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[1ee7cbf5ef8d2075090c0756baf58aec]
+link Breaking and Placing to BreakPlaceBlock--><g id="link_Breaking and Placing_BreakPlaceBlock"><path d="M228.571,62.062 C309.414,82.18 445.536,116.06 476.329,123.725 " fill="none" id="Breaking and Placing-BreakPlaceBlock" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[4ba018fd2aac3000e629c9054405dd99]
+reverse link BreakPlaceBlock to Player--><g id="link_BreakPlaceBlock_Player"><path d="M495.467,133.224 C520.198,145.817 575.015,173.726 608.608,190.82 " fill="none" id="BreakPlaceBlock-backto-Player" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M488.3087,136.223 A6.3,6.3 0 0 0 493.6714 125.6669" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[bf2800027f078a606b20da05126be894]
+link Game World to PlaceBlock--><g id="link_Game World_PlaceBlock"><path d="M76.37,222.747 C63.182,240.324 42.861,267.421 34.062,279.153 " fill="none" id="Game World-PlaceBlock" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[d85fcbc4def0fba87b6109e07813c447]
+link Breaking and Placing to PlaceBlock--><g id="link_Breaking and Placing_PlaceBlock"><path d="M143.969,63.035 C111.993,86.429 56.504,133.147 34.65,189 C23.702,216.993 25.746,253.134 27.909,272.048 " fill="none" id="Breaking and Placing-to-PlaceBlock" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M34.4338,276.3388 A6.3,6.3 0 0 0 22.692 277.8615" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[d97bc650b134c668d2d0bc8760395a7b]
+link Crafting to Craft--><g id="link_Crafting_Craft"><path d="M938.868,222.558 C901.39,241.549 841.617,271.838 822.185,281.694 " fill="none" id="Crafting-Craft" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[5f3df63fa38e93bd3dec1679891c80ef]
+link Player to Craft--><g id="link_Player_Craft"><path d="M664.846,218.834 C704.2,236.054 773.997,266.588 802.83,279.202 " fill="none" id="Player-to-Craft" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M809.7736,275.7842 A6.3,6.3 0 0 0 805.0403 286.637" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[dbaa1f3b8b77d9001dabe906e4ed8be3]
+link Crafting to GetRecipes--><g id="link_Crafting_GetRecipes"><path d="M958.657,222.747 C947.597,237.853 931.392,259.987 921.599,273.364 " fill="none" id="Crafting-to-GetRecipes" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M923.4079,280.907 A6.3,6.3 0 0 0 913.8492 273.9199" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[c98b33fc196342044df8e7c9a7be6562]
+link Recipe Json to GetRecipes--><g id="link_Recipe Json_GetRecipes"><path d="M902.713,63.07 C904.953,110.782 911.484,249.466 912.884,279.23 " fill="none" id="Recipe Json-GetRecipes" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[faf5538fb3abce4c287cd57d989a2286]
+link Crafting to StoreRetrieveBlockItem--><g id="link_Crafting_StoreRetrieveBlockItem"><path d="M969.549,222.67 C966.791,267.302 959.119,391.566 956.634,431.774 " fill="none" id="Crafting-to-StoreRetrieveBlockItem" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M962.2412,437.0428 A6.3,6.3 0 0 0 950.4234 436.3158" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[8316efd59f7fcc42c947664f8b098d59]
+link Inventory to StoreRetrieveBlockItem--><g id="link_Inventory_StoreRetrieveBlockItem"><path d="M818.846,381.871 C860.713,401.009 928.319,431.914 949.375,441.539 " fill="none" id="Inventory-StoreRetrieveBlockItem" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[d1cb480aeb3d18fd78e26c8f5d7e4928]
+link Game World to CreateWorld--><g id="link_Game World_CreateWorld"><path d="M91.042,222.621 C95.235,251.181 103.25,312.564 103.25,364.7 C103.25,364.7 103.25,364.7 103.25,445.9 C103.25,549.409 264.985,591.318 313.166,601.503 " fill="none" id="Game World-to-CreateWorld" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M319.1738,596.6869 A6.3,6.3 0 0 0 316.8225 608.2913" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[abe6a1f43b7e4f0a0e98714264839424]
+link Block to CreateWorld--><g id="link_Block_CreateWorld"><path d="M684.082,531.027 C605.675,547.05 374.78,594.244 333.053,602.77 " fill="none" id="Block-CreateWorld" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[ce53c0dd0a691013d768cd79576454a5]
+link User Interface to DisplayCrafting--><g id="link_User Interface_DisplayCrafting"><path d="M1069.173,222.747 C1067.213,237.37 1064.371,258.587 1062.572,272.062 " fill="none" id="User Interface-to-DisplayCrafting" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M1067.7738,277.8037 A6.3,6.3 0 0 0 1056.0386 276.2311" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[edf66ab3cdf5bca1abd96e2616a0233c]
+link User Interface to DisplayInventory--><g id="link_User Interface_DisplayInventory"><path d="M1087.639,222.649 C1097.369,233.492 1108.821,248.661 1114.05,264.6 C1133.762,324.716 1113.665,401.94 1104.292,431.872 " fill="none" id="User Interface-to-DisplayInventory" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M1108.376,438.4877 A6.3,6.3 0 0 0 1097.1134 434.835" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[c24d5849b99aa7b41bd365c538f4a333]
+link Crafting to DisplayCrafting--><g id="link_Crafting_DisplayCrafting"><path d="M989.261,222.747 C1009.617,240.415 1041.033,267.694 1054.438,279.335 " fill="none" id="Crafting-DisplayCrafting" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[070fbf2d164a533150642b1b43fee6b6]
+link Inventory to DisplayInventory--><g id="link_Inventory_DisplayInventory"><path d="M818.762,373.73 C866.285,384.384 954.604,404.621 1029.35,424.2 C1053.192,430.444 1081.269,438.809 1093.645,442.554 " fill="none" id="Inventory-DisplayInventory" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[26c4895d8cc59df4a395c8c051f0ed9e]
+link Camera to DisplayWorld--><g id="link_Camera_DisplayWorld"><path d="M339.787,222.747 C313.257,239.344 273.168,264.432 252.987,277.053 " fill="none" id="Camera-to-DisplayWorld" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M251.9237,284.7057 A6.3,6.3 0 0 0 245.6514 274.6634" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[4c1498c39fa8a73509cefd8bf87ee60c]
+link Camera to DisplayPlayer--><g id="link_Camera_DisplayPlayer"><path d="M380.107,222.747 C393.645,238.063 413.567,260.596 425.334,273.903 " fill="none" id="Camera-to-DisplayPlayer" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M432.9787,273.6152 A6.3,6.3 0 0 0 424.1144 281.4645" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[c97f339238bcf692952904a793869808]
+link Camera to DisplayUI--><g id="link_Camera_DisplayUI"><path d="M397.446,221.914 C421.302,233.555 454.783,249.97 484.05,264.6 C493.101,269.122 503.258,274.295 511.063,278.285 " fill="none" id="Camera-to-DisplayUI" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M518.2562,275.3175 A6.3,6.3 0 0 0 512.8465 285.8495" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[2b59e7a64008b19389b948aca0ac1d81]
+link Game World to DisplayWorld--><g id="link_Game World_DisplayWorld"><path d="M119.84,222.649 C156.492,241.563 214.662,271.586 233.975,281.561 " fill="none" id="Game World-DisplayWorld" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[36976bc424124ba4f6508b3d1bf060a2]
+link Player to DisplayPlayer--><g id="link_Player_DisplayPlayer"><path d="M608.433,216.965 C577.731,228.417 527.254,247.429 484.05,264.6 C468.65,270.718 450.681,278.271 441.371,282.212 " fill="none" id="Player-DisplayPlayer" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[b85e66af217458cd32f6b66e79a12a70]
+link User Interface to DisplayUI--><g id="link_User Interface_DisplayUI"><path d="M1026.34,220.087 C1022.406,221.032 1018.472,221.886 1014.65,222.6 C816.543,259.616 756.539,207.879 563.15,264.6 C550.795,268.226 537.775,275.835 530.285,280.637 " fill="none" id="User Interface-DisplayUI" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[2861157fd50c8730c1a44d11893be101]
+link Player to MovePlayer--><g id="link_Player_MovePlayer"><path d="M630.847,222.747 C624.568,240.324 614.894,267.421 610.701,279.153 " fill="none" id="Player-MovePlayer" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[fc7c0b3852e23d6887b9c854d8afb544]
+link Player Movement to MovePlayer--><g id="link_Player Movement_MovePlayer"><path d="M524.853,222.747 C546.609,238.882 579.173,263.032 596.61,275.968 " fill="none" id="Player Movement-to-MovePlayer" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M604.0982,274.1508 A6.3,6.3 0 0 0 597.043 283.6593" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[b42e92d8200a6000ed2bdbd654b00a1a]
+link Camera to MoveCamera--><g id="link_Camera_MoveCamera"><path d="M359.8,222.747 C354.396,237.51 346.535,258.986 341.614,272.44 " fill="none" id="Camera-to-MoveCamera" style="stroke:#181818;stroke-width:0.6999999999999998;"/><path d="M345.45,279.1688 A6.3,6.3 0 0 0 334.3341 275.0913" fill="none" style="stroke:#181818;stroke-width:1.0499999999999998;"/></g><!--MD5=[a971186785c9f0d11b4bbdcd2e718ec3]
+link Player Movement to MoveCamera--><g id="link_Player Movement_MoveCamera"><path d="M468.776,222.649 C428.372,241.745 364.014,272.16 343.532,281.834 " fill="none" id="Player Movement-MoveCamera" style="stroke:#181818;stroke-width:0.6999999999999998;"/></g><!--MD5=[e0a3efbb1b98bc1326c33ec7fce0984d]
+@startuml
+[Game Settings]
+
+[Crafting]
+[Block]
+[Item]
+[Breaking and Placing]
+[Player]
+[Player Movement]
+[Camera]
+[Game World]
+[Inventory]
+[User Interface]
+folder "Files"{
+    [Sprites]
+    [Recipe Json]
+}
+() "Get Texture" as GT1
+() "Get Texture" as GT2
+[Sprites] - - GT1
+GT1 )- - [Game Settings]
+[Sprites] - - GT2
+GT2 )- - [Player]
+
+() "Get Block Properties" as GBlockInfo
+() "Get Item Properties" as GBItemInfo
+[Block] - -( GBlockInfo
+GBlockInfo - - [Game Settings]
+[Item] - -( GBItemInfo
+GBItemInfo - - [Game Settings]
+
+() "Get Block" as GBlock
+() "Get Item" as GItem
+
+[Inventory] - -( GBlock
+GBlock - - [Block]
+[Inventory] - -( GItem
+GItem - - [Item]
+
+() "Store/Retrieve Block" as StoreRetrieveBlock
+[Breaking and Placing] - -( StoreRetrieveBlock
+StoreRetrieveBlock - - [Inventory]
+
+() "Select Item/Block" as SelectItemBlock
+SelectItemBlock - - [Inventory]
+[Player] - -( SelectItemBlock
+
+() "Break/Place Block" as BreakPlaceBlock
+[Breaking and Placing] - - BreakPlaceBlock
+BreakPlaceBlock )- - [Player]
+
+() "Place Block" as PlaceBlock
+[Game World] - - PlaceBlock
+[Breaking and Placing] - -( PlaceBlock
+
+() "Craft Item/Block" as Craft
+[Crafting] - - Craft
+[Player] - -( Craft
+
+() "Get Recipes" as GetRecipes
+[Crafting] - -( GetRecipes
+[Recipe Json] - - GetRecipes
+
+() "Store/Retrieve Item/Block" as StoreRetrieveBlockItem
+[Crafting] - -( StoreRetrieveBlockItem
+[Inventory] - - StoreRetrieveBlockItem
+
+() "Create World" as CreateWorld
+[Game World] - -( CreateWorld
+[Block] - - CreateWorld
+
+() "Display World" as DisplayWorld
+() "Display Player" as DisplayPlayer
+() "Display UI" as DisplayUI
+
+() "Display Crafting" as DisplayCrafting
+() "Display Inventory" as DisplayInventory
+
+[User Interface] - -( DisplayCrafting
+[User Interface] - -( DisplayInventory
+[Crafting] - - DisplayCrafting
+[Inventory] - - DisplayInventory
+
+[Camera] - -( DisplayWorld
+[Camera] - -( DisplayPlayer
+[Camera] - -( DisplayUI
+[Game World] - - DisplayWorld
+[Player] - - DisplayPlayer
+[User Interface] - - DisplayUI
+
+() "Move Player" as MovePlayer
+[Player] - - MovePlayer
+[Player Movement] - -( MovePlayer
+
+() "Move Camera" as MoveCamera
+[Camera] - -( MoveCamera
+[Player Movement] - - MoveCamera
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 15:29:17 CAT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

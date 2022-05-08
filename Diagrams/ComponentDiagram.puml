@@ -1,0 +1,99 @@
+@startuml
+[Game Settings]
+
+[Crafting]
+[Block]
+[Item]
+[Breaking and Placing]
+[Player]
+[Player Movement]
+[Camera]
+[Game World]
+[Inventory]
+[User Interface]
+folder "Files"{
+    [Sprites]
+    [Recipe Json]
+}
+() "Get Texture" as GT1
+() "Get Texture" as GT2
+[Sprites] -- GT1
+GT1 )-- [Game Settings]
+[Sprites] -- GT2
+GT2 )-- [Player]
+
+() "Get Block Properties" as GBlockInfo
+() "Get Item Properties" as GBItemInfo
+[Block] --( GBlockInfo
+GBlockInfo -- [Game Settings]
+[Item] --( GBItemInfo
+GBItemInfo -- [Game Settings]
+
+() "Get Block" as GBlock
+() "Get Item" as GItem
+
+[Inventory] --( GBlock
+GBlock -- [Block]
+[Inventory] --( GItem
+GItem -- [Item]
+
+() "Store/Retrieve Block" as StoreRetrieveBlock
+[Breaking and Placing] --( StoreRetrieveBlock
+StoreRetrieveBlock -- [Inventory]
+
+() "Select Item/Block" as SelectItemBlock
+SelectItemBlock -- [Inventory]
+[Player] --( SelectItemBlock
+
+() "Break/Place Block" as BreakPlaceBlock
+[Breaking and Placing] -- BreakPlaceBlock
+BreakPlaceBlock )-- [Player]
+
+() "Place Block" as PlaceBlock
+[Game World] -- PlaceBlock
+[Breaking and Placing] --( PlaceBlock
+
+() "Craft Item/Block" as Craft
+[Crafting] -- Craft
+[Player] --( Craft
+
+() "Get Recipes" as GetRecipes
+[Crafting] --( GetRecipes
+[Recipe Json] -- GetRecipes
+
+() "Store/Retrieve Item/Block" as StoreRetrieveBlockItem
+[Crafting] --( StoreRetrieveBlockItem
+[Inventory] -- StoreRetrieveBlockItem
+
+() "Create World" as CreateWorld
+[Game World] --( CreateWorld
+[Block] -- CreateWorld
+
+() "Display World" as DisplayWorld
+() "Display Player" as DisplayPlayer
+() "Display UI" as DisplayUI
+
+() "Display Crafting" as DisplayCrafting
+() "Display Inventory" as DisplayInventory
+
+[User Interface] --( DisplayCrafting
+[User Interface] --( DisplayInventory
+[Crafting] -- DisplayCrafting
+[Inventory] -- DisplayInventory
+
+[Camera] --( DisplayWorld
+[Camera] --( DisplayPlayer
+[Camera] --( DisplayUI
+[Game World] -- DisplayWorld
+[Player] -- DisplayPlayer
+[User Interface] -- DisplayUI
+
+() "Move Player" as MovePlayer
+[Player] -- MovePlayer
+[Player Movement] --( MovePlayer
+
+() "Move Camera" as MoveCamera
+[Camera] --( MoveCamera
+[Player Movement] -- MoveCamera
+
+@enduml
