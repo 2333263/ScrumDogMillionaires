@@ -18,7 +18,7 @@ Michaela Klug - 2393033
 Benjamin Servant - 2420656  
 Wen Guan Gavin Chen -2302891  
 Damion Harvey - 2303289  
-Stuart Groves - 2356823  
+Stuart 'Lazarus' Groves - 2356823  
 Jeremy Stott - 2368841  
 
 [![codecov](https://codecov.io/gh/2333263/Scrum-Dog-Millionaires/branch/main/graph/badge.svg?token=S5G6FCJHRC)](https://codecov.io/gh/2333263/Scrum-Dog-Millionaires)
