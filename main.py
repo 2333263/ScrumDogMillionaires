@@ -27,10 +27,10 @@ color_light = (250,250,250) #colour of button when hover over
 color_dark = (255, 165, 0) #colour of button- default
 
 buttonFont = pygame.font.Font('Minecraft.ttf', 40) #font for button
-startButtonText = buttonFont.render('BEGIN GAME' , True , (0,0,0) )  #rendering a text written in this font for the start button
-exitButtonText = buttonFont.render('EXIT GAME' , True , (0,0,0) )  #rendering a text written in this font for the exit button
+startButtonText = buttonFont.render('BEGIN GAME' , True , (255,255,255) )  #rendering a text written in this font for the start button
+exitButtonText = buttonFont.render('EXIT GAME' , True , (255,255,255) )  #rendering a text written in this font for the exit button
 
-startPage = pygame.image.load("Textures/Screens/startscreen.PNG") #load image for start screen
+startPage = pygame.image.load("Textures/Screens/start.png") #load image for start screen
 startPage = pygame.transform.scale(startPage, (gs.width, gs.height)) #fit to page
 
 pausePage = pygame.image.load("Textures/Screens/pause.PNG") #load image for pause screen
@@ -123,7 +123,8 @@ def gameMenu():
         
         #Font to draw the FPS
         font = pygame.font.Font('Minecraft.ttf', 16)
-        fpsText = font.render("FPS: "+str(int(clock.get_fps())), 1, (0, 0, 0))
+        fpsText = font.render("FPS: "+str(int(clock.get_fps())), 1, (255, 255, 255))
+        seedText = font.render("Seed: " +str(gs.seed), 1, (255, 255, 255))
 
         #Create the sky     
         bg = pygame.image.load(gs.textureNames["Sky"]).convert()
@@ -133,6 +134,7 @@ def gameMenu():
         #Draws all blocks in the viewable screen and returns all blocks within a small range to be used for collison in the next time step
         collisionblocks=camera.draw(screen,worldBlocks)   
         screen.blit(fpsText, (gs.blockSize*gs.noXBlocks-100, 5))
+        screen.blit(seedText, (gs.blockSize*gs.noXBlocks-100, 50))
         inv.drawHotBar(screen)
 
         if(gs.drawCrafting):
