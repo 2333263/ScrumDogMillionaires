@@ -22,7 +22,7 @@ gameRunning = True
 
 color_light = (250,250,250) #colour of button when hover over
 color_dark = (255, 165, 0) #colour of button- default
-buttonFont = pygame.font.SysFont('Corbel',50) #font for button
+buttonFont = pygame.font.Font('Minecraft.ttf', 40) #font for button
 startButtonText = buttonFont.render('BEGIN GAME' , True , (0,0,0) )  #rendering a text written in this font for the start button
 exitButtonText = buttonFont.render('EXIT GAME' , True , (0,0,0) )  #rendering a text written in this font for the exit button
 startPage = pygame.image.load("Textures/Screens/startscreen.PNG") #load image for start screen
