@@ -4,6 +4,8 @@ from select import select
 from typing import List
 import unittest
 from xmlrpc.client import Boolean, boolean
+
+from numpy import array, ndarray
 import Camera
 import item 
 import gameSettings as gs
@@ -17,7 +19,7 @@ import playerHandler as ph
 import CraftingMenu
 import inventoryHandler as ih
 import breakPlaceHandler as bph
-
+import RandomWorldGen as rwg
 #Testing the level Generator
 class TestWorld(unittest.TestCase):
    def test_getBlock(self):
@@ -333,7 +335,6 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.immovableBlocks, list)
       self.assertIsInstance(gs.clickableBlocks, list)
 
-
 class TestInventoryHandler(unittest.TestCase):
    hotbar=ih.getHotBar()
    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
@@ -403,8 +404,6 @@ class TestInventoryHandler(unittest.TestCase):
          self.assertTrue(True)
       except:
          self.assertTrue(False)
-
-
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
@@ -481,5 +480,10 @@ class TestBreakPlace(unittest.TestCase):
       self.pos=(8000,8000)
       bph.blockPlace(self.pos,self.spriteGroup,self.TempPlayer)
       
+class TestRandomWorldGEN(unittest.TestCase):
+   
+   def test_generateWorld(self):
+      self.assertEqual(ndarray,  type(rwg.generateWorld()))
+
 
 unittest.main()
