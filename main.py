@@ -68,6 +68,7 @@ def gameMenu():
             if events.type == pygame.QUIT:
                 gameRunning = False
                 pygame.quit()
+                quit()
 
             # Logic for player interaction
             # 1 -- left click
@@ -152,6 +153,7 @@ while gameRunning:
                 gameMenu() #call main game loop
             elif width/2-110 <= mouse[0] <= width/2+190 and height/2+200 <= mouse[1] <= height/2+280:
                 pygame.quit()
+                quit()
         
 
     screen.blit(startPage,(0,0) ) #put the start page on the screen
