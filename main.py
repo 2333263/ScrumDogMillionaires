@@ -14,6 +14,7 @@ clock = pygame.time.Clock()
 #Creating the pygame screen
 width=gs.blockSize*gs.noXBlocks
 height=gs.blockSize*gs.noYBlocks
+
 screen = pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
 pygame.display.set_caption("2D Minecraft")
 
@@ -22,11 +23,14 @@ gameRunning = True
 
 color_light = (250,250,250) #colour of button when hover over
 color_dark = (255, 165, 0) #colour of button- default
+
 buttonFont = pygame.font.Font('Minecraft.ttf', 40) #font for button
 startButtonText = buttonFont.render('BEGIN GAME' , True , (0,0,0) )  #rendering a text written in this font for the start button
 exitButtonText = buttonFont.render('EXIT GAME' , True , (0,0,0) )  #rendering a text written in this font for the exit button
+
 startPage = pygame.image.load("Textures/Screens/startscreen.PNG") #load image for start screen
 startPage = pygame.transform.scale(startPage, (gs.width, gs.height)) #fit to page
+
 pausePage = pygame.image.load("Textures/Screens/pause.PNG") #load image for pause screen
 pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to page
 
