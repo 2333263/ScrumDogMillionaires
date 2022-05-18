@@ -309,7 +309,7 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.noXBlocks, int)
       self.assertGreaterEqual(gs.noXBlocks, 1)
 
-      self.assertIsInstance(gs.noYBlocks, float)
+      self.assertIsInstance(gs.noYBlocks, int)
       self.assertGreaterEqual(gs.noYBlocks, 1)
 
       self.assertIsInstance(gs.width, int)
