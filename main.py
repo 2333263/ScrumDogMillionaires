@@ -33,7 +33,7 @@ exitButtonText = buttonFont.render('EXIT GAME' , True , (255,255,255) )  #render
 startPage = pygame.image.load("Textures/Screens/start.png") #load image for start screen
 startPage = pygame.transform.scale(startPage, (gs.width, gs.height)) #fit to page
 
-pausePage = pygame.image.load("Textures/Screens/pause.PNG") #load image for pause screen
+pausePage = pygame.image.load("Textures/Screens/pause_new.png") #load image for pause screen
 pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to page
 
 #pause menu - pops up when user clicks key "p"
