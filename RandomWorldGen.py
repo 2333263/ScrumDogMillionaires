@@ -1,6 +1,5 @@
 from perlin_noise import PerlinNoise
 import numpy as np
-from scipy import rand
 import gameSettings as gs
 import random
 
