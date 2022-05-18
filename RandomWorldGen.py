@@ -16,7 +16,7 @@ def generateWorld():
 
     craftingTableX = random.randint(0, gs.noXBlocks) 
 
-    #           TREE PATTERN :
+    #                 TREE PATTERN :
     #                 [['#', 'V', '#'],
     #                 ['V', 'V', 'V'],
     #                 ['V', 'V', 'V'],
