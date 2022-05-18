@@ -11,19 +11,18 @@ def generateWorld():
 
     h = int(gs.height/2 / gs.blockSize) - 5
 
-    x_vals = []
-
     world = np.zeros((gs.noYBlocks, gs.noXBlocks))
     random.seed(gs.seed)
 
     craftingTableX = random.randint(0, gs.noXBlocks) 
 
-    tree = np.array([['#', 'V', '#'],
-                    ['V', 'V', 'V'],
-                    ['V', 'V', 'V'],
-                    ['V', 'L', 'V'],
-                    ['#', 'L', '#'], 
-                    ['#', 'L', '#']])
+    #           TREE PATTERN :
+    #                 [['#', 'V', '#'],
+    #                 ['V', 'V', 'V'],
+    #                 ['V', 'V', 'V'],
+    #                 ['V', 'L', 'V'],
+    #                 ['#', 'L', '#'], 
+    #                 ['#', 'L', '#']]
     
     def drawTree(world):
         for y in range(gs.noYBlocks):

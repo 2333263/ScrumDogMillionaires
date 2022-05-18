@@ -1,7 +1,7 @@
 import gameSettings as gs
 from block import Block
 import pygame
-from noisetest import generateWorld
+from RandomWorldGen import generateWorld
 
 def getBlocks(levelName):
     gs.levelName = levelName
