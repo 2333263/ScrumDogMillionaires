@@ -7,9 +7,12 @@ import playerHandler as ph
 import Camera as cam#Why would we call this cam like why CAM2007A
 import CraftingMenu as cm
 
+
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
+
+
 
 #Creating the pygame screen
 width=gs.blockSize*gs.noXBlocks
