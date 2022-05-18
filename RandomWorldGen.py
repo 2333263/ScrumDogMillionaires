@@ -53,8 +53,9 @@ def generateWorld():
                 world[y][x] = 2 #Stone
             else:
                 world[y][x] = -1 #Sky
-            if(y == h + heightNoise[x] - 1 ):
+            if(y == h + heightNoise[x] - 1 and (x > 0 and x < gs.noXBlocks - 3)):
                 if (random.randint(1, 25) == 1):
+                    
                     world[y][x] = -2 #Tree
                 
             if(x == craftingTableX and y == h + heightNoise[x] - 1):

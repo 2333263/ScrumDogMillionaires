@@ -1,6 +1,6 @@
 #When random world gen is done, could just feel level into levelName to avoid exsessive code changes
 levelName = "random"
-seed = 20
+seed = 6969 
 octaves = 1
 
 with open('Levels/' + levelName + '.txt') as f:

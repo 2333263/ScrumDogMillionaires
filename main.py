@@ -75,7 +75,6 @@ def gameMenu():
                 gameRunning = False
                 pygame.quit()
                 quit()
-
             # Logic for player interaction
             # 1 -- left click
             # 2 -- middle click
