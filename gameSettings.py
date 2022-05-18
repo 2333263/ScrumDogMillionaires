@@ -1,6 +1,6 @@
-#When random world gen is done, could just feel level into levelName to avoid exsessive code changes
+import random
 levelName = "random"
-seed = 6969 
+seed = random.randint(-10000, 10000)
 octaves = 1
 
 with open('Levels/' + levelName + '.txt') as f:

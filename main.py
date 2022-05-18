@@ -62,7 +62,8 @@ def gameMenu():
     collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
 
     #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
-    player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
+    # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
+    player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.blockSize*6), gs.blockSize)
     camera=cam.Camera(player)
 
     #Initialise the crafting table screen 
