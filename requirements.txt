@@ -2,3 +2,4 @@ numpy
 pygame
 pytest
 pygame_gui
+perlin-noise

@@ -1,10 +1,13 @@
 import gameSettings as gs
 from block import Block
 import pygame
+from RandomWorldGen import generateWorld
 
 def getBlocks(levelName):
     gs.levelName = levelName
     worldGroup = pygame.sprite.Group()
+
+    gs.levelArray = generateWorld()
 
     #Loop over every character
     for i in range(len(gs.levelArray)):

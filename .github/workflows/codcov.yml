@@ -16,6 +16,7 @@ jobs:
         pip install coverage
         pip install pygame_gui
         pip install numpy
+        pip install perlin-noise
      - name: Generate Report
        run: |
         coverage run test.py
