@@ -26,7 +26,28 @@ buttonFont = pygame.font.SysFont('Corbel',50) #font for button
 startButtonText = buttonFont.render('BEGIN GAME' , True , (0,0,0) )  #rendering a text written in this font for the start button
 exitButtonText = buttonFont.render('EXIT GAME' , True , (0,0,0) )  #rendering a text written in this font for the exit button
 startPage = pygame.image.load("Textures/Screens/startscreen.PNG") #load image for start screen
-startPage = pygame.transform.scale(startPage, (gs.width, gs.height)) #fito to page
+startPage = pygame.transform.scale(startPage, (gs.width, gs.height)) #fit to page
+pausePage = pygame.image.load("Textures/Screens/pause.PNG") #load image for pause screen
+pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to page
+
+#pause menu - pops up when user clicks key "p"
+def pauseMenu():
+    paused= True #the user has paused the game
+    while paused:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_c: #if the user clicks c, resume game
+                    paused=False
+                elif event.key==pygame.K_q: #if the user clicks q, quit game
+                    pygame.quit()
+                    quit()
+        screen.blit(pausePage,(0,0) ) #display the pause screen
+        pygame.display.update()
+        clock.tick(60)
+        
 #main game loop:
 def gameMenu():
     gameRunning=True
@@ -82,6 +103,8 @@ def gameMenu():
                     player.jump()
                 elif(events.key == pygame.K_ESCAPE):
                     gs.drawCrafting = False
+                elif(events.key==pygame.K_p):
+                    pauseMenu()
 
         if(not gs.drawCrafting):
             #runs the move on X which checks if the player is pressing an arrow key to move
@@ -155,6 +178,9 @@ while gameRunning:
       
     pygame.display.update()
 
+
+
+    
 
     
 
