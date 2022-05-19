@@ -16,7 +16,21 @@ def generateWorld():
 
     craftingTableX = random.randint(0, gs.noXBlocks) 
     
+    #  (0,1) (0,1) (0,1)
+    #  (0,1) (0,1) (0,1)
+    #  (0,1) (0,1) (0,1)
+
+    def drawOre(world, x, y, ore):
+        xChange = yChange =  [-1, 0, 1]
+        for xVal in xChange:
+            for yVal in yChange:
+                if(random.randint(0, 4) == 1):
+                    if ((y + yVal > 0 and y + yVal < gs.noYBlocks) and (x + xVal > 1 and x + xVal < gs.noXBlocks - 1)):
+                        world[y + yVal][x + xVal] = ore
+    
+
     def drawTree(world, y, x):
+
         world[y][x] = 'L'
         world[y - 1][x] = 'L'
         world[y - 2][x] = 'L'
@@ -24,7 +38,9 @@ def generateWorld():
         world[y - 2][x + 1] = 'V'
         world[y - 3][x] = 'V'
         world[y - 3][x + 1] = 'V'
+        world[y - 3][x + 2] = 'V'
         world[y - 3][x - 1] = 'V'
+        world[y - 3][x - 2] = 'V'
         world[y - 4][x] = 'V'
         world[y - 4][x + 1] = 'V'
         world[y - 4][x - 1] = 'V'
@@ -46,7 +62,20 @@ def generateWorld():
             if(y == h + heightNoise[x] - 1 and (x > 0 and x < gs.noXBlocks - 3)):
                 if (random.randint(1, 25) == 1):
                     drawTree(world, y, x) #Tree
-                
+            
+
+            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 30):
+                if (random.randint(1, 120) == 1):
+                    drawOre(world, x, y, "M")
+            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 16):
+                if (random.randint(1, 35) == 1):
+                    drawOre(world, x, y, "I")
+            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 28):
+                if (random.randint(1, 100) == 1):
+                    drawOre(world, x, y, "A")
+            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 10):
+                if (random.randint(1, 28) == 1):
+                    drawOre(world, x, y, "C")
             if(x == craftingTableX and y == h + heightNoise[x] - 1):
                 world[y][x] = 'T' #Crafting Table
 

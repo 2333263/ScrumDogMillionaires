@@ -7,7 +7,7 @@ with open('Levels/' + levelName + '.txt') as f:
     levelArray = f.readlines()
 
 
-blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
+blockSize = 32 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
 playerRange = 7
 noXBlocks = 128
 noYBlocks = int(9/16 * noXBlocks)
@@ -113,10 +113,10 @@ converterIDs = {
     'T' : 5, #Crafting Table
     'V' : 6, #Leaves 
     'L' : 7, #Logs,
-    'CO' : 13, #Coal Ore
-    'IO' : 14, #Iron Ore
-    'GO' : 15, #Gold Ore
-    'DO' : 16 #Diamond Ore
+    "C" : 13, #Coal Ore
+    "I" : 14, #Iron Ore
+    "A" : 15, #Gold Ore
+    "M" : 16 #Diamond Ore
 }
 
 textureNames = {
