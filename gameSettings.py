@@ -1,4 +1,5 @@
 import random
+import math
 levelName = "random"
 seed = random.randint(-10000, 10000)
 octaves = 1
@@ -16,6 +17,11 @@ height = 720
 
 drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]
+
+#Moved to GS for global access
+def getPos(pos): #Takes in pygame position coordinates returns block coordinates based system ---> returns block_size*floor(pyPos/block_size) tuple transform
+    pos = blockSize*math.floor(pos[0]/blockSize),blockSize*math.floor(pos[1]/blockSize)
+    return pos
 
 itemIDs = {
     0 : "Grass",
