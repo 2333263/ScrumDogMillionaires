@@ -9,10 +9,10 @@ with open('Levels/' + levelName + '.txt') as f:
 
 blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
 playerRange = 7
-noXBlocks = 64
+noXBlocks = 128
 noYBlocks = int(9/16 * noXBlocks)
-width = round(blockSize * len(levelArray[0])) - blockSize
-height = round(blockSize * len(levelArray))
+width = 1280
+height = 720
 
 drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]

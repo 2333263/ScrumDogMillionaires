@@ -12,12 +12,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 
-
-#Creating the pygame screen
-width=gs.blockSize*gs.noXBlocks
-height=gs.blockSize*gs.noYBlocks
-
-screen = pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+screen = pygame.display.set_mode((gs.width, gs.height))
 pygame.display.set_caption("2D Minecraft")
 
 #Game runing variable
@@ -157,34 +152,34 @@ while gameRunning:
         if events.type == pygame.MOUSEBUTTONDOWN: 
               
             #if the mouse is clicked on the button,the game begins
-            if width/2-110 <= mouse[0] <= width/2+190 and height/2+50 <= mouse[1] <= height/2+130: 
+            if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130: 
                 gameMenu() #call main game loop
-            elif width/2-110 <= mouse[0] <= width/2+190 and height/2+200 <= mouse[1] <= height/2+280:
+            elif gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+200 <= mouse[1] <= gs.height/2+280:
                 pygame.quit()
                 quit()
         
 
     screen.blit(startPage,(0,0) ) #put the start page on the screen
     mouse = pygame.mouse.get_pos() #get mouse positions
-    if width/2-110 <= mouse[0] <= width/2+190 and height/2+50 <= mouse[1] <= height/2+130: 
+    if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130: 
         #if we are hovering over the start button, draw it with the lighter colour
-        pygame.draw.rect(screen,color_light,[width/2-110,height/2+50,300,80]) 
+        pygame.draw.rect(screen,color_light,[gs.width/2-110,gs.height/2+50,300,80]) 
           
     else: 
         #if we are not hovering over the start button, draw it with the darker colour
-        pygame.draw.rect(screen,color_dark,[width/2-110,height/2+50,300,80]) 
+        pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+50,300,80]) 
         
-    if width/2-110 <= mouse[0] <= width/2+190 and height/2+200 <= mouse[1] <= height/2+280: 
+    if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+200 <= mouse[1] <= gs.height/2+280: 
         #if we are hovering over the exit button, draw it with the lighter colour
-        pygame.draw.rect(screen,color_light,[width/2-110,height/2+200,300,80]) 
+        pygame.draw.rect(screen,color_light,[gs.width/2-110,gs.height/2+200,300,80]) 
           
     else: 
         #if we are not hovering over the exit button, draw it with the darker colour
-        pygame.draw.rect(screen,color_dark,[width/2-110,height/2+200,300,80]) 
+        pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+200,300,80]) 
         
     
-    screen.blit(exitButtonText , (width/2-75,height/2+220)) # display text on exit button 
-    screen.blit(startButtonText , (width/2-100,height/2+70)) # display text on start button 
+    screen.blit(exitButtonText , (gs.width/2-75,gs.height/2+220)) # display text on exit button 
+    screen.blit(startButtonText , (gs.width/2-100,gs.height/2+70)) # display text on start button 
       
     pygame.display.update()
 
