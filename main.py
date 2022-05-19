@@ -23,9 +23,6 @@ color_light = (250,250,250) #colour of button when hover over
 color_dark = (64,64,64) #colour of button- default
 
 buttonFont = pygame.font.Font('Minecraft.ttf', 40) #font for button
-startButtonText = buttonFont.render('BEGIN GAME' , True , (255,255,255) )  #rendering a text written in this font for the start button
-exitButtonText = buttonFont.render('EXIT GAME' , True , (255,255,255) )  #rendering a text written in this font for the exit button
-informationButonText= buttonFont.render('?' , True , (255,255,255) )  #rendering a text written in this font for the information button
 startPage = pygame.image.load("Textures/Screens/start.png") #load image for start screen
 startPage = pygame.transform.scale(startPage, (gs.width, gs.height)) #fit to page
 
@@ -161,29 +158,38 @@ while gameRunning:
 
     screen.blit(startPage,(0,0) ) #put the start page on the screen
     mouse = pygame.mouse.get_pos() #get mouse positions
+    
+
+
     if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130: 
         #if we are hovering over the start button, draw it with the lighter colour
         pygame.draw.rect(screen,color_light,[gs.width/2-110,gs.height/2+50,300,80]) 
+        startButtonText = buttonFont.render('BEGIN GAME' , True , (0,0,0) )  #rendering a text written in this font for the start button
           
     else: 
         #if we are not hovering over the start button, draw it with the darker colour
         pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+50,300,80]) 
+        startButtonText = buttonFont.render('BEGIN GAME' , True , (255,255,255) )  #rendering a text written in this font for the start button
         
     if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+200 <= mouse[1] <= gs.height/2+280: 
         #if we are hovering over the exit button, draw it with the lighter colour
         pygame.draw.rect(screen,color_light,[gs.width/2-110,gs.height/2+200,300,80]) 
+        exitButtonText = buttonFont.render('EXIT GAME' , True , (0,0,0) )  #rendering a text written in this font for the exit button
           
     else: 
         #if we are not hovering over the exit button, draw it with the darker colour
         pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+200,300,80]) 
+        exitButtonText = buttonFont.render('EXIT GAME' , True , (255,255,255) )  #rendering a text written in this font for the exit button
         
     if gs.width-110 <= mouse[0] <= gs.width-70 and 10 <= mouse[1] <= 50: 
         #if we are hovering over the information button, draw it with the lighter colour
         pygame.draw.rect(screen,color_light,[gs.width-110,10,40,40]) 
+        informationButonText= buttonFont.render('?' , True , (0,0,0) )  #rendering a text written in this font for the information button
           
     else: 
         #if we are not hovering over the information button, draw it with the darker colour
         pygame.draw.rect(screen,color_dark,[gs.width-110,10,40,40])
+        informationButonText= buttonFont.render('?' , True , (255,255,255) )  #rendering a text written in this font for the information button
     
     
     
