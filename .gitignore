@@ -24,3 +24,4 @@ __pycache__/break_place_handler.cpython-38.pyc
 *.gcov
 test
 *.pyc
+__pycache__/block.cpython-310.pyc
