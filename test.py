@@ -448,7 +448,7 @@ class TestBreakPlace(unittest.TestCase):
   # ih.addBlock(tempBlock)
   # print(ih.getSelected())
    def test_getPos(self):
-      self.assertEqual(bph.getPos(self.pos),(0,0))
+      self.assertEqual(gs.getPos(self.pos),(0,0))
    # def test_Distance(self):
    #    self.assertEqual(int(bph.distance(self.TempPlayer,self.pos)),226)
    def test_checkBreak(self):
