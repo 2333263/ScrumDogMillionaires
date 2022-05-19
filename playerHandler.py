@@ -73,6 +73,7 @@ class Player(pygame.sprite.Sprite):
 
 
     def update(self, dt, allBlocks):
+        print(gs.getPos((self.rect.x,self.rect.y)))
         #if the player is jumping use the jump arc gravity instead of normal gravity
         if(self.jumped==True):
             self.jumpArc()

@@ -87,26 +87,26 @@ def selectPrevious():
     else:
         selected-=1
 def drawHotBar(screen):
-    
-    pygame.draw.rect(screen,(90,90,90),[5,20,850,100],0)
+    relative=gs.blockSize/24
+    pygame.draw.rect(screen,(90,90,90),[5*relative,20*relative,850*relative,100*relative],0)
     skip=0
     for i in range(10):
-        pygame.draw.rect(screen,(0,0,0),[12+i*85,30,70,80],0)
+        pygame.draw.rect(screen,(0,0,0),[12*relative+i*85*relative,30*relative,70*relative,80*relative],0)
         if(i<len(hotbarArr)):
             currTexture = hotbarArr[i].texture
-            currTexture=pygame.transform.scale(currTexture,(50,50))
-            screen.blit(currTexture,(22+(i)*85,45))
-            font = pygame.font.Font('Minecraft.ttf', 16)
+            currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
+            screen.blit(currTexture,(22*relative+(i)*85*relative,45*relative))
+            font = pygame.font.Font('Minecraft.ttf', int(16*relative))
             count=hotbarArr[i].getCount()
-            text2 = font.render(str(count), 1, (255, 255,255))
+            text2 = font.render(str(count), 1*relative, (255, 255,255))
             shift=0
             if(count>=10) :
                 shift-=5
             if(count>=100):
                 shift-=5
-            screen.blit(text2,(42+(i)*85+shift,95))
+            screen.blit(text2,(42*relative+(i)*85*relative+shift*relative,95*relative))
             if (i==selected):
-                pygame.draw.rect(screen, (255, 255, 0), (12+(i)*85, 30, 70, 80), 3)
+                pygame.draw.rect(screen, (255, 255, 0), (12*relative+(i)*85*relative, 30*relative, 70*relative, 80*relative), 3)
 
 def getHotBar():
     return hotbarArr

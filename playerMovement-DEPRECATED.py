@@ -101,9 +101,9 @@ class Player(pygame.sprite.Sprite):
                 if(math.floor(self.rect.x/gs.blockSize)==block.blockPosition[0]/gs.blockSize or math.ceil(self.rect.x / gs.blockSize)==block.blockPosition[0]/gs.blockSize) :
                     self.direction.y=0  #blocks below
                 #checks to see if theyre at a world border
-            elif(self.rect.x < 0 and self.direction.x < 0 or self.rect.x + gs.blockSize > gs.width and self.direction.x > 0): #world borders
+            #elif(self.rect.x < 0 and self.direction.x < 0 or self.rect.x + gs.blockSize > gs.width and self.direction.x > 0): #world borders
                     #self.direction.y=0
-                    self.direction.x=0
+                    #self.direction.x=0
             #checks to see if there are any collisions to the left or right of the player
             if(self.direction.x>0 and self.rect.x+gs.blockSize==block.blockPosition[0] or self.direction.x<0 and self.rect.x==block.blockPosition[0]+gs.blockSize):
                 if(math.floor(self.rect.y/gs.blockSize)==block.blockPosition[1]/gs.blockSize or math.ceil(self.rect.y / gs.blockSize)==block.blockPosition[1]/gs.blockSize
