@@ -24,6 +24,7 @@ def getPos(pos): #Takes in pygame position coordinates returns block coordinates
     return pos
 
 itemIDs = {
+   -1: "null",
     0 : "Grass",
     1 : "Dirt",
     2 : "Stone",
@@ -40,6 +41,7 @@ itemIDs = {
 }
 
 blockHardness = {
+     -1: 0,
     0 : 0,
     1 : 0,
     2 : 10,
@@ -56,6 +58,7 @@ blockHardness = {
 }
 
 itemHardness = {
+    -1: 0,
     0 : 0,
     1 : 0,
     2 : 0,
@@ -72,6 +75,7 @@ itemHardness = {
 }
 
 isPlaceable = {
+     -1: False,
     0 : True,
     1 : True,
     2 : True,

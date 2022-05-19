@@ -30,8 +30,8 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
     if distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = gs.getPos(python_pos)
         for block in world_block:
-            if block.blockPosition == pos and block.itemID not in gs.immovableBlocks and len(inv.hotbarArr) > 0:
-                if checkBreakable(block,inv.hotbarArr[inv.selected]):
+            if block.blockPosition == pos and block.itemID not in gs.immovableBlocks and len(inv.invArray) > 0:
+                if checkBreakable(block,inv.invArray[inv.selected]):
                     #Remove block from world
                     world_block.remove(block)
                     #Add block to inventory
@@ -59,14 +59,14 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
                 found = True
         if found == False:
             #Only allow placing if player has more blocks
-            if (len(inv.hotbarArr)!=0 and inv.getSelected().amount >0):
+            if (len(inv.invArray)!=0 and inv.getSelected().amount >0):
                 #Decrease inventory item
                 
 
                 #Add block to world
-                if(gs.textureNames.__contains__(gs.itemIDs[inv.hotbarArr[inv.selected].getItemId()])):
-                    currTexture = gs.textureNames[gs.itemIDs[inv.hotbarArr[inv.selected].getItemId()]]
-                    if inv.hotbarArr[inv.selected].isPlaceable:
-                        tempBlock = Block(gs.blockSize, pos,  inv.hotbarArr[inv.selected].getItemId(), currTexture, hardness = gs.blockHardness[inv.hotbarArr[inv.selected].getItemId()])
+                if(gs.textureNames.__contains__(gs.itemIDs[inv.invArray[inv.selected].getItemId()])):
+                    currTexture = gs.textureNames[gs.itemIDs[inv.invArray[inv.selected].getItemId()]]
+                    if inv.invArray[inv.selected].isPlaceable:
+                        tempBlock = Block(gs.blockSize, pos,  inv.invArray[inv.selected].getItemId(), currTexture, hardness = gs.blockHardness[inv.invArray[inv.selected].getItemId()])
                         world_block.add(tempBlock)
                         inv.decrease()

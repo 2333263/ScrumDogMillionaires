@@ -20,7 +20,8 @@ class Item:
             self.isPlaceable = True
             self.hardness = 0
             self.amount = 0
-            self.texture = pygame.image.load(gs.textureNames[self.itemName])
+            if(self.itemID!=-1):
+                self.texture = pygame.image.load(gs.textureNames[self.itemName])
         #When 3 args are given item(itemName, itemId, hardness)
         #Non placeable item, tools or entity likes (e.g. piece of coal or wooden pickaxe)
         elif len(args) == 3:

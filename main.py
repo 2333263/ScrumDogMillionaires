@@ -30,7 +30,7 @@ startPage = pygame.transform.scale(startPage, (gs.width, gs.height)) #fit to pag
 
 pausePage = pygame.image.load("Textures/Screens/pause_new.png") #load image for pause screen
 pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to page
-
+inv.initGroup()
 #pause menu - pops up when user clicks key "p"
 def pauseMenu():
     paused= True #the user has paused the game
@@ -83,11 +83,12 @@ def gameMenu():
                     if(gs.drawCrafting):
                         crafter.checkClick(pygame.mouse.get_pos()) 
                         crafter.makeItem(pygame.mouse.get_pos())
-                    else:
+                        
+                    elif(inv.fullInv==False):
                         bph.blockBreak(pygame.mouse.get_pos()+camera.getOffsets(), worldBlocks, player) #break the block
-                    
+                    inv.onClick(pygame.mouse.get_pos())
                 elif(not gs.drawCrafting):
-                    if events.button == 3:
+                    if (events.button == 3 and inv.fullInv==False):
                         #Place a block
                         bph.blockPlace(pygame.mouse.get_pos()+camera.getOffsets(), worldBlocks, player) #place the block
                         
@@ -105,8 +106,17 @@ def gameMenu():
                     player.jump()
                 elif(events.key == pygame.K_ESCAPE):
                     gs.drawCrafting = False
+                    if(inv.fullInv==True):
+                        inv.fullInv=False
+                        inv.clicked=-1
                 elif(events.key==pygame.K_p):
                     pauseMenu()
+                elif(events.key==pygame.K_e):
+                    if(inv.fullInv==False):
+                        inv.fullInv=True
+                    else:
+                        inv.fullInv=False
+                        inv.clicked=-1
 
         if(not gs.drawCrafting):
             #runs the move on X which checks if the player is pressing an arrow key to move
@@ -145,7 +155,6 @@ def gameMenu():
 while gameRunning:
     #start screen
     clock.tick(60) #Sets the frame to update 60 times a second
-
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
             gameRunning = False

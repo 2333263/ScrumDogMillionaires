@@ -4,7 +4,7 @@ from CraftButtonHandler import Button
 from TextHandler import Text
 from item import Item
 import recipeHandler as rh
-from inventoryHandler import getHotBar, addBlock, addItem, decreaseSpec, getItemCount
+from inventoryHandler import getInv, addBlock, addItem, decreaseSpec, getItemCount
 
 
 class Crafting():
@@ -97,7 +97,7 @@ class Crafting():
                 self.populateRecipe(menuItem.itemID)
                 self.createdItem = menuItem.itemID
 
-                if(self.isCraftable(menuItem.itemID, getHotBar())):
+                if(self.isCraftable(menuItem.itemID, getInv())):
                     self.craftButton.empty()
                     craftBut = Text("CRAFT", int(self.relativeSize/2), "lime",
                                     (craftingTablePos[0] + self.relativeSize/2.25, craftingTablePos[1] - self.relativeSize * 1), pygame.Color(198, 198, 198))

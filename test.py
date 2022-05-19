@@ -294,10 +294,10 @@ class TestCraftingMenu (unittest.TestCase):
              self.assertEqual(self.crafter.craftButton.has(), False)
       def test_isCraftable(self):
              for menuItem in self.crafter.craftables:
-                    if(self.crafter.isCraftable(menuItem.itemID,ih.getHotBar())):
-                          self.assertIsInstance(True,  type(self.crafter.isCraftable(menuItem.itemID,ih.getHotBar())))
+                    if(self.crafter.isCraftable(menuItem.itemID,ih.getInv())):
+                          self.assertIsInstance(True,  type(self.crafter.isCraftable(menuItem.itemID,ih.getInv())))
                     else:
-                          self.assertIsInstance(False,  type(self.crafter.isCraftable(menuItem.itemID,ih.getHotBar())))
+                          self.assertIsInstance(False,  type(self.crafter.isCraftable(menuItem.itemID,ih.getInv())))
 class TestGameSettings(unittest.TestCase):
    def test_properties(self):
       self.assertIsInstance(gs.levelName, str)
@@ -336,7 +336,7 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.clickableBlocks, list)
 
 class TestInventoryHandler(unittest.TestCase):
-   hotbar=ih.getHotBar()
+   hotbar=ih.getInv()
    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
    tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
    tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
