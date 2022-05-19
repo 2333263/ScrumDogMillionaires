@@ -64,13 +64,13 @@ def generateWorld():
                     drawTree(world, y, x) #Tree
             
 
-            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 30):
+            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 36):
                 if (random.randint(1, 120) == 1):
                     drawOre(world, x, y, "M")
             if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 16):
                 if (random.randint(1, 35) == 1):
                     drawOre(world, x, y, "I")
-            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 28):
+            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 30):
                 if (random.randint(1, 100) == 1):
                     drawOre(world, x, y, "A")
             if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 10):
