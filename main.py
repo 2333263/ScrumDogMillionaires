@@ -128,8 +128,8 @@ def gameMenu():
 
         #Draws all blocks in the viewable screen and returns all blocks within a small range to be used for collison in the next time step
         collisionblocks=camera.draw(screen,worldBlocks)   
-        screen.blit(fpsText, (gs.blockSize*gs.noXBlocks-100, 5))
-        screen.blit(seedText, (gs.blockSize*gs.noXBlocks-100, 50))
+        screen.blit(fpsText, (1180, 5))
+        screen.blit(seedText, (1180, 50))
         inv.drawHotBar(screen)
 
         if(gs.drawCrafting):
