@@ -19,7 +19,7 @@ pygame.display.set_caption("2D Minecraft")
 gameRunning = True
 
 color_light = (250,250,250) #colour of button when hover over
-color_dark = (255, 165, 0) #colour of button- default
+color_dark = (64,64,64) #colour of button- default
 
 buttonFont = pygame.font.Font('Minecraft.ttf', 40) #font for button
 startButtonText = buttonFont.render('BEGIN GAME' , True , (255,255,255) )  #rendering a text written in this font for the start button
@@ -178,8 +178,8 @@ while gameRunning:
         pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+200,300,80]) 
         
     
-    screen.blit(exitButtonText , (gs.width/2-75,gs.height/2+220)) # display text on exit button 
-    screen.blit(startButtonText , (gs.width/2-100,gs.height/2+70)) # display text on start button 
+    screen.blit(exitButtonText , (gs.width/2-75,gs.height/2+225)) # display text on exit button 
+    screen.blit(startButtonText , (gs.width/2-85,gs.height/2+75)) # display text on start button 
       
     pygame.display.update()
 
