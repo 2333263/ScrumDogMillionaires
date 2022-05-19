@@ -8,7 +8,7 @@ with open('Levels/' + levelName + '.txt') as f:
     levelArray = f.readlines()
 
 
-blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
+blockSize = 32 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
 playerRange = 7
 noXBlocks = 128
 noYBlocks = int(9/16 * noXBlocks)
@@ -36,7 +36,11 @@ itemIDs = {
     9 : "Crafting Background",
     10 : "Wooden Pickaxe",
     11 : "Stone Pickaxe",
-    12 : "Stone Shovel"
+    12 : "Stone Shovel",
+    13 : "Coal Ore",
+    14 : "Iron Ore",
+    15 : "Gold Ore",
+    16 : "Diamond Ore"
 }
 
 blockHardness = {
@@ -52,7 +56,11 @@ blockHardness = {
     9 : 999,
     10 : 0,
     11 : 0,
-    12 : 0
+    12 : 0,
+    13 : 10,
+    14 : 10,
+    15 : 10,
+    16 : 10
 }
 
 itemHardness = {
@@ -84,7 +92,11 @@ isPlaceable = {
     9 : True,
     10 : False,
     11 : False,
-    12 : False
+    12 : False,
+    13 : True,
+    14 : True,
+    15 : True,
+    16 : True
 }
 
 
@@ -95,7 +107,7 @@ craftingIDs = {
     0 : "Wooden Planks", 
     1 : "Wooden Pickaxe", 
     2 : "Stone Pickaxe",
-    3 : "Stone Shovel" 
+    3 : "Stone Shovel"
 }
 
 converterIDs = {
@@ -106,7 +118,11 @@ converterIDs = {
     'B' : 4, #Bedrock 
     'T' : 5, #Crafting Table
     'V' : 6, #Leaves 
-    'L' : 7 #Logs
+    'L' : 7, #Logs,
+    "C" : 13, #Coal Ore
+    "I" : 14, #Iron Ore
+    "A" : 15, #Gold Ore
+    "M" : 16 #Diamond Ore
 }
 
 textureNames = {
@@ -125,6 +141,7 @@ textureNames = {
     "Copper Ore" : "Textures/Blocks/copper_ore.png",
     "Gold Ore" : "Textures/Blocks/gold_ore.png",
     "Iron Ore" : "Textures/Blocks/iron_ore.png",
+    "Diamond Ore" : "Textures/Blocks/diamond_ore.png",
     "Twig Leaves" : "Textures/Blocks/leaves_twig.png",
     "Stone Bricks" : "Textures/Blocks/stone_bricks.png",
 
