@@ -335,7 +335,7 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.immovableBlocks, list)
       self.assertIsInstance(gs.clickableBlocks, list)
 
-class TestInventoryHandler(unittest.TestCase):
+'''class TestInventoryHandler(unittest.TestCase):
    hotbar=ih.getInv()
    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
    tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
@@ -404,6 +404,8 @@ class TestInventoryHandler(unittest.TestCase):
          self.assertTrue(True)
       except:
          self.assertTrue(False)
+
+'''
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
