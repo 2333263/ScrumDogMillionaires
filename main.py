@@ -6,6 +6,7 @@ import inventoryHandler as inv
 import playerHandler as ph
 import Camera as cam#Why would we call this cam like why CAM2007A
 import CraftingMenu as cm
+import menuHandler as  mh
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
@@ -22,32 +23,16 @@ color_light = (250,250,250) #colour of button when hover over
 color_dark = (64,64,64) #colour of button- default
 
 buttonFont = pygame.font.Font('Minecraft.ttf', 40) #font for button
-startButtonText = buttonFont.render('BEGIN GAME' , True , (255,255,255) )  #rendering a text written in this font for the start button
-exitButtonText = buttonFont.render('EXIT GAME' , True , (255,255,255) )  #rendering a text written in this font for the exit button
-
 startPage = pygame.image.load("Textures/Screens/start.png") #load image for start screen
 startPage = pygame.transform.scale(startPage, (gs.width, gs.height)) #fit to page
 
-pausePage = pygame.image.load("Textures/Screens/pause_new.png") #load image for pause screen
+pausePage = pygame.image.load("Textures/Screens/finalPause.png") #load image for pause screen
 pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to page
+
+infoPage = pygame.image.load("Textures/Screens/gameInfo.png") #load image for information screen
+infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit to page
+
 inv.initGroup()
-#pause menu - pops up when user clicks key "p"
-def pauseMenu():
-    paused= True #the user has paused the game
-    while paused:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type==pygame.KEYDOWN:
-                if event.key==pygame.K_c: #if the user clicks c, resume game
-                    paused=False
-                elif event.key==pygame.K_q: #if the user clicks q, quit game
-                    pygame.quit()
-                    quit()
-        screen.blit(pausePage,(0,0) ) #display the pause screen
-        pygame.display.update()
-        clock.tick(60)
         
 #main game loop:
 def gameMenu():
@@ -63,6 +48,7 @@ def gameMenu():
 
     #Initialise the crafting table screen 
     crafter = cm.Crafting(screen)
+    
     while gameRunning:
         clock.tick(60) #Sets the frame to update 60 times a second
 
@@ -110,7 +96,7 @@ def gameMenu():
                         inv.fullInv=False
                         inv.clicked=-1
                 elif(events.key==pygame.K_p):
-                    pauseMenu()
+                    mh.pauseMenu(screen,clock,pausePage)
                 elif(events.key==pygame.K_e):
                     if(inv.fullInv==False):
                         inv.fullInv=True
@@ -166,27 +152,48 @@ while gameRunning:
             elif gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+200 <= mouse[1] <= gs.height/2+280:
                 pygame.quit()
                 quit()
+            elif gs.width-110 <= mouse[0] <= gs.width-70 and 10 <= mouse[1] <= 50:
+                mh.infoMenu(screen,clock,infoPage)
         
 
     screen.blit(startPage,(0,0) ) #put the start page on the screen
     mouse = pygame.mouse.get_pos() #get mouse positions
+    
+
+
     if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130: 
         #if we are hovering over the start button, draw it with the lighter colour
         pygame.draw.rect(screen,color_light,[gs.width/2-110,gs.height/2+50,300,80]) 
+        startButtonText = buttonFont.render('BEGIN GAME' , True , (0,0,0) )  #rendering a text written in this font for the start button
           
     else: 
         #if we are not hovering over the start button, draw it with the darker colour
         pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+50,300,80]) 
+        startButtonText = buttonFont.render('BEGIN GAME' , True , (255,255,255) )  #rendering a text written in this font for the start button
         
     if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+200 <= mouse[1] <= gs.height/2+280: 
         #if we are hovering over the exit button, draw it with the lighter colour
         pygame.draw.rect(screen,color_light,[gs.width/2-110,gs.height/2+200,300,80]) 
+        exitButtonText = buttonFont.render('EXIT GAME' , True , (0,0,0) )  #rendering a text written in this font for the exit button
           
     else: 
         #if we are not hovering over the exit button, draw it with the darker colour
         pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+200,300,80]) 
+        exitButtonText = buttonFont.render('EXIT GAME' , True , (255,255,255) )  #rendering a text written in this font for the exit button
         
+    if gs.width-110 <= mouse[0] <= gs.width-70 and 10 <= mouse[1] <= 50: 
+        #if we are hovering over the information button, draw it with the lighter colour
+        pygame.draw.rect(screen,color_light,[gs.width-110,10,40,40]) 
+        informationButonText= buttonFont.render('?' , True , (0,0,0) )  #rendering a text written in this font for the information button
+          
+    else: 
+        #if we are not hovering over the information button, draw it with the darker colour
+        pygame.draw.rect(screen,color_dark,[gs.width-110,10,40,40])
+        informationButonText= buttonFont.render('?' , True , (255,255,255) )  #rendering a text written in this font for the information button
     
+    
+    
+    screen.blit(informationButonText , (gs.width-100,17)) # display text on information button
     screen.blit(exitButtonText , (gs.width/2-75,gs.height/2+225)) # display text on exit button 
     screen.blit(startButtonText , (gs.width/2-85,gs.height/2+75)) # display text on start button 
       
