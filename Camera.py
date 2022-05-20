@@ -1,6 +1,10 @@
 import pygame
 import gameSettings as gs
 
+#init curser to only be called once
+blockFrameImg = pygame.image.load(gs.textureNames["Block_Frame"])
+blockFrame = pygame.transform.scale(blockFrameImg, (gs.blockSize, gs.blockSize))
+
 #create camera class
 class Camera(pygame.sprite.Group):
     def __init__(self,player):
@@ -28,11 +32,15 @@ class Camera(pygame.sprite.Group):
     def draw(self, screen, worldBlocks):
         self.scroll()
         collideabeBlocks=[] #list of blocks player can collide with, done here so that we only loop through the block array once per time step
+        mousePos = pygame.mouse.get_pos()
         for i in worldBlocks:
             if(self.isColideable(i)):
                 collideabeBlocks.append(i)
             if(self.isOnScreen(i)):
                 screen.blit(i.image,(i.rect.x-self.offset.x,i.rect.y-self.offset.y))
+                if i.rect.x-self.offset.x <= mousePos[0] < i.rect.x-self.offset.x + gs.blockSize and \
+                        i.rect.y - self.offset.y <= mousePos[1] < i.rect.y - self.offset.y + gs.blockSize:
+                    screen.blit(blockFrame, (i.rect.x - self.offset.x, i.rect.y - self.offset.y))
            
         screen.blit(self.Player.image, (self.Player.rect.x-self.offset.x, self.Player.rect.y-self.offset.y))
         return collideabeBlocks

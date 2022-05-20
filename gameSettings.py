@@ -131,6 +131,8 @@ converterIDs = {
 
 textureNames = {
     #Blocks
+
+    "Block_Frame" : "Textures/Blocks/block_frame.png",
     "Grass" : "Textures/Blocks/grass.png",
     "Stone" : "Textures/Blocks/stone.png",
     "Dirt" : "Textures/Blocks/dirt.png",
