@@ -158,8 +158,9 @@ def gameMenu():
         #Calculate final position
         blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \
                    gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
-        #Draw cursor
-        screen.blit(blockFrame, blockPos)
+        #Draw cursor only if block is within interactable range (place/break)
+        if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize:
+            screen.blit(blockFrame, blockPos)
 
         if(gs.drawCrafting):
             crafter.makeScreen()  
