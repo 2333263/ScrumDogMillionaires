@@ -155,9 +155,10 @@ def gameMenu():
         mousePos = pygame.mouse.get_pos()[0] + camera.getOffsets()[0] % gs.blockSize, \
                    pygame.mouse.get_pos()[1] + camera.getOffsets()[1] % gs.blockSize
 
+        #Calculate final position
         blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \
                    gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
-
+        #Draw cursor
         screen.blit(blockFrame, blockPos)
 
         if(gs.drawCrafting):
