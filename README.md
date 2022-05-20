@@ -8,6 +8,7 @@ https://docs.google.com/document/d/1LtWjn-yJh1E1d_EoXST2fb7v0ZfIiN9U-UyINgQ-b7c/
 Proof of meetings & Daily Scrum Logs:  
 Sprint 1: https://docs.google.com/document/d/1YRG0rBVASGISJTlt8-KFch11thfsGsR5wvCkr5ZfSpU/edit#   
 Sprint 2: https://docs.google.com/document/d/1GG44mOb9FiwA51WHIQqN1QGDVoooA9w4QhJxmRtMxIo/edit?usp=sharing
+Sprint 3: https://docs.google.com/document/d/1PD5AnRz9jDJ5wTZBcshxm1VUs_YJqakkpumEQ9N1JII/edit?usp=sharing
   
   
 Group members  
