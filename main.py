@@ -56,7 +56,7 @@ def gameMenu():
     while gameRunning:
         clock.tick(60) #Sets the frame to update 60 times a second
 
-        for events in pygame.event.get():    
+        for events in pygame.event.get():
             if events.type == pygame.QUIT:
                 gameRunning = False
                 pygame.quit()
@@ -148,6 +148,17 @@ def gameMenu():
         screen.blit(fpsText, (1180, 5))
         screen.blit(seedText, (1180, 50))
         inv.drawHotBar(screen)
+
+        #Draws a box around the selected block
+        blockFrameImg = pygame.image.load(gs.textureNames["Block_Frame"])
+        blockFrame = pygame.transform.scale(blockFrameImg, (gs.blockSize, gs.blockSize))
+        mousePos = pygame.mouse.get_pos()[0] + camera.getOffsets()[0] % gs.blockSize, \
+                   pygame.mouse.get_pos()[1] + camera.getOffsets()[1] % gs.blockSize
+
+        blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \
+                   gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
+
+        screen.blit(blockFrame, blockPos)
 
         if(gs.drawCrafting):
             crafter.makeScreen()  
