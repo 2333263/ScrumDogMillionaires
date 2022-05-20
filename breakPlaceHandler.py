@@ -6,10 +6,7 @@ from block import Block
 import inventoryHandler as inv
 
 
-def distance(player, python_pos):
-    playerPos = gs.getPos(player.getPlayerPos())
-    blockPos = gs.getPos(python_pos)
-    return math.sqrt(pow((playerPos[0] - blockPos[0]), 2) + (pow((playerPos[1] - blockPos[1]), 2)))
+
 
 
 def checkBreakable(block, inHand):
@@ -27,7 +24,7 @@ def notEmpty(hotbarSelected):
         return True
 
 def blockBreak(python_pos, world_block, player): #Block breaking logic, and inventory handler passover
-    if distance(player, python_pos) <= gs.playerRange * gs.blockSize:
+    if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = gs.getPos(python_pos)
         for block in world_block:
             if block.blockPosition == pos and block.itemID not in gs.immovableBlocks and len(inv.invArray) > 0:
@@ -46,7 +43,7 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
 
 
 def blockPlace(python_pos, world_block, player): #Block placing logic, and inventory handler requesting
-    if distance(player, python_pos) <= gs.playerRange * gs.blockSize:
+    if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = gs.getPos(python_pos)
         found = False
         for block in world_block:

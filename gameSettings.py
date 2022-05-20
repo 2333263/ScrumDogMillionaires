@@ -23,6 +23,12 @@ def getPos(pos): #Takes in pygame position coordinates returns block coordinates
     pos = blockSize*math.floor(pos[0]/blockSize),blockSize*math.floor(pos[1]/blockSize)
     return pos
 
+#Moved to GS for global access
+def distance(player, python_pos): #Takes in player position and coords and returns distance
+    playerPos = getPos(player.getPlayerPos())
+    blockPos = getPos(python_pos)
+    return math.sqrt(pow((playerPos[0] - blockPos[0]), 2) + (pow((playerPos[1] - blockPos[1]), 2)))
+
 itemIDs = {
    -1: "null",
     0 : "Grass",
