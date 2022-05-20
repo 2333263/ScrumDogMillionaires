@@ -46,6 +46,10 @@ def gameMenu():
     player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.blockSize*6), gs.blockSize)
     camera=cam.Camera(player)
 
+    #Initilise breaking speed times
+    startTime = 0
+    startPos = 0
+
     #Initialise the crafting table screen 
     crafter = cm.Crafting(screen)
     
@@ -71,8 +75,13 @@ def gameMenu():
                         crafter.makeItem(pygame.mouse.get_pos())
                         
                     elif(inv.fullInv==False):
+                        #Code for break speed:
+                        #startTime = pygame.time.get_ticks() / 1000
+                        #startPos = gs.getPos(pygame.mouse.get_pos())
                         bph.blockBreak(pygame.mouse.get_pos()+camera.getOffsets(), worldBlocks, player) #break the block
+
                     inv.onClick(pygame.mouse.get_pos())
+
                 elif(not gs.drawCrafting):
                     if (events.button == 3 and inv.fullInv==False):
                         #Place a block
@@ -85,6 +94,18 @@ def gameMenu():
                     #Scroll DOWN to select previous item in hotbar
                     elif events.button == 5:
                         inv.selectPrevious()
+
+            #Code for break speed:
+            
+            #elif events.type == pygame.MOUSEBUTTONUP:
+            #    if events.button == 1:
+            #        endTime = pygame.time.get_ticks()/1000
+            #        endPos = gs.getPos(pygame.mouse.get_pos())
+            #        # Speed is roughly ~0.5 seconds
+            #        timeToBreak = 0.5
+            #        if (endTime-startTime >=timeToBreak and startPos==endPos):
+            #            bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player)  # break the block
+            
 
             #if a key is pressed and that key is the up arrow, run the jump method in the player class
             elif(events.type==pygame.KEYDOWN ):
