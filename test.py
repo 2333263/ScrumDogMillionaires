@@ -452,7 +452,7 @@ class TestBreakPlace(unittest.TestCase):
    def test_getPos(self):
       self.assertEqual(gs.getPos(self.pos),(0,0))
    # def test_Distance(self):
-   #    self.assertEqual(int(bph.distance(self.TempPlayer,self.pos)),226)
+   #    self.assertEqual(int(gs.distance(self.TempPlayer,self.pos)),226)
    def test_checkBreak(self):
       self.assertTrue(bph.checkBreakable(self.tempBlock,self.tempItem))
       self.tempItem.hardness=0
