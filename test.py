@@ -27,16 +27,23 @@ class TestWorld(unittest.TestCase):
 
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
+   tempItem1 = item.Item("Grass", 0,20)
    def test_itemID(self):
       self.assertIsInstance(self.tempItem.itemID, int)
       self.assertGreaterEqual(self.tempItem.itemID, 0)
       self.assertLessEqual(self.tempItem.itemID, len(gs.itemIDs) + 1)
       self.assertEqual(self.tempItem.getItemId(), self.tempItem.itemID)
-
+      self.assertIsInstance(self.tempItem1.itemID, int)
+      self.assertGreaterEqual(self.tempItem1.itemID, 0)
+      self.assertLessEqual(self.tempItem1.itemID, len(gs.itemIDs) + 1)
+      self.assertEqual(self.tempItem1.getItemId(), self.tempItem1.itemID)
+        
    def test_amount(self):
       self.assertIsInstance(self.tempItem.amount, int)
       self.assertGreaterEqual(self.tempItem.amount, 0)
 
+      self.assertIsInstance(self.tempItem1.amount, int)
+      self.assertGreaterEqual(self.tempItem1.amount, 0)
       oldCount = self.tempItem.amount
       self.tempItem.increase()
       self.assertGreaterEqual(self.tempItem.amount, oldCount)
@@ -49,6 +56,11 @@ class TestItem(unittest.TestCase):
       self.assertEqual(self.tempItem.getItemName(),"Grass")
    def test_Hardness(self):
       self.assertEqual(self.tempItem.getHardness(),0)
+      self.assertEqual(self.tempItem1.getHardness(),20)
+   
+   
+   
+   
 
 class TestBlock(unittest.TestCase):
    tempBlock = block.Block(gs.blockSize, (0, 0), 0, gs.textureNames[gs.itemIDs[0]],0)
@@ -280,14 +292,17 @@ class TestCraftingMenu (unittest.TestCase):
              self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.populatePossibleItems()))
       def test_populateRecipe(self):
              self.crafter.populateRecipe(self.crafter.craftables)
+             self.crafter.populateRecipe(self.crafter.craftables)
+             self.crafter.populateRecipe(self.crafter.craftables)
+             self.crafter.populateRecipe(self.crafter.craftables)
              self.assertTrue(self.crafter.itemRecipe.__sizeof__() >= 0)
       def test_resetTable(self):
-             self.crafter.populateRecipe(gs.itemIDs);
+             self.crafter.resetTable();
              self.assertEqual(self.crafter.itemRecipe.has(), False)
              self.assertEqual(self.crafter.craftButton.has(), False)
       def test_checkClick(self):
              self.crafter.checkClick((0,0))
-             self.assertTrue(self.crafter.craftButton.has()>= 0)
+             self.assertEqual(self.crafter.craftButton.has(), False)
       def test_makeItem(self):
              self.crafter.makeItem((0,0))
              self.assertEqual(self.crafter.itemRecipe.has(), False)
@@ -456,8 +471,8 @@ class TestBreakPlace(unittest.TestCase):
       self.tempItem.hardness=0
       self.assertFalse(bph.checkBreakable(self.tempBlock,self.tempItem))
    def test_notEmpty(self):
-      #self.hotbar.append(self.tempBlock)
-      #self.assertTrue(bph.notEmpty(self.hotbar[0]))
+      # self.hotbar.append(self.tempBlock)
+      # self.assertTrue(bph.notEmpty(self.hotbar[0]))
       print("ADD THIS")
    def test_blockBreak(self):
       try:
