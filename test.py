@@ -515,14 +515,14 @@ class TestBreakPlace(unittest.TestCase):
 class TestRandomWorldGEN(unittest.TestCase):
    def test_generateWorld(self):
       self.assertEqual(ndarray,  type(rwg.generateWorld()))
-class TestInvinventorySlots(unittest.TestCase):
-   ins = InventorySlots.slot("red", 10, 20, 30, 40)
-   def test_everything(self):
-      self.assertEqual(self.ins.width,30)
-      self.assertEqual(self.ins.height,40)
-      self.assertEqual(self.ins.rect.x,10)
-      self.assertEqual(self.ins.rect.y,20)
-      self.assertEqual(self.ins.image.get_width(),30)
-      self.assertEqual(self.ins.image.get_height(),40)
+# class TestInvinventorySlots(unittest.TestCase):
+#    ins = InventorySlots.slot("red", 10, 20, 30, 40)
+#    def test_everything(self):
+#       self.assertEqual(self.ins.width,30)
+#       self.assertEqual(self.ins.height,40)
+#       self.assertEqual(self.ins.rect.x,10)
+#       self.assertEqual(self.ins.rect.y,20)
+#       self.assertEqual(self.ins.image.get_width(),30)
+#       self.assertEqual(self.ins.image.get_height(),40)
 
 unittest.main()
