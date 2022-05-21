@@ -1,4 +1,5 @@
 # from asyncio.windows_events import NULL
+from asyncio.windows_events import NULL
 from platform import python_branch
 from select import select
 from typing import List
@@ -20,6 +21,7 @@ import CraftingMenu
 import inventoryHandler as ih
 import breakPlaceHandler as bph
 import RandomWorldGen as rwg
+import InventorySlots
 #Testing the level Generator
 class TestWorld(unittest.TestCase):
    def test_getBlock(self):
@@ -347,7 +349,7 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.immovableBlocks, list)
       self.assertIsInstance(gs.clickableBlocks, list)
 
-'''class TestInventoryHandler(unittest.TestCase):
+class TestInventoryHandler(unittest.TestCase):
    hotbar=ih.getInv()
    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
    tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
@@ -373,9 +375,9 @@ class TestGameSettings(unittest.TestCase):
       ih.selected=1
       ih.decrease()
       self.assertNotIn(self.tempBlock2,self.hotbar)
-      self.assertEqual(ih.selected,0)
+      self.assertEqual(self.hotbar[1].getCount(),0)
       ih.decrease()
-      self.assertEqual(self.hotbar,[])
+      self.assertEqual(self.hotbar[1], ih.NullItem)
    def test_DecreaseSpec(self):
       ih.addBlock(self.tempBlock)
       ih.addBlock(self.tempBlock2)
@@ -386,38 +388,54 @@ class TestGameSettings(unittest.TestCase):
       ih.decreaseSpec(self.tempBlock2.itemID)
       self.assertEqual(self.hotbar[1].getCount(),1)
       ih.decreaseSpec(self.tempBlock2.itemID)
+      self.assertEqual(self.hotbar[1], ih.NullItem)
       self.assertNotEqual(self.hotbar[1].itemID,self.tempBlock2.itemID)
    def test_Selected(self):
+      ih.selected=0
       self.assertEqual(ih.selected,0)
       self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
+      self.assertEqual(item.Item,  type(ih.getSelected()))
       ih.selected=1
       self.assertEqual(ih.selected,1)
-      self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+      ih.addBlock(self.tempBlock2)
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock2.itemID)
+   
+   def test_selectNext(self):
       ih.selected=0
       ih.selectNext()
-      self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+      self.assertEqual(ih.selected,1)
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock2.itemID)
       ih.selectNext()
-      self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
-      ih.selectPrevious()
+      self.assertEqual(ih.selected,2)
       self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
+   def test_selectPrevious(self):  
       ih.selectPrevious()
+      self.assertEqual(ih.selected,1)
+      self.assertEqual(ih.getSelected().itemID,self.tempBlock2.itemID)
+      ih.selectPrevious()
+      self.assertEqual(ih.selected,0)
       self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
-   def test_itemCount(self):
+   def test_getInv(self):
+          self.assertEqual(ndarray,  type(ih.getInv()))
+   def test_getItemCount(self):
       ih.addBlock(self.tempBlock)
-      self.assertEqual(ih.getItemCount(self.tempBlock.itemID),2)
-      self.assertEqual(ih.getItemCount(self.tempBlock2.itemID),0)
+      self.assertEqual(ih.getItemCount(self.tempBlock.itemID),3)
+      self.assertEqual(ih.getItemCount(self.tempBlock2.itemID),1)
    def test_addItem(self):
       ih.addItem(self.tempItem)
       ih.addItem(self.tempItem)
-      self.assertEqual(self.hotbar[2].itemID,self.tempItem.itemID)
-   def test_Draw(self):
+      self.assertEqual(self.hotbar[3].itemID,self.tempItem.itemID)
+   def test_drawInv(self):
       try:
          ih.drawHotBar(self.screen)
          self.assertTrue(True)
       except:
          self.assertTrue(False)
+   def test_initGroup(self):
+      ih.initGroup()
+      self.assertTrue(ih.hotBarrSprite.__len__() >0)
+      self.assertTrue(ih.slots.__len__() >0)  
 
-'''
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
@@ -495,9 +513,16 @@ class TestBreakPlace(unittest.TestCase):
       bph.blockPlace(self.pos,self.spriteGroup,self.TempPlayer)
       
 class TestRandomWorldGEN(unittest.TestCase):
-   
    def test_generateWorld(self):
       self.assertEqual(ndarray,  type(rwg.generateWorld()))
-
+class TestInvinventorySlots(unittest.TestCase):
+   ins = InventorySlots.slot("red", 10, 20, 30, 40)
+   def test_everything(self):
+      self.assertEqual(self.ins.width,30)
+      self.assertEqual(self.ins.height,40)
+      self.assertEqual(self.ins.rect.x,10)
+      self.assertEqual(self.ins.rect.y,20)
+      self.assertEqual(self.ins.image.get_width(),30)
+      self.assertEqual(self.ins.image.get_height(),40)
 
 unittest.main()
