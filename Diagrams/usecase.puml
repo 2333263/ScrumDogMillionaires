@@ -1,0 +1,23 @@
+@startuml uc
+skinparam Dpi 350
+left to right direction
+skinparam packageStyle rectangle
+actor User
+actor Admin
+rectangle checkout {
+  User --> (Generate World from Seed)
+  (Apply textures to differentiate blocks & resources) <-- Admin
+  User --> (Start Game)
+  User --> (View Information) 
+  User --> (Pause Game)
+  User --> (Exit Game)
+  User --> (Game control with keyboard & mouse) 
+  User --> (Move around game world)
+  User --> (Break blocks using appropriate tools)
+  User --> (Use hotbar to see items in use)
+  User --> (Use full inventory to see items collected)
+  User --> (Edit hotbar and inventory)
+  User --> (Place blocks in the world) 
+  User --> (Craft new items, blocks & tools) 
+}
+@enduml
