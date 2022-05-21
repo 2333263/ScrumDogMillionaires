@@ -356,7 +356,7 @@ class TestInventoryHandler(unittest.TestCase):
    tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
    tempBlock4=block.Block(gs.blockSize, (50, 7), 3, gs.textureNames[gs.itemIDs[1]],0)
    tempItem = item.Item("Cloud", 4)
-   screen=pygame.Surface((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+   # screen=pygame.Surface((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
    def test_AddBlock(self):
       ih.addBlock(self.tempBlock)
       #self.hotbar=ih.getHotBar()
