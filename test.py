@@ -1,11 +1,4 @@
-# from asyncio.windows_events import NULL
-from asyncio.windows_events import NULL
-from platform import python_branch
-from select import select
-from typing import List
 import unittest
-from xmlrpc.client import Boolean, boolean
-
 from numpy import array, ndarray
 import Camera
 import item 
@@ -333,7 +326,7 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.height, int)
       self.assertGreaterEqual(gs.height, 1)
 
-      self.assertIsInstance(gs.drawCrafting, boolean)
+      self.assertIsInstance(gs.drawCrafting, bool)
       self.assertIsInstance(gs.levelName, str)
 
       self.assertIsInstance(gs.craftingTablePos[0], int)
