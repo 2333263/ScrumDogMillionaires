@@ -425,12 +425,12 @@ class TestInventoryHandler(unittest.TestCase):
       ih.addItem(self.tempItem)
       ih.addItem(self.tempItem)
       self.assertEqual(self.hotbar[3].itemID,self.tempItem.itemID)
-   def test_drawInv(self):
-      try:
-         ih.drawHotBar(self.screen)
-         self.assertTrue(True)
-      except:
-         self.assertTrue(False)
+   # def test_drawInv(self):
+   #    try:
+   #       ih.drawHotBar(self.screen)
+   #       self.assertTrue(True)
+   #    except:
+   #       self.assertTrue(False)
    def test_initGroup(self):
       ih.initGroup()
       self.assertTrue(ih.hotBarrSprite.__len__() >0)
