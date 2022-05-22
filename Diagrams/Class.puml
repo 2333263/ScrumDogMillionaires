@@ -1,0 +1,271 @@
+@startuml class
+
+skinparam Dpi 500
+class Block {
+    +blockPosition
+    +itemID
+    +textureName
+    +hardness
+    +image
+    +rect
+    +init(blockSize, blockPosition, itemID, textureName, hardness)
+    +getHardness()
+}
+
+class breakPlaceHandler {
+    +checkBreakable(block, inHand)
+    +notEmpty(hotbarSelected)
+    +blockBreak(python_pos, world_block, player)
+    +blockPlace(python_pos, world_block, player)
+}
+
+class Camera {
+    +offset
+    +hWidth
+    +hHeight
+    +Player
+    +init(player)
+    +scroll()
+    +draw(screen, worldBlocks)
+    +getOffsets()
+    +isColideable(block)
+    +isOnScreen(block)
+}
+
+class Button {
+    +itemID
+    +pos
+    +image
+    +rect
+    +init(itemID, pos, width, height)
+}
+
+class Crafting {
+    +relativeSize
+    +recipes
+    +allItems
+    +screen
+    +menuBackground
+    +craftables
+    +itemName
+    +itemRecipe
+    +itemsNeeded
+    +canCraft
+    +createdItem
+    +craftButton
+    +init(screen)
+    +makeScreen()
+    +makeBackground()
+    +populatePossibleItems()
+    +populateRecipe(itemID)
+    +resetTable()
+    +checkClick(pos)
+    +makeItem(pos)
+    +isCraftabel(itemID, playerInventory)
+}
+
+class gameSettings {
+    +levelName
+    +seed 
+    +octaves
+    +levelArray
+    +blockSize
+    +playerRange
+    +noXBlocks
+    +noYBlocks
+    +width
+    +height
+    +drawCrafting
+    +craftingTablePos
+    +getPos(pos)
+    +distance(player, python_pos)
+    +itemIDs{}
+    +blockHardness{}
+    +itemHardness{}
+    +isPlaceable{}
+    +craftingIDs{}
+    +converterIDs{}
+    +textureNames{}
+    +immovableBlocks
+    +clickableBlocks
+}
+
+class inventoryHandler {
+    +NullItem
+    +invArray
+    +itemIDs
+    +selected 
+    +fullInv 
+    +slots 
+    +hotBarrSprite
+    +relative 
+    +clicked
+    +addBlock(block)
+    +addItem(item)
+    +decrease()
+    +decreaseSpec(itemID)
+    +getSelected()
+    +selectNext()
+    +selectPrevious()
+    +drawHotBar(screen)
+    +getInv()
+    +getItemCount(itemID)
+    +drawInv(screen)
+    +initGroup()
+    +onClick(pos)
+
+}
+
+class slot {
+    +image
+    +width
+    +height 
+    +rect 
+    +init(colour, left, top, width, height)
+}
+
+class Item {
+    +itemName
+    +itemID
+    +isPlaceable
+    +hardness
+    +amount
+    +texture
+    +init(*args)
+    +getItemName()
+    +getItemID()
+    +increase()
+    +decrease()
+    +getCount()
+    +getHardness()
+}
+
+class levelGenerator {
+    +worldGroup
+    +getBlocks(levelName)
+}
+
+class main {
+    +clock
+    +screen
+    +gameRunning
+    +color_light
+    +color_dark
+    +buttonFont
+    +startPage
+    +PausePage
+    +infoPage
+    +worldBlocks
+    +collisionblocks
+    +player
+    +camera
+    +crafter
+    +font
+    +fpsText
+    +seedText
+    +bg
+    +blockFrameImg
+    +blockFrame 
+    +mousePos
+    +blockPos 
+    +mouse
+    +gameMenu()
+}
+
+class menuHandler {
+    +infoMenu(screen, clock, infoPage)
+    +pauseMenu(screen, clock, pausePage)
+}
+
+class Player {
+    +playerSize
+    +image
+    +jumped
+    +rect
+    +direction
+    +gravity
+    +character
+    +keys
+    +getPlayerPos()
+    +MoveOnX
+    +useGravity()
+    +jump()
+    +jumpArc
+    +update(dt, allBlocks)
+    +stopMoveOnX
+}
+
+class RandomWorldGen {
+    +world
+    +generateWorld()
+    +drawOre(world, x, y, ore)
+    +drawTree(world, x, y)
+}
+
+class RecipeHandler {
+    +file
+    +data
+    +recipe{}
+    +init()
+    +getRecipeInfo(itemID)
+    +getRecipe(itemID)
+    +getCraftingAmount(itemID)
+    +getAllItemIDs()
+    +getCrafterShape(itemID)
+}
+
+class Text {
+    +my_font
+    +words
+    +image
+    +pos
+    +rect
+    +init(text, fontSize, color, pos, background)
+}
+
+
+main --* Player
+main --* Camera
+main --* Crafting
+main --> gameSettings
+main --> levelGenerator
+main --> breakPlaceHandler
+main --> inventoryHandler
+main --> menuHandler
+
+Block --> gameSettings
+
+breakPlaceHandler --* Block
+breakPlaceHandler --> Block
+breakPlaceHandler --> gameSettings
+breakPlaceHandler --> inventoryHandler
+
+Camera --> gameSettings
+
+Button --> gameSettings
+
+Crafting --* RecipeHandler
+Crafting --* Button
+Crafting --* Text
+Crafting --* Item
+Crafting --> gameSettings
+Crafting --> inventoryHandler
+
+inventoryHandler --* Item
+inventoryHandler --* slot
+inventoryHandler --> gameSettings
+
+Item --> gameSettings
+
+levelGenerator --* Block
+levelGenerator --> gameSettings
+levelGenerator --> RandomWorldGen
+
+menuHandler --> gameSettings
+
+Player --> gameSettings
+
+RandomWorldGen --> gameSettings
+
+RecipeHandler --> gameSettings
+@enduml

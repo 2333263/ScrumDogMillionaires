@@ -66,9 +66,6 @@ def decreaseSpec(itemID):
   
 
 
-
-
-
 def getSelected():
     #Returns the selected item
     return invArray[selected]
