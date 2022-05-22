@@ -4,7 +4,7 @@ from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerHandler as ph
-import Camera as cam#Why would we call this cam like why CAM2007A
+import Camera as cam
 import CraftingMenu as cm
 import menuHandler as  mh
 
