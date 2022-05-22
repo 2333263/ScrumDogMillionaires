@@ -1,0 +1,64 @@
+@startuml state
+
+skinparam dpi 500
+
+state fork_startScreen <<fork>>
+state fork_beginGame <<fork>>
+state fork_pause <<fork>>
+state fork_craft <<fork>>
+state join_inventory <<join>>
+state join_loadGame <<join>>
+
+[*] --> StartScreen : Start
+StartScreen --> fork_startScreen
+fork_startScreen --> BeginGame : Click Begin Game Button
+fork_startScreen --> ExitGame : Click Exit Game Button
+fork_startScreen --> Options : Click Question Mark Button
+BeginGame --> RandmolyGenerateWorld
+BeginGame --> LoadPlayer
+BeginGame --> LoadTextures
+BeginGame --> LoadCamera
+
+RandmolyGenerateWorld --> join_loadGame 
+LoadPlayer --> join_loadGame
+LoadTextures --> join_loadGame
+LoadCamera --> join_loadGame
+join_loadGame --> LoadGame 
+LoadGame --> fork_beginGame
+
+UpdateWorld --> fork_beginGame : Update the way the world looks
+
+
+fork_beginGame --> MovePlayer : Use A, D and SpaceBar keys to move the player
+MovePlayer --> UpdateWorld
+
+fork_beginGame --> BreakBlocks : Left Click to break blocks
+BreakBlocks --> AddInventory : Add the blocks to the inventory 
+
+fork_beginGame --> PlaceBlocks : right Click to remove blocks from inventory
+PlaceBlocks --> RemoveInventory : Remove Blocks from inventory
+
+MovePlayer --> CraftMenu : Open Craft Menu if near crafting table
+CraftMenu --> fork_craft
+fork_craft --> CanCraft : Able to Craft new Tool
+fork_craft --> CannotCraft : Not able to Craft new tool
+CanCraft --> RemoveInventory : Remove Blocks needed 
+CanCraft --> AddInventory : Add new Tool to inventory
+CannotCraft --> CraftMenu
+CraftMenu --> UpdateWorld : Press ESC key to exit crafting menu
+
+RemoveInventory --> join_inventory
+AddInventory --> join_inventory
+join_inventory --> UpdateInventory 
+
+UpdateInventory --> UpdateWorld
+fork_beginGame --> PauseMenu : Press P to pause the game
+
+
+PauseMenu --> fork_pause
+fork_pause --> Continue : press C to continue
+Continue --> fork_beginGame
+fork_pause --> ExitGame : Press Q to exit the game
+Options --> StartScreen : Press ESC key
+ExitGame --> [*] : end game
+@enduml 
