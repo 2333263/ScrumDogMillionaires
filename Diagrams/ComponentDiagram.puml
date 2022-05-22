@@ -11,6 +11,7 @@
 [Game World]
 [Inventory]
 [User Interface]
+[Game Menu]
 folder "Files"{
     [Sprites]
     [Recipe Json]
@@ -65,9 +66,13 @@ BreakPlaceBlock )-- [Player]
 [Crafting] --( StoreRetrieveBlockItem
 [Inventory] -- StoreRetrieveBlockItem
 
-() "Create World" as CreateWorld
-[Game World] --( CreateWorld
-[Block] -- CreateWorld
+() "Get Blocks for Gen" as BlocKGen
+[Game World] --( BlocKGen
+[Block] -- BlocKGen
+
+() "Generate world from seed" as GenWorld
+[Game World] -- GenWorld
+GenWorld )-- [Game Menu]
 
 () "Display World" as DisplayWorld
 () "Display Player" as DisplayPlayer
@@ -88,12 +93,14 @@ BreakPlaceBlock )-- [Player]
 [Player] -- DisplayPlayer
 [User Interface] -- DisplayUI
 
-() "Move Player" as MovePlayer
-[Player] -- MovePlayer
-[Player Movement] --( MovePlayer
+() "Move Player" as MovePlayerWorld
+[Player] --( MovePlayerWorld
+[Game World] -- MovePlayerWorld
 
-() "Move Camera" as MoveCamera
-[Camera] --( MoveCamera
-[Player Movement] -- MoveCamera
+() "Move Camera on Player Move" as MovePlayerCamera
+[Camera] -- MovePlayerCamera
+[Player] --( MovePlayerCamera
+
+
 
 @enduml
