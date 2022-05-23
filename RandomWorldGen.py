@@ -46,8 +46,7 @@ def generateWorld():
         world[y - 4][x - 1] = 'V'
         world[y - 5][x] = 'V'
 
-            
-        
+#traverses through tree and builds a 2d array of the map with letters corresponding to block types
     for y in range(gs.noYBlocks):
         for x in range(gs.noXBlocks):
             dirt = random.randint(2, 5)

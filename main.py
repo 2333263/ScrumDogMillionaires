@@ -114,13 +114,13 @@ def gameMenu():
                 elif(events.key == pygame.K_ESCAPE):
                     gs.drawCrafting = False
                     if(inv.fullInv==True):
-                        inv.fullInv=False
+                        inv.fullInv=False      #hides full inventory
                         inv.clicked=-1
                 elif(events.key==pygame.K_p):
                     mh.pauseMenu(screen,clock,pausePage)
                 elif(events.key==pygame.K_e):
                     if(inv.fullInv==False):
-                        inv.fullInv=True
+                        inv.fullInv=True        #displays full inventory
                     else:
                         inv.fullInv=False
                         inv.clicked=-1
@@ -138,7 +138,7 @@ def gameMenu():
         fpsText = font.render("FPS: "+str(int(clock.get_fps())), 1, (255, 255, 255))
         seedText = font.render("Seed: " +str(gs.seed), 1, (255, 255, 255))
 
-        #Create the sky     
+        #Create the sky background
         bg = pygame.image.load(gs.textureNames["Sky"]).convert()
         bg = pygame.transform.scale(bg, (gs.width, gs.height))
         screen.blit(bg, (0, 0))

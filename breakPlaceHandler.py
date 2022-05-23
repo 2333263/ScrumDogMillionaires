@@ -10,6 +10,7 @@ import inventoryHandler as inv
 
 
 def checkBreakable(block, inHand):
+    #a block can only be broken if the current tool is harder than the block's hardness
     blockHardness = block.getHardness()
     itemHardness = inHand.getHardness()
     if(itemHardness>=blockHardness):
@@ -27,6 +28,7 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
     if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = gs.getPos(python_pos)
         for block in world_block:
+            #find correct block to break. Check if block is breakable. i.e. not bed rock/ crafting table
             if block.blockPosition == pos and block.itemID not in gs.immovableBlocks and len(inv.invArray) > 0:
                 if checkBreakable(block,inv.invArray[inv.selected]):
                     #Remove block from world
