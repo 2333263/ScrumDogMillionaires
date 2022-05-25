@@ -52,7 +52,8 @@ itemIDs = {
     17 : "Portal",
     18 : "Emerald Ore",
     19 : "Diamond",
-    20 : "Emerald"
+    20 : "Emerald",
+    21 : "Gold Ingot"
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
@@ -94,7 +95,8 @@ itemHardness = {
     11 : 20, #tool
     12 : 20, #tool
     19 : 0,
-    20 : 0
+    20 : 0,
+    21 : 0
 }
 #dictionary controling whether an item can be placed into the world
 #tools and ore cannot be placed into the world
@@ -121,7 +123,8 @@ isPlaceable = {
     17 : False,
     18 : True,
     19 : False,
-    20 : False
+    20 : False,
+    21 : False
 }
 
 
@@ -134,7 +137,8 @@ craftingIDs = {
     2 : "Stone Pickaxe",
     3 : "Stone Shovel",
     4 : "Diamond",
-    5 : "Emerald"
+    5 : "Emerald",
+    6 : "Gold Ingot"
 }
 
 converterIDs = {
