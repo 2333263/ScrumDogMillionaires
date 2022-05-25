@@ -1,8 +1,8 @@
 import pygame
 import gameSettings as gs
 
-def CheckEndGame(screen, portal, ):
+def CheckEndGame(screen, portal, camera):
     if(gs.endGamePos[0] != -1):
         #Draw the portal
-        screen.blit(portal, gs.endGamePoss)
+        return True
         

@@ -7,7 +7,8 @@ import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
 import menuHandler as  mh
-import EndGameHandler as egh
+import Portal as po
+
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
@@ -32,9 +33,6 @@ pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to pag
 
 infoPage = pygame.image.load("Textures/Screens/gameInfo.png") #load image for information screen
 infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit to page
-
-portal = pygame.image.load("Textures/Screens/portal.png") #load image for information screen
-portal = pygame.transform.scale(portal, (500, 500)) #fit to page
 
 
 inv.initGroup()
@@ -174,11 +172,13 @@ def gameMenu():
         if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize:
             screen.blit(blockFrame, blockPos)
         
-        egh.CheckEndGame(screen, portal)
-
-        if(not gs.endGamePlaced):
-            
+        #egh.CheckEndGame(screen, portal, camera)
+        if(gs.endGamePos[0] != -1 and not gs.endGamePlaced):
+            tempPortal = po.Portal(150, gs.endGamePos, 26, "Textures/Screens/portal.png", 999)
+            worldBlocks.add(tempPortal)
             gs.endGamePlaced = True
+            
+      
         
         if(gs.drawCrafting):
             crafter.makeScreen()  

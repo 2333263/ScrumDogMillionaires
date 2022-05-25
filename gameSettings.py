@@ -1,7 +1,7 @@
 import random
 import math
 levelName = "random"
-seed = random.randint(-10000, 10000) #-107, -8801
+seed = -8801 #-107, -8801 random.randint(-10000, 10000)
 octaves = 1
 
 with open('Levels/' + levelName + '.txt') as f:
@@ -60,7 +60,8 @@ itemIDs = {
     22 : "Diamond Block",
     23 : "Emerald Block",
     24 : "Gold Block",
-    25 : "End Game Block"
+    25 : "End Game Block",
+    26 : "End Game Portal"
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
@@ -87,7 +88,8 @@ blockHardness = {
     22 : 20,
     23 : 20,
     24 : 20,
-    25 : 999
+    25 : 999,
+    26 : 999
 }
 #dictionary of tool hardness (strength) correlating to order of itemID dictionary
 itemHardness = {
@@ -139,7 +141,8 @@ isPlaceable = {
     22 : True,
     23 : True,
     24 : True,
-    25 : True
+    25 : True,
+    26 : False
 }
 
 
