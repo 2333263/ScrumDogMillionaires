@@ -66,6 +66,9 @@ def generateWorld():
             if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 36):
                 if (random.randint(1, 120) == 1):
                     drawOre(world, x, y, "M")
+            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 40):
+                if (random.randint(1, 230) == 5):
+                    drawOre(world, x, y, "E")
             if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 16):
                 if (random.randint(1, 35) == 1):
                     drawOre(world, x, y, "I")

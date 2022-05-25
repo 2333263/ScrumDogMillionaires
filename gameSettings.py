@@ -1,7 +1,7 @@
 import random
 import math
 levelName = "random"
-seed = random.randint(-10000, 10000)
+seed = random.randint(-10000, 10000) #-107
 octaves = 1
 
 with open('Levels/' + levelName + '.txt') as f:
@@ -48,14 +48,18 @@ itemIDs = {
     13 : "Coal Ore",
     14 : "Iron Ore",
     15 : "Gold Ore",
-    16 : "Diamond Ore"
+    16 : "Diamond Ore",
+    17 : "Portal",
+    18 : "Emerald Ore",
+    19 : "Diamond",
+    20 : "Emerald"
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
-     -1: 0,
+    -1: 0,
     0 : 0,
     1 : 0,
-    2 : 10,
+    2 : 0, #10
     3 : 999,
     4 : 999,
     5 : 999,
@@ -69,7 +73,9 @@ blockHardness = {
     13 : 10,
     14 : 15,
     15 : 15,
-    16 : 20
+    16 : 0, #15
+    17 : 999,
+    18 : 20
 }
 #dictionary of tool hardness (strength) correlating to order of itemID dictionary
 itemHardness = {
@@ -86,7 +92,9 @@ itemHardness = {
     9 : 0,
     10 : 10, #tool with hardness level 10
     11 : 20, #tool
-    12 : 20 #tool
+    12 : 20, #tool
+    19 : 0,
+    20 : 0
 }
 #dictionary controling whether an item can be placed into the world
 #tools and ore cannot be placed into the world
@@ -109,7 +117,11 @@ isPlaceable = {
     13 : True,
     14 : True,
     15 : True,
-    16 : True
+    16 : True,
+    17 : False,
+    18 : True,
+    19 : False,
+    20 : False
 }
 
 
@@ -120,7 +132,9 @@ craftingIDs = {
     0 : "Wooden Planks", 
     1 : "Wooden Pickaxe", 
     2 : "Stone Pickaxe",
-    3 : "Stone Shovel"
+    3 : "Stone Shovel",
+    4 : "Diamond",
+    5 : "Emerald"
 }
 
 converterIDs = {
@@ -135,12 +149,12 @@ converterIDs = {
     "C" : 13, #Coal Ore
     "I" : 14, #Iron Ore
     "A" : 15, #Gold Ore
-    "M" : 16 #Diamond Ore
+    "M" : 16, #Diamond Ore
+    "E" : 18 #Emerald Ore
 }
 
 textureNames = {
     #Blocks
-
     "Block_Frame" : "Textures/Blocks/block_frame.png",
     "Grass" : "Textures/Blocks/grass.png",
     "Stone" : "Textures/Blocks/stone.png",
@@ -157,6 +171,7 @@ textureNames = {
     "Gold Ore" : "Textures/Blocks/gold_ore.png",
     "Iron Ore" : "Textures/Blocks/iron_ore.png",
     "Diamond Ore" : "Textures/Blocks/diamond_ore.png",
+    "Emerald Ore" : "Textures/Blocks/emerald_ore.png",
     "Twig Leaves" : "Textures/Blocks/leaves_twig.png",
     "Stone Bricks" : "Textures/Blocks/stone_bricks.png",
 
@@ -213,7 +228,8 @@ textureNames = {
 
     #MENUS
     "Sky" : "Textures/Screens/sky.png",
-    "Crafting Background" : "Textures/Screens/CraftingMenu.png"
+    "Crafting Background" : "Textures/Screens/CraftingMenu.png",
+    "Portal" : "Textures/Screens/portal.png"
 }
 immovableBlocks = [3, 5] #list used to store itemIDs of blocks that cannot be moved
 clickableBlocks = [5]

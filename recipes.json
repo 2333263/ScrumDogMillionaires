@@ -79,6 +79,40 @@
         [-1, 2, -1,
          -1, 8, -1,
          -1, 8, -1]
+    },
+    {
+        "craftingID" : 4,
+        "toolName" : "Diamond",
+        "itemID" : 19,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 16,
+                "numBlocks" : 1
+            }
+        ],
+        "shape":
+        [-1, -1, -1,
+         -1, 16, -1,
+         -1, -1, -1]
+    },
+    {
+        "craftingID" : 5,
+        "toolName" : "Emerald",
+        "itemID" : 20,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 18,
+                "numBlocks" : 1
+            }
+        ],
+        "shape":
+        [-1, -1, -1,
+         -1, 18, -1,
+         -1, -1, -1]
     }
 
 ]
