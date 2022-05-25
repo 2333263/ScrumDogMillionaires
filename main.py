@@ -83,7 +83,7 @@ def gameMenu():
                     inv.onClick(pygame.mouse.get_pos())
 
                 elif(not gs.drawCrafting):
-                    if (events.button == 3 and inv.fullInv==False):
+                    if (events.button == 3 and inv.fullInv == False):
                         #Place a block
                         bph.blockPlace(pygame.mouse.get_pos()+camera.getOffsets(), worldBlocks, player) #place the block
                         

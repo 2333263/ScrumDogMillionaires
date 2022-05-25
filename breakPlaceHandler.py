@@ -49,6 +49,8 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
         pos = gs.getPos(python_pos)
         found = False
         for block in world_block:
+            if(block.itemID == 25):
+                gs.endGamePos = block.blockPosition
             if block.blockPosition == pos:
                 if(block.itemID in gs.clickableBlocks):
                     if(gs.drawCrafting):

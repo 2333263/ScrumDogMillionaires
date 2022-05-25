@@ -18,6 +18,8 @@ height = 1080
 drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]
 
+endGamePos = [-1, -1]
+
 #Moved to GS for global access
 def getPos(pos): #Takes in pygame position coordinates returns block coordinates based system ---> returns block_size*floor(pyPos/block_size) tuple transform
     pos = blockSize*math.floor(pos[0]/blockSize),blockSize*math.floor(pos[1]/blockSize)
@@ -202,7 +204,7 @@ textureNames = {
     "Emerald Block" : "Textures/Blocks/emerald_block.png",
     "Gold Block" : "Textures/Blocks/gold_block.png",
     "End Game Block" : "Textures/Blocks/end_game_block.png",
-    
+
     #ITEMS:
     "Charcoal" : "Textures/Items/charcoal.png",
     "Diamond" : "Textures/Items/diamond.png",
