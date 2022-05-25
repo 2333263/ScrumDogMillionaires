@@ -1,7 +1,7 @@
 import random
 import math
 levelName = "random"
-seed = random.randint(-10000, 10000) #-107
+seed = random.randint(-10000, 10000) #-107, -8801
 octaves = 1
 
 with open('Levels/' + levelName + '.txt') as f:
@@ -12,12 +12,13 @@ blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (po
 playerRange = 7
 noXBlocks = 128
 noYBlocks = int(9/16 * noXBlocks)
-width = 1920
-height = 1080
+width = 1280
+height = 720
 
 drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]
 
+endGamePlaced = False
 endGamePos = [-1, -1]
 
 #Moved to GS for global access

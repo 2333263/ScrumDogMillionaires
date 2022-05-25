@@ -7,17 +7,18 @@ import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
 import menuHandler as  mh
+import EndGameHandler as egh
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
-
 
 screen = pygame.display.set_mode((gs.width, gs.height))
 pygame.display.set_caption("2D Minecraft")
 
 #Game runing variable
 gameRunning = True
+
 
 color_light = (250,250,250) #colour of button when hover over
 color_dark = (64,64,64) #colour of button- default
@@ -32,11 +33,16 @@ pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to pag
 infoPage = pygame.image.load("Textures/Screens/gameInfo.png") #load image for information screen
 infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit to page
 
+portal = pygame.image.load("Textures/Screens/portal.png") #load image for information screen
+portal = pygame.transform.scale(portal, (500, 500)) #fit to page
+
+
 inv.initGroup()
         
 #main game loop:
 def gameMenu():
     gameRunning=True
+    
     #Array to keep track of all the blocks in the world
     worldBlocks = getBlocks(gs.levelName)
     collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
@@ -68,8 +74,12 @@ def gameMenu():
             # 4 -- scroll up
             # 5 -- scroll down
             if events.type == pygame.MOUSEBUTTONDOWN:
+                
                 #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
                 if events.button == 1:
+
+                    
+                
                     if(gs.drawCrafting):
                         crafter.checkClick(pygame.mouse.get_pos()) 
                         crafter.makeItem(pygame.mouse.get_pos())
@@ -85,7 +95,9 @@ def gameMenu():
                 elif(not gs.drawCrafting):
                     if (events.button == 3 and inv.fullInv == False):
                         #Place a block
-                        bph.blockPlace(pygame.mouse.get_pos()+camera.getOffsets(), worldBlocks, player) #place the block
+                        
+                        bph.blockPlace(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player) #place the block
+                        
                         
                     #Scroll UP to select next item in hotbar
                     elif events.button == 4:
@@ -161,7 +173,13 @@ def gameMenu():
         #Draw cursor only if block is within interactable range (place/break)
         if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize:
             screen.blit(blockFrame, blockPos)
+        
+        egh.CheckEndGame(screen, portal)
 
+        if(not gs.endGamePlaced):
+            
+            gs.endGamePlaced = True
+        
         if(gs.drawCrafting):
             crafter.makeScreen()  
         else:
