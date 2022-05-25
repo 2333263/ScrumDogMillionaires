@@ -181,6 +181,31 @@
         [21, 21, 21,
          21, 21, 21,
          21, 21, 21]
+    },
+    {
+        "craftingID" : 10,
+        "toolName" : "End Game Block",
+        "itemID" : 25,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 24,
+                "numBlocks" : 4
+            },
+            {
+                "itemID" : 22,
+                "numBlocks" : 4
+            },
+            {
+                "itemID" : 23,
+                "numBlocks" : 1
+            }
+        ],
+        "shape":
+        [24, 22, 24,
+         22, 23, 22,
+         24, 22, 24]
     }
    
 
