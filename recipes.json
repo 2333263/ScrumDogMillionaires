@@ -130,6 +130,24 @@
         [-1, -1, -1,
          -1, 15, -1,
          -1, -1, -1]
+    },
+    {
+        "craftingID" : 7,
+        "toolName" : "Diamond Block",
+        "itemID" : 22,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 19,
+                "numBlocks" : 9
+            }
+        ],
+        "shape":
+        [19, 19, 19,
+         19, 19, 19,
+         19, 19, 19]
     }
+   
 
 ]

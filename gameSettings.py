@@ -12,8 +12,8 @@ blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (po
 playerRange = 7
 noXBlocks = 128
 noYBlocks = int(9/16 * noXBlocks)
-width = 1280
-height = 720
+width = 1920
+height = 1080
 
 drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]
@@ -53,7 +53,8 @@ itemIDs = {
     18 : "Emerald Ore",
     19 : "Diamond",
     20 : "Emerald",
-    21 : "Gold Ingot"
+    21 : "Gold Ingot",
+    22 : "Diamond Block"
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
@@ -76,7 +77,8 @@ blockHardness = {
     15 : 15,
     16 : 0, #15
     17 : 999,
-    18 : 20
+    18 : 20,
+    22 : 20
 }
 #dictionary of tool hardness (strength) correlating to order of itemID dictionary
 itemHardness = {
@@ -124,7 +126,8 @@ isPlaceable = {
     18 : True,
     19 : False,
     20 : False,
-    21 : False
+    21 : False,
+    22 : True
 }
 
 
@@ -138,7 +141,8 @@ craftingIDs = {
     3 : "Stone Shovel",
     4 : "Diamond",
     5 : "Emerald",
-    6 : "Gold Ingot"
+    6 : "Gold Ingot",
+    7 : "Diamond Block"
 }
 
 converterIDs = {
@@ -154,7 +158,8 @@ converterIDs = {
     "I" : 14, #Iron Ore
     "A" : 15, #Gold Ore
     "M" : 16, #Diamond Ore
-    "E" : 18 #Emerald Ore
+    "E" : 18, #Emerald Ore
+    "O" : 22 #Diamond Block
 }
 
 textureNames = {
@@ -178,6 +183,7 @@ textureNames = {
     "Emerald Ore" : "Textures/Blocks/emerald_ore.png",
     "Twig Leaves" : "Textures/Blocks/leaves_twig.png",
     "Stone Bricks" : "Textures/Blocks/stone_bricks.png",
+    "Diamond Block" :  "Textures/Blocks/diamond_block.png",
 
     #ITEMS:
     "Charcoal" : "Textures/Items/charcoal.png",
