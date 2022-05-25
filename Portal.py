@@ -12,7 +12,7 @@ class Portal(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
         self.rect.x = blockPosition[0] - 0.4 * blockSize
-        self.rect.y = blockPosition[1] -   blockSize
+        self.rect.y = blockPosition[1] -  blockSize
 
         self.image = pygame.transform.scale(self.image, (blockSize, blockSize))
         

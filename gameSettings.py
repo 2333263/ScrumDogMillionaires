@@ -1,7 +1,7 @@
 import random
 import math
 levelName = "random"
-seed = -8801 #-107, -8801 random.randint(-10000, 10000)
+seed = random.randint(-10000, 10000) #-107, -8801 
 octaves = 1
 
 with open('Levels/' + levelName + '.txt') as f:
