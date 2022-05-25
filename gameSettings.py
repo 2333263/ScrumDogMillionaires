@@ -54,7 +54,9 @@ itemIDs = {
     19 : "Diamond",
     20 : "Emerald",
     21 : "Gold Ingot",
-    22 : "Diamond Block"
+    22 : "Diamond Block",
+    23 : "Emerald Block",
+    24 : "Gold Block"
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
@@ -78,7 +80,9 @@ blockHardness = {
     16 : 0, #15
     17 : 999,
     18 : 20,
-    22 : 20
+    22 : 20,
+    23 : 20,
+    24 : 20
 }
 #dictionary of tool hardness (strength) correlating to order of itemID dictionary
 itemHardness = {
@@ -142,7 +146,9 @@ craftingIDs = {
     4 : "Diamond",
     5 : "Emerald",
     6 : "Gold Ingot",
-    7 : "Diamond Block"
+    7 : "Diamond Block",
+    8 : "Emerald Block",
+    9 : "Gold Block"
 }
 
 converterIDs = {
@@ -159,7 +165,9 @@ converterIDs = {
     "A" : 15, #Gold Ore
     "M" : 16, #Diamond Ore
     "E" : 18, #Emerald Ore
-    "O" : 22 #Diamond Block
+    "O" : 22, #Diamond Block
+    "R" : 23, #Emerald Block
+    "H" : 24 #Gold Block
 }
 
 textureNames = {
@@ -184,7 +192,8 @@ textureNames = {
     "Twig Leaves" : "Textures/Blocks/leaves_twig.png",
     "Stone Bricks" : "Textures/Blocks/stone_bricks.png",
     "Diamond Block" :  "Textures/Blocks/diamond_block.png",
-
+    "Emerald Block" : "Textures/Blocks/emerald_block.png",
+    "Gold Block" : "Textures/Blocks/gold_block.png",
     #ITEMS:
     "Charcoal" : "Textures/Items/charcoal.png",
     "Diamond" : "Textures/Items/diamond.png",

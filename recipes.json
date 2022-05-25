@@ -147,6 +147,40 @@
         [19, 19, 19,
          19, 19, 19,
          19, 19, 19]
+    },
+    {
+        "craftingID" : 8,
+        "toolName" : "Emerald Block",
+        "itemID" : 23,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 20,
+                "numBlocks" : 9
+            }
+        ],
+        "shape":
+        [20, 20, 20,
+         20, 20, 20,
+         20, 20, 20]
+    },
+    {
+        "craftingID" : 8,
+        "toolName" : "Gold Block",
+        "itemID" : 24,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 21,
+                "numBlocks" : 9
+            }
+        ],
+        "shape":
+        [21, 21, 21,
+         21, 21, 21,
+         21, 21, 21]
     }
    
 
