@@ -185,7 +185,7 @@ class TestPlayer(unittest.TestCase):
       self.assertEqual(self.TempPlayer.jumped,False)
       self.TempPlayer.jump()
       self.assertEqual(self.TempPlayer.jumped,True)
-      self.assertEqual(self.TempPlayer.direction.y,-2)
+      self.assertEqual(self.TempPlayer.direction.y,-2.5)
       self.TempPlayer.jumped=False
 
    def test_jumping_acceleration(self):
