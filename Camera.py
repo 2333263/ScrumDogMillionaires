@@ -51,7 +51,7 @@ class Camera(pygame.sprite.Group):
                 return True
         return False
     def isOnScreen(self,block): #checks if block is close enough to player to be visible on screen to save compute time by not drawing objects that are outside the viewable window
-        if(abs(block.rect.x-self.Player.rect.x)/gs.blockSize<=gs.noXBlocks/1.5):
-            if(abs(block.rect.y-self.Player.rect.y)/gs.blockSize<=gs.noXBlocks/2):
+        if(abs(block.rect.x-self.Player.rect.x)/gs.blockSize<=gs.CHUNK_SIZE[0]/1.5):
+            if(abs(block.rect.y-self.Player.rect.y)/gs.blockSize<=gs.CHUNK_SIZE[0]/2):
                 return True
         return False

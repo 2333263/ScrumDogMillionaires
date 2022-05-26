@@ -1,19 +1,18 @@
 import pygame
 import gameSettings as gs
-from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
 import menuHandler as  mh
-
+from ChunkGenerator import generateChunk
+from ChunkHandler import checkChunkUpdates
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
 
-
-screen = pygame.display.set_mode((gs.width, gs.height))
+screen = pygame.display.set_mode((gs.width, gs.height), vsync=1)
 pygame.display.set_caption("2D Minecraft")
 
 #Game runing variable
@@ -34,13 +33,31 @@ infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit 
 
 inv.initGroup()
         
+
+def playMusic():
+    # Loading and playing a sound effect:
+    #soundObj = pygame.mixer.Sound('')
+
+    #soundObj.play()
+    # Loading and playing background music:
+
+    pygame.mixer.music.load('SelfExploration.wav')
+    pygame.mixer.music.play(-1, 0.0) #-1 makes the track loop infintely, play from 0th second
+
 #main game loop:
 def gameMenu():
     gameRunning=True
-    #Array to keep track of all the blocks in the world
-    worldBlocks = getBlocks(gs.levelName)
-    collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
+    #Array to keep track of all the blocks aaaaa in the world
+ 
+    worldBlocks = pygame.sprite.Group()
 
+    collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
+    
+    gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], worldBlocks)
+    gs.generatedChunks[0] = generateChunk(0, worldBlocks)
+    gs.generatedChunks[1] = generateChunk(gs.CHUNK_SIZE[0], worldBlocks)
+
+     
     #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
     # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
     player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.blockSize*6), gs.blockSize)
@@ -132,7 +149,7 @@ def gameMenu():
             #update the player position
             player.update(clock.tick(),  collisionblocks)
 
-        
+
         #Font to draw the FPS
         font = pygame.font.Font('Minecraft.ttf', 16)
         fpsText = font.render("FPS: "+str(int(clock.get_fps())), 1, (255, 255, 255))
@@ -158,15 +175,16 @@ def gameMenu():
         #Calculate final position
         blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \
                    gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
-        #Draw cursor only if block is within interactable range (place/break)
-        if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize:
+        #Draw cursor only if block is within interactable range (place/break) and not on top of player
+        if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize and gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets())>0.8*gs.blockSize and  gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()-[0,gs.blockSize])>0.8*gs.blockSize:
             screen.blit(blockFrame, blockPos)
 
         if(gs.drawCrafting):
             crafter.makeScreen()  
         else:
             crafter.resetTable()
-        
+
+        checkChunkUpdates(player, worldBlocks)
 
         #Finally update the  screen with all the above changes     
         pygame.display.update()
@@ -174,9 +192,11 @@ def gameMenu():
     
 while gameRunning:
     #start screen
+    playMusic()
     clock.tick(60) #Sets the frame to update 60 times a second
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
+            pygame.mixer.music.stop() #stops the music player
             gameRunning = False
         if events.type == pygame.MOUSEBUTTONDOWN: 
               
@@ -231,8 +251,10 @@ while gameRunning:
     screen.blit(exitButtonText , (gs.width/2-75,gs.height/2+225)) # display text on exit button 
     screen.blit(startButtonText , (gs.width/2-85,gs.height/2+75)) # display text on start button 
       
-    pygame.display.update()
+    pygame.display.flip()
 
+
+    
 
 
     

@@ -20,9 +20,10 @@ class Player(pygame.sprite.Sprite):
         self.image=Image
         #declare a change in direction vector
         self.direction=pygame.math.Vector2(0.0,0.0)
-        self.gravity = 1
+        self.gravity = 2
         #save a copy of the sprite for later
         self.character=Image
+        self.y_momentum=0
         self.keys={}
 
     def getPlayerPos(self):
@@ -60,55 +61,66 @@ class Player(pygame.sprite.Sprite):
         #if the player is not moving in the y direction
         if(self.direction.y==0):
             #set the change of direction to -3 in the y direction (ie go up by 3 places)
-            self.direction.y=-2
+            self.direction.y=-2.5
             #set jump to true
             self.jumped=True
 
     def jumpArc(self):
         #add 1/15th of gravity to the current change in direction (this causes an arc when jumping)
-        self.direction.y+=self.gravity/15
+        self.direction.y+=self.gravity/20
         #when the player reaches his arc set jumped to false so normal gravity functions
         if(math.floor(self.direction.y)==0):
             self.jumped=False
+            
+    def collided(self,blocks):
+        collide_list=[]
+        for block in blocks: #checks all nearby blocks
+            if self.rect.colliderect(block): #uses sprite grpup collide
+                 collide_list.append(block)
+        return   collide_list
+        
 
-
-    def update(self, dt, allBlocks):
+    def update(self, dt, blocks):
         #if the player is jumping use the jump arc gravity instead of normal gravity
         if(self.jumped==True):
             self.jumpArc()
         else:
             #otherwise use normal gravity
             self.useGravity()
-        # #check if there are any collisions
+      #shift rect to moved pos on x
+        self.rect.x+=self.direction.x
+        #gets a list of blocks that collide with player sprite
+        collide_list=self.collided(blocks)
 
-        for block in allBlocks:
-            #this bit checks to see if the player is standing on any blocks, we use floor and ceiling to ensure that it works even if the player is between 2 blocks, but only if theyre not jumping
-            if(not self.jumped and math.floor((self.rect.y+2*gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize):
-                if(math.floor(self.rect.x/gs.blockSize)==block.blockPosition[0]/gs.blockSize or math.ceil(self.rect.x / gs.blockSize)==block.blockPosition[0]/gs.blockSize) :
-                    self.direction.y=0  #blocks below
-                #checks to see if theyre at a world border
-           # elif(self.rect.x < 0 and self.direction.x < 0 or self.rect.x + gs.blockSize > gs.width and self.direction.x > 0): #world borders
-                    #self.direction.y=0
-            #        self.direction.x=0
-            #checks to see if there are any collisions to the left or right of the player
-            if(self.direction.x>0 and self.rect.x+gs.blockSize==block.blockPosition[0] or self.direction.x<0 and self.rect.x==block.blockPosition[0]+gs.blockSize):
-                if(math.floor(self.rect.y/gs.blockSize)==block.blockPosition[1]/gs.blockSize or math.ceil(self.rect.y / gs.blockSize)==block.blockPosition[1]/gs.blockSize
-                or math.floor((self.rect.y+gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize or math.ceil((self.rect.y + gs.blockSize) / gs.blockSize)==block.blockPosition[1]/gs.blockSize):
-                    self.direction.x=0 #blocks left and right
-            #same as first if, but its the blocks above the player when they jump
-            if(self.jumped and math.ceil((self.rect.y)/gs.blockSize)==(block.blockPosition[1] + gs.blockSize)/gs.blockSize):
-                  if(math.floor(self.rect.x/gs.blockSize)==block.blockPosition[0]/gs.blockSize or math.ceil(self.rect.x / gs.blockSize)==block.blockPosition[0]/gs.blockSize) :
-                    self.direction.y=0
-                    self.jumped=False
-
-       
+        for block in collide_list:
+                if self.direction.x>0: # if moving right
+                    self.rect.right=block.rect.left #collide with block on right
+                    self.direction.x=0 #no movement on x
+                    
+                    
+                elif self.direction.x<0:# if moving left
+                    self.rect.left=block.rect.right #collide with block on left
+                    self.direction.x=0 #no movement on x
+        #shift rect to moved pos on y
+        self.rect.y+=self.direction.y
+        #gets a list of blocks that collide with plater sprite
+        collide_list=self.collided(blocks)
+        for block in collide_list:
+                if self.direction.y>0:  # if moving down
+                    self.rect.bottom=block.rect.top #collide with block on bottom
+                    self.direction.y=0 #no movement on y
+                elif self.direction.y<0: # if moving up
+                    self.rect.top=block.rect.bottom #collide with block on top
+                    self.direction.y=0 #no movement on y
+                    self.jumped=False #no longer jumping
+                
+             
         if(dt>0):
             self.rect.x += self.direction.x * dt
             self.rect.y += self.direction.y * dt
         else:
             self.rect.x += self.direction.x
             self.rect.y += self.direction.y
-        
 
     def stopMoveOnX(self):
         self.direction.x=0
