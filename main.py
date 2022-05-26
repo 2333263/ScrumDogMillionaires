@@ -34,10 +34,8 @@ pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to pag
 infoPage = pygame.image.load("Textures/Screens/gameInfo.png") #load image for information screen
 infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit to page
 
-endPage = pygame.image.load("Textures/Screens/endScreenFinal.png") #load image for information screen
+endPage = pygame.image.load("Textures/Screens/endscreenNorestart.png") #load image for end screen
 endPage = pygame.transform.scale(endPage, (gs.width, gs.height)) #fit to page
-
-
 
 inv.initGroup()
         
@@ -192,30 +190,21 @@ def gameMenu():
         #Calculate final position
         blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \
                    gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
+        
         #Draw cursor only if block is within interactable range (place/break) and not on top of player
         if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize and gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets())>0.8*gs.blockSize and  gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()-[0,gs.blockSize])>0.8*gs.blockSize:
             screen.blit(blockFrame, blockPos)
         
-        #egh.CheckEndGame(screen, portal, camera)
-        if(gs.endGamePos[0] != -1 and not gs.endGamePlaced):
-            tempPortal = po.Portal(150, gs.endGamePos, 26, "Textures/Screens/portal.png", 999)
-            worldBlocks.add(tempPortal)
-            gs.endGamePlaced = True
-        
-        currentX= player.getPlayerPos()[0]
-        currentY=player.getPlayerPos()[1]
-        print(currentX,currentY)
-        
-        if(gs.endGamePos[0] != -1 and gs.endGamePlaced):
-              if(currentX<= gs.endGamePos[0]+2*gs.blockSize and currentX>=gs.endGamePos[0]-2*gs.blockSize and currentY<= gs.endGamePos[1]-1.8*gs.blockSize and currentY>=gs.endGamePos[1]-3*gs.blockSize):
-                  screen.blit(endPage,(0,0) ) #display the information screen
-              
-        
+      
+        if(gs.endGamePos[0] != -1 and gs.drawPortal):
+            mh.endMenu(screen, clock, endPage)
+
+                
         if(gs.drawCrafting):
             crafter.makeScreen()  
         else:
             crafter.resetTable()
-
+        
         checkChunkUpdates(player, worldBlocks)
 
         #Finally update the  screen with all the above changes     

@@ -19,6 +19,7 @@ drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]
 
 endGamePlaced = False
+drawPortal = True
 endGamePos = [-1, -1]
 
 #Moved to GS for global access

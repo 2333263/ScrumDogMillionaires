@@ -53,7 +53,7 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
             if block.blockPosition == pos:
                 if(block.itemID == 25):
                     gs.endGamePos = block.blockPosition
-                    print(gs.endGamePos)
+                    gs.drawPortal = True
                     
 
                 if(block.itemID in gs.clickableBlocks):
