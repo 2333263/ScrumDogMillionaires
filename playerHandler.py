@@ -74,8 +74,8 @@ class Player(pygame.sprite.Sprite):
             
     def collided(self,blocks):
         collide_list=[]
-        for block in blocks:
-            if self.rect.colliderect(block):
+        for block in blocks: #checks all nearby blocks
+            if self.rect.colliderect(block): #uses sprite grpup collide
                  collide_list.append(block)
         return   collide_list
         
@@ -87,30 +87,32 @@ class Player(pygame.sprite.Sprite):
         else:
             #otherwise use normal gravity
             self.useGravity()
-      
+      #shift rect to moved pos on x
         self.rect.x+=self.direction.x
+        #gets a list of blocks that collide with player sprite
         collide_list=self.collided(blocks)
 
         for block in collide_list:
-                if self.direction.x>0:
-                    self.rect.right=block.rect.left
-                    self.direction.x=0
+                if self.direction.x>0: # if moving right
+                    self.rect.right=block.rect.left #collide with block on right
+                    self.direction.x=0 #no movement on x
                     
                     
-                elif self.direction.x<0:
-                    self.rect.left=block.rect.right
-                    self.direction.x=0
-        
+                elif self.direction.x<0:# if moving left
+                    self.rect.left=block.rect.right #collide with block on left
+                    self.direction.x=0 #no movement on x
+        #shift rect to moved pos on y
         self.rect.y+=self.direction.y
+        #gets a list of blocks that collide with plater sprite
         collide_list=self.collided(blocks)
         for block in collide_list:
-                if self.direction.y>0:
-                    self.rect.bottom=block.rect.top
-                    self.direction.y=0
-                elif self.direction.y<0:
-                    self.rect.top=block.rect.bottom
-                    self.direction.y=0
-                    self.jumped=False
+                if self.direction.y>0:  # if moving down
+                    self.rect.bottom=block.rect.top #collide with block on bottom
+                    self.direction.y=0 #no movement on y
+                elif self.direction.y<0: # if moving up
+                    self.rect.top=block.rect.bottom #collide with block on top
+                    self.direction.y=0 #no movement on y
+                    self.jumped=False #no longer jumping
                 
              
         if(dt>0):
