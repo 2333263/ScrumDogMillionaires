@@ -52,7 +52,7 @@ def gameMenu():
     worldBlocks = pygame.sprite.Group()
 
     collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
-    
+
     gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], worldBlocks)
     gs.generatedChunks[0] = generateChunk(0, worldBlocks)
     gs.generatedChunks[1] = generateChunk(gs.CHUNK_SIZE[0], worldBlocks)
@@ -62,6 +62,7 @@ def gameMenu():
     # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
     player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.blockSize*6), gs.blockSize)
     camera=cam.Camera(player)
+    checkChunkUpdates(player, worldBlocks)
 
     #Initilise breaking speed times
     startTime = 0

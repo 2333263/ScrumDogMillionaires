@@ -4,14 +4,14 @@ import random
 seed = random.randint(-10000, 10000)
 octaves = 1
 
-blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
+blockSize = 30 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
 playerRange = 7
 
 width = 1280
 height = 720
 
 generatedChunks = {}
-CHUNK_SIZE = [64, 50]
+CHUNK_SIZE = [32, 50]
 visibleChunks = [-1, 0, 1]
 
 drawCrafting = False
