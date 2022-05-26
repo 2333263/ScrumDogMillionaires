@@ -51,11 +51,17 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
         found = False
         for block in world_block:
             if block.blockPosition == pos:
+                if(block.itemID == 25):
+                    gs.endGamePos = block.blockPosition
+                    print(gs.endGamePos)
+                    
+
                 if(block.itemID in gs.clickableBlocks):
                     if(gs.drawCrafting):
                         gs.drawCrafting = False
                     else:
                         gs.drawCrafting = True
+
                 found = True
         if found == False and gs.distance(player, python_pos)>=1.2*gs.blockSize and  gs.distance(player, python_pos-[0,gs.blockSize])>=1.2*gs.blockSize:
             #Only allow placing if player has more blocks

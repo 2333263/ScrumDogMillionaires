@@ -8,6 +8,8 @@ import CraftingMenu as cm
 import menuHandler as  mh
 from ChunkGenerator import generateChunk
 from ChunkHandler import checkChunkUpdates
+import Portal as po
+
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
@@ -17,6 +19,7 @@ pygame.display.set_caption("2D Minecraft")
 
 #Game runing variable
 gameRunning = True
+
 
 color_light = (250,250,250) #colour of button when hover over
 color_dark = (64,64,64) #colour of button- default
@@ -30,6 +33,11 @@ pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to pag
 
 infoPage = pygame.image.load("Textures/Screens/gameInfo.png") #load image for information screen
 infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit to page
+
+endPage = pygame.image.load("Textures/Screens/endScreenFinal.png") #load image for information screen
+endPage = pygame.transform.scale(endPage, (gs.width, gs.height)) #fit to page
+
+
 
 inv.initGroup()
         
@@ -50,6 +58,7 @@ def gameMenu():
     #Array to keep track of all the blocks aaaaa in the world
  
     worldBlocks = pygame.sprite.Group()
+
 
     collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
 
@@ -73,6 +82,7 @@ def gameMenu():
     
     while gameRunning:
         clock.tick(60) #Sets the frame to update 60 times a second
+        
 
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
@@ -86,8 +96,12 @@ def gameMenu():
             # 4 -- scroll up
             # 5 -- scroll down
             if events.type == pygame.MOUSEBUTTONDOWN:
+                
                 #Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
                 if events.button == 1:
+
+                    
+                
                     if(gs.drawCrafting):
                         crafter.checkClick(pygame.mouse.get_pos()) 
                         crafter.makeItem(pygame.mouse.get_pos())
@@ -101,9 +115,11 @@ def gameMenu():
                     inv.onClick(pygame.mouse.get_pos())
 
                 elif(not gs.drawCrafting):
-                    if (events.button == 3 and inv.fullInv==False):
+                    if (events.button == 3 and inv.fullInv == False):
                         #Place a block
-                        bph.blockPlace(pygame.mouse.get_pos()+camera.getOffsets(), worldBlocks, player) #place the block
+                        
+                        bph.blockPlace(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player) #place the block
+                        
                         
                     #Scroll UP to select next item in hotbar
                     elif events.button == 4:
@@ -179,7 +195,22 @@ def gameMenu():
         #Draw cursor only if block is within interactable range (place/break) and not on top of player
         if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize and gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets())>0.8*gs.blockSize and  gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()-[0,gs.blockSize])>0.8*gs.blockSize:
             screen.blit(blockFrame, blockPos)
-
+        
+        #egh.CheckEndGame(screen, portal, camera)
+        if(gs.endGamePos[0] != -1 and not gs.endGamePlaced):
+            tempPortal = po.Portal(150, gs.endGamePos, 26, "Textures/Screens/portal.png", 999)
+            worldBlocks.add(tempPortal)
+            gs.endGamePlaced = True
+        
+        currentX= player.getPlayerPos()[0]
+        currentY=player.getPlayerPos()[1]
+        print(currentX,currentY)
+        
+        if(gs.endGamePos[0] != -1 and gs.endGamePlaced):
+              if(currentX<= gs.endGamePos[0]+2*gs.blockSize and currentX>=gs.endGamePos[0]-2*gs.blockSize and currentY<= gs.endGamePos[1]-1.8*gs.blockSize and currentY>=gs.endGamePos[1]-3*gs.blockSize):
+                  screen.blit(endPage,(0,0) ) #display the information screen
+              
+        
         if(gs.drawCrafting):
             crafter.makeScreen()  
         else:
