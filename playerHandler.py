@@ -1,8 +1,10 @@
 import pygame
 import gameSettings as gs
 import math
+from soundHandler import playSoundforID
 
 class Player(pygame.sprite.Sprite):
+    
     def __init__(self,pos,size):
         #Any reference to playerPos or player.pos is deprecated, please use player.getPlayerPos() instead. This returns a tuple of x and y coordinates.
         super().__init__()
@@ -30,6 +32,7 @@ class Player(pygame.sprite.Sprite):
         return self.rect.x, self.rect.y
 
 
+    
     def MoveOnX(self,fakeKeys):
         #gets a list of all keys currently being pressed
         if(len(fakeKeys)==0):
@@ -108,6 +111,8 @@ class Player(pygame.sprite.Sprite):
         for block in collide_list:
                 if self.direction.y>0:  # if moving down
                     self.rect.bottom=block.rect.top #collide with block on bottom
+
+                    playSoundforID(block.itemID)
                     self.direction.y=0 #no movement on y
                 elif self.direction.y<0: # if moving up
                     self.rect.top=block.rect.bottom #collide with block on top
