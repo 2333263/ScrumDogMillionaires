@@ -29,6 +29,7 @@ def distance(player, python_pos): #Takes in player position and coords and retur
     blockPos = getPos(python_pos)
     return math.sqrt(pow((playerPos[0] - blockPos[0]), 2) + (pow((playerPos[1] - blockPos[1]), 2)))
 
+#dictionary of all block types
 itemIDs = {
    -1: "null",
     0 : "Grass",
@@ -49,7 +50,7 @@ itemIDs = {
     15 : "Gold Ore",
     16 : "Diamond Ore"
 }
-
+#dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
      -1: 0,
     0 : 0,
@@ -70,9 +71,9 @@ blockHardness = {
     15 : 15,
     16 : 20
 }
-
+#dictionary of tool hardness (strength) correlating to order of itemID dictionary
 itemHardness = {
-    -1: 0,
+    -1: 0, #is a block, therefore has hardeness 0
     0 : 0,
     1 : 0,
     2 : 0,
@@ -83,11 +84,13 @@ itemHardness = {
     7 : 0,
     8 : 0,
     9 : 0,
-    10 : 10,
-    11 : 20,
-    12 : 20
+    10 : 10, #tool with hardness level 10
+    11 : 20, #tool
+    12 : 20 #tool
 }
-
+#dictionary controling whether an item can be placed into the world
+#tools and ore cannot be placed into the world
+#blocks can be pplaced into the world
 isPlaceable = {
      -1: False,
     0 : True,
@@ -212,5 +215,5 @@ textureNames = {
     "Sky" : "Textures/Screens/sky.png",
     "Crafting Background" : "Textures/Screens/CraftingMenu.png"
 }
-immovableBlocks = [3, 5]
+immovableBlocks = [3, 5] #list used to store itemIDs of blocks that cannot be moved
 clickableBlocks = [5]

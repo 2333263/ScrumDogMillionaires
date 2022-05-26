@@ -10,8 +10,8 @@ class Item:
         self.amount = 0
         self.texture=pygame.image.load(gs.textureNames[self.itemName])'''
 
-    def __init__(self, *args):
-
+    def __init__(self, *args):# a special constructor that creates items dynmically based on input
+                                #option1: blocks opion2: tools/ore
         #When 2 args are given item(itemName, itemId)
         #Placeable item, blocks only (e.g. stone or bed)
         if len(args) == 2:
@@ -39,14 +39,14 @@ class Item:
     def getItemId(self):
         return self.itemID
 
-    def increase(self):
+    def increase(self):     #used to update item count when placing/breaking blocks
         self.amount += 1
 
-    def decrease(self):
+    def decrease(self):     #used to update item count when placing/breaking blocks
         self.amount -= 1
     
-    def getCount(self):
+    def getCount(self):    #returns the number of the item
         return self.amount
 
-    def getHardness(self): 
+    def getHardness(self): #returns the hardness level of the block. which is used in breakPlaceHandler.py
         return self.hardness
