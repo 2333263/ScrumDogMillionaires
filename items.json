@@ -44,14 +44,15 @@
             "sword" : "",
 
         "The fifth and final variable will be toolType, as implied, this will be the type of tool a given item is specified as, used to compare with reqToolType" : "",
+        "Ignore the / in front of axe, pickaxe, shovel, hoe and sword, just was tired of json error saying there were dupilcates" : "",
 
             "null: reserved for the null item, do not use this." : "",
             "none: reserved for items that are not explicitely tools." : "",
-            "axe" : "",
-            "pickaxe" : "",
-            "shovel" : "",
-            "hoe" : "",
-            "sword" : ""
+            "/axe" : "",
+            "/pickaxe" : "",
+            "/shovel" : "",
+            "/hoe" : "",
+            "/sword" : ""
     
     
 }
