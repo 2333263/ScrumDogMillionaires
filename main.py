@@ -8,6 +8,7 @@ import CraftingMenu as cm
 import menuHandler as  mh
 from ChunkGenerator import generateChunk
 from ChunkHandler import checkChunkUpdates
+from soundHandler import playMusic
 import Portal as po
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
@@ -38,17 +39,8 @@ endPage = pygame.image.load("Textures/Screens/endscreenNorestart.png") #load ima
 endPage = pygame.transform.scale(endPage, (gs.width, gs.height)) #fit to page
 
 inv.initGroup()
-        
-
-def playMusic():
-    # Loading and playing a sound effect:
-    #soundObj = pygame.mixer.Sound('')
-
-    #soundObj.play()
-    # Loading and playing background music:
-
-    pygame.mixer.music.load('SelfExploration.wav')
-    pygame.mixer.music.play(-1, 0.0) #-1 makes the track loop infintely, play from 0th second
+# Loading and playing a sound effect:
+playMusic()
 
 #main game loop:
 def gameMenu():
@@ -210,10 +202,9 @@ def gameMenu():
         #Finally update the  screen with all the above changes     
         pygame.display.update()
 
-    
+
 while gameRunning:
     #start screen
-    playMusic()
     clock.tick(60) #Sets the frame to update 60 times a second
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
