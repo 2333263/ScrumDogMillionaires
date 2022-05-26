@@ -7,6 +7,7 @@ import Camera as cam
 import CraftingMenu as cm
 import menuHandler as  mh
 from ChunkGenerator import generateChunk
+from ChunkHandler import checkChunkUpdates
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
@@ -35,17 +36,17 @@ inv.initGroup()
 #main game loop:
 def gameMenu():
     gameRunning=True
-    #Array to keep track of all the blocks in the world
+    #Array to keep track of all the blocks aaaaa in the world
  
     worldBlocks = pygame.sprite.Group()
 
     collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
     
-    
+    gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], worldBlocks)
+    gs.generatedChunks[0] = generateChunk(0, worldBlocks)
+    gs.generatedChunks[1] = generateChunk(gs.CHUNK_SIZE[0], worldBlocks)
 
-    for i in range(-5, 5, 1):
-        gs.generatedChunks[i] = generateChunk(64 * i, worldBlocks)
-
+     
     #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
     # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
     player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.blockSize*6), gs.blockSize)
@@ -171,8 +172,8 @@ def gameMenu():
             crafter.makeScreen()  
         else:
             crafter.resetTable()
-        
-        print(player.rect.x//gs.blockSize)
+
+        checkChunkUpdates(player, worldBlocks)
 
         #Finally update the  screen with all the above changes     
         pygame.display.update()

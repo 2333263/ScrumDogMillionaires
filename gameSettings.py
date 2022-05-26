@@ -4,7 +4,7 @@ levelName = "random"
 seed = 69 #random.randint(-10000, 10000)
 octaves = 1
 
-generatedChunks = {}
+
 
 blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
 playerRange = 7
@@ -13,7 +13,9 @@ noYBlocks = int(9/16 * noXBlocks)
 width = 1280
 height = 720
 
+generatedChunks = {}
 CHUNK_SIZE = [int(width/blockSize), noYBlocks]
+visibleChunks = [-1, 0, 1]
 
 drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]

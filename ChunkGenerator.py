@@ -94,7 +94,6 @@ def generateChunk(generatePos, worldBlocks):
 
     worldGroup = getWorldSprites(world, generatePos)
 
-    for b in worldGroup:
-        worldBlocks.add(b)
+    worldBlocks.add(worldGroup)
     
     return worldGroup
