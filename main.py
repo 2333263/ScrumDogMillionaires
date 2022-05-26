@@ -1,13 +1,12 @@
 import pygame
 import gameSettings as gs
-from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
 import menuHandler as  mh
-
+from ChunkGenerator import generateChunk
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
@@ -33,13 +32,19 @@ infoPage = pygame.image.load("Textures/Screens/gameInfo.png") #load image for in
 infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit to page
 
 inv.initGroup()
-        
+     
 #main game loop:
 def gameMenu():
     gameRunning=True
     #Array to keep track of all the blocks in the world
-    worldBlocks = getBlocks(gs.levelName)
+ 
+    worldBlocks = pygame.sprite.Group()
+
     collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
+    spawnChunk = generateChunk(0, worldBlocks)
+    currentChunk = generateChunk(64, worldBlocks)
+    # generateChunk(-64, worldBlocks)
+    #generateChunk(-128 - 64, worldBlocks)
 
     #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
     # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
@@ -132,7 +137,7 @@ def gameMenu():
             #update the player position
             player.update(clock.tick(),  collisionblocks)
 
-        
+
         #Font to draw the FPS
         font = pygame.font.Font('Minecraft.ttf', 16)
         fpsText = font.render("FPS: "+str(int(clock.get_fps())), 1, (255, 255, 255))

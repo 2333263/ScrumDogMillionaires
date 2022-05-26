@@ -1,11 +1,9 @@
 import random
 import math
 levelName = "random"
-seed = random.randint(-10000, 10000)
+seed = 69 #random.randint(-10000, 10000)
 octaves = 1
 
-with open('Levels/' + levelName + '.txt') as f:
-    levelArray = f.readlines()
 
 
 blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
@@ -14,6 +12,8 @@ noXBlocks = 128
 noYBlocks = int(9/16 * noXBlocks)
 width = 1280
 height = 720
+
+CHUNK_SIZE = [int(width/blockSize), noYBlocks]
 
 drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]
