@@ -6,16 +6,13 @@ import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
 import menuHandler as  mh
-<<<<<<< Updated upstream
 from ChunkGenerator import generateChunk
 from ChunkHandler import checkChunkUpdates
-=======
 import itemHandler as ih
 
 #Init itemHandler dictionaries
 ih.populateDictionaries()
 
->>>>>>> Stashed changes
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
