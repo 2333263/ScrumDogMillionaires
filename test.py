@@ -195,7 +195,7 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.direction.y=-5
       #testing if the grabity acceleration changes 
       self.TempPlayer.jumpArc()
-      self.assertEqual(self.TempPlayer.direction.y,-5+1/15)
+      self.assertEqual(self.TempPlayer.direction.y,-5+self.TempPlayer.gravity/20)
       self.TempPlayer.direction.y=0
 #NEED TO BE REWRITTEN 
    # def test_update(self):
