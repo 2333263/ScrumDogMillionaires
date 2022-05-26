@@ -417,7 +417,7 @@ class TestInventoryHandler(unittest.TestCase):
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
-   pygame.display.set_mode((1280, 720))
+   #pygame.display.set_mode((1280, 720))
    screen = pygame.Surface((gs.blockSize, gs.blockSize))
    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
    tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
