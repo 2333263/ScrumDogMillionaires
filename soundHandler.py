@@ -1,7 +1,7 @@
 import pygame
 pygame.mixer.init()
-grassSound = pygame.mixer.Sound("Sound Effects\minecraft-grass-walking-sound-effect.mp3")
-stoneSound = pygame.mixer.Sound("Sound Effects\stonesound.mp3")
+grassSound = pygame.mixer.Sound("Sound Effects\grass3.ogg")
+stoneSound = pygame.mixer.Sound("Sound Effects\stone1.ogg")
 def playMusic():
     
     #soundObj.play()
