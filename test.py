@@ -235,13 +235,13 @@ class TestPlayer(unittest.TestCase):
       tempPosX=self.TempPlayer.rect.x
       tempPosY=self.TempPlayer.rect.y
       self.TempPlayer.update(0,tempGroup)
-      self.assertEqual(self.TempPlayer.rect.y,tempPosY+2)
-      self.assertEqual(self.TempPlayer.rect.x,tempPosX+2)
+      self.assertEqual(self.TempPlayer.rect.y,tempPosY+1)
+      self.assertEqual(self.TempPlayer.rect.x,tempPosX+1)
       self.TempPlayer.rect.x=tempPosX
       self.TempPlayer.rect.y=tempPosY
       self.TempPlayer.update(2,tempGroup)
-      self.assertEqual(self.TempPlayer.rect.y,tempPosY+3)
-      self.assertEqual(self.TempPlayer.rect.x,tempPosX+3)
+      self.assertEqual(self.TempPlayer.rect.y,tempPosY+2)
+      self.assertEqual(self.TempPlayer.rect.x,tempPosX+2)
 
    def test_StopOnX(self):
       self.TempPlayer.stopMoveOnX()
@@ -307,11 +307,11 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.playerRange, int)
       self.assertGreaterEqual(gs.playerRange, 1)
 
-      self.assertIsInstance(gs.noXBlocks, int)
-      self.assertGreaterEqual(gs.noXBlocks, 1)
+     # self.assertIsInstance(gs.noXBlocks, int)
+      #self.assertGreaterEqual(gs.noXBlocks, 1)
 
-      self.assertIsInstance(gs.noYBlocks, int)
-      self.assertGreaterEqual(gs.noYBlocks, 1)
+     # self.assertIsInstance(gs.noYBlocks, int)
+     # self.assertGreaterEqual(gs.noYBlocks, 1)
 
       self.assertIsInstance(gs.width, int)
       self.assertGreaterEqual(gs.width, 1)
@@ -424,7 +424,7 @@ class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
    #pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
-   screen = pygame.Surface((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+   screen = pygame.Surface((gs.blockSize, gs.blockSize))
    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
    tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
    tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
