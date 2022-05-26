@@ -34,6 +34,17 @@ infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit 
 
 inv.initGroup()
         
+
+def playMusic():
+    # Loading and playing a sound effect:
+    #soundObj = pygame.mixer.Sound('')
+
+    #soundObj.play()
+    # Loading and playing background music:
+
+    pygame.mixer.music.load('SelfExploration.wav')
+    pygame.mixer.music.play(-1, 0.0) #-1 makes the track loop infintely, play from 0th second
+
 #main game loop:
 def gameMenu():
     gameRunning=True
@@ -174,9 +185,11 @@ def gameMenu():
     
 while gameRunning:
     #start screen
+    playMusic()
     clock.tick(60) #Sets the frame to update 60 times a second
     for events in pygame.event.get():    
         if events.type == pygame.QUIT:
+            pygame.mixer.music.stop() #stops the music player
             gameRunning = False
         if events.type == pygame.MOUSEBUTTONDOWN: 
               
@@ -233,6 +246,8 @@ while gameRunning:
       
     pygame.display.update()
 
+
+    
 
 
     
