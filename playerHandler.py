@@ -1,7 +1,7 @@
 import pygame
 import gameSettings as gs
 import math
-from soundHandler import playSoundforID
+#from soundHandler import playSoundforID
 
 class Player(pygame.sprite.Sprite):
     
@@ -118,7 +118,7 @@ class Player(pygame.sprite.Sprite):
                 if self.direction.y>0:  # if moving down
                     self.rect.bottom=block.rect.top #collide with block on bottom
 
-                    playSoundforID(block.itemID)
+                    #playSoundforID(block.itemID)
                     self.direction.y=0 #no movement on y
                 elif self.direction.y<0: # if moving up
                     self.rect.top=block.rect.bottom #collide with block on top
