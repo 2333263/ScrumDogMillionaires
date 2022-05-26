@@ -4,6 +4,12 @@ import random
 seed = random.randint(-10000, 10000)
 octaves = 1
 
+<<<<<<< Updated upstream
+=======
+with open('Levels/' + levelName + '.txt') as f:
+    levelArray = f.readlines()
+
+>>>>>>> Stashed changes
 blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
 playerRange = 7
 
