@@ -91,7 +91,10 @@ class Player(pygame.sprite.Sprite):
             #otherwise use normal gravity
             self.useGravity()
       #shift rect to moved pos on x
-        self.rect.x+=self.direction.x
+        if(dt>0):
+            self.rect.x += self.direction.x * dt
+        else:
+            self.rect.x+=self.direction.x
         #gets a list of blocks that collide with player sprite
         collide_list=self.collided(blocks)
 
@@ -105,7 +108,10 @@ class Player(pygame.sprite.Sprite):
                     self.rect.left=block.rect.right #collide with block on left
                     self.direction.x=0 #no movement on x
         #shift rect to moved pos on y
-        self.rect.y+=self.direction.y
+        if(dt>0):
+            self.rect.y += self.direction.y * dt
+        else:
+            self.rect.y+=self.direction.y
         #gets a list of blocks that collide with plater sprite
         collide_list=self.collided(blocks)
         for block in collide_list:
@@ -118,14 +124,6 @@ class Player(pygame.sprite.Sprite):
                     self.rect.top=block.rect.bottom #collide with block on top
                     self.direction.y=0 #no movement on y
                     self.jumped=False #no longer jumping
-                
-             
-        if(dt>0):
-            self.rect.x += self.direction.x * dt
-            self.rect.y += self.direction.y * dt
-        else:
-            self.rect.x += self.direction.x
-            self.rect.y += self.direction.y
 
     def stopMoveOnX(self):
         self.direction.x=0
