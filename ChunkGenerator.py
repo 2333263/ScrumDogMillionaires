@@ -5,7 +5,6 @@ import random
 import pygame
 from block import Block
 
-
 def drawOre(world, x, y, ore):
     xChange = yChange =  [-1, 0, 1]
     for xVal in xChange:

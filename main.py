@@ -11,7 +11,6 @@ from ChunkGenerator import generateChunk
 pygame.init()
 clock = pygame.time.Clock()
 
-
 screen = pygame.display.set_mode((gs.width, gs.height))
 pygame.display.set_caption("2D Minecraft")
 
@@ -41,10 +40,11 @@ def gameMenu():
     worldBlocks = pygame.sprite.Group()
 
     collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
-    spawnChunk = generateChunk(0, worldBlocks)
-    currentChunk = generateChunk(64, worldBlocks)
-    # generateChunk(-64, worldBlocks)
-    #generateChunk(-128 - 64, worldBlocks)
+    
+    
+
+    for i in range(-5, 5, 1):
+        gs.generatedChunks[i] = generateChunk(64 * i, worldBlocks)
 
     #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
     # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
@@ -172,6 +172,7 @@ def gameMenu():
         else:
             crafter.resetTable()
         
+        print(player.rect.x//gs.blockSize)
 
         #Finally update the  screen with all the above changes     
         pygame.display.update()
