@@ -1,17 +1,16 @@
 import pygame
 import gameSettings as gs
-from levelGenerator import getBlocks
 import breakPlaceHandler as bph
 import inventoryHandler as inv
 import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
 import menuHandler as  mh
-
+from ChunkGenerator import generateChunk
+from ChunkHandler import checkChunkUpdates
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
-
 
 screen = pygame.display.set_mode((gs.width, gs.height))
 pygame.display.set_caption("2D Minecraft")
@@ -48,10 +47,17 @@ def playMusic():
 #main game loop:
 def gameMenu():
     gameRunning=True
-    #Array to keep track of all the blocks in the world
-    worldBlocks = getBlocks(gs.levelName)
-    collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
+    #Array to keep track of all the blocks aaaaa in the world
+ 
+    worldBlocks = pygame.sprite.Group()
 
+    collisionblocks=worldBlocks #list of blocks player can collide with, initially entire world but updated within first time step
+    
+    gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], worldBlocks)
+    gs.generatedChunks[0] = generateChunk(0, worldBlocks)
+    gs.generatedChunks[1] = generateChunk(gs.CHUNK_SIZE[0], worldBlocks)
+
+     
     #initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
     # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
     player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.blockSize*6), gs.blockSize)
@@ -143,7 +149,7 @@ def gameMenu():
             #update the player position
             player.update(clock.tick(),  collisionblocks)
 
-        
+
         #Font to draw the FPS
         font = pygame.font.Font('Minecraft.ttf', 16)
         fpsText = font.render("FPS: "+str(int(clock.get_fps())), 1, (255, 255, 255))
@@ -177,7 +183,8 @@ def gameMenu():
             crafter.makeScreen()  
         else:
             crafter.resetTable()
-        
+
+        checkChunkUpdates(player, worldBlocks)
 
         #Finally update the  screen with all the above changes     
         pygame.display.update()

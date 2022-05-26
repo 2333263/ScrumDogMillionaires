@@ -32,6 +32,7 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
                 if checkBreakable(block,inv.invArray[inv.selected]):
                     #Remove block from world
                     world_block.remove(block)
+                    gs.generatedChunks[gs.visibleChunks[1]].remove(block)
                     #Add block to inventory
                     inv.addBlock(block)
             elif block.blockPosition == pos and block.itemID not in gs.immovableBlocks: 
@@ -39,6 +40,7 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
                 if block.getHardness()<=0:
                     #Remove block from world
                     world_block.remove(block)
+                    gs.generatedChunks[gs.visibleChunks[1]].remove(block)
                     #Add block to inventory
                     inv.addBlock(block)
 
@@ -67,4 +69,5 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
                     if inv.invArray[inv.selected].isPlaceable:
                         tempBlock = Block(gs.blockSize, pos,  inv.invArray[inv.selected].getItemId(), currTexture, hardness = gs.blockHardness[inv.invArray[inv.selected].getItemId()])
                         world_block.add(tempBlock)
+                        gs.generatedChunks[gs.visibleChunks[1]].add(block)
                         inv.decrease()

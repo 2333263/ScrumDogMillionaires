@@ -1,9 +1,10 @@
-#from matplotlib.pyplot import hot
 from item import Item
 import pygame
 import gameSettings as gs
 import numpy as np
 from InventorySlots import slot
+from block import Block
+
 #Init inv with item objects
 NullItem=Item("null",-1)
 invArray=np.full(40,NullItem,dtype=Item)
@@ -176,6 +177,8 @@ def initGroup():
         for i in range(10):
             s=slot((0,0,0),12*relative+i*85*relative,150*relative+j*100*relative,70*relative,80*relative)
             slots.add(s)
+    cTable= Block(gs.blockSize, (0,0), 5, "Textures/Blocks/crafting.png", 999)
+    addBlock(cTable)   
  #runs when a slot is clicked on           
 def onClick(pos):
     i=0
