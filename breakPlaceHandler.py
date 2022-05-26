@@ -23,7 +23,6 @@ def notEmpty(hotbarSelected):
         return False
     else:
         return True
-
 def blockBreak(python_pos, world_block, player): #Block breaking logic, and inventory handler passover
     if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = gs.getPos(python_pos)
@@ -45,7 +44,7 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
 
 
 def blockPlace(python_pos, world_block, player): #Block placing logic, and inventory handler requesting
-    if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize:
+    if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize and gs.distance(player, python_pos)>=1.2*gs.blockSize and  gs.distance(player, python_pos-[0,gs.blockSize])>=1.2*gs.blockSize:
         pos = gs.getPos(python_pos)
         found = False
         for block in world_block:
