@@ -1,10 +1,8 @@
-import random
 import math
-levelName = "random"
-seed = 69 #random.randint(-10000, 10000)
+import random
+
+seed = random.randint(-10000, 10000)
 octaves = 1
-
-
 
 blockSize = 20 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
 playerRange = 7
