@@ -307,12 +307,6 @@ class TestGameSettings(unittest.TestCase):
       self.assertIsInstance(gs.playerRange, int)
       self.assertGreaterEqual(gs.playerRange, 1)
 
-     # self.assertIsInstance(gs.noXBlocks, int)
-      #self.assertGreaterEqual(gs.noXBlocks, 1)
-
-     # self.assertIsInstance(gs.noYBlocks, int)
-     # self.assertGreaterEqual(gs.noYBlocks, 1)
-
       self.assertIsInstance(gs.width, int)
       self.assertGreaterEqual(gs.width, 1)
       self.assertIsInstance(gs.height, int)
@@ -423,7 +417,7 @@ class TestInventoryHandler(unittest.TestCase):
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
-   #pygame.display.set_mode((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
+   pygame.display.set_mode((1280, 720))
    screen = pygame.Surface((gs.blockSize, gs.blockSize))
    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
    tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
