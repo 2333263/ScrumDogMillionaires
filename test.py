@@ -3,7 +3,6 @@ from numpy import array, ndarray
 import Camera
 import item 
 import gameSettings as gs
-import levelGenerator as lg
 import block
 import pygame
 import CraftButtonHandler
@@ -13,12 +12,7 @@ import playerHandler as ph
 import CraftingMenu
 import inventoryHandler as ih
 import breakPlaceHandler as bph
-import RandomWorldGen as rwg
 import InventorySlots
-#Testing the level Generator
-class TestWorld(unittest.TestCase):
-   def test_getBlock(self):
-      self.assertIsInstance(pygame.sprite.Group(),  type(lg.getBlocks(gs.levelName)))
 
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -307,8 +301,6 @@ class TestCraftingMenu (unittest.TestCase):
                           self.assertIsInstance(False,  type(self.crafter.isCraftable(menuItem.itemID,ih.getInv())))
 class TestGameSettings(unittest.TestCase):
    def test_properties(self):
-      self.assertIsInstance(gs.levelName, str)
-
       self.assertIsInstance(gs.blockSize, int)
       self.assertGreaterEqual(gs.blockSize, 1)
 
@@ -327,7 +319,6 @@ class TestGameSettings(unittest.TestCase):
       self.assertGreaterEqual(gs.height, 1)
 
       self.assertIsInstance(gs.drawCrafting, bool)
-      self.assertIsInstance(gs.levelName, str)
 
       self.assertIsInstance(gs.craftingTablePos[0], int)
       self.assertGreaterEqual(gs.craftingTablePos[0], 1)
@@ -484,17 +475,17 @@ class TestBreakPlace(unittest.TestCase):
       #self.hotbar.append(self.tempBlock)
       #self.assertTrue(bph.notEmpty(self.hotbar[0]))
       print("ADD THIS")
-   def test_blockBreak(self):
-      try:
-         newBlock=block.Block(gs.blockSize, (8*gs.blockSize, 8*gs.blockSize), 0, gs.textureNames[gs.itemIDs[0]],0)
-         self.spriteGroup.add(newBlock)
-         #ih.addItem(self.tempItem)
-         self.pos=(8*gs.blockSize,8*gs.blockSize)
-         bph.blockBreak(self.pos,self.spriteGroup,self.TempPlayer)
-         self.assertTrue(True)
-         ih.decrease()
-      except:
-         self.assertTrue(False)
+   # def test_blockBreak(self):
+   #    try:
+   #       newBlock=block.Block(gs.blockSize, (8*gs.blockSize, 8*gs.blockSize), 0, gs.textureNames[gs.itemIDs[0]],0)
+   #       self.spriteGroup.add(newBlock)
+   #       #ih.addItem(self.tempItem)
+   #       self.pos=(8*gs.blockSize,8*gs.blockSize)
+   #       bph.blockBreak(self.pos,self.spriteGroup,self.TempPlayer)
+   #       self.assertTrue(True)
+   #       ih.decrease()
+   #    except:
+   #       self.assertTrue(False)
    def test_blockPlace(self):
       craftableBlock=block.Block(gs.blockSize, (10*gs.blockSize, 10*gs.blockSize), 5, gs.textureNames[gs.itemIDs[0]],1)
       self.spriteGroup.add(craftableBlock)
@@ -505,9 +496,7 @@ class TestBreakPlace(unittest.TestCase):
       self.pos=(8000,8000)
       bph.blockPlace(self.pos,self.spriteGroup,self.TempPlayer)
       
-class TestRandomWorldGEN(unittest.TestCase):
-   def test_generateWorld(self):
-      self.assertEqual(ndarray,  type(rwg.generateWorld()))
+
 class TestInvinventorySlots(unittest.TestCase):
     ins = InventorySlots.slot("red", 10, 20, 30, 40)
     def test_everything(self):

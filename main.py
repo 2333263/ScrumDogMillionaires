@@ -12,7 +12,7 @@ from ChunkHandler import checkChunkUpdates
 pygame.init()
 clock = pygame.time.Clock()
 
-screen = pygame.display.set_mode((gs.width, gs.height))
+screen = pygame.display.set_mode((gs.width, gs.height), vsync=1)
 pygame.display.set_caption("2D Minecraft")
 
 #Game runing variable
@@ -251,7 +251,7 @@ while gameRunning:
     screen.blit(exitButtonText , (gs.width/2-75,gs.height/2+225)) # display text on exit button 
     screen.blit(startButtonText , (gs.width/2-85,gs.height/2+75)) # display text on start button 
       
-    pygame.display.update()
+    pygame.display.flip()
 
 
     
