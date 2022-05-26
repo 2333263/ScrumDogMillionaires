@@ -2,6 +2,7 @@ import math
 import random
 
 seed = random.randint(-10000, 10000)
+
 octaves = 1
 
 blockSize = 30 #tested values: [12, 16, 20,24, 32]otherwise collision issues (possibly all multiples of 4 work)
@@ -16,6 +17,9 @@ visibleChunks = [-1, 0, 1]
 
 drawCrafting = False
 craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize]
+
+endGamePlaced = False
+endGamePos = [-1, -1]
 
 #Moved to GS for global access
 def getPos(pos): #Takes in pygame position coordinates returns block coordinates based system ---> returns block_size*floor(pyPos/block_size) tuple transform
@@ -47,14 +51,24 @@ itemIDs = {
     13 : "Coal Ore",
     14 : "Iron Ore",
     15 : "Gold Ore",
-    16 : "Diamond Ore"
+    16 : "Diamond Ore",
+    17 : "Portal",
+    18 : "Emerald Ore",
+    19 : "Diamond",
+    20 : "Emerald",
+    21 : "Gold Ingot",
+    22 : "Diamond Block",
+    23 : "Emerald Block",
+    24 : "Gold Block",
+    25 : "End Game Block",
+    26 : "End Game Portal"
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
-     -1: 0,
+    -1: 0,
     0 : 0,
     1 : 0,
-    2 : 10,
+    2 : 0, #10
     3 : 999,
     4 : 999,
     5 : 999,
@@ -68,7 +82,14 @@ blockHardness = {
     13 : 10,
     14 : 15,
     15 : 15,
-    16 : 20
+    16 : 0, #15
+    17 : 999,
+    18 : 20,
+    22 : 20,
+    23 : 20,
+    24 : 20,
+    25 : 999,
+    26 : 999
 }
 #dictionary of tool hardness (strength) correlating to order of itemID dictionary
 itemHardness = {
@@ -85,7 +106,10 @@ itemHardness = {
     9 : 0,
     10 : 10, #tool with hardness level 10
     11 : 20, #tool
-    12 : 20 #tool
+    12 : 20, #tool
+    19 : 0,
+    20 : 0,
+    21 : 0
 }
 #dictionary controling whether an item can be placed into the world
 #tools and ore cannot be placed into the world
@@ -108,7 +132,17 @@ isPlaceable = {
     13 : True,
     14 : True,
     15 : True,
-    16 : True
+    16 : True,
+    17 : False,
+    18 : True,
+    19 : False,
+    20 : False,
+    21 : False,
+    22 : True,
+    23 : True,
+    24 : True,
+    25 : True,
+    26 : False
 }
 
 
@@ -119,7 +153,14 @@ craftingIDs = {
     0 : "Wooden Planks", 
     1 : "Wooden Pickaxe", 
     2 : "Stone Pickaxe",
-    3 : "Stone Shovel"
+    3 : "Stone Shovel",
+    4 : "Diamond",
+    5 : "Emerald",
+    6 : "Gold Ingot",
+    7 : "Diamond Block",
+    8 : "Emerald Block",
+    9 : "Gold Block",
+    10 : "End Game Block"
 }
 
 converterIDs = {
@@ -134,12 +175,16 @@ converterIDs = {
     "C" : 13, #Coal Ore
     "I" : 14, #Iron Ore
     "A" : 15, #Gold Ore
-    "M" : 16 #Diamond Ore
+    "M" : 16, #Diamond Ore
+    "E" : 18, #Emerald Ore
+    "O" : 22, #Diamond Block
+    "R" : 23, #Emerald Block
+    "U" : 24, #Gold Block
+    "X" : 25 #End Game Block
 }
 
 textureNames = {
     #Blocks
-
     "Block_Frame" : "Textures/Blocks/block_frame.png",
     "Grass" : "Textures/Blocks/grass.png",
     "Stone" : "Textures/Blocks/stone.png",
@@ -156,8 +201,13 @@ textureNames = {
     "Gold Ore" : "Textures/Blocks/gold_ore.png",
     "Iron Ore" : "Textures/Blocks/iron_ore.png",
     "Diamond Ore" : "Textures/Blocks/diamond_ore.png",
+    "Emerald Ore" : "Textures/Blocks/emerald_ore.png",
     "Twig Leaves" : "Textures/Blocks/leaves_twig.png",
     "Stone Bricks" : "Textures/Blocks/stone_bricks.png",
+    "Diamond Block" :  "Textures/Blocks/diamond_block.png",
+    "Emerald Block" : "Textures/Blocks/emerald_block.png",
+    "Gold Block" : "Textures/Blocks/gold_block.png",
+    "End Game Block" : "Textures/Blocks/end_game_block.png",
 
     #ITEMS:
     "Charcoal" : "Textures/Items/charcoal.png",
@@ -212,7 +262,8 @@ textureNames = {
 
     #MENUS
     "Sky" : "Textures/Screens/sky.png",
-    "Crafting Background" : "Textures/Screens/CraftingMenu.png"
+    "Crafting Background" : "Textures/Screens/CraftingMenu.png",
+    "Portal" : "Textures/Screens/portal.png"
 }
 immovableBlocks = [3, 5] #list used to store itemIDs of blocks that cannot be moved
 clickableBlocks = [5]
