@@ -34,6 +34,10 @@ pausePage = pygame.transform.scale(pausePage, (gs.width, gs.height)) #fit to pag
 infoPage = pygame.image.load("Textures/Screens/gameInfo.png") #load image for information screen
 infoPage = pygame.transform.scale(infoPage, (gs.width/1.5, gs.height/1.5)) #fit to page
 
+endPage = pygame.image.load("Textures/Screens/endScreenFinal.png") #load image for information screen
+endPage = pygame.transform.scale(endPage, (gs.width, gs.height)) #fit to page
+
+
 
 inv.initGroup()
         
@@ -59,6 +63,7 @@ def gameMenu():
     
     while gameRunning:
         clock.tick(60) #Sets the frame to update 60 times a second
+        
 
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
@@ -177,8 +182,15 @@ def gameMenu():
             tempPortal = po.Portal(150, gs.endGamePos, 26, "Textures/Screens/portal.png", 999)
             worldBlocks.add(tempPortal)
             gs.endGamePlaced = True
-            
-      
+        
+        currentX= player.getPlayerPos()[0]
+        currentY=player.getPlayerPos()[1]
+        print(currentX,currentY)
+        
+        if(gs.endGamePos[0] != -1 and gs.endGamePlaced):
+              if(currentX<= gs.endGamePos[0]+2*gs.blockSize and currentX>=gs.endGamePos[0]-2*gs.blockSize and currentY<= gs.endGamePos[1]-1.8*gs.blockSize and currentY>=gs.endGamePos[1]-3*gs.blockSize):
+                  screen.blit(endPage,(0,0) ) #display the information screen
+              
         
         if(gs.drawCrafting):
             crafter.makeScreen()  
