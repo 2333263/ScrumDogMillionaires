@@ -10,7 +10,7 @@ def drawOre(world, x, y, ore):
     for xVal in xChange:
         for yVal in yChange:
             if(random.randint(0, 4) == 1):
-                if ((y + yVal > 0 and y + yVal < gs.noYBlocks) and (x + xVal > 1 and x + xVal < gs.CHUNK_SIZE[0] - 1)):
+                if ((y + yVal > 0 and y + yVal < gs.CHUNK_SIZE[1]) and (x + xVal > 1 and x + xVal < gs.CHUNK_SIZE[0] - 1)):
                     world[y + yVal][x + xVal] = ore
 def drawTree(world, y, x):
     world[y][x] = 'L'
@@ -31,7 +31,7 @@ def drawTree(world, y, x):
 def getWorldSprites(world, generatePos):
     worldGroup = pygame.sprite.Group()
     for i in range(gs.CHUNK_SIZE[0]):
-        for j in range(gs.noYBlocks):
+        for j in range(gs.CHUNK_SIZE[1]):
             currHeight = i * gs.blockSize
             currWidth = j * gs.blockSize
             if(world[j][i] == ' '):
@@ -56,11 +56,11 @@ def generateChunk(generatePos, worldBlocks):
 
     h = int(gs.height/2 / gs.blockSize) - 5
 
-    world =np.empty((gs.noYBlocks, gs.CHUNK_SIZE[0]), dtype='str')
+    world =np.empty((gs.CHUNK_SIZE[1], gs.CHUNK_SIZE[0]), dtype='str')
     world[:] = ' '
     random.seed(gs.seed)
 
-    for y in range(gs.noYBlocks):
+    for y in range(gs.CHUNK_SIZE[1]):
         for x in range(gs.CHUNK_SIZE[0]):
             dirt = random.randint(2, 5)
             if(y == h + heightNoise[x]):
@@ -90,7 +90,7 @@ def generateChunk(generatePos, worldBlocks):
                     drawOre(world, x, y, "C")
     
     for i in range(gs.CHUNK_SIZE[0]):
-        world[gs.noYBlocks - 1][i] = "B"
+        world[gs.CHUNK_SIZE[1] - 1][i] = "B"
 
     worldGroup = getWorldSprites(world, generatePos)
 

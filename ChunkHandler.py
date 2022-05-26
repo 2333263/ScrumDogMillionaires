@@ -8,14 +8,14 @@ def updateChunkPositions(playerChunk):
 
 def checkChunkUpdates(player, worldBlocks):
 
-    newPlayerChunk = (player.rect.x//gs.blockSize)//64
+    newPlayerChunk = (player.rect.x//gs.blockSize)//gs.CHUNK_SIZE[0]
 
     if(newPlayerChunk != gs.visibleChunks[1]):    
         if(newPlayerChunk < gs.visibleChunks[1]):
             worldBlocks.remove(gs.generatedChunks[gs.visibleChunks[2]])
             updateChunkPositions(newPlayerChunk)
             if(gs.visibleChunks[0] not in gs.generatedChunks):
-                gs.generatedChunks[gs.visibleChunks[0]] = generateChunk(64 * gs.visibleChunks[0], worldBlocks)
+                gs.generatedChunks[gs.visibleChunks[0]] = generateChunk(gs.CHUNK_SIZE[0] * gs.visibleChunks[0], worldBlocks)
             else:
                 worldBlocks.add(gs.generatedChunks[gs.visibleChunks[0]])
         else:
@@ -23,7 +23,7 @@ def checkChunkUpdates(player, worldBlocks):
                 worldBlocks.remove(gs.generatedChunks[gs.visibleChunks[0]])
                 updateChunkPositions(newPlayerChunk)
             if(gs.visibleChunks[2] not in gs.generatedChunks):
-                gs.generatedChunks[gs.visibleChunks[2]] = generateChunk(64 * gs.visibleChunks[2], worldBlocks)
+                gs.generatedChunks[gs.visibleChunks[2]] = generateChunk(gs.CHUNK_SIZE[0]* gs.visibleChunks[2], worldBlocks)
             else:
                 worldBlocks.add(gs.generatedChunks[gs.visibleChunks[2]])
         #     worldBlocks.remove(gs.generatedChunks[gs.visibleChunks[0]])
