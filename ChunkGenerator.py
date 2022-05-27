@@ -12,6 +12,16 @@ def drawOre(world, x, y, ore):
             if(random.randint(0, 4) == 1):
                 if ((y + yVal > 0 and y + yVal < gs.CHUNK_SIZE[1]) and (x + xVal > 1 and x + xVal < gs.CHUNK_SIZE[0] - 1)):
                     world[y + yVal][x + xVal] = ore
+
+def drawCave(world, x, y):
+    xChange = yChange =  [-4, -3, -2, -1, 0, 1, 2, 3, 4]
+    for xVal in xChange:
+        for yVal in yChange:
+            if(random.randint(0, 3) == 1):
+                if ((y + yVal > 0 and y + yVal < gs.CHUNK_SIZE[1]) and (x + xVal > 1 and x + xVal < gs.CHUNK_SIZE[0] - 1)):
+                    world[y + yVal][x + xVal] = " "
+
+
 def drawTree(world, y, x):
     world[y][x] = 'L'
     world[y - 1][x] = 'L'
@@ -69,22 +79,36 @@ def generateChunk(generatePos, worldBlocks):
                 world[y][x] = 'D' #Dirt
             elif(y > h + heightNoise[x] and y > h + heightNoise[x] + dirt):
                 world[y][x] = 'S' #Stone
+            
             else:
                 world[y][x] = ' ' #Sky
             if(y == h + heightNoise[x] - 1 and (x > 0 and x < gs.CHUNK_SIZE[0] - 3)):
                 if (random.randint(1, 25) == 1):
                     drawTree(world, y, x) #Tree
             
+            if(y > h + heightNoise[x] and y > h + heightNoise[x] + 12):
+                if(random.randint(1, 150) == 69):
+                    drawCave(world, x, y)
 
-            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 36):
-                if (random.randint(1, 120) == 1):
+            if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + int(gs.CHUNK_SIZE[1]/2)):
+                diamondRand = random.randint(1, 120) 
+                if (diamondRand == 1):
                     drawOre(world, x, y, "M")
+                elif(diamondRand == 69):
+                    drawOre(world, x, y, "D")
+                
             if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 16):
-                if (random.randint(1, 35) == 1):
+                ironRand = random.randint(1, 35)
+                if (ironRand == 1):
                     drawOre(world, x, y, "I")
+                elif(ironRand == 5):
+                    drawOre(world, x, y, "D")
             if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 30):
-                if (random.randint(1, 100) == 1):
+                goldRand = random.randint(1, 100)
+                if (goldRand == 1):
                     drawOre(world, x, y, "A")
+                elif(goldRand == 69):
+                    drawOre(world, x, y, "D")
             if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + 10):
                 if (random.randint(1, 28) == 1):
                     drawOre(world, x, y, "C")

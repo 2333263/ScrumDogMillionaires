@@ -12,7 +12,7 @@ width = 1280
 height = 720
 
 generatedChunks = {}
-CHUNK_SIZE = [32, 50]
+CHUNK_SIZE = [32, 70]
 visibleChunks = [-1, 0, 1]
 
 drawCrafting = False
