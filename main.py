@@ -8,7 +8,7 @@ import CraftingMenu as cm
 import menuHandler as  mh
 from ChunkGenerator import generateChunk
 from ChunkHandler import checkChunkUpdates
-#from soundHandler import playMusic
+from soundHandler import playMusic
 import Portal as po
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
@@ -40,7 +40,7 @@ endPage = pygame.transform.scale(endPage, (gs.width, gs.height)) #fit to page
 
 inv.initGroup()
 # Loading and playing a sound effect:
-#playMusic()
+playMusic()
 
 #main game loop:
 def gameMenu():
