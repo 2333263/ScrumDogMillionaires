@@ -5,10 +5,6 @@ import math
 from block import Block
 import inventoryHandler as inv
 
-
-
-
-
 def checkBreakable(block, inHand):
     #a block can only be broken if the current tool is harder than the block's hardness
     blockHardness = block.getHardness()

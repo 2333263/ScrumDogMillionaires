@@ -26,36 +26,4 @@ def checkChunkUpdates(player, worldBlocks):
                 gs.generatedChunks[gs.visibleChunks[2]] = generateChunk(gs.CHUNK_SIZE[0]* gs.visibleChunks[2], worldBlocks)
             else:
                 worldBlocks.add(gs.generatedChunks[gs.visibleChunks[2]])
-        #     worldBlocks.remove(gs.generatedChunks[gs.visibleChunks[0]])
-        
-        #if (newPlayerChunk < oldPlayerChunk)
-            #unload right chunk
-            #Generate new left
-        #else
-            #unload left chunk 
-            # generate new right 
-
-        #updateChunkPositions()
-
-    
-
-    
-    
-
-  
-
-    
-
-
-
-    # if(gs.prevChunk!=currentChunkNum):
-    #     gs.generatedChunks[gs.prevChunk]= copy.copy(worldBlocks)
-        
-    #     if(currentChunkNum not in gs.generatedChunks):
-    #         gs.generatedChunks[currentChunkNum] = generateChunk(64 * currentChunkNum, worldBlocks)
-    #     else:
-    #         worldBlocks.add(gs.generatedChunks[currentChunkNum])
-    #     worldBlocks.remove(gs.generatedChunks[gs.prevChunk])
-    #     gs.prevChunk=currentChunkNum
-    # else:
-    #     gs.prevChunk=currentChunkNum
+ 
