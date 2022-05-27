@@ -62,7 +62,7 @@ def decreaseSpec(itemID):
         if( invArray[i].itemID==itemID):
             invArray[i].decrease()
             if( invArray[i].getCount()<=0):
-               invArray[selected]=NullItem
+                invArray[i]=NullItem
             return
   
 
