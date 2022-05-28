@@ -39,8 +39,6 @@ def blockBreak(python_pos, world_block, player): #Block breaking logic, and inve
             elif block.blockPosition == pos and block.itemID not in gs.immovableBlocks: 
                 # payer is not holding a tool
                 if block.getHardness()<=0:
-                    #call sound effect
-                    playBreakSoundforID(block.itemID)
                     #Remove block from world
                     world_block.remove(block)
                     gs.generatedChunks[gs.visibleChunks[1]].remove(block)
@@ -80,3 +78,5 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
                         world_block.add(tempBlock)
                         gs.generatedChunks[gs.visibleChunks[1]].add(block)
                         inv.decrease()
+                        #call sound effect
+                        playBreakSoundforID(block.itemID)
