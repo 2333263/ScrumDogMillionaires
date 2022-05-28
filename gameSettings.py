@@ -21,6 +21,7 @@ craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize
 endGamePlaced = False
 drawPortal = True
 endGamePos = [-1, -1]
+endGamePortal=[-1,-1]
 
 #Moved to GS for global access
 def getPos(pos): #Takes in pygame position coordinates returns block coordinates based system ---> returns block_size*floor(pyPos/block_size) tuple transform
@@ -62,7 +63,7 @@ itemIDs = {
     23 : "Emerald Block",
     24 : "Gold Block",
     25 : "End Game Block",
-    26 : "End Game Portal"
+    26 : "Portal Block"
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
@@ -209,6 +210,7 @@ textureNames = {
     "Emerald Block" : "Textures/Blocks/emerald_block.png",
     "Gold Block" : "Textures/Blocks/gold_block.png",
     "End Game Block" : "Textures/Blocks/end_game_block.png",
+    "Portal Block" : "Textures/Blocks/PortalBlock.png",
 
     #ITEMS:
     "Charcoal" : "Textures/Items/charcoal.png",

@@ -188,8 +188,8 @@ def gameMenu():
             screen.blit(blockFrame, blockPos)
         
       
-        if(gs.endGamePos[0] != -1 and gs.drawPortal):
-            mh.endMenu(screen, clock, endPage)
+        #if(gs.endGamePos[0] != -1 and gs.drawPortal):
+            #mh.endMenu(screen, clock, endPage)
 
                 
         if(gs.drawCrafting):

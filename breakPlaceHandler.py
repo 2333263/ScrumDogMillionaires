@@ -51,7 +51,8 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
                     gs.endGamePos = block.blockPosition
                     gs.drawPortal = True
                     
-
+               
+                
                 if(block.itemID in gs.clickableBlocks):
                     if(gs.drawCrafting):
                         gs.drawCrafting = False
