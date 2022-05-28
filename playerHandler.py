@@ -1,10 +1,9 @@
 import pygame
 import gameSettings as gs
 import math
-#from soundHandler import playSoundforID
+from soundHandler import playSoundforID
 
 class Player(pygame.sprite.Sprite):
-    
     def __init__(self,pos,size):
         #Any reference to playerPos or player.pos is deprecated, please use player.getPlayerPos() instead. This returns a tuple of x and y coordinates.
         super().__init__()
@@ -27,7 +26,8 @@ class Player(pygame.sprite.Sprite):
         self.character=Image
         self.y_momentum=0
         self.keys={}
-
+        #used for audio
+        self.count=0
     def getPlayerPos(self):
         return self.rect.x, self.rect.y
 
@@ -67,7 +67,8 @@ class Player(pygame.sprite.Sprite):
             self.direction.y=-2.5
             #set jump to true
             self.jumped=True
-
+            self.count=0#reset counter (audio) when player stops moving, to avoid overflow
+                #allows sound effect to play when player lands on block after jumping
     def jumpArc(self):
         #add 1/15th of gravity to the current change in direction (this causes an arc when jumping)
         self.direction.y+=self.gravity/20
@@ -82,7 +83,7 @@ class Player(pygame.sprite.Sprite):
                  collide_list.append(block)
         return   collide_list
         
-
+    
     def update(self, dt, blocks):
         #if the player is jumping use the jump arc gravity instead of normal gravity
         if(self.jumped==True):
@@ -117,8 +118,11 @@ class Player(pygame.sprite.Sprite):
         for block in collide_list:
                 if self.direction.y>0:  # if moving down
                     self.rect.bottom=block.rect.top #collide with block on bottom
-
-                    #playSoundforID(block.itemID)
+                    if(self.count%20==0 and not self.direction.x==0): 
+                        #player is walking and sound should play
+                        #mod 20 so that sound does not play ontop of itself
+                        playSoundforID(block.itemID) #call method in soundHandler.py
+                    self.count+=1
                     self.direction.y=0 #no movement on y
                 elif self.direction.y<0: # if moving up
                     self.rect.top=block.rect.bottom #collide with block on top
@@ -127,3 +131,4 @@ class Player(pygame.sprite.Sprite):
 
     def stopMoveOnX(self):
         self.direction.x=0
+        self.count=0#reset counter (audio) when player stops moving, to avoid overflow
