@@ -10,6 +10,8 @@ from ChunkGenerator import generateChunk
 from ChunkHandler import checkChunkUpdates
 #from soundHandler import playMusic
 import Portal as po
+from block import Block
+
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
@@ -188,9 +190,11 @@ def gameMenu():
             screen.blit(blockFrame, blockPos)
         
       
-        #if(gs.endGamePos[0] != -1 and gs.drawPortal):
-            #mh.endMenu(screen, clock, endPage)
-
+        if(gs.endGamePos[0] != -1 and gs.drawPortal):
+            blockTemp = Block(gs.blockSize, gs.endGamePos, 26, gs.textureNames["Portal Block"], 999)
+            worldBlocks.add(blockTemp)
+            mh.endMenu(screen, clock, endPage)
+      
                 
         if(gs.drawCrafting):
             crafter.makeScreen()  
@@ -210,8 +214,8 @@ while gameRunning:
         if events.type == pygame.QUIT:
             pygame.mixer.music.stop() #stops the music player
             gameRunning = False
-        if events.type == pygame.MOUSEBUTTONDOWN: 
-              
+
+        if events.type == pygame.MOUSEBUTTONDOWN:   
             #if the mouse is clicked on the button,the game begins
             if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130: 
                 gameMenu() #call main game loop
@@ -222,9 +226,8 @@ while gameRunning:
                 mh.infoMenu(screen,clock,infoPage)
         
 
-    screen.blit(startPage,(0,0) ) #put the start page on the screen
+    screen.blit( startPage,(0,0) ) #put the start page on the screen
     mouse = pygame.mouse.get_pos() #get mouse positions
-    
 
 
     if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130: 

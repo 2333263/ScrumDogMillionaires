@@ -21,7 +21,7 @@ craftingTablePos = [int(width/2) - 5 * blockSize, int(height/2) + 12 * blockSize
 endGamePlaced = False
 drawPortal = True
 endGamePos = [-1, -1]
-endGamePortal=[-1,-1]
+
 
 #Moved to GS for global access
 def getPos(pos): #Takes in pygame position coordinates returns block coordinates based system ---> returns block_size*floor(pyPos/block_size) tuple transform
