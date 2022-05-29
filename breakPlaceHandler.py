@@ -5,6 +5,7 @@ import math
 from block import Block
 import inventoryHandler as inv
 
+
 def checkBreakable(block, inHand):
     #a block can only be broken if the current tool is harder than the block's hardness
     blockHardness = block.getHardness()
@@ -60,7 +61,7 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
                         gs.drawCrafting = True
 
                 found = True
-        if found == False and gs.distance(player, python_pos)>=1.2*gs.blockSize and  gs.distance(player, python_pos-[0,gs.blockSize])>=1.2*gs.blockSize:
+        if found == False:
             #Only allow placing if player has more blocks
             if (len(inv.invArray)!=0 and inv.getSelected().amount >0) :
                 #Decrease inventory item
@@ -71,6 +72,8 @@ def blockPlace(python_pos, world_block, player): #Block placing logic, and inven
                     currTexture = gs.textureNames[gs.itemIDs[inv.invArray[inv.selected].getItemId()]]
                     if inv.invArray[inv.selected].isPlaceable:
                         tempBlock = Block(gs.blockSize, pos,  inv.invArray[inv.selected].getItemId(), currTexture, hardness = gs.blockHardness[inv.invArray[inv.selected].getItemId()])
-                        world_block.add(tempBlock)
-                        gs.generatedChunks[gs.visibleChunks[1]].add(block)
-                        inv.decrease()
+                        if(not  (player.willcollide(tempBlock))): #only added to world if block will not cause collision 
+                            world_block.add(tempBlock)
+                       
+                            gs.generatedChunks[gs.visibleChunks[1]].add(block)
+                            inv.decrease()

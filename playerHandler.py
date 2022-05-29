@@ -127,3 +127,7 @@ class Player(pygame.sprite.Sprite):
 
     def stopMoveOnX(self):
         self.direction.x=0
+    def willcollide(self,block):
+            if self.rect.colliderect(block): #uses sprite group collide
+                 return True
+            return   False

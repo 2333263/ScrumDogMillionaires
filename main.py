@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import pygame
 import gameSettings as gs
 import breakPlaceHandler as bph
@@ -185,8 +186,9 @@ def gameMenu():
         blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \
                    gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
         
-        #Draw cursor only if block is within interactable range (place/break) and not on top of player
-        if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize and gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets())>0.8*gs.blockSize and  gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()-[0,gs.blockSize])>0.8*gs.blockSize:
+        #Draw cursor only if block is within interactable range (place/break) and won't collide with player
+        tempNullBlock = Block(gs.blockSize, gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()), 1, gs.textureNames[gs.itemIDs[1]], hardness = 1) #replace with nulltexture when added
+        if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize and not player.willcollide(tempNullBlock):
             screen.blit(blockFrame, blockPos)
         
       
