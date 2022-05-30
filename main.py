@@ -96,6 +96,9 @@ def gameMenu():
             # 3 -- right click
             # 4 -- scroll up
             # 5 -- scroll down
+            if (events.type == pygame.ACTIVEEVENT):
+                if (events.gain == 0):
+                    mh.mouseOffPause(clock)
             if events.type == pygame.MOUSEBUTTONDOWN:
 
                 # Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
