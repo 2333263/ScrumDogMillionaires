@@ -11,7 +11,7 @@ from ChunkHandler import checkChunkUpdates
 import itemHandler as ih
 
 #Init itemHandler dictionaries
-ih.populateDictionaries()
+#ih.populateDictionaries()
 
 #Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()

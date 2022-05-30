@@ -138,26 +138,28 @@ converterIDs = {
 }
 
 textureNames = {
-    #Blocks
 
+    #Blocks
     "Block_Frame" : "Textures/Blocks/block_frame.png",
     "Grass" : "Textures/Blocks/grass.png",
     "Stone" : "Textures/Blocks/stone.png",
     "Dirt" : "Textures/Blocks/dirt.png",
     "Cloud" : "Textures/Blocks/cloud.png",
     "Bedrock" : "Textures/Blocks/bedrock.png",
-    "Crafting Table" : "Textures/Blocks/crafting.png",
+    "Crafting Table" : "Textures/Blocks/crafting_table_top.png",
     "Leaves" : "Textures/Blocks/leaves_dense.png",
     "Logs" : "Textures/Blocks/wood_log.png",
     "Crafting Background" : "Textures/Menus/crafting_background.png",
     "Wooden Planks" : "Textures/Blocks/wood_planks.png",
-    "Coal Ore" : "Textures/Blocks/coal_ore.png",
-    "Copper Ore" : "Textures/Blocks/copper_ore.png",
-    "Gold Ore" : "Textures/Blocks/gold_ore.png",
-    "Iron Ore" : "Textures/Blocks/iron_ore.png",
-    "Diamond Ore" : "Textures/Blocks/diamond_ore.png",
     "Twig Leaves" : "Textures/Blocks/leaves_twig.png",
     "Stone Bricks" : "Textures/Blocks/stone_bricks.png",
+
+    #Ores
+    "Coal Ore" : "Textures/Ores/coal_ore.png",
+    "Copper Ore" : "Textures/Ores/copper_ore.png",
+    "Gold Ore" : "Textures/Ores/gold_ore.png",
+    "Iron Ore" : "Textures/Ores/iron_ore.png",
+    "Diamond Ore" : "Textures/Ores/diamond_ore.png",
 
     #ITEMS:
     "Charcoal" : "Textures/Items/charcoal.png",
@@ -171,38 +173,45 @@ textureNames = {
     "Stick" : "Textures/Items/stick.png",
     
     #TOOLS:
+
     #fishingrods
     "Fishing Rod" : "Textures/Tools/fishing_rod.png",
+
     #wood
     "Wooden Sword" : "Textures/Tools/wooden_sword.png",
     "Wooden Shovel" : "Textures/Tools/wooden_shovel.png",
     "Wooden Pickaxe" : "Textures/Tools/wooden_pickaxe.png",
     "Wooden Hoe" : "Textures/Tools/wooden_hoe.png",
     "Wooden Axe" : "Textures/Tools/wooden_axe.png",
+
     #stone
     "Stone Sword" : "Textures/Tools/stone_sword.png",
     "Stone Shovel" : "Textures/Tools/stone_shovel.png",
     "Stone Pickaxe" : "Textures/Tools/stone_pickaxe.png",
     "Stone Hoe" : "Textures/Tools/stone_hoe.png",
     "Stone Axe" : "Textures/Tools/stone_axe.png",
+
     #netherite
     "Netherite Sword" : "Textures/Tools/netherite_sword.png",
     "Netherite Shovel" : "Textures/Tools/netherite_shovel.png",
     "Netherite Pickaxe" : "Textures/Tools/netherite_pickaxe.png",
     "Netherite Hoe" : "Textures/Tools/netherite_hoe.png",
     "Netherite Axe" : "Textures/Tools/netherite_axe.png",
+
     #iron
     "Iron Sword" : "Textures/Tools/iron_sword.png",
     "Iron Shovel" : "Textures/Tools/iron_shovel.png",
     "Iron Pickaxe" : "Textures/Tools/iron_pickaxe.png",
     "Iron Hoe" : "Textures/Tools/iron_hoe.png",
     "Iron Axe" : "Textures/Tools/iron_axe.png",
+
     #gold
     "Golden Sword" : "Textures/Tools/golden_sword.png",
     "Golden Shovel" : "Textures/Tools/golden_shovel.png",
     "Golden Pickaxe" : "Textures/Tools/golden_pickaxe.png",
     "Golden Hoe" : "Textures/Tools/golden_hoe.png",
     "Golden Axe" : "Textures/Tools/golden_axe.png",
+    
     #diamond
     "Diamond Sword" : "Textures/Tools/diamond_sword.png",
     "Diamond Shovel" : "Textures/Tools/diamond_shovel.png",

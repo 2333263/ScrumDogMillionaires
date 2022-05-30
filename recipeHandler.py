@@ -1,5 +1,5 @@
 import json
-from gameSettings import craftingIDs
+from itemHandler import craftingIDs
 
 class RecipeHandler():
     def __init__(self):
