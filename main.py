@@ -175,9 +175,20 @@ def gameMenu():
         screen.blit(fpsText, (1180, 5))
         screen.blit(seedText, (1180, 50))
         inv.drawHotBar(screen)
-
+        blockFrameImgName="Block_Frame_Red"
+        found = False
         #Draws a box around the selected block
-        blockFrameImg = pygame.image.load(gs.textureNames["Block_Frame"])
+        for block in worldBlocks:
+              if block.blockPosition == gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()) and block.itemID not in gs.immovableBlocks and len(inv.invArray) > 0:
+                    found=True
+                    if bph.checkBreakable(block,inv.invArray[inv.selected]):
+                         blockFrameImgName="Block_Frame_Green"
+                         
+                         break
+                    
+        if (not found):
+             blockFrameImgName="Block_Frame"
+        blockFrameImg = pygame.image.load(gs.textureNames[blockFrameImgName])
         blockFrame = pygame.transform.scale(blockFrameImg, (gs.blockSize, gs.blockSize))
         mousePos = pygame.mouse.get_pos()[0] + camera.getOffsets()[0] % gs.blockSize, \
                    pygame.mouse.get_pos()[1] + camera.getOffsets()[1] % gs.blockSize
