@@ -186,10 +186,14 @@ converterIDs = {
 }
 
 textureNames = {
-    #Blocks
+    #Ui Blocks
     "Block_Frame" : "Textures/Blocks/block_frame.png",
     "Block_Frame_Red" : "Textures/Blocks/block_frame_red.png",
     "Block_Frame_Green" : "Textures/Blocks/block_frame_green.png",
+    "Null_Block" : "Textures/Blocks/null_block.png",
+    
+
+    #normal blocks
     "Grass" : "Textures/Blocks/grass.png",
     "Stone" : "Textures/Blocks/stone.png",
     "Dirt" : "Textures/Blocks/dirt.png",
