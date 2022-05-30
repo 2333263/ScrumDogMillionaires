@@ -191,6 +191,10 @@ textureNames = {
     "Block_Frame_Red" : "Textures/Blocks/block_frame_red.png",
     "Block_Frame_Green" : "Textures/Blocks/block_frame_green.png",
     "Null_Block" : "Textures/Blocks/null_block.png",
+    "Block_Frame_Green_1_4" : "Textures/Blocks/block_frame_green_1-4.png",
+    "Block_Frame_Green_2_4" : "Textures/Blocks/block_frame_green_2-4.png",
+    "Block_Frame_Green_3_4" : "Textures/Blocks/block_frame_green_3-4.png",
+    "Block_Frame_Green_4_4" : "Textures/Blocks/block_frame_green_4-4.png",
     
 
     #normal blocks

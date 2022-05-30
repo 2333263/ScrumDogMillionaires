@@ -7,6 +7,7 @@ import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
 import menuHandler as mh
+import time
 from ChunkGenerator import generateChunk
 from ChunkHandler import checkChunkUpdates
 #from soundHandler import playMusic
@@ -81,7 +82,7 @@ def gameMenu():
 
     # Initialise the crafting table screen
     crafter = cm.Crafting(screen)
-
+    mouseDownCheck = False;
     while gameRunning:
         clock.tick(60)  # Sets the frame to update 60 times a second
 
@@ -107,11 +108,11 @@ def gameMenu():
 
                     elif(inv.fullInv == False):
                         # Code for break speed:
-                        #startTime = pygame.time.get_ticks() / 1000
-                        #startPos = gs.getPos(pygame.mouse.get_pos())
+                        mouseDownCheck = True;
+                        startTime = time.time();
+                        startPos = gs.getPos(pygame.mouse.get_pos() + camera.getOffsets())
                         # break the block
-                        bph.blockBreak(pygame.mouse.get_pos() +
-                                       camera.getOffsets(), worldBlocks, player)
+
 
                     inv.onClick(pygame.mouse.get_pos())
 
@@ -132,14 +133,9 @@ def gameMenu():
 
             # Code for break speed:
 
-            # elif events.type == pygame.MOUSEBUTTONUP:
-            #    if events.button == 1:
-            #        endTime = pygame.time.get_ticks()/1000
-            #        endPos = gs.getPos(pygame.mouse.get_pos())
-            #        # Speed is roughly ~0.5 seconds
-            #        timeToBreak = 0.5
-            #        if (endTime-startTime >=timeToBreak and startPos==endPos):
-            #            bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player)  # break the block
+            elif events.type == pygame.MOUSEBUTTONUP:
+               if events.button == 1:
+                   mouseDownCheck = False;
 
             # if a key is pressed and that key is the up arrow, run the jump method in the player class
             elif(events.type == pygame.KEYDOWN):
@@ -184,14 +180,41 @@ def gameMenu():
         inv.drawHotBar(screen)
         blockFrameImgName = "Block_Frame_Red"
 
+        # Breaking speed
+        breakTime = 1
+        if (mouseDownCheck):
+            if (startPos != gs.getPos(pygame.mouse.get_pos() + camera.getOffsets())):
+                # Restart timer if player moves blocks
+                startPos = gs.getPos(pygame.mouse.get_pos() + camera.getOffsets())
+                startTime = time.time()
+                # print('moved cursor')
+            if (time.time() - startTime >= breakTime):
+                bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player)
+            # Break block if timer is longer than required
         # Draws a box around the selected block
+
         block = bph.getBlockFromPos(
             gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()), worldBlocks)
         if(block.itemID != -1):
             if block.itemID in gs.clickableBlocks:
                 blockFrameImgName = "Block_Frame"
             if bph.checkBreakable(block, inv.invArray[inv.selected]):
-                blockFrameImgName = "Block_Frame_Green"
+                # Different cursors for different levels of breakage
+                if (mouseDownCheck):
+                    # Steps for breaking speed
+                    if (time.time() - startTime <= breakTime * 1 / 4):
+                        blockFrameImgName = "Block_Frame_Green_1_4"
+                    elif (time.time() - startTime <= breakTime * 2 / 4):
+                        blockFrameImgName = "Block_Frame_Green_2_4"
+                    elif (time.time() - startTime <= breakTime * 3 / 4):
+                        blockFrameImgName = "Block_Frame_Green_3_4"
+                    elif (time.time() - startTime <= breakTime * 4 / 4):
+                        blockFrameImgName = "Block_Frame_Green_4_4"
+                    else:
+                        blockFrameImgName = "Block_Frame_Green"
+
+                else:
+                    blockFrameImgName = "Block_Frame_Green"
 
         else:
             blockFrameImgName = "Block_Frame"
