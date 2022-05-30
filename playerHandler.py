@@ -99,14 +99,16 @@ class Player(pygame.sprite.Sprite):
         collide_list=self.collided(blocks)
 
         for block in collide_list:
-                if self.direction.x>0: # if moving right
-                    self.rect.right=block.rect.left #collide with block on right
+                if (self.direction.x>0 and  self.rect.right>=block.rect.left) or (self.direction.x<0 and self.rect.left<=block.rect.right): 
+                    #collide with block on right
+                    if(dt>0):
+                        self.rect.x -= self.direction.x * dt
+                    else:
+                        self.rect.x-=self.direction.x
                     self.direction.x=0 #no movement on x
                     
                     
-                elif self.direction.x<0:# if moving left
-                    self.rect.left=block.rect.right #collide with block on left
-                    self.direction.x=0 #no movement on x
+               
         #shift rect to moved pos on y
         if(dt>0):
             self.rect.y += self.direction.y * dt
