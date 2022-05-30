@@ -232,24 +232,24 @@ while gameRunning:
     mouse = pygame.mouse.get_pos() #get mouse positions
 
 
-    if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130: 
+    if gs.width/2-130 <= mouse[0] <= gs.width/2+170 and gs.height/2+50 <= mouse[1] <= gs.height/2+130: 
         #if we are hovering over the start button, draw it with the lighter colour
-        pygame.draw.rect(screen,color_light,[gs.width/2-110,gs.height/2+50,300,80]) 
+        pygame.draw.rect(screen,color_light,[gs.width/2-130,gs.height/2+50,300,80]) 
         startButtonText = buttonFont.render('BEGIN GAME' , True , (0,0,0) )  #rendering a text written in this font for the start button
           
     else: 
         #if we are not hovering over the start button, draw it with the darker colour
-        pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+50,300,80]) 
+        pygame.draw.rect(screen,color_dark,[gs.width/2-130,gs.height/2+50,300,80]) 
         startButtonText = buttonFont.render('BEGIN GAME' , True , (255,255,255) )  #rendering a text written in this font for the start button
         
-    if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+200 <= mouse[1] <= gs.height/2+280: 
+    if gs.width/2-130 <= mouse[0] <= gs.width/2+170 and gs.height/2+200 <= mouse[1] <= gs.height/2+280: 
         #if we are hovering over the exit button, draw it with the lighter colour
-        pygame.draw.rect(screen,color_light,[gs.width/2-110,gs.height/2+200,300,80]) 
+        pygame.draw.rect(screen,color_light,[gs.width/2-130,gs.height/2+200,300,80]) 
         exitButtonText = buttonFont.render('EXIT GAME' , True , (0,0,0) )  #rendering a text written in this font for the exit button
           
     else: 
         #if we are not hovering over the exit button, draw it with the darker colour
-        pygame.draw.rect(screen,color_dark,[gs.width/2-110,gs.height/2+200,300,80]) 
+        pygame.draw.rect(screen,color_dark,[gs.width/2-130,gs.height/2+200,300,80]) 
         exitButtonText = buttonFont.render('EXIT GAME' , True , (255,255,255) )  #rendering a text written in this font for the exit button
         
     if gs.width-110 <= mouse[0] <= gs.width-70 and 10 <= mouse[1] <= 50: 
@@ -265,8 +265,8 @@ while gameRunning:
     
     
     screen.blit(informationButonText , (gs.width-100,17)) # display text on information button
-    screen.blit(exitButtonText , (gs.width/2-75,gs.height/2+225)) # display text on exit button 
-    screen.blit(startButtonText , (gs.width/2-85,gs.height/2+75)) # display text on start button 
+    screen.blit(exitButtonText , (gs.width/2-90,gs.height/2+225)) # display text on exit button 
+    screen.blit(startButtonText , (gs.width/2-107,gs.height/2+75)) # display text on start button 
       
     pygame.display.flip()
 
