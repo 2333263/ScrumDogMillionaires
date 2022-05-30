@@ -1,5 +1,5 @@
 import unittest
-from numpy import array, ndarray
+from numpy import ndarray
 import Camera
 import item 
 import gameSettings as gs
