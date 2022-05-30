@@ -271,4 +271,4 @@ textureNames = {
     "Portal" : "Textures/Screens/portal.png"
 }
 immovableBlocks = [3, 5] #list used to store itemIDs of blocks that cannot be moved
-clickableBlocks = [5]
+clickableBlocks = [5,25]
