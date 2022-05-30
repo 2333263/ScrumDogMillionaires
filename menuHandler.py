@@ -36,6 +36,19 @@ def pauseMenu(screen, clock, pausePage):
         screen.blit(pausePage,(0,0) ) #display the pause screen
         pygame.display.update()
         clock.tick(60)
+def mouseOffPause( clock):
+    paused= True #the user has paused the game
+    while paused:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                quit()
+            if (event.type == pygame.ACTIVEEVENT):
+                if (event.gain == 1):
+                    paused=False
+        
+        pygame.display.update()
+        clock.tick(60)
 
 #end menu - pops up when user enters the portal
 def endMenu(screen, clock, endPage):

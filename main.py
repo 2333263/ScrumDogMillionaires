@@ -72,7 +72,7 @@ def gameMenu():
     # initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
     # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
     player = ph.Player((gs.width/2 - gs.blockSize * 4,
-                       gs.blockSize*6), gs.blockSize)
+                      - gs.blockSize*2), gs.blockSize)
     camera = cam.Camera(player)
     checkChunkUpdates(player, worldBlocks)
 
@@ -97,6 +97,9 @@ def gameMenu():
             # 3 -- right click
             # 4 -- scroll up
             # 5 -- scroll down
+            if (events.type == pygame.ACTIVEEVENT):
+                if (events.gain == 0):
+                    mh.mouseOffPause(clock)
             if events.type == pygame.MOUSEBUTTONDOWN:
 
                 # Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
