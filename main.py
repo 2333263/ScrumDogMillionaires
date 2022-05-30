@@ -179,12 +179,17 @@ def gameMenu():
         found = False
         #Draws a box around the selected block
         for block in worldBlocks:
-              if block.blockPosition == gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()) and block.itemID not in gs.immovableBlocks and len(inv.invArray) > 0:
+              if block.blockPosition == gs.getPos(pygame.mouse.get_pos()+camera.getOffsets())  and len(inv.invArray) > 0:
+
                     found=True
-                    if bph.checkBreakable(block,inv.invArray[inv.selected]):
+                    if block.itemID in gs.clickableBlocks:
+                        found=False
+                        break
+                    if bph.checkBreakable(block,inv.invArray[inv.selected]) :
                          blockFrameImgName="Block_Frame_Green"
                          
                          break
+                    
                     
         if (not found):
              blockFrameImgName="Block_Frame"
