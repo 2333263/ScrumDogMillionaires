@@ -221,7 +221,7 @@ def gameMenu():
 
         else:
             blockFrameImgName = "Block_Frame"
-        blockFrameImg = pygame.image.load(gs.textureNames[blockFrameImgName])
+        blockFrameImg = pygame.image.load(gs.textureNames[blockFrameImgName]).convert_alpha()
         blockFrame = pygame.transform.scale(
             blockFrameImg, (gs.blockSize, gs.blockSize))
         mousePos = pygame.mouse.get_pos()[0] + camera.getOffsets()[0] % gs.blockSize, \
