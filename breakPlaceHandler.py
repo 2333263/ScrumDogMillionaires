@@ -4,7 +4,7 @@ import inventoryHandler
 import math
 from block import Block
 import inventoryHandler as inv
-from soundHandler import playBreakSoundforID
+
 
 def checkBreakable(block, inHand):
     # a block can only be broken if the current tool is harder than the block's hardness
@@ -37,9 +37,6 @@ def blockBreak(python_pos, world_block, player):
                     gs.generatedChunks[gs.visibleChunks[1]].remove(block)
                     # Add block to inventory
                     inv.addBlock(block)
-
-                    #call sound effect
-                    playBreakSoundforID(block.itemID)
             elif block.itemID not in gs.immovableBlocks:
                 # payer is not holding a tool
                 if block.getHardness() <= 0:
@@ -74,7 +71,6 @@ def blockPlace(python_pos, world_block, player):
                 if(gs.textureNames.__contains__(gs.itemIDs[inv.invArray[inv.selected].getItemId()])):
                     currTexture = gs.textureNames[gs.itemIDs[inv.invArray[inv.selected].getItemId()]]
                     if inv.invArray[inv.selected].isPlaceable:
-
                         tempBlock = Block(gs.blockSize, pos,  inv.invArray[inv.selected].getItemId(), currTexture, hardness=gs.blockHardness[inv.invArray[inv.selected].getItemId()])
                         # only added to world if block will not cause collision
                         if(not (player.willcollide(tempBlock))):
@@ -82,7 +78,7 @@ def blockPlace(python_pos, world_block, player):
 
                             gs.generatedChunks[gs.visibleChunks[1]].add(block)
                             inv.decrease()
-                            playBreakSoundforID(block.itemID)
+
 
 def getBlockFromPos(pos, world_block):  # find block based on position in world
     for block in world_block:
@@ -90,4 +86,3 @@ def getBlockFromPos(pos, world_block):  # find block based on position in world
             return block
     # if no block at position, return null block
     return Block(gs.blockSize, pos, -1,  gs.textureNames["Null_Block"], 0)
-

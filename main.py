@@ -10,7 +10,7 @@ import menuHandler as mh
 import time
 from ChunkGenerator import generateChunk
 from ChunkHandler import checkChunkUpdates
-from soundHandler import playMusic
+#from soundHandler import playMusic
 import Portal as po
 from block import Block
 
@@ -51,7 +51,9 @@ endPage = pygame.transform.scale(endPage, (gs.width, gs.height))  # fit to page
 
 inv.initGroup()
 # Loading and playing a sound effect:
-playMusic()
+# playMusic()
+
+# main game loop:
 
 
 def gameMenu():
