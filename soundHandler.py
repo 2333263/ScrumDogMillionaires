@@ -1,5 +1,8 @@
 import pygame
-pygame.mixer.init()
+try:
+    pygame.mixer.init()
+except:
+    print()
 grassSound = pygame.mixer.Sound("Sound Effects\grass6.ogg")
 stoneSound = pygame.mixer.Sound("Sound Effects\stone1.ogg")
 dirtSound  = pygame.mixer.Sound("Sound Effects\sand5.ogg")
@@ -20,6 +23,7 @@ breakDirtSound.set_volume(0.1)
 breakWoodSound.set_volume(0.1)
 breakStoneSound.set_volume(0.1)
 breakLeafSound.set_volume(0.1)
+
 def playMusic():
     # Loading and playing background music:
 
