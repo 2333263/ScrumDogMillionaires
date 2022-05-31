@@ -14,7 +14,7 @@ from ChunkHandler import checkChunkUpdates
 import Portal as po
 from block import Block
 
-
+#force update
 # Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
