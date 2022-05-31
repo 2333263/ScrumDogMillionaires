@@ -17,11 +17,11 @@ jobs:
         pip install pygame_gui
         pip install numpy
         pip install perlin-noise
+     - ignore:
+            - "soundHandler.py"
      - name: Generate Report
        run: |
         coverage run test.py
-        ignore:
-            - "soundHandler.py"
         coverage xml
      - name: Upload Coverage to Codecov
        uses: codecov/codecov-action@v2
