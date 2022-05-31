@@ -1,8 +1,10 @@
 name: CodeCov
 on: [push, pull_request]
-jobs:
+coverage:
   ignore:
-            "soundHandler.py"
+    -"soundHandler.py"
+
+jobs:
   run:
     runs-on: ubuntu-latest
     
