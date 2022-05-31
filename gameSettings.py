@@ -22,6 +22,7 @@ endGamePlaced = False
 drawPortal = True
 endGamePos = [-1, -1]
 
+
 #Moved to GS for global access
 def getPos(pos): #Takes in pygame position coordinates returns block coordinates based system ---> returns block_size*floor(pyPos/block_size) tuple transform
     pos = blockSize*math.floor(pos[0]/blockSize),blockSize*math.floor(pos[1]/blockSize)
@@ -62,14 +63,14 @@ itemIDs = {
     23 : "Emerald Block",
     24 : "Gold Block",
     25 : "End Game Block",
-    26 : "End Game Portal"
+    26 : "Portal Block"
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
     -1: 0,
     0 : 0,
     1 : 0,
-    2 : 0, #10
+    2 : 10, #10
     3 : 999,
     4 : 999,
     5 : 999,
@@ -83,7 +84,7 @@ blockHardness = {
     13 : 10,
     14 : 15,
     15 : 15,
-    16 : 0, #15
+    16 : 15, 
     17 : 999,
     18 : 20,
     22 : 20,
@@ -185,8 +186,18 @@ converterIDs = {
 }
 
 textureNames = {
-    #Blocks
+    #Ui Blocks
     "Block_Frame" : "Textures/Blocks/block_frame.png",
+    "Block_Frame_Red" : "Textures/Blocks/block_frame_red.png",
+    "Block_Frame_Green" : "Textures/Blocks/block_frame_green.png",
+    "Null_Block" : "Textures/Blocks/null_block.png",
+    "Block_Frame_Green_1_4" : "Textures/Blocks/block_frame_green_1-4.png",
+    "Block_Frame_Green_2_4" : "Textures/Blocks/block_frame_green_2-4.png",
+    "Block_Frame_Green_3_4" : "Textures/Blocks/block_frame_green_3-4.png",
+    "Block_Frame_Green_4_4" : "Textures/Blocks/block_frame_green_4-4.png",
+    
+
+    #normal blocks
     "Grass" : "Textures/Blocks/grass.png",
     "Stone" : "Textures/Blocks/stone.png",
     "Dirt" : "Textures/Blocks/dirt.png",
@@ -209,6 +220,7 @@ textureNames = {
     "Emerald Block" : "Textures/Blocks/emerald_block.png",
     "Gold Block" : "Textures/Blocks/gold_block.png",
     "End Game Block" : "Textures/Blocks/end_game_block.png",
+    "Portal Block" : "Textures/Blocks/PortalBlock.png",
 
     #ITEMS:
     "Charcoal" : "Textures/Items/charcoal.png",
@@ -267,4 +279,4 @@ textureNames = {
     "Portal" : "Textures/Screens/portal.png"
 }
 immovableBlocks = [3, 5] #list used to store itemIDs of blocks that cannot be moved
-clickableBlocks = [5]
+clickableBlocks = [5,25]
