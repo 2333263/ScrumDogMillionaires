@@ -3,7 +3,7 @@ on: [push, pull_request]
 jobs:
   run:
     runs-on: ubuntu-latest
-    - ignore:
+    ignore:
             - "soundHandler.py"
     steps:
      - name: Checkout
