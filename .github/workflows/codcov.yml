@@ -1,10 +1,11 @@
 name: CodeCov
 on: [push, pull_request]
 jobs:
+  ignore:
+            "soundHandler.py"
   run:
     runs-on: ubuntu-latest
-    ignore:
-            - "soundHandler.py"
+    
     steps:
      - name: Checkout
        uses: actions/checkout@v2
