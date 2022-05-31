@@ -1,7 +1,7 @@
 name: CodeCov
 on: [push, pull_request]
-coverage:
-  ignore:
+
+ignore:
     -"soundHandler.py"
 
 jobs:
