@@ -82,6 +82,7 @@ def blockPlace(python_pos, world_block, player):
 
                             gs.generatedChunks[gs.visibleChunks[1]].add(block)
                             inv.decrease()
+                            #call sound effect
                             playBreakSoundforID(block.itemID)
 
 def getBlockFromPos(pos, world_block):  # find block based on position in world
