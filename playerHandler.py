@@ -1,7 +1,7 @@
 import pygame
 import gameSettings as gs
 import math
-#from soundHandler import playSoundforID
+from soundHandler import playSoundforID
 
 class Player(pygame.sprite.Sprite):
     
@@ -27,6 +27,8 @@ class Player(pygame.sprite.Sprite):
         self.character=Image
         self.y_momentum=0
         self.keys={}
+         #used for audio
+        self.count=0
 
     def getPlayerPos(self):
         return self.rect.x, self.rect.y
@@ -120,7 +122,11 @@ class Player(pygame.sprite.Sprite):
                 if self.direction.y>0:  # if moving down
                     self.rect.bottom=block.rect.top #collide with block on bottom
 
-                    #playSoundforID(block.itemID)
+                    if(self.count%20==0 and not self.direction.x==0): 
+                        #player is walking and sound should play
+                        #mod 20 so that sound does not play ontop of itself
+                        playSoundforID(block.itemID) #call method in soundHandler.py
+                    self.count+=1
                     self.direction.y=0 #no movement on y
                 elif self.direction.y<0: # if moving up
                     self.rect.top=block.rect.bottom #collide with block on top

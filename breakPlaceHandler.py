@@ -4,7 +4,7 @@ import inventoryHandler
 import math
 from block import Block
 import inventoryHandler as inv
-
+from soundHandler import playBreakSoundforID
 
 def checkBreakable(block, inHand):
     # a block can only be broken if the current tool is harder than the block's hardness
@@ -37,6 +37,8 @@ def blockBreak(python_pos, world_block, player):
                     gs.generatedChunks[gs.visibleChunks[1]].remove(block)
                     # Add block to inventory
                     inv.addBlock(block)
+                     #call sound effect
+                    playBreakSoundforID(block.itemID)
             elif block.itemID not in gs.immovableBlocks:
                 # payer is not holding a tool
                 if block.getHardness() <= 0:
