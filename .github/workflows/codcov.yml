@@ -26,6 +26,6 @@ jobs:
        uses: codecov/codecov-action@v2
        with:
          token: ${{ secrets.CODECOV_TOKEN }}
-#ignore:
- #   -"soundHandler.py"
+ignore:
+  -"soundHandler.py"
   
