@@ -3,6 +3,8 @@ on: [push, pull_request]
 jobs:
   run:
     runs-on: ubuntu-latest
+    - ignore:
+            - "soundHandler.py"
     steps:
      - name: Checkout
        uses: actions/checkout@v2
@@ -17,8 +19,6 @@ jobs:
         pip install pygame_gui
         pip install numpy
         pip install perlin-noise
-     - ignore:
-            - "soundHandler.py"
      - name: Generate Report
        run: |
         coverage run test.py
