@@ -117,13 +117,20 @@ class Player(pygame.sprite.Sprite):
         #gets a list of blocks that collide with plater sprite
         collide_list=self.collided(blocks)
         for block in collide_list:
-                if self.direction.y>0:  # if moving down
-                    self.rect.bottom=block.rect.top #collide with block on bottom
-
+                if self.direction.y>0 and self.rect.bottom>=block.rect.top:  # if moving down
+                     #collide with block on bottom
+                    if(dt>0):
+                        self.rect.y -= self.direction.y * dt
+                    else:
+                        self.rect.y-=self.direction.y
                     #playSoundforID(block.itemID)
                     self.direction.y=0 #no movement on y
-                elif self.direction.y<0: # if moving up
-                    self.rect.top=block.rect.bottom #collide with block on top
+                elif self.direction.y<0 and self.rect.top<=block.rect.bottom: # if moving up
+                     #collide with block on top
+                    if(dt>0):
+                        self.rect.y -= self.direction.y * dt
+                    else:
+                        self.rect.y-=self.direction.y
                     self.direction.y=0 #no movement on y
                     self.jumped=False #no longer jumping
 
