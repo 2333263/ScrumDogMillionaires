@@ -1,9 +1,5 @@
 name: CodeCov
 on: [push, pull_request]
-
-ignore:
-    -"soundHandler.py"
-
 jobs:
   run:
     runs-on: ubuntu-latest
