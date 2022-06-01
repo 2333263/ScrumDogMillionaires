@@ -156,14 +156,12 @@ craftingIDs = {
     0 : "Wooden Planks", 
     1 : "Wooden Pickaxe", 
     2 : "Stone Pickaxe",
-    3 : "Stone Shovel",
-    4 : "Diamond",
-    5 : "Emerald",
-    6 : "Gold Ingot",
-    7 : "Diamond Block",
-    8 : "Emerald Block",
-    9 : "Gold Block",
-    10 : "End Game Block"
+    3 :  "Diamond",
+    4 : "Emerald",
+    5 : "Gold Ingot",
+    6 : "Diamond Block",
+    7 : "Gold Block",
+    8 : "End Game Block"
 }
 
 converterIDs = {

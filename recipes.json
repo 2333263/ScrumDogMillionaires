@@ -59,29 +59,9 @@
         -1, 8, -1]
     },
 
+    
     {
         "craftingID" : 3,
-        "toolName" : "Stone Shovel",
-        "itemID" : 12,
-        "craftingAmount" : 1,
-        "recipe" :
-        [
-            {
-                "itemID" : 2,
-                "numBlocks" : 1
-            },
-            {
-                "itemID": 8,
-                "numBlocks" : 2
-            }
-        ],
-        "shape":
-        [-1, 2, -1,
-         -1, 8, -1,
-         -1, 8, -1]
-    },
-    {
-        "craftingID" : 4,
         "toolName" : "Diamond",
         "itemID" : 19,
         "craftingAmount" : 1,
@@ -98,7 +78,7 @@
          -1, -1, -1]
     },
     {
-        "craftingID" : 5,
+        "craftingID" : 4,
         "toolName" : "Emerald",
         "itemID" : 20,
         "craftingAmount" : 1,
@@ -111,11 +91,11 @@
         ],
         "shape":
         [-1, -1, -1,
-         -1, 18, -1,
+            -1, 18, -1,
          -1, -1, -1]
     },
     {
-        "craftingID" : 6,
+        "craftingID" : 5,
         "toolName" : "Gold Ingot",
         "itemID" : 21,
         "craftingAmount" : 1,
@@ -132,7 +112,7 @@
          -1, -1, -1]
     },
     {
-        "craftingID" : 7,
+        "craftingID" :6,
         "toolName" : "Diamond Block",
         "itemID" : 22,
         "craftingAmount" : 1,
@@ -148,25 +128,9 @@
          19, 19, 19,
          19, 19, 19]
     },
+   
     {
-        "craftingID" : 8,
-        "toolName" : "Emerald Block",
-        "itemID" : 23,
-        "craftingAmount" : 1,
-        "recipe" :
-        [
-            {
-                "itemID" : 20,
-                "numBlocks" : 9
-            }
-        ],
-        "shape":
-        [20, 20, 20,
-         20, 20, 20,
-         20, 20, 20]
-    },
-    {
-        "craftingID" : 8,
+        "craftingID" : 7,
         "toolName" : "Gold Block",
         "itemID" : 24,
         "craftingAmount" : 1,
@@ -183,7 +147,7 @@
          21, 21, 21]
     },
     {
-        "craftingID" : 10,
+        "craftingID" : 8,
         "toolName" : "End Game Block",
         "itemID" : 25,
         "craftingAmount" : 1,
@@ -198,13 +162,13 @@
                 "numBlocks" : 4
             },
             {
-                "itemID" : 23,
+                "itemID" : 20,
                 "numBlocks" : 1
             }
         ],
         "shape":
         [24, 22, 24,
-         22, 23, 22,
+         22, 20, 22,
          24, 22, 24]
     }
    
