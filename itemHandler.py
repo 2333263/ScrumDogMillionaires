@@ -44,9 +44,9 @@ def populateDictionaries():
         textureNames[data[i]['itemDisplayName']] = data[i]['texture']
     return
 
-populateDictionaries()
-for itemID,itemDisplayName in textureNames.items():
-    print(itemID,":",itemDisplayName)
+#populateDictionaries()
+#for itemID,itemDisplayName in textureNames.items():
+    #print(itemID,":",itemDisplayName)
 
 
 
