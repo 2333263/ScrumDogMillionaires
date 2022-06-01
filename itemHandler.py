@@ -37,14 +37,16 @@ def populateDictionaries():
     file = open("items.json")
     data = json.load(file)
     for i in data:
-        print(i)
-        print(data[i]['itemID'])
-        itemIDs[i] = data[i]['itemID']
+        itemIDs[data[i]['itemID']] = data[i]['itemDisplayName']
+        blockHardness[data[i]['itemID']] = data[i]['blockHardness']
+        itemHardness[data[i]['itemID']] = data[i]['itemHardness']
+        isPlaceable[data[i]['itemID']] = data[i]['isPlaceable']
+        textureNames[data[i]['itemDisplayName']] = data[i]['texture']
     return
 
-print(itemIDs)
 populateDictionaries()
-print(itemIDs)
+for itemID,itemDisplayName in textureNames.items():
+    print(itemID,":",itemDisplayName)
 
 
 
