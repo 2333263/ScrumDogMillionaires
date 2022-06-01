@@ -234,8 +234,9 @@ def gameMenu():
         # Draw cursor only if block is within interactable range (place/break) and won't collide with player
         tempNullBlock = Block(gs.blockSize, gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()),
                               1, gs.textureNames[gs.itemIDs[1]], hardness=1)  # replace with nulltexture when added
-        if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize and (not player.willcollide(tempNullBlock) or not blockFrameImgName == "Block_Frame"):
-            screen.blit(blockFrame, blockPos)
+        if (not inv.fullInv):
+            if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize and (not player.willcollide(tempNullBlock) or not blockFrameImgName == "Block_Frame"):
+                screen.blit(blockFrame, blockPos)
 
         if(gs.endGamePos[0] != -1 and gs.drawPortal):
             blockTemp = Block(gs.blockSize, gs.endGamePos, 26,
