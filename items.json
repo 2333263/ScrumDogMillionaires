@@ -1,7 +1,7 @@
-{        
+{
     "null": {
         "itemID": -1,
-        "itemDisplayName" : "",
+        "itemDisplayName" : "null",
         "breakTime": 99999,
         "blockHardness": 5,
         "itemHardness": 5,
@@ -121,7 +121,7 @@
     },
     "crafting_background": {
         "itemID": 9,
-        "itemDisplayName" : "BUGGED ITEM",
+        "itemDisplayName" : "Crafting Background BUGGED",
         "breakTime": 99999,
         "blockHardness": 5,
         "itemHardness": 0,
@@ -133,7 +133,7 @@
     },
     "sky": {
         "itemID": 10,
-        "itemDisplayName" : "BUGGED ITEM",
+        "itemDisplayName" : "Sky BUGGED",
         "breakTime": 99999,
         "blockHardness": 5,
         "itemHardness": 0,
@@ -625,7 +625,7 @@
     },
     "block_frame": {
         "itemID": 51,
-        "itemDisplayName" : "",
+        "itemDisplayName" : "Block Frame",
         "breakTime": 99999,
         "blockHardness": 5,
         "itemHardness": 0,
@@ -1005,6 +1005,30 @@
         "toolType": "none",
         "texture": "Textures/Items/redstone.png",
         "isPlaceable": false,
+        "drops" : "null"
+    },
+    "end_game_block": {
+        "itemID": 83,
+        "itemDisplayName" : "End Game Block",
+        "breakTime": 99999,
+        "blockHardness": 5,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/end_game_block.png",
+        "isPlaceable": true,
+        "drops" : "null"
+    },
+    "portal block": {
+        "itemID": 84,
+        "itemDisplayName" : "End Game Block",
+        "breakTime": 99999,
+        "blockHardness": 5,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/PortalBlock.png",
+        "isPlaceable": true,
         "drops" : "null"
     }
 }

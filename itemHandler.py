@@ -1,10 +1,10 @@
 import json
 
-itemIDs = {}
-blockHardness = {}
-itemHardness = {}
-isPlaceable = {}
-textureNames = {}
+itemIDs = {} #itemID -> itemDisplayName
+blockHardness = {} #itemID -> blockHardness
+itemHardness = {} #itemID -> itemHardness
+isPlaceable = {} #itemID -> isPlaceable
+textureNames = {} #itemDisplayName -> textureDirectory
 
 #Pre-defined (These will slowly be phased out, one step at a time.)
 immovableBlocks = [3, 5]
@@ -31,14 +31,23 @@ converterIDs = {
     "A" : 15, #Gold Ore
     "M" : 16 #Diamond Ore
 }   #This dictionary genuinly makes me feel sick, aswell as the craftingIDs but this sprint is like 10 seconds long so deal
-class itemHandler():
-    def __init__(self):
-        self.file = open("items.json")
-        self.data = json.load(self.file)
-    
 
-
-
+#Populate Dictionaries
 def populateDictionaries():
-
+    file = open("items.json")
+    data = json.load(file)
+    for i in data:
+        itemIDs[data[i]['itemID']] = data[i]['itemDisplayName']
+        blockHardness[data[i]['itemID']] = data[i]['blockHardness']
+        itemHardness[data[i]['itemID']] = data[i]['itemHardness']
+        isPlaceable[data[i]['itemID']] = data[i]['isPlaceable']
+        textureNames[data[i]['itemDisplayName']] = data[i]['texture']
     return
+
+populateDictionaries()
+for itemID,itemDisplayName in textureNames.items():
+    print(itemID,":",itemDisplayName)
+
+
+
+
