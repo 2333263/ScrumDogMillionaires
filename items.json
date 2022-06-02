@@ -4,7 +4,7 @@
         "itemDisplayName" : "null",
         "breakTime": 99999,
         "blockHardness": 5,
-        "itemHardness": 5,
+        "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "null",
         "texture": "Textures/null",
