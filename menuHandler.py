@@ -60,6 +60,7 @@ def endMenu(screen, clock, endPage):
                 quit()
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_c or event.key==pygame.K_ESCAPE: #if the user clicks c, resume game
+                    gs.drawCrafting=False
                     completed=False
                     gs.drawPortal = False
                     
