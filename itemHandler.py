@@ -17,7 +17,7 @@ craftingIDs = {
     3 : "Stone Shovel"
 }
 
-converterIDs = {
+converterIDs = { #Depricated (was used for text file converstion)
     'G' : 0, #Grass
     'D' : 1, #Dirt
     'S' : 2, #Stone
@@ -30,7 +30,7 @@ converterIDs = {
     "I" : 14, #Iron Ore
     "A" : 15, #Gold Ore
     "M" : 16 #Diamond Ore
-}   #This dictionary genuinly makes me feel sick, aswell as the craftingIDs but this sprint is like 10 seconds long so deal
+}   
 
 #Populate Dictionaries
 def populateDictionaries():
