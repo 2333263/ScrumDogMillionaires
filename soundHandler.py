@@ -1,4 +1,5 @@
 import pygame
+audio=True
 try:
     pygame.mixer.init()
     grassSound = pygame.mixer.Sound("Sound Effects\grass6.ogg")
@@ -23,6 +24,7 @@ try:
     breakLeafSound.set_volume(0.1)  
 except:
     print("no audio device found")
+    audio=False
 def getGrassSound():
     return grassSound;
 
@@ -34,26 +36,26 @@ def playMusic():
     pygame.mixer.music.set_volume(0.5)
 
 def playSoundforID(id): #takes in block id from playerHandler and plays the appropriate sound
-    if id==0:
+    if id==0 and audio:
         grassSound.play()
     
-    elif id==1:
+    elif id==1 and audio:
         dirtSound.play()
-    elif id==8 or id==5 or id==7:
+    elif (id==8 or id==5 or id==7) and audio:
         woodSound.play()
-    elif id==6:
+    elif id==6 and audio:
         leafSound.play()
-    else:
+    elif audio:
         stoneSound.play()
     
 def playBreakSoundforID(id): #takes in id from breakPlaceHandler.py and plays the breaking sound for that block
-    if id==0:
+    if id==0 and audio:
         breakGrassSound.play()
-    if id==1:
+    if id==1 and audio:
         breakDirtSound.play()
-    if id==8 or id==5 or id==7:
+    if (id==8 or id==5 or id==7) and audio:
         breakWoodSound.play()
-    if id==6:
+    if id==6 and audio:
         breakLeafSound.play()
-    else:
+    elif audio:
         breakStoneSound.play() #covers blocks like diamon, iron etc
