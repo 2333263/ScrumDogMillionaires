@@ -591,13 +591,13 @@ class TestInvinventorySlots(unittest.TestCase):
        self.assertEqual(self.ins.rect.y,20)
        self.assertEqual(self.ins.image.get_width(),30)
        self.assertEqual(self.ins.image.get_height(),40)
-class TestSoundHandler(unittest.TestCase):
+# class TestSoundHandler(unittest.TestCase):
        
    # mat=um.patch("soundHandler.getGrassSound()")
    # print(mock.get_volume())
-   def test_testSound(self):
-      mock = um.Mock(spec=pygame.mixer.Sound)
-      self.assertIsInstance(mock,  type(soundHandler.grassSound))
+   # def test_testSound(self):
+   #    mock = um.Mock(spec=pygame.mixer.Sound)
+   #    self.assertIsInstance(mock,  type(soundHandler.grassSound))
       #  self.assertEqual(0.3,  round(soundHandler.getGrassSound().get_volume(),1))
       #  self.assertEqual(0.3,  round(soundHandler.getGrassSound().get_volume(),1))
       #  self.assertEqual(0.3,  round(soundHandler.stoneSound.get_volume(),1))
