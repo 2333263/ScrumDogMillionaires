@@ -22,6 +22,7 @@ import soundHandler
 import unittest.mock as um
 import itemNew
 from itemHandler import populateDictionaries
+import itemHandler
 #update test for sound
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -741,6 +742,10 @@ class TestItemNew (unittest.TestCase):
       self.assertEqual(newItems.getTexture(),"texture")
       self.assertEqual(newItems.getIsPlaceable(),False)
       self.assertEqual(newItems.getDrop(),"drops")
+class TestItemHandler (unittest.TestCase):
+       def test_populateDictionaries(self):
+         self.assertEqual(populateDictionaries(),None);
+         self.assertEqual(dict,  type(itemHandler.itemIDs));
 #unittest.TestLoader.sortTestMethodsUsing=None
 
 unittest.main()
