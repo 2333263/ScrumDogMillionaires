@@ -128,7 +128,7 @@ def gameMenu():
                         # Place a block
 
                         bph.blockPlace(pygame.mouse.get_pos(
-                        ) + camera.getOffsets(), worldBlocks, player)  # place the block
+                        ) + camera.getOffsets(), worldBlocks, player,False)  # place the block
 
                     # Scroll UP to select next item in hotbar
                     elif events.button == 4:
@@ -196,7 +196,7 @@ def gameMenu():
                 startTime = time.time()
                 # print('moved cursor')
             if (time.time() - startTime >= breakTime):
-                bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player)
+                bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player,False)
             # Break block if timer is longer than required
         # Draws a box around the selected block
 

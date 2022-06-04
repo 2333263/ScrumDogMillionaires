@@ -24,7 +24,7 @@ def notEmpty(hotbarSelected):
 '''
 
 # Block breaking logic, and inventory handler passover
-def blockBreak(python_pos, world_block, player):
+def blockBreak(python_pos, world_block, player,test):
     if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = gs.getPos(python_pos)
         block = getBlockFromPos(pos, world_block)
@@ -38,7 +38,8 @@ def blockBreak(python_pos, world_block, player):
                     # Add block to inventory
                     inv.addBlock(block)
                      #call sound effect
-                    playBreakSoundforID(block.itemID)
+                    if(test==False):
+                        playBreakSoundforID(block.itemID)
             elif block.itemID not in gs.immovableBlocks:
                 # payer is not holding a tool
                 if block.getHardness() <= 0:
@@ -50,7 +51,7 @@ def blockBreak(python_pos, world_block, player):
 
 
 # Block placing logic, and inventory handler requesting
-def blockPlace(python_pos, world_block, player):
+def blockPlace(python_pos, world_block, player,test):
     if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = gs.getPos(python_pos)
         block = getBlockFromPos(pos, world_block)
@@ -80,9 +81,9 @@ def blockPlace(python_pos, world_block, player):
 
                             gs.generatedChunks[gs.visibleChunks[1]].add(block)
                             inv.decrease()
-
                             #call sound effect
-                            playBreakSoundforID(block.itemID)
+                            if(test==False):
+                                playBreakSoundforID(block.itemID)
 
 
 def getBlockFromPos(pos, world_block):  # find block based on position in world
