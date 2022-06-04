@@ -624,8 +624,8 @@ class TestPortal (unittest.TestCase):
       x=8 - 4 * gs.blockSize
       y=7 - 8 * gs.blockSize
       self.assertEqual(self.port.blockPosition, [x,y ])
-      self.assertEqual(self.port.rect.x,x- 0.4 * gs.blockSize)
-      self.assertEqual(self.port.rect.y,y- 1* gs.blockSize)
+      self.assertEqual(self.port.rect.x,8- 0.4 * gs.blockSize)
+      self.assertEqual(self.port.rect.y,7- 1* gs.blockSize)
    def test_getHardness(self):
       self.assertEqual(self.port.getHardness(),999)
 
