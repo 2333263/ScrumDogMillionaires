@@ -17,7 +17,9 @@ import InventorySlots
 import ChunkGenerator as CG
 import ChunkHandler as CH
 import copy
+import Portal
 import soundHandler
+import unittest.mock as um
 #update test for sound
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -247,6 +249,35 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.update(2,tempGroup)
       self.assertEqual(self.TempPlayer.rect.y,tempPosY+2)
       self.assertEqual(self.TempPlayer.rect.x,tempPosX+2)
+      tempBlock = block.Block(gs.blockSize, (8*gs.blockSize, 7*gs.blockSize), 0, gs.textureNames[gs.itemIDs[0]],0)
+      tempGroup.add(tempBlock)
+      self.TempPlayer.rect.x=8*gs.blockSize-1
+      self.TempPlayer.rect.y=7*gs.blockSize
+      self.TempPlayer.direction.x=1
+      
+      self.TempPlayer.update(1,tempGroup)
+      self.TempPlayer.update(0,tempGroup)
+      self.assertEqual(8*gs.blockSize-1,self.TempPlayer.rect.x)
+      self.TempPlayer.rect.x=8*gs.blockSize+1
+      self.TempPlayer.rect.y=7*gs.blockSize
+      self.TempPlayer.direction.x=-1
+      self.TempPlayer.update(1,tempGroup)
+      self.TempPlayer.update(0,tempGroup)
+      self.assertEqual(8*gs.blockSize+1,self.TempPlayer.rect.x)
+      self.TempPlayer.jumped=True
+      self.TempPlayer.rect.x=8*gs.blockSize
+      self.TempPlayer.rect.y=7*gs.blockSize
+      self.TempPlayer.direction.y=-3
+      self.TempPlayer.update(1,tempGroup)
+      self.assertEqual(tempBlock.rect.bottom,self.TempPlayer.rect.top)
+      self.assertFalse(self.TempPlayer.jumped)
+      self.TempPlayer.rect.x=8*gs.blockSize
+      self.TempPlayer.rect.y=7*gs.blockSize-1
+      self.TempPlayer.direction.y=3
+      
+      self.TempPlayer.update(1,tempGroup)
+      self.assertEqual(tempBlock.rect.top,self.TempPlayer.rect.bottom)
+
 
    def test_StopOnX(self):
       self.TempPlayer.stopMoveOnX()
@@ -649,23 +680,44 @@ class TestInvinventorySlots(unittest.TestCase):
        self.assertEqual(self.ins.rect.y,20)
        self.assertEqual(self.ins.image.get_width(),30)
        self.assertEqual(self.ins.image.get_height(),40)
-#class TestSoundHandler(unittest.TestCase):
-#    def test_testSound(self):
-#       self.assertEqual(0.3,  round(soundHandler.getGrassSound().get_volume(),1))
-   #     self.assertEqual(0.3,  round(soundHandler.stoneSound.get_volume(),1))
-   #     self.assertEqual(0.3,  round(soundHandler.dirtSound.get_volume(),1))
-   #     self.assertEqual(0.3,  round(soundHandler.woodSound.get_volume(),1))
-   #     self.assertEqual(0.3,  round(soundHandler.leafSound.get_volume(),1))
-   #     self.assertEqual(0.1,  round(soundHandler.breakDirtSound.get_volume(),1))
-   #     self.assertEqual(0.1,  round(soundHandler.breakGrassSound.get_volume(),1))
-   #     self.assertEqual(0.1,  round(soundHandler.breakStoneSound.get_volume(),1))
-   #     self.assertEqual(0.1,  round(soundHandler.breakWoodSound.get_volume(),1))
-   #     self.assertEqual(0.1,  round(soundHandler.breakLeafSound.get_volume(),1))
+# class TestSoundHandler(unittest.TestCase):
+       
+   # mat=um.patch("soundHandler.getGrassSound()")
+   # print(mock.get_volume())
+   # def test_testSound(self):
+   #    mock = um.Mock(spec=pygame.mixer.Sound)
+   #    self.assertIsInstance(mock,  type(soundHandler.grassSound))
+      #  self.assertEqual(0.3,  round(soundHandler.getGrassSound().get_volume(),1))
+      #  self.assertEqual(0.3,  round(soundHandler.getGrassSound().get_volume(),1))
+      #  self.assertEqual(0.3,  round(soundHandler.stoneSound.get_volume(),1))
+      #  self.assertEqual(0.3,  round(soundHandler.dirtSound.get_volume(),1))
+      #  self.assertEqual(0.3,  round(soundHandler.woodSound.get_volume(),1))
+      #  self.assertEqual(0.3,  round(soundHandler.leafSound.get_volume(),1))
+      #  self.assertEqual(0.1,  round(soundHandler.breakDirtSound.get_volume(),1))
+      #  self.assertEqual(0.1,  round(soundHandler.breakGrassSound.get_volume(),1))
+      #  self.assertEqual(0.1,  round(soundHandler.breakStoneSound.get_volume(),1))
+      #  self.assertEqual(0.1,  round(soundHandler.breakWoodSound.get_volume(),1))
+      #  self.assertEqual(0.1,  round(soundHandler.breakLeafSound.get_volume(),1))
    #  def test_playMusic(self):
    #     self.assert_
    #  def test_playBreakSound(self):
    #     pass
    #  def test_playSoundforID(self):
    #     pass
+
+class TestPortal (unittest.TestCase):
+   port=Portal.Portal(gs.blockSize,(8,7), 26,gs.textureNames[gs.itemIDs[0]], 999)
+   def test_init(self):
+      
+      self.assertEqual(self.port.textureName,gs.textureNames[gs.itemIDs[0]])
+      self.assertEqual(self.port.itemID,26)
+      x=8 - 4 * gs.blockSize
+      y=7 - 8 * gs.blockSize
+      self.assertEqual(self.port.blockPosition, [x,y ])
+      self.assertEqual(self.port.rect.x,8- 0.4 * gs.blockSize)
+      self.assertEqual(self.port.rect.y,7- 1* gs.blockSize)
+   def test_getHardness(self):
+      self.assertEqual(self.port.getHardness(),999)
+
 unittest.TestLoader.sortTestMethodsUsing=None
 unittest.main()
