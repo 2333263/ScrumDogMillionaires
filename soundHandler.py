@@ -23,7 +23,8 @@ try:
     breakLeafSound.set_volume(0.1)  
 except:
     print()
-
+def getGrassSound():
+    return grassSound;
 
 def playMusic():
     # Loading and playing background music:
