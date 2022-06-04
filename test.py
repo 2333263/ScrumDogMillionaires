@@ -15,6 +15,7 @@ import breakPlaceHandler as bph
 import InventorySlots
 import ChunkGenerator as CG
 import ChunkHandler as CH
+import copy
 #update test for sound
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -449,8 +450,11 @@ class TestCamera(unittest.TestCase):
       tempGroup.add(self.tempBlock4)
       self.assertEqual(self.Cam.draw(self.screen,tempGroup),[self.tempBlock])
 
-class testChunkGeneration(unittest.TestCase):
+class testChunks(unittest.TestCase):
    testWorld = pygame.sprite.Group()
+   TempPlayer=ph.Player((gs.width/2 - gs.blockSize * 4,
+                      - gs.blockSize*2), 24)
+   #testChunk=CG.generateChunk(0, testWorld)
    def test_generation(self):
       gs.generatedChunks[-1] = CG.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld)
       gs.generatedChunks[0] = CG.generateChunk(0, self.testWorld)
@@ -458,6 +462,24 @@ class testChunkGeneration(unittest.TestCase):
       self.assertIsInstance(gs.generatedChunks[-1],pygame.sprite.Group)
       self.assertIsInstance(gs.generatedChunks[0],pygame.sprite.Group)
       self.assertIsInstance(gs.generatedChunks[1],pygame.sprite.Group)
+   def test_Load_Unload(self):
+      gs.generatedChunks[-1] = CG.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld)
+      gs.generatedChunks[0] = CG.generateChunk(0, self.testWorld)
+      gs.generatedChunks[1] = CG.generateChunk(gs.CHUNK_SIZE[0], self.testWorld)
+      testChunk=[-1,0,1]
+      CH.checkChunkUpdates(self.TempPlayer,self.testWorld)
+      self.assertEqual(testChunk,gs.visibleChunks)
+      self.TempPlayer.rect.x+=gs.CHUNK_SIZE[0]*gs.blockSize
+      CH.checkChunkUpdates(self.TempPlayer,self.testWorld)
+      self.assertNotEqual(testChunk,gs.visibleChunks)
+      self.assertEqual([0,1,2],gs.visibleChunks)
+      self.TempPlayer.rect.x-=gs.CHUNK_SIZE[0]*gs.blockSize
+      CH.checkChunkUpdates(self.TempPlayer,self.testWorld)
+      self.assertEqual(testChunk,gs.visibleChunks)
+      self.TempPlayer.rect.x-=gs.CHUNK_SIZE[0]*gs.blockSize
+      CH.checkChunkUpdates(self.TempPlayer,self.testWorld)
+      self.assertNotEqual(testChunk,gs.visibleChunks)
+      self.assertEqual([-2,-1,0],gs.visibleChunks)
 class TestBreakPlace(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    pos=(8,8)
