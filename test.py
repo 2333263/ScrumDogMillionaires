@@ -17,6 +17,7 @@ import InventorySlots
 import ChunkGenerator as CG
 import ChunkHandler as CH
 import copy
+import Portal
 import soundHandler
 import unittest.mock as um
 #update test for sound
@@ -615,4 +616,19 @@ class TestSoundHandler(unittest.TestCase):
    #     pass
    #  def test_playSoundforID(self):
    #     pass
+class TestPortal (unittest.TestCase):
+   port=Portal.Portal(gs.blockSize,(8,7), 26,gs.textureNames["Portal Block"], 999)
+   def test_init(self):
+      
+      self.assertEqual(self.port.textureName,gs.textureNames["Portal Block"])
+      self.assertEqual(self.port.itemID,26)
+      x=8 - 4 * gs.blockSize
+      y=7 - 8 * gs.blockSize
+      self.assertEqual(self.port.blockPosition, [x,y ])
+      self.assertEqual(self.port.rect.x,x- 0.4 * gs.blockSize)
+      self.assertEqual(self.port.rect.y,y- 1* gs.blockSize)
+   def test_getHardness(self):
+      self.assertEqual(self.port.getHardness(),999)
+
+
 unittest.main()
