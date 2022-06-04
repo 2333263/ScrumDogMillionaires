@@ -594,7 +594,6 @@ class TestInvinventorySlots(unittest.TestCase):
 class TestSoundHandler(unittest.TestCase):
        
    # mat=um.patch("soundHandler.getGrassSound()")
-   mock = um.Mock(spec=soundHandler.getGrassSound())
    # print(mock.get_volume())
    def test_testSound(self):
       mock = um.Mock(spec=pygame.mixer.Sound)
