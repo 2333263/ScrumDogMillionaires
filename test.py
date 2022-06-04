@@ -425,12 +425,20 @@ class TestInv(unittest.TestCase):
       self.assertFalse(found)
       tempItem=item.Item(gs.itemIDs[10],10,gs.itemHardness[10])
       ih.addItem(tempItem)
+      ih.addItem(tempItem)
       found=False
       inv=ih.getInv()
       for i in inv:
          if(i.getItemId()==10):
             found=True
       self.assertTrue(found)
+      foundpos=0
+      inv=ih.getInv()
+      for i in range(len(inv)):
+         if(inv[i].getItemId()==10):
+            foundpos=i
+      self.assertEqual(inv[foundpos].getCount(),2)
+      ih.decreaseSpec(10)
       ih.decreaseSpec(10)
    def testSelection(self):
       ih.selected=0
@@ -447,6 +455,28 @@ class TestInv(unittest.TestCase):
    def testGetitemCount(self):
       self.assertEqual(ih.getItemCount(5),1)
       self.assertEqual(ih.getItemCount(14),0)
+   def testClick(self):
+      ih.fullInv=False
+      ih.selected=0
+      self.assertEqual(ih.selected,0)
+      ih.onClick((12*ih.relative+3*85*ih.relative,30*ih.relative+15*ih.relative))
+      self.assertEqual(ih.selected,3)
+      ih.fullInv=True
+      self.assertEqual(ih.clicked,-1)
+      ih.onClick((12*ih.relative+0*85*ih.relative,30*ih.relative+15*ih.relative))
+      self.assertEqual(ih.clicked,0)
+      ih.onClick((12*ih.relative+3*85*ih.relative,30*ih.relative+15*ih.relative))
+      self.assertEqual(ih.clicked,-1)
+      foundPos=0
+      inv=ih.getInv()
+      for i in range(len(inv)):
+         if(inv[i].getItemId()==5):
+            foundPos=i
+      self.assertEqual(foundPos,3)
+      ih.onClick((12*ih.relative+0*85*ih.relative,30*ih.relative+15*ih.relative))
+      self.assertEqual(ih.clicked,0)
+      ih.onClick((12*ih.relative+3*85*ih.relative,30*ih.relative+15*ih.relative))
+      self.assertEqual(ih.clicked,-1)
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
