@@ -517,6 +517,17 @@ class TestInvinventorySlots(unittest.TestCase):
        self.assertEqual(self.ins.image.get_width(),30)
        self.assertEqual(self.ins.image.get_height(),40)
 class TestSoundHandler(unittest.TestCase):
+    def test_testSound(self):
+       self.assertEqual(0.3,  round(soundHandler.grassSound.get_volume(),1))
+       self.assertEqual(0.3,  round(soundHandler.stoneSound.get_volume(),1))
+       self.assertEqual(0.3,  round(soundHandler.dirtSound.get_volume(),1))
+       self.assertEqual(0.3,  round(soundHandler.woodSound.get_volume(),1))
+       self.assertEqual(0.3,  round(soundHandler.leafSound.get_volume(),1))
+       self.assertEqual(0.1,  round(soundHandler.breakDirtSound.get_volume(),1))
+       self.assertEqual(0.1,  round(soundHandler.breakGrassSound.get_volume(),1))
+       self.assertEqual(0.1,  round(soundHandler.breakStoneSound.get_volume(),1))
+       self.assertEqual(0.1,  round(soundHandler.breakWoodSound.get_volume(),1))
+       self.assertEqual(0.1,  round(soundHandler.breakLeafSound.get_volume(),1))
     def test_playMusic(self):
        pass
     def test_playBreakSound(self):
