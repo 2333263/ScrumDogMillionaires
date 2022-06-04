@@ -518,11 +518,9 @@ class TestInvinventorySlots(unittest.TestCase):
        self.assertEqual(self.ins.image.get_height(),40)
 class TestSoundHandler(unittest.TestCase):
     def test_playMusic(self):
-       pygame.mixer.init()
-       soundHandler.playMusic();
        pass
     def test_playBreakSound(self):
-       pygame.mixer.init()
-       soundHandler.playBreakSoundforID(2);
+       pass
+    def test_playSoundforID(self):
        pass
 unittest.main()
