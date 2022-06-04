@@ -521,6 +521,12 @@ class TestBreakPlace(unittest.TestCase):
   #     except Exception as e:
   #        print(e)
   #        self.assertTrue(False)
+   def test_getBlockFromPos(self):
+      craftableBlock=block.Block(gs.blockSize, (10*gs.blockSize, 10*gs.blockSize), 5, gs.textureNames[gs.itemIDs[0]],1)
+      self.spriteGroup.add(craftableBlock)
+      self.assertEqual(craftableBlock.itemID,bph.getBlockFromPos((10*gs.blockSize, 10*gs.blockSize),self.spriteGroup).itemID)
+      self.assertEqual(-1,bph.getBlockFromPos((200*gs.blockSize, 10*gs.blockSize),self.spriteGroup).itemID)
+
    def test_blockPlace(self):
       craftableBlock=block.Block(gs.blockSize, (10*gs.blockSize, 10*gs.blockSize), 5, gs.textureNames[gs.itemIDs[0]],1)
       self.spriteGroup.add(craftableBlock)
