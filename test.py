@@ -1,3 +1,4 @@
+from tarfile import BLOCKSIZE
 import unittest
 from numpy import ndarray
 import Camera
@@ -250,6 +251,18 @@ class TestPlayer(unittest.TestCase):
    def test_StopOnX(self):
       self.TempPlayer.stopMoveOnX()
       self.assertEqual(self.TempPlayer.direction.x,0)
+   def test_willcolide(self):
+      tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
+      tempGroup=pygame.sprite.Group()
+      tempGroup.add(tempBlock)
+      
+      self.TempPlayer.rect.x=8
+      self.TempPlayer.rect.y=7
+      self.assertTrue(self.TempPlayer.willcollide(tempBlock))
+      self.TempPlayer.rect.x=22*gs.blockSize
+      self.TempPlayer.rect.y=22*gs.blockSize
+      self.assertFalse(self.TempPlayer.willcollide(tempBlock))
+
 
 class TestCraftingMenu (unittest.TestCase):
       screen = pygame.display

@@ -22,7 +22,7 @@ try:
     breakStoneSound.set_volume(0.1)
     breakLeafSound.set_volume(0.1)  
 except:
-    print()
+    print("no audio device found")
 def getGrassSound():
     return grassSound;
 
