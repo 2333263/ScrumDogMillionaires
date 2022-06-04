@@ -20,6 +20,8 @@ import copy
 import Portal
 import soundHandler
 import unittest.mock as um
+import itemNew
+from itemHandler import populateDictionaries
 #update test for sound
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -738,6 +740,37 @@ class TestPortal (unittest.TestCase):
       self.assertEqual(self.port.rect.y,7- 1* gs.blockSize)
    def test_getHardness(self):
       self.assertEqual(self.port.getHardness(),999)
+# need to change tooltype and reqtooltype and drops when we used it
+class TestItemNew (unittest.TestCase):
+   def test_getDrop(self):
+      newItems=itemNew.Item(9, "Bigblock", 100, 3, 3, "axe", "pickaxe", "texture", False, "drops")
+      self.assertEqual(newItems.getCount(),0)
+      newItems.increase();
+      self.assertEqual(newItems.getCount(),1)
+      newItems.decrease();
+      self.assertEqual(newItems.getCount(),0)
 
+      self.assertEqual(int,  type(newItems.itemID))
+      self.assertEqual(str,  type(newItems.itemDisplayName))
+      self.assertEqual(int,  type(newItems.breakTime))
+      self.assertEqual(int,  type(newItems.blockHardness))
+      self.assertEqual(int,  type(newItems.itemHardness))
+      self.assertEqual(str,  type(newItems.reqToolType))
+      self.assertEqual(str,  type(newItems.toolType))
+      self.assertEqual(str,  type(newItems.texture))
+      self.assertEqual(bool,  type(newItems.isPlaceable))
+      self.assertEqual(str,  type(newItems.drops))
+
+      self.assertEqual(newItems.getItemId(),9)
+      self.assertEqual(newItems.getItemName(),"Bigblock")
+      self.assertEqual(newItems.getBreakTime(),100)
+      self.assertEqual(newItems.getBlockHardness(),3)
+      self.assertEqual(newItems.getItemHardness(),3)
+      self.assertEqual(newItems.getReqToolType(),"axe")
+      self.assertEqual(newItems.getToolType(),"pickaxe")
+      self.assertEqual(newItems.getTexture(),"texture")
+      self.assertEqual(newItems.getIsPlaceable(),False)
+      self.assertEqual(newItems.getDrop(),"drops")
 #unittest.TestLoader.sortTestMethodsUsing=None
+
 unittest.main()
