@@ -665,8 +665,13 @@ class TestInvinventorySlots(unittest.TestCase):
        self.assertEqual(self.ins.rect.y,20)
        self.assertEqual(self.ins.image.get_width(),30)
        self.assertEqual(self.ins.image.get_height(),40)
-# class TestSoundHandler(unittest.TestCase):
-       
+class TestSoundHandler(unittest.TestCase):
+   def test_everything(self):
+     soundHandler.audio=False
+     for i in range (9):
+        soundHandler.playBreakSoundforID(i)
+        soundHandler.playSoundforID(i)
+     self.assertFalse( soundHandler.audio)
    # mat=um.patch("soundHandler.getGrassSound()")
    # print(mock.get_volume())
    # def test_testSound(self):
