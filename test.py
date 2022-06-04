@@ -15,6 +15,7 @@ import breakPlaceHandler as bph
 import InventorySlots
 import ChunkGenerator as CG
 import ChunkHandler as CH
+import soundHandler
 #update test for sound
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -515,5 +516,11 @@ class TestInvinventorySlots(unittest.TestCase):
        self.assertEqual(self.ins.rect.y,20)
        self.assertEqual(self.ins.image.get_width(),30)
        self.assertEqual(self.ins.image.get_height(),40)
-
+class TestSoundHandler(unittest.TestCase):
+    def test_playMusic(self):
+       soundHandler.playMusic();
+       pass
+    def test_playBreakSound(self):
+       soundHandler.playBreakSoundforID(2);
+       pass
 unittest.main()
