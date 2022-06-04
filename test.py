@@ -13,6 +13,8 @@ import CraftingMenu
 import inventoryHandler as ih
 import breakPlaceHandler as bph
 import InventorySlots
+import ChunkGenerator as CG
+import ChunkHandler as CH
 #update test for sound
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -446,6 +448,16 @@ class TestCamera(unittest.TestCase):
       tempGroup.add(self.tempBlock3)
       tempGroup.add(self.tempBlock4)
       self.assertEqual(self.Cam.draw(self.screen,tempGroup),[self.tempBlock])
+
+class testChunkGeneration(unittest.TestCase):
+   testWorld = pygame.sprite.Group()
+   def test_generation(self):
+      gs.generatedChunks[-1] = CH.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld)
+      gs.generatedChunks[0] = CH.generateChunk(0, self.testWorld)
+      gs.generatedChunks[1] = CH.generateChunk(gs.CHUNK_SIZE[0], self.testWorld)
+      self.assertIsInstance(gs.generatedChunks[-1],pygame.sprite.Group)
+      self.assertIsInstance(gs.generatedChunks[0],pygame.sprite.Group)
+      self.assertIsInstance(gs.generatedChunks[1],pygame.sprite.Group)
 class TestBreakPlace(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    pos=(8,8)
@@ -465,21 +477,24 @@ class TestBreakPlace(unittest.TestCase):
       self.assertTrue(bph.checkBreakable(self.tempBlock,self.tempItem))
       self.tempItem.hardness=0
       self.assertFalse(bph.checkBreakable(self.tempBlock,self.tempItem))
+      '''removed depricated function
    def test_notEmpty(self):
       #self.hotbar.append(self.tempBlock)
       #self.assertTrue(bph.notEmpty(self.hotbar[0]))
       print("ADD THIS")
-   # def test_blockBreak(self):
-   #    try:
-   #       newBlock=block.Block(gs.blockSize, (8*gs.blockSize, 8*gs.blockSize), 0, gs.textureNames[gs.itemIDs[0]],0)
-   #       self.spriteGroup.add(newBlock)
-   #       #ih.addItem(self.tempItem)
-   #       self.pos=(8*gs.blockSize,8*gs.blockSize)
-   #       bph.blockBreak(self.pos,self.spriteGroup,self.TempPlayer)
-   #       self.assertTrue(True)
-   #       ih.decrease()
-   #    except:
-   #       self.assertTrue(False)
+      '''
+  # def test_blockBreak(self):
+  #     try:
+  ##        newBlock=block.Block(gs.blockSize, (8*gs.blockSize, 8*gs.blockSize), 0, gs.textureNames[gs.itemIDs[0]],0)
+  #        self.spriteGroup.add(newBlock)
+  #        #ih.addItem(self.tempItem)
+  #        self.pos=(8*gs.blockSize,8*gs.blockSize)
+  #        bph.blockBreak(self.pos,self.spriteGroup,self.TempPlayer)
+  ##        self.assertTrue(True)
+  #        ih.decrease()
+  #     except Exception as e:
+  #        print(e)
+  #        self.assertTrue(False)
    def test_blockPlace(self):
       craftableBlock=block.Block(gs.blockSize, (10*gs.blockSize, 10*gs.blockSize), 5, gs.textureNames[gs.itemIDs[0]],1)
       self.spriteGroup.add(craftableBlock)

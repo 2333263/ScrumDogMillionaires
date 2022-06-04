@@ -15,13 +15,13 @@ def checkBreakable(block, inHand):
     else:
         return False
 
-
+'''
 def notEmpty(hotbarSelected):
     if hotbarSelected.isEmpty():
         return False
     else:
         return True
-
+'''
 
 # Block breaking logic, and inventory handler passover
 def blockBreak(python_pos, world_block, player):
