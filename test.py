@@ -609,10 +609,10 @@ class TestInvinventorySlots(unittest.TestCase):
    #  def test_playSoundforID(self):
    #     pass
 class TestPortal (unittest.TestCase):
-   port=Portal.Portal(gs.blockSize,(8,7), 26,gs.textureNames["Portal Block"], 999)
+   port=Portal.Portal(gs.blockSize,(8,7), 26,gs.textureNames[gs.itemIDs[0]], 999)
    def test_init(self):
       
-      self.assertEqual(self.port.textureName,gs.textureNames["Portal Block"])
+      self.assertEqual(self.port.textureName,gs.textureNames[gs.itemIDs[0]])
       self.assertEqual(self.port.itemID,26)
       x=8 - 4 * gs.blockSize
       y=7 - 8 * gs.blockSize
