@@ -247,6 +247,35 @@ class TestPlayer(unittest.TestCase):
       self.TempPlayer.update(2,tempGroup)
       self.assertEqual(self.TempPlayer.rect.y,tempPosY+2)
       self.assertEqual(self.TempPlayer.rect.x,tempPosX+2)
+      tempBlock = block.Block(gs.blockSize, (8*gs.blockSize, 7*gs.blockSize), 0, gs.textureNames[gs.itemIDs[0]],0)
+      tempGroup.add(tempBlock)
+      self.TempPlayer.rect.x=8*gs.blockSize-1
+      self.TempPlayer.rect.y=7*gs.blockSize
+      self.TempPlayer.direction.x=1
+      
+      self.TempPlayer.update(1,tempGroup)
+      self.TempPlayer.update(0,tempGroup)
+      self.assertEqual(8*gs.blockSize-1,self.TempPlayer.rect.x)
+      self.TempPlayer.rect.x=8*gs.blockSize+1
+      self.TempPlayer.rect.y=7*gs.blockSize
+      self.TempPlayer.direction.x=-1
+      self.TempPlayer.update(1,tempGroup)
+      self.TempPlayer.update(0,tempGroup)
+      self.assertEqual(8*gs.blockSize+1,self.TempPlayer.rect.x)
+      self.TempPlayer.jumped=True
+      self.TempPlayer.rect.x=8*gs.blockSize
+      self.TempPlayer.rect.y=7*gs.blockSize
+      self.TempPlayer.direction.y=-3
+      self.TempPlayer.update(1,tempGroup)
+      self.assertEqual(tempBlock.rect.bottom,self.TempPlayer.rect.top)
+      self.assertFalse(self.TempPlayer.jumped)
+      self.TempPlayer.rect.x=8*gs.blockSize
+      self.TempPlayer.rect.y=7*gs.blockSize-1
+      self.TempPlayer.direction.y=3
+      
+      self.TempPlayer.update(1,tempGroup)
+      self.assertEqual(tempBlock.rect.top,self.TempPlayer.rect.bottom)
+
 
    def test_StopOnX(self):
       self.TempPlayer.stopMoveOnX()
