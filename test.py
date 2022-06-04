@@ -452,9 +452,9 @@ class TestCamera(unittest.TestCase):
 class testChunkGeneration(unittest.TestCase):
    testWorld = pygame.sprite.Group()
    def test_generation(self):
-      gs.generatedChunks[-1] = CH.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld)
-      gs.generatedChunks[0] = CH.generateChunk(0, self.testWorld)
-      gs.generatedChunks[1] = CH.generateChunk(gs.CHUNK_SIZE[0], self.testWorld)
+      gs.generatedChunks[-1] = CG.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld)
+      gs.generatedChunks[0] = CG.generateChunk(0, self.testWorld)
+      gs.generatedChunks[1] = CG.generateChunk(gs.CHUNK_SIZE[0], self.testWorld)
       self.assertIsInstance(gs.generatedChunks[-1],pygame.sprite.Group)
       self.assertIsInstance(gs.generatedChunks[0],pygame.sprite.Group)
       self.assertIsInstance(gs.generatedChunks[1],pygame.sprite.Group)
