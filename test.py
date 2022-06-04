@@ -374,94 +374,79 @@ class TestGameSettings(unittest.TestCase):
 
       self.assertIsInstance(gs.immovableBlocks, list)
       self.assertIsInstance(gs.clickableBlocks, list)
-''' disbled for now, until break place handler is complete
-class TestInventoryHandler(unittest.TestCase):
-    hotbar=ih.getInv()
-    tempBlock = block.Block(gs.blockSize, (8, 7), 0, gs.textureNames[gs.itemIDs[0]],0)
-    tempBlock2=block.Block(gs.blockSize, (20, 7), 1, gs.textureNames[gs.itemIDs[1]],0)
-    tempBlock3=block.Block(gs.blockSize, (29, 7), 2, gs.textureNames[gs.itemIDs[1]],0)
-    tempBlock4=block.Block(gs.blockSize, (50, 7), 3, gs.textureNames[gs.itemIDs[1]],0)
-    tempItem = item.Item("Cloud", 4)
-    # screen=pygame.Surface((gs.blockSize*gs.noXBlocks, gs.blockSize*gs.noYBlocks))
-    def test_AddBlock(self):
-       ih.addBlock(self.tempBlock)
-       #self.hotbar=ih.getHotBar()
-       self.assertEqual(self.hotbar[0].itemID,self.tempBlock.itemID)
-       self.assertEqual(self.hotbar[0].getCount(),1)
-       ih.addBlock(self.tempBlock)
-       #self.hotbar=ih.getHotBar()
-       self.assertEqual(self.hotbar[0].getCount(),2)
-    def test_Decrease(self):
-       #selected is 0 currently
-       self.assertEqual(self.hotbar[0].getCount(),2)
-       ih.decrease()
-       self.assertEqual(self.hotbar[0].getCount(),1)
-       ih.addBlock(self.tempBlock2)
-       self.assertEqual(self.hotbar[1].getCount(),1)
-       ih.selected=1
-       ih.decrease()
-       self.assertNotIn(self.tempBlock2,self.hotbar)
-       self.assertEqual(self.hotbar[1].getCount(),0)
-       ih.decrease()
-       self.assertEqual(self.hotbar[1], ih.NullItem)
-    def test_DecreaseSpec(self):
-       ih.addBlock(self.tempBlock)
-       ih.addBlock(self.tempBlock2)
-       ih.addBlock(self.tempBlock2)
-       ih.addBlock(self.tempBlock3)
-       ih.addBlock(self.tempBlock3)
-       self.assertEqual(self.hotbar[1].getCount(),2)
-       ih.decreaseSpec(self.tempBlock2.itemID)
-       self.assertEqual(self.hotbar[1].getCount(),1)
-       ih.decreaseSpec(self.tempBlock2.itemID)
-       self.assertEqual(self.hotbar[1], ih.NullItem)
-       self.assertNotEqual(self.hotbar[1].itemID,self.tempBlock2.itemID)
-    def test_Selected(self):
-       ih.selected=0
-       self.assertEqual(ih.selected,0)
-       self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
-       self.assertEqual(item.Item,  type(ih.getSelected()))
-       ih.selected=1
-       self.assertEqual(ih.selected,1)
-       ih.addBlock(self.tempBlock2)
-       self.assertEqual(ih.getSelected().itemID,self.tempBlock2.itemID)
-   
-    def test_selectNext(self):
-       ih.selected=0
-       ih.selectNext()
-       self.assertEqual(ih.selected,1)
-       self.assertEqual(ih.getSelected().itemID,self.tempBlock2.itemID)
-       ih.selectNext()
-       self.assertEqual(ih.selected,2)
-       self.assertEqual(ih.getSelected().itemID,self.tempBlock3.itemID)
-    def test_selectPrevious(self):  
-       ih.selectPrevious()
-       self.assertEqual(ih.selected,1)
-       self.assertEqual(ih.getSelected().itemID,self.tempBlock2.itemID)
-       ih.selectPrevious()
-       self.assertEqual(ih.selected,0)
-       self.assertEqual(ih.getSelected().itemID,self.tempBlock.itemID)
-    def test_getInv(self):
-           self.assertEqual(ndarray,  type(ih.getInv()))
-    def test_getItemCount(self):
-       ih.addBlock(self.tempBlock)
-       self.assertEqual(ih.getItemCount(self.tempBlock.itemID),3)
-       self.assertEqual(ih.getItemCount(self.tempBlock2.itemID),1)
-    def test_addItem(self):
-       ih.addItem(self.tempItem)
-       ih.addItem(self.tempItem)
-       self.assertEqual(self.hotbar[3].itemID,self.tempItem.itemID)
-    #def test_drawInv(self):
-    #   try:
-    #       ih.drawHotBar(self.screen)
-    #       self.assertTrue(True)
-    #    except:
-    #       self.assertTrue(False)
-    def test_initGroup(self):
-       ih.initGroup()
-       self.assertTrue(ih.hotBarrSprite.__len__() >0)
-       self.assertTrue(ih.slots.__len__() >0)  
-'''
+class TestInv(unittest.TestCase): 
+   def testAAInit(self):# I had to call it AAinit so it would run before the other test cases
+      inventory=ih.getInv()
+      empty=True
+      for i in inventory:
+         if(i.getItemId()!=-1):
+            empty=False
+      self.assertTrue(empty)
+      ih.initGroup()
+      self.assertIsInstance(ih.slots,pygame.sprite.Group)
+      self.assertEqual(len(ih.slots),40)
+      ih.selected=0
+      self.assertEqual(ih.getSelected().getItemId(),5)
+   def testAddBlockandRemove(self):
+      tempBlock=block.Block(gs.blockSize,(9*gs.blockSize,9*gs.blockSize),7,gs.textureNames["Logs"],gs.blockHardness[7])
+      ih.addBlock(tempBlock)
+      found=False
+      foundPos=0
+      inv=ih.getInv()
+      for i in range(len(inv)):
+        if(inv[i].getItemId()==7):
+           foundPos=i
+           found=True
+      self.assertTrue(found)
+      self.assertEqual(inv[foundPos].getCount(),1)
+      ih.addBlock(tempBlock)
+      self.assertEqual(inv[foundPos].getCount(),2)
+      ih.selected=foundPos
+      ih.decrease()
+      self.assertEqual(inv[foundPos].getCount(),1)
+      ih.decrease()
+      self.assertEqual(inv[foundPos].getItemId(),-1)
+   def testDecSpec(self):
+      inv=ih.getInv()
+      self.assertEqual(inv[0].getItemId(),5)#crafting table is in position 0
+      tempBlock=block.Block(gs.blockSize,(9*gs.blockSize,9*gs.blockSize),7,gs.textureNames["Logs"],gs.blockHardness[7])
+      ih.addBlock(tempBlock) #should be in position 1
+      inv=ih.getInv()
+      self.assertEqual(inv[1].getItemId(),7)
+      ih.selected=0
+      ih.decreaseSpec(7)
+      self.assertEqual(inv[1].getItemId(),-1)
+   def testAddItem(self):
+      found=False
+      inv=ih.getInv()
+      for i in inv:
+         if(i.getItemId()==10):
+            found=True
+      self.assertFalse(found)
+      tempItem=item.Item(gs.itemIDs[10],10,gs.itemHardness[10])
+      ih.addItem(tempItem)
+      found=False
+      inv=ih.getInv()
+      for i in inv:
+         if(i.getItemId()==10):
+            found=True
+      self.assertTrue(found)
+      ih.decreaseSpec(10)
+   def testSelection(self):
+      ih.selected=0
+      ih.selectNext()
+      self.assertEqual(ih.selected,1)
+      ih.selected=9
+      ih.selectNext()
+      self.assertEqual(ih.selected,0)
+      ih.selectPrevious()
+      self.assertEqual(ih.selected,9)
+      ih.selectPrevious()
+      self.assertEqual(ih.selected,8)
+      ih.selected=0
+   def testGetitemCount(self):
+      self.assertEqual(ih.getItemCount(5),1)
+      self.assertEqual(ih.getItemCount(14),0)
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
@@ -719,5 +704,5 @@ class TestPortal (unittest.TestCase):
    def test_getHardness(self):
       self.assertEqual(self.port.getHardness(),999)
 
-unittest.TestLoader.sortTestMethodsUsing=None
+#unittest.TestLoader.sortTestMethodsUsing=None
 unittest.main()
