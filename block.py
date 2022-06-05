@@ -1,5 +1,4 @@
 import pygame
-from gameSettings import blockSize
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, blockSize, blockPosition, itemID, textureName, hardness):

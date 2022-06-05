@@ -14,9 +14,9 @@ class Block {
 
 class breakPlaceHandler {
     +checkBreakable(block, inHand)
-    +notEmpty(hotbarSelected)
-    +blockBreak(python_pos, world_block, player)
-    +blockPlace(python_pos, world_block, player)
+    +blockBreak(python_pos, world_block, player, test)
+    +blockPlace(python_pos, world_block, player, test)
+    +getBlockFromPos(pos, world_block)
 }
 
 class Camera {
@@ -30,6 +30,19 @@ class Camera {
     +getOffsets()
     +isColideable(block)
     +isOnScreen(block)
+}
+
+class ChunkGenerator {
+    +drawOre(world, x, y, ore)
+    +drawCave(world, x, y)
+    +drawTree(world, y, x)
+    +getWorldSprites(world, generatePos)
+    +generateChunk(generatePos, worldBlocks)
+}
+
+class ChunkHandler {
+    +updateChunkPositions(playerChunk)
+    +checkChunkUpdates(player, worldBlocks)
 }
 
 class Button {
@@ -65,18 +78,20 @@ class Crafting {
 }
 
 class gameSettings {
-    +levelName
-    +seed 
-    +octaves
-    +levelArray
-    +blockSize
-    +playerRange
-    +noXBlocks
-    +noYBlocks
-    +width
-    +height
-    +drawCrafting
-    +craftingTablePos
+    +seed
+    +octaves 
+    +blockSize 
+    +playerRange 
+    +width 
+    +height 
+    +generatedChunks 
+    +CHUNK_SIZE 
+    +visibleChunks
+    +drawCrafting 
+    +craftingTablePos 
+    +endGamePlaced 
+    +drawPortal 
+    +endGamePos 
     +getPos(pos)
     +distance(player, python_pos)
     +itemIDs{}
@@ -140,9 +155,17 @@ class Item {
     +getHardness()
 }
 
-class levelGenerator {
-    +worldGroup
-    +getBlocks(levelName)
+class itemHandler {
+    +itemIDs
+    +blockHardness 
+    +itemHardness 
+    +isPlacable 
+    +textureNames 
+    +immovableBlocks
+    +clickableBlocks
+    +craftingIDs{}
+    +converterIDs{}
+    +populateDictionaries()
 }
 
 class main {
@@ -155,26 +178,33 @@ class main {
     +startPage
     +PausePage
     +infoPage
+    +endPage
     +worldBlocks
     +collisionblocks
     +player
     +camera
+    +startTime 
+    +startPos
     +crafter
+    +fakeKeys{}
     +font
     +fpsText
     +seedText
-    +bg
+    +blockFrameImgName
     +blockFrameImg
     +blockFrame 
     +mousePos
     +blockPos 
     +mouse
     +gameMenu()
+    +playMusic()
 }
 
 class menuHandler {
     +infoMenu(screen, clock, infoPage)
     +pauseMenu(screen, clock, pausePage)
+    +mouseOffPause(clock)
+    +endMenu(screen, clock, endPage)
 }
 
 class Player {
@@ -185,21 +215,29 @@ class Player {
     +direction
     +gravity
     +character
+    +y_momentum
     +keys
+    +count
     +getPlayerPos()
-    +MoveOnX
+    +MoveOnX(fakeKeys)
     +useGravity()
     +jump()
-    +jumpArc
-    +update(dt, allBlocks)
-    +stopMoveOnX
+    +jumpArc()
+    +collided(blocks)
+    +update(dt, blocks)
+    +stopMoveOnX()
+    +willcollide(block)
 }
 
-class RandomWorldGen {
-    +world
-    +generateWorld()
-    +drawOre(world, x, y, ore)
-    +drawTree(world, x, y)
+class Portal {
+    +blockPosition 
+    +itemID 
+    +textureName 
+    +hardness 
+    +image 
+    +rect 
+    +init(blockSize, blockPosition, itemID, textureName, hardness)
+    +getHardness()
 }
 
 class RecipeHandler {
@@ -212,6 +250,14 @@ class RecipeHandler {
     +getCraftingAmount(itemID)
     +getAllItemIDs()
     +getCrafterShape(itemID)
+}
+
+class soundHandler {
+    +audio 
+    +getGrassSound()
+    +playMusic()
+    +playSoundForID(id)
+    +playBreakSoundforID(id)
 }
 
 class Text {
@@ -227,20 +273,30 @@ class Text {
 main --* Player
 main --* Camera
 main --* Crafting
+main --* Block
 main --> gameSettings
-main --> levelGenerator
 main --> breakPlaceHandler
 main --> inventoryHandler
+main --> ChunkGenerator
+main --> ChunkHandler
 main --> menuHandler
-
-Block --> gameSettings
+main --> soundHandler
+main --> itemHandler
 
 breakPlaceHandler --* Block
 breakPlaceHandler --> Block
 breakPlaceHandler --> gameSettings
 breakPlaceHandler --> inventoryHandler
+breakPlaceHandler --> soundHandler
+breakPlaceHandler --> Player
 
 Camera --> gameSettings
+
+ChunkGenerator --> gameSettings
+ChunkGenerator --* Block
+
+ChunkHandler --> gameSettings
+ChunkHandler --> ChunkGenerator
 
 Button --> gameSettings
 
@@ -253,19 +309,17 @@ Crafting --> inventoryHandler
 
 inventoryHandler --* Item
 inventoryHandler --* slot
+inventoryHandler --* Block
 inventoryHandler --> gameSettings
 
 Item --> gameSettings
 
-levelGenerator --* Block
-levelGenerator --> gameSettings
-levelGenerator --> RandomWorldGen
-
 menuHandler --> gameSettings
 
 Player --> gameSettings
+Player --> soundHandler
 
-RandomWorldGen --> gameSettings
+Portal --> gameSettings
 
 RecipeHandler --> gameSettings
 @enduml

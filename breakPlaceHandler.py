@@ -1,7 +1,4 @@
 import gameSettings as gs
-import block
-import inventoryHandler
-import math
 from block import Block
 import inventoryHandler as inv
 from soundHandler import playBreakSoundforID
