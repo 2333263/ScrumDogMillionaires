@@ -6,6 +6,7 @@ state fork_startScreen <<fork>>
 state fork_beginGame <<fork>>
 state fork_pause <<fork>>
 state fork_craft <<fork>>
+state movement_fork <<fork>>
 state join_inventory <<join>>
 state join_loadGame <<join>>
 
@@ -14,12 +15,14 @@ StartScreen --> fork_startScreen
 fork_startScreen --> BeginGame : Click Begin Game Button
 fork_startScreen --> ExitGame : Click Exit Game Button
 fork_startScreen --> Options : Click Question Mark Button
-BeginGame --> RandmolyGenerateWorld
+BeginGame --> GenerateWorld
 BeginGame --> LoadPlayer
 BeginGame --> LoadTextures
 BeginGame --> LoadCamera
+BeginGame --> LoadSounds
 
-RandmolyGenerateWorld --> join_loadGame 
+GenerateWorld --> join_loadGame
+LoadSounds --> join_loadGame
 LoadPlayer --> join_loadGame
 LoadTextures --> join_loadGame
 LoadCamera --> join_loadGame
@@ -30,15 +33,20 @@ UpdateWorld --> fork_beginGame : Update the way the world looks
 
 
 fork_beginGame --> MovePlayer : Use A, D and SpaceBar keys to move the player
-MovePlayer --> UpdateWorld
+MovePlayer --> MovementSound
+MovementSound --> movement_fork
+movement_fork --> UpdateWorld
+movement_fork --> GenerateNewChunk
+GenerateNewChunk --> UpdateWorld
 
 fork_beginGame --> BreakBlocks : Left Click to break blocks
-BreakBlocks --> AddInventory : Add the blocks to the inventory 
+BreakBlocks --> BreakBlockSound : Play block breaking sound
+BreakBlockSound --> AddInventory : Add the blocks to the inventory
 
 fork_beginGame --> PlaceBlocks : right Click to remove blocks from inventory
 PlaceBlocks --> RemoveInventory : Remove Blocks from inventory
 
-MovePlayer --> CraftMenu : Open Craft Menu if near crafting table
+movement_fork --> CraftMenu : Open Craft Menu if near crafting table
 CraftMenu --> fork_craft
 fork_craft --> CanCraft : Able to Craft new Tool
 fork_craft --> CannotCraft : Not able to Craft new tool
