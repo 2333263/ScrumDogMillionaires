@@ -1,0 +1,157 @@
+@startuml sequence
+skinparam Dpi 350
+skinparam Monochrome true
+skinparam Shadowing false
+
+actor User
+entity Game
+queue MovementQueue
+Database Inventory
+alt ifBeginGame
+    User -> Game : startGame
+    Game -> Game : generateChunks
+    activate Game
+    activate User
+    Game --> User : OpenGameWindow
+
+    alt ifKeyboardPressed
+        User -> Game : keyboardInput
+        Game -> MovementQueue : sendKeys
+        activate MovementQueue
+        MovementQueue --> Game : sendNewCoordinates
+        deactivate MovementQueue
+        Game --> User : displayMovedPlayer
+
+    else ifScrollWheel
+        User -> Game : scrollWheelInput
+        Game -> Game : checkScrollDirection
+        activate Game
+        deactivate Game
+        Game -> Inventory : retrieveSelectedItem
+        activate Inventory
+        Inventory --> Game : sendItem
+        deactivate Inventory
+        Game --> User : displaySelectedItem
+
+
+    else ifleftMouseClicked
+        User -> Game : mouseInput
+        Game -> Game : checkCoordinates
+        activate Game
+        deactivate Game
+        alt ifInRadius&CorrectTool
+            Game -> Game : removeBlock
+            activate Game
+            deactivate Game
+            Game -> Inventory : addBlockToInventory
+            activate Inventory
+            Inventory --> Game : blockRemoved
+            deactivate Inventory
+        end
+
+    else ifRightMouseClicked
+        User -> Game : mouseInput
+        Game -> Game : checkCoordinates
+        activate Game
+        deactivate Game
+        alt ifInRadius & notCraftingTable
+            Game -> Game : placeBlock
+            activate Game
+            deactivate Game
+            Game -> Inventory : removeBlockFromInventory
+            activate Inventory
+            Inventory --> Game : blockAdded
+            deactivate Inventory
+        else ifInRadius & craftingTable
+            Game -> Game : disableMovement
+            activate Game
+            deactivate Game
+            Game -> User : displayCraftingScreen
+            User -> Game : selectCraftingItem
+            Game -> Inventory : checkResources
+            activate Inventory
+            Inventory --> Game : canCraft
+            deactivate Inventory
+            alt canCraft & ifCrafted
+                Game -> Inventory : removeResources
+                activate Inventory
+                Inventory --> Game : resourcesRemoved
+                deactivate Inventory
+                Game -> Inventory : addItem
+                activate Inventory
+                Inventory --> Game : resourcesAdded
+                deactivate Inventory
+                Game --> User : displayItem
+                Game --> User : displayResourceCount
+
+            end
+            User -> Game : exitCraftingMenu
+            Game --> User : closeCraftingWindow
+
+        else ifInRadius & endBlock
+            Game -> Game : placePortal
+            activate Game
+            deactivate Game
+            User -> Game : openEndMenu
+            Game --> User : displayEndMenu
+            alt keyCPressed or keyEscPressed
+            User -> Game : resumeGame
+            Game --> User : dismissMenu
+
+            else keyQPressed
+                User -> Game : quitGame(True)
+            end
+        end
+
+
+    else ifKeyEPressed
+        User -> Game : openInventory
+        Game -> Inventory : getItems
+        Inventory --> Game : returnItems
+        Game --> User : displayInventoryItems
+        alt ifEditInventory
+            User -> Game : editInventory
+            Game -> Inventory : editInventoryPositions
+            Inventory --> Game : returnUpdatedInventory
+            Game --> User : displayUpdatedInventory
+        end
+
+    else ifKeyPPressed
+        User -> Game : pauseGame
+        Game --> User : displayPauseScreen
+
+        alt keyCPressed or keyEscPressed
+            User -> Game : resumeGame
+            Game --> User : dismissMenu
+
+        else keyQPressed
+            User -> Game : quitGame(True)
+
+
+
+        end
+    else ifQuitGame
+        User -> Game : quitGame(True)
+    end
+
+
+else ifGameInformation
+    User -> Game : requestInformation
+    Game --> User : displayInformation
+    User -> Game : exitInformationMenu
+    Game --> User : closeInformationMenu
+
+else ifExitButton or quitGame
+    User -> Game :quitGame(True)
+else ifCloseGame == True
+    User -> Game : exitGame
+    Game -> Inventory : clearItems
+    activate Inventory
+    Inventory --> Game : itemsCleared
+    deactivate Inventory
+    Game --> User : closeGameWindow
+    deactivate Game
+    activate User
+end
+
+@enduml
