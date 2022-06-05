@@ -6,12 +6,12 @@
 [Item]
 [Breaking and Placing]
 [Player]
-[Player Movement]
 [Camera]
 [Game World]
 [Inventory]
 [User Interface]
 [Game Menu]
+[Audio]
 folder "Files"{
     [Sprites]
     [Recipe Json]
@@ -101,6 +101,8 @@ GenWorld )-- [Game Menu]
 [Camera] -- MovePlayerCamera
 [Player] --( MovePlayerCamera
 
-
+() "Get Audio to Play" as playAudio
+[Audio] -- playAudio
+[Player] --( playAudio
 
 @enduml
