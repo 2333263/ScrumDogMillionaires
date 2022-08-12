@@ -53,6 +53,20 @@ infoPage = pygame.transform.scale(
 endPage = pygame.image.load("Textures/Screens/endscreenNorestart.png")
 endPage = pygame.transform.scale(endPage, (gs.width, gs.height))  # fit to page
 
+#seed box font
+base_font = pygame.font.Font(None, 32)
+user_text = ''
+#input rectangle
+#rect for seed input
+input_rect = pygame.Rect(20, 20, 100, 30)
+color_active = pygame.Color('blanchedalmond')
+color_passive = pygame.Color('bisque4')
+color = color_passive
+activeBox= False
+
+
+
+
 inv.initGroup()
 # Loading and playing a sound effect:
 playMusic()
@@ -91,6 +105,7 @@ def gameMenu():
         clock.tick(60)  # Sets the frame to update 60 times a second
 
         for events in pygame.event.get():
+
             if events.type == pygame.QUIT:
                 gameRunning = False
                 pygame.quit()
@@ -277,6 +292,25 @@ while gameRunning:
             elif gs.width-110 <= mouse[0] <= gs.width-70 and 10 <= mouse[1] <= 50:
                 mh.infoMenu(screen, clock, infoPage)
 
+            #if mouse clicks on seed box
+            if input_rect.collidepoint(events.pos):
+                activeBox= True
+                print("active")
+            else:
+                activeBox= False
+        if events.type == pygame.KEYDOWN:
+            #check for backspace
+            if events.key == pygame.K_BACKSPACE:
+                user_text = user_text[:-1]
+                
+            elif len(user_text)<7:#add seed char to input string
+                user_text += events.unicode
+                print(user_text)
+    #sets colour for text box based on if it has been clicked on
+    if activeBox: 
+        color =  color_active
+    else:
+        color = color_passive
     screen.blit(startPage, (0, 0))  # put the start page on the screen
     mouse = pygame.mouse.get_pos()  # get mouse positions
 
@@ -320,6 +354,12 @@ while gameRunning:
         pygame.draw.rect(screen, color_dark, [gs.width-110, 10, 40, 40])
         # rendering a text written in this font for the information button
         informationButonText = buttonFont.render('?', True, (255, 255, 255))
+    
+
+        #render seed box
+        pygame.draw.rect(screen, color, input_rect)
+        text_surface = base_font.render(user_text, False, (0,0,0))
+        screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
 
     # display text on information button
     screen.blit(informationButonText, (gs.width-100, 17))
