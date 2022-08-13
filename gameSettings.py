@@ -1,7 +1,19 @@
 import math
 import random
 
-seed = random.randint(-10000, 10000)
+#sets seed taken from user text input or a random number if no seed is given
+seed=1
+def setSeed(string):   
+    global seed
+    if len(string)!=0:
+        seed = int(hasher(string))
+    else:
+        seed = random.randint(-10000, 10000)
+def hasher(string):
+    hash=""
+    for char in string:
+        hash+=str(ord(char))
+    return hash
 
 octaves = 1
 

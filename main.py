@@ -71,6 +71,7 @@ inv.initGroup()
 # Loading and playing a sound effect:
 playMusic()
 
+
 # main game loop:
 
 
@@ -82,12 +83,11 @@ def gameMenu():
 
     # list of blocks player can collide with, initially entire world but updated within first time step
     collisionblocks = worldBlocks
-
     gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], worldBlocks)
     gs.generatedChunks[0] = generateChunk(0, worldBlocks)
     gs.generatedChunks[1] = generateChunk(gs.CHUNK_SIZE[0], worldBlocks)
 
-    # initilize a player object with attributes, position (x,y) and size (horizontal size, verical size is 2x horizontal)
+    # initilize a player object with attributes, position (x,y) and size (horizontal size, vertical size is 2x horizontal)
     # player = ph.Player((gs.width/2 - gs.blockSize * 4, gs.height/3), gs.blockSize)
     player = ph.Player((gs.width/2 - gs.blockSize * 4,
                       - gs.blockSize*2), gs.blockSize)
@@ -100,7 +100,7 @@ def gameMenu():
 
     # Initialise the crafting table screen
     crafter = cm.Crafting(screen)
-    mouseDownCheck = False;
+    mouseDownCheck = False
     while gameRunning:
         clock.tick(60)  # Sets the frame to update 60 times a second
 
@@ -285,6 +285,7 @@ while gameRunning:
         if events.type == pygame.MOUSEBUTTONDOWN:
             # if the mouse is clicked on the button,the game begins
             if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130:
+                gs.setSeed(user_text) #sets seed in gameSettings
                 gameMenu()  # call main game loop
             elif gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+200 <= mouse[1] <= gs.height/2+280:
                 pygame.quit()
@@ -295,7 +296,6 @@ while gameRunning:
             #if mouse clicks on seed box
             if input_rect.collidepoint(events.pos):
                 activeBox= True
-                print("active")
             else:
                 activeBox= False
         if events.type == pygame.KEYDOWN:
@@ -305,8 +305,7 @@ while gameRunning:
                 
             elif len(user_text)<7:#add seed char to input string
                 user_text += events.unicode
-                print(user_text)
-    #sets colour for text box based on if it has been clicked on
+    #sets colour for seed text box based on if it has been clicked on
     if activeBox: 
         color =  color_active
     else:
