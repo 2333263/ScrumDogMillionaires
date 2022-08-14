@@ -15,7 +15,7 @@ selected = 0
 fullInv=False
 slots=pygame.sprite.Group()
 hotBarrSprite=pygame.sprite.Group()
-relative=gs.blockSize/24
+relative=gs.blockSize/30
 global clicked
 clicked=-1
 
