@@ -42,9 +42,17 @@ class Crafting():
             currTexture =tempItem.texture
             currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
             self.screen.blit(currTexture,(928*relative,463*relative))
+        else:
+            #question mark is displayed until an item can be craftaed
+            #it is then replaced with the item that can be crafted
+            questionMark=buttonFont.render('?',True, (255,255,255)) 
+            pygame.draw.rect(self.screen, (0,0,0), [928*relative, 463*relative, 50*relative,50*relative])
+            self.screen.blit(questionMark, (943*relative, 475*relative))
+            
         
         craftText = buttonFont.render('CRAFT', True, colour)
         self.screen.blit(craftText, (1000*relative, 475*relative))
+       
         #traverse through craft array and add in the corresponding block textures to the crafting  table
         for j in range (3):
             for i in range(3):
