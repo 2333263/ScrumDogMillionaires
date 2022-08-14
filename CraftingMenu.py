@@ -1,158 +1,151 @@
 import pygame
-from gameSettings import itemIDs, blockSize, craftingTablePos, isPlaceable, itemHardness
-from CraftButtonHandler import Button
+from gameSettings import itemIDs, blockSize, isPlaceable, itemHardness
+import gameSettings as gs
 from TextHandler import Text
 from item import Item
 import recipeHandler as rh
-from inventoryHandler import getInv, addBlock, addItem, decreaseSpec, getItemCount
+import numpy as np
+from inventoryHandler import  addBlock, addItem, decreaseSpec, getClicked, invArray, setClicked
+from InventorySlots import slot
+
+slots=pygame.sprite.Group()
+relative=gs.blockSize/30
+buttonFont = pygame.font.Font('Minecraft.ttf', 40)  # font for button
+#invArray=np.full(40,NullItem,dtype=Item)
+NullItem=Item("null",-1)
+craftArray=np.full([3,3],NullItem,dtype=Item)
 
 
 class Crafting():
     def __init__(self, screen):
+        
         self.relativeSize = blockSize * 3 #must be between 0 and window size
-        self.recipies = rh.RecipeHandler() #already tested 
-        self.allItems = self.recipies.getAllItemIDs() #Must be a list 
+        self.recipes = rh.RecipeHandler() #already tested 
+        self.allItems = self.recipes.getAllItemIDs() #Must be a list 
         self.screen = screen #Must be of data type pygame screen 
-        self.menuBackround = self.makeBackground() #Must be a sprite group 
-        self.craftables = self.populatePossibleItems() ##Must be a list 
-        self.itemName = pygame.sprite.GroupSingle() #Must be a single sprite group 
-        self.itemRecipe = pygame.sprite.Group() #Must be a sprite group 
-        self.itemsNeeded = dict() #Must be a dict 
         self.canCraft = False #Must be a boolean 
-        self.createdItem = -1 #Must be greater than or equal to -1 
-        self.craftButton = pygame.sprite.Group()
+        self.craftID=-1 #ID of item to be crafted
         
-    def makeScreen(self): #No tests needed
-        self.menuBackround.draw(self.screen)
-        self.craftables.draw(self.screen)
-        self.itemName.draw(self.screen)
-        self.itemRecipe.draw(self.screen)
-        self.craftButton.draw(self.screen)
-
-    def makeBackground(self): #Check this returns a sprite group
-        tempBackround = pygame.sprite.Group()
-
-        # When there are more items to craft that require more pages, uncomment the below 4 lines and make sure to have a page tracker
-        # leftArrow = Text("<", int(self.relativeSize), pygame.Color(76, 76, 76),  (craftingTablePos[0] - self.relativeSize * 4, craftingTablePos[1] - self.relativeSize * 5.5/2))
-        # rightArrow = Text(">", int(self.relativeSize), pygame.Color(76, 76, 76),  (craftingTablePos[0] , craftingTablePos[1] - self.relativeSize * 5.5/2))
+            
+    def drawCraft(self):
+        #draw background rectangle of crafting table
+        pygame.draw.rect(self.screen,(173,139,120),[900*relative,140*relative,255*relative,100*relative*4],0)
+        #draw the blocks of the crafting table 
+        slots.draw(self.screen)
+        colour=(255, 255, 255)
+        if(self.canCraft):
+            #if you can craft an item
+            #change the colour of craft from white to green
+            colour= (0,255,0)
+            #place the craftable item next to the word craft
+            tempItem=Item(itemIDs[self.craftID],self.craftID)
+            currTexture =tempItem.texture
+            currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
+            self.screen.blit(currTexture,(928*relative,463*relative))
         
-        tempBackround.add(Button(9, (craftingTablePos[0] - self.relativeSize * 4.5, craftingTablePos[1] -
-                          self.relativeSize * 5.5), self.relativeSize * 10, self.relativeSize * 5))
+        craftText = buttonFont.render('CRAFT', True, colour)
+        self.screen.blit(craftText, (1000*relative, 475*relative))
+        #traverse through craft array and add in the corresponding block textures to the crafting  table
+        for j in range (3):
+            for i in range(3):
+                if(craftArray[j][i].itemID!=-1):
+                    currTexture = craftArray[j][i].texture
+                    currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
+                    self.screen.blit(currTexture,(917*relative+(i)*85*relative,65*relative + relative* (j+1)*100))
         
-        # tempBackround.add(rightArrow)
+              
+   #initlize the slots as a sprite group
+    def initGroup(self):
+        for j in range (3):
+            for i in range(3):
+                s=slot((0,0,0),907*relative+i*85*relative,150*relative+j*100*relative,70*relative,80*relative)
+                slots.add(s)
+        #'slot' that is used as the button to craft an item       
+        s=slot((71,45,45),907*relative,150*relative+3*100*relative,240*relative,80*relative)
+        slots.add(s)
+    def checkCanCraft(self): #checks if the block placement within the table matches any valid recipes
+        craftIDArray=np.full([3,3],-1) #IDs of items in the crafting table as a matrix
+        for i in range (3):
+            for j in range( 3):
+                craftIDArray[i][j]=craftArray[i][j].itemID
 
-        return tempBackround
-
-    def populatePossibleItems(self): #Check this returns a list
-        craftableItems = self.recipies.getAllItemIDs()
-        tempItemList = pygame.sprite.Group()
-
-        baseX, baseY = (craftingTablePos[0] - self.relativeSize *
-                        3.55), (craftingTablePos[1] - self.relativeSize * 4.4)
-        countX, countY = 0, 0
-
-        for item in (craftableItems):
-            if(countX != 0 and (countX) % 3 == 0):
-                countX = 0
-                countY += 1
-
-            tempBut = Button(item, (baseX + self.relativeSize * 1.1 * countX, baseY +
-                             self.relativeSize * 1.1 * countY), self.relativeSize/1.2, self.relativeSize/1.2)
-            tempItemList.add(tempBut)
-            countX += 1
-
-        return tempItemList
-
-    def populateRecipe(self, itemID): #No test
-        self.itemRecipe.empty()
-        recipeItems = self.recipies.getCraftingShape(itemID)
-
-        baseX, baseY = (craftingTablePos[0] + self.relativeSize *
-                        1.5), (craftingTablePos[1] - self.relativeSize * 4.4)
-        countX, countY = 0, 0
-
-        for item in (recipeItems):
-            if(item == -1):
-                continue
-
-            if(countX != 0 and (countX) % 3 == 0):
-                countX = 0
-                countY += 1
-
-            tempBut = Button(item, (baseX + self.relativeSize * 1.1 * countX, baseY +
-                             self.relativeSize * 1.1 * countY), self.relativeSize/1.2, self.relativeSize/1.2)
-            self.itemRecipe.add(tempBut)
-            countX += 1
-
-    def resetTable(self): #No test
-        self.itemRecipe.empty()
-        self.craftButton.empty()
-
-    def checkClick(self, pos): #No test
-        for menuItem in self.craftables:
-            if (menuItem.rect.collidepoint(pos)):
-                tempText = Text(itemIDs[menuItem.itemID], int(self.relativeSize/2), pygame.Color(76, 76, 76),
-                                (craftingTablePos[0] + self.relativeSize * 2.88, craftingTablePos[1] - self.relativeSize * 5))
-                self.itemName.add(tempText)
-                self.populateRecipe(menuItem.itemID)
-                self.createdItem = menuItem.itemID
-
-                if(self.isCraftable(menuItem.itemID, getInv())):
-                    self.craftButton.empty()
-                    craftBut = Text("CRAFT", int(self.relativeSize/2), "lime",
-                                    (craftingTablePos[0] + self.relativeSize/2.25, craftingTablePos[1] - self.relativeSize * 1), pygame.Color(198, 198, 198))
-                    self.craftButton.add(craftBut)
-                    self.canCraft = True
-
+        
+        for i in self.allItems:
+            if(np.array_equal(craftIDArray,self.recipes.getCraftingMatrix(i))): #compares crafting table to all recipe matrices
+                self.canCraft=True
+                self.craftID=i
+                return
+        #only runs if no match is found
+        self.canCraft=False 
+        self.craftID=-1
+        
+    def doCraft(self):
+        #this function crafts the craftable item
+        self.checkCanCraft()
+        if(self.canCraft):
+            for i in range(self.recipes.getCraftingAmount(self.craftID)):
+             #If item is a placeable object, it is then counted as a block
+                if (isPlaceable[self.craftID]):
+                            newTempItem = Item(itemIDs[self.craftID], self.craftID)
+                            addBlock(newTempItem)
+                #Else the item is added as an item with an item hardness, defined in gameSettings.py
                 else:
-                    self.craftButton.empty()
-                    craftBut = Text("CRAFT", int(self.relativeSize/2), "red",
-                                    (craftingTablePos[0] + self.relativeSize/2.25, craftingTablePos[1] - self.relativeSize * 1), pygame.Color(198, 198, 198))
-                    self.craftButton.add(craftBut)
-                    self.canCraft = False
-
-    def makeItem(self, pos): #No test
-        for sp in self.craftButton:
-            if (sp.rect.collidepoint(pos) and self.canCraft):
-                if(self.createdItem != -1):
-                    tempItem = Item(
-                        itemIDs[self.createdItem], self.createdItem)
-                    for item in self.itemsNeeded:
-                        for i in range(self.itemsNeeded[item]):
-                            if(getItemCount(item) > 0):
-                                decreaseSpec(item)
-                            else:
-                                self.canCraft = False
-                                self.resetTable()
-                                return
-                            if(getItemCount(item) == 0):
-                                self.canCraft = False
-                                self.resetTable()
-                    for i in range(self.recipies.getCraftingAmount(self.createdItem)):
-                        #If item is a placeable object, it is then counted as a block
-                        if (isPlaceable[tempItem.getItemId()]):
-                            addBlock(tempItem)
-                        #Else the item is added as an item with an item hardness, defined in gameSettings.py
-                        else:
-                            newTempItem = Item(tempItem.itemName, tempItem.itemID, itemHardness[tempItem.getItemId()])
+                            newTempItem = Item(itemIDs[self.craftID], self.craftID, itemHardness[self.craftID])   
                             addItem(newTempItem)
-                    self.resetTable()
+            self.emptyTable()
 
-   # Takes in the current item and the player inventory and checks if the player has enough items
-    def isCraftable(self, itemID, playerInventory): #Test return boolean
-        if(len(playerInventory) == 0):
-            return False
-        self.itemsNeeded = self.recipies.getRecipe(itemID)
-        for resource in self.itemsNeeded:
-            found = False
-            for item in playerInventory:
-                if(item.itemID == resource):
-                    found = True
-                    if(item.amount < self.itemsNeeded[resource]):
-                        return False
-            if (not found):
-                return False
-        return True
+    def onClick(self,pos):
+        #checks which bloc in the crafting table has been clicked by the user- acts accordingly
+        i=0
+        j=0
+        clicked=getClicked()
+        #loop through all slots
+        for box in slots:
+          
+            #if a sprite collides with where you clicked
+            if(box.rect.collidepoint(pos)):
+                if (j==3):
+                    self.doCraft()
+                else:
+                    craftItem=craftArray[j][i]
+                    #if the inventory is open and nothing has been selected previously
+                    if(clicked!=-1):
+                        #if a slot was previously selected in the inventory, place that selected item in the 
+                        #chosen block in the crafting table
+                        inventoryItem=invArray[clicked]
+                        craftArray[j][i]=Item(inventoryItem.getItemName(),inventoryItem.getItemId())
+                        decreaseSpec(inventoryItem.getItemId())
+                        if(craftItem.getItemId()!=-1):
+                            #replace the item in the crafting table with one of item in the inventory
+                            addItem(craftItem)
+                            craftArray[j][i]=inventoryItem 
+                        
+                
+                        setClicked() #set the clicked item to -1 in inventory
+                    
+                    else: #if nothing was previously selected and if selecet craft item slot not null
+                        if(craftItem.getItemId()!=-1):
+                            addItem(craftItem) #add the item to the inventory
+                            craftArray[j][i]=NullItem
+                    self.checkCanCraft() #check if the crafting table matches any valid recipes
+                break
+            i+=1
+            if(i==3):#if you have gone through all the slots in the row, go to the next row
+                i=0
+                j+=1
+
+
+    def emptyTable(self): #empty's the crafting table when an item is crafted so resources are used up
+        global craftArray
+        craftArray=np.full([3,3],NullItem,dtype=Item) #empty the crafting table
+        self.canCraft=False #can't craft an item
+        self.craftID=-1 #no item to craft
+
+
+
+   
+
+   
     
 
         

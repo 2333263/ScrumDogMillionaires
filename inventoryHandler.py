@@ -65,7 +65,12 @@ def decreaseSpec(itemID):
                 invArray[i]=NullItem
             return
   
-
+def getClicked():
+    return clicked
+    
+def setClicked():
+  global clicked
+  clicked=-1
 
 def getSelected():
     #Returns the selected item

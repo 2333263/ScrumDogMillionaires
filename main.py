@@ -100,8 +100,10 @@ def gameMenu():
 
     # Initialise the crafting table screen
     crafter = cm.Crafting(screen)
+ 
     mouseDownCheck = False
     while gameRunning:
+       
         clock.tick(60)  # Sets the frame to update 60 times a second
 
         for events in pygame.event.get():
@@ -119,16 +121,15 @@ def gameMenu():
             if (events.type == pygame.ACTIVEEVENT):
                 if (events.gain == 0):
                     mh.mouseOffPause(clock)
+            
             if events.type == pygame.MOUSEBUTTONDOWN:
 
                 # Will add tool checks after each event.button check for effeciency, and other aspects (when we get there)
                 if events.button == 1:
 
-                    if(gs.drawCrafting):
-                        crafter.checkClick(pygame.mouse.get_pos())
-                        crafter.makeItem(pygame.mouse.get_pos())
+                    
 
-                    elif(inv.fullInv == False):
+                    if(inv.fullInv == False):
                         # Code for break speed:
                         mouseDownCheck = True;
                         startTime = time.time();
@@ -137,6 +138,7 @@ def gameMenu():
 
 
                     inv.onClick(pygame.mouse.get_pos())
+                    crafter.onClick(pygame.mouse.get_pos())
 
                 elif(not gs.drawCrafting):
                     if (events.button == 3 and inv.fullInv == False):
@@ -176,7 +178,7 @@ def gameMenu():
                     else:
                         inv.fullInv = False
                         inv.clicked = -1
-
+        
         if(not gs.drawCrafting):
             # runs the move on X which checks if the player is pressing an arrow key to move
             fakeKeys = {}
@@ -199,7 +201,13 @@ def gameMenu():
         collisionblocks = camera.draw(screen, worldBlocks)
         screen.blit(fpsText, (1180, 5))
         screen.blit(seedText, (1180, 50))
+        crafter.initGroup()
+        if(gs.drawCrafting):
+            crafter.drawCraft()
+            inv.fullInv=True
         inv.drawHotBar(screen)
+        
+        
         blockFrameImgName = "Block_Frame_Red"
 
         # Breaking speed
@@ -249,7 +257,7 @@ def gameMenu():
         # Calculate final position
         blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \
             gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
-
+       
         # Draw cursor only if block is within interactable range (place/break) and won't collide with player
         tempNullBlock = Block(gs.blockSize, gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()),
                               1, gs.textureNames[gs.itemIDs[1]], hardness=1)  # replace with nulltexture when added
@@ -263,10 +271,7 @@ def gameMenu():
             worldBlocks.add(blockTemp)
             mh.endMenu(screen, clock, endPage)
 
-        if(gs.drawCrafting):
-            crafter.makeScreen()
-        else:
-            crafter.resetTable()
+      
 
         checkChunkUpdates(player, worldBlocks)
 
@@ -276,12 +281,13 @@ def gameMenu():
 
 while gameRunning:
     # start screen
+    
     clock.tick(60)  # Sets the frame to update 60 times a second
     for events in pygame.event.get():
         if events.type == pygame.QUIT:
             pygame.mixer.music.stop()  # stops the music player
             gameRunning = False
-
+    
         if events.type == pygame.MOUSEBUTTONDOWN:
             # if the mouse is clicked on the button,the game begins
             if gs.width/2-110 <= mouse[0] <= gs.width/2+190 and gs.height/2+50 <= mouse[1] <= gs.height/2+130:

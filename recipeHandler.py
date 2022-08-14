@@ -1,5 +1,6 @@
 import json
 from gameSettings import craftingIDs
+import numpy as np
 
 class RecipeHandler():
     def __init__(self):
@@ -44,3 +45,5 @@ class RecipeHandler():
             if(resource["itemID"] == itemID):
                 craftID = c
         return self.data[craftID]['shape']
+    def getCraftingMatrix(self,itemID):
+        return  np.reshape( np.array(self.getCraftingShape(itemID)), (3,3))
