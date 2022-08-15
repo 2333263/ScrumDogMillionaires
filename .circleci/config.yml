@@ -12,10 +12,10 @@ jobs:
       - checkout
       - run:
           name: Install requirements
-          command: pip install -r api/requirements.txt
+          command: pip install -r requirements.txt
       - run:
           name: Run tests and collect coverage
-          command: pytest --cov api/test.py
+          command: pytest --cov test.py
       - codecov/upload: 
           token: CODECOV_TOKEN
 
