@@ -24,4 +24,5 @@ jobs:
 workflows:
   example-workflow:
     jobs:
-      - test-api
+      - test-api:
+          context: my_context
