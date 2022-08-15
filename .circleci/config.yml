@@ -15,7 +15,9 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run tests and collect coverage
-          command: pytest --cov api/test.py
+          command: |
+            coverage run test.py
+            coverage xml
       - codecov/upload: 
           token: CODECOV_TOKEN
 
