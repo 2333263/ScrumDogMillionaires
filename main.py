@@ -55,12 +55,20 @@ endPage = pygame.transform.scale(endPage, (gs.width, gs.height))  # fit to page
 
 #seed box font
 base_font = pygame.font.Font(None, 32)
+seedFont  = pygame.font.Font('freesansbold.ttf',32)
 user_text = ''
 #input rectangle
 #rect for seed input
-input_rect = pygame.Rect(20, 20, 100, 30)
-color_active = pygame.Color('blanchedalmond')
-color_passive = pygame.Color('bisque4')
+input_rect = pygame.Rect(80, 20, 100, 30)
+
+text = base_font.render('SEED: ', True, (0,0,0))
+textRect = text.get_rect()
+textRect = (10,25)
+
+text_surface = base_font.render("SEED:", False, (0,0,0))
+
+color_active = pygame.Color(color_light)
+color_passive = pygame.Color(color_dark)
 color = color_passive
 activeBox= False
 
@@ -365,6 +373,7 @@ while gameRunning:
         pygame.draw.rect(screen, color, input_rect)
         text_surface = base_font.render(user_text, False, (0,0,0))
         screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
+        screen.blit(text, textRect)
 
     # display text on information button
     screen.blit(informationButonText, (gs.width-100, 17))
