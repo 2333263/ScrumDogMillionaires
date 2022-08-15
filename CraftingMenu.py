@@ -13,12 +13,12 @@ relative=gs.blockSize/30
 buttonFont = pygame.font.Font('Minecraft.ttf', 40)  # font for button
 #invArray=np.full(40,NullItem,dtype=Item)
 NullItem=Item("null",-1)
-craftArray=np.full([3,3],NullItem,dtype=Item)
+
 
 
 class Crafting():
     def __init__(self, screen):
-        
+        self.craftArray=np.full([3,3],NullItem,dtype=Item)
         self.relativeSize = blockSize * 3 #must be between 0 and window size
         self.recipes = rh.RecipeHandler() #already tested 
         self.allItems = self.recipes.getAllItemIDs() #Must be a list 
@@ -56,8 +56,8 @@ class Crafting():
         #traverse through craft array and add in the corresponding block textures to the crafting  table
         for j in range (3):
             for i in range(3):
-                if(craftArray[j][i].itemID!=-1):
-                    currTexture = craftArray[j][i].texture
+                if(self.craftArray[j][i].itemID!=-1):
+                    currTexture = self.craftArray[j][i].texture
                     currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
                     self.screen.blit(currTexture,(917*relative+(i)*85*relative,65*relative + relative* (j+1)*100))
         
@@ -75,7 +75,7 @@ class Crafting():
         craftIDArray=np.full([3,3],-1) #IDs of items in the crafting table as a matrix
         for i in range (3):
             for j in range( 3):
-                craftIDArray[i][j]=craftArray[i][j].itemID
+                craftIDArray[i][j]=self.craftArray[i][j].itemID
 
         
         for i in self.allItems:
@@ -115,18 +115,18 @@ class Crafting():
                 if (j==3):
                     self.doCraft()
                 else:
-                    craftItem=craftArray[j][i]
+                    craftItem=self.craftArray[j][i]
                     #if the inventory is open and nothing has been selected previously
                     if(clicked!=-1):
                         #if a slot was previously selected in the inventory, place that selected item in the 
                         #chosen block in the crafting table
                         inventoryItem=invArray[clicked]
-                        craftArray[j][i]=Item(inventoryItem.getItemName(),inventoryItem.getItemId())
+                        self.craftArray[j][i]=Item(inventoryItem.getItemName(),inventoryItem.getItemId())
                         decreaseSpec(inventoryItem.getItemId())
                         if(craftItem.getItemId()!=-1):
                             #replace the item in the crafting table with one of item in the inventory
                             addItem(craftItem)
-                            craftArray[j][i]=inventoryItem 
+                            self.craftArray[j][i]=inventoryItem 
                         
                 
                         setClicked() #set the clicked item to -1 in inventory
@@ -134,7 +134,7 @@ class Crafting():
                     else: #if nothing was previously selected and if selecet craft item slot not null
                         if(craftItem.getItemId()!=-1):
                             addItem(craftItem) #add the item to the inventory
-                            craftArray[j][i]=NullItem
+                            self.craftArray[j][i]=NullItem
                     self.checkCanCraft() #check if the crafting table matches any valid recipes
                 break
             i+=1
@@ -144,8 +144,8 @@ class Crafting():
 
 
     def emptyTable(self): #empty's the crafting table when an item is crafted so resources are used up
-        global craftArray
-        craftArray=np.full([3,3],NullItem,dtype=Item) #empty the crafting table
+        
+        self.craftArray=np.full([3,3],NullItem,dtype=Item) #empty the crafting table
         self.canCraft=False #can't craft an item
         self.craftID=-1 #no item to craft
 

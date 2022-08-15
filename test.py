@@ -23,6 +23,7 @@ import unittest.mock as um
 import itemNew
 from itemHandler import populateDictionaries
 import itemHandler
+import numpy as np
 #update test for sound
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -299,57 +300,54 @@ class TestPlayer(unittest.TestCase):
 
 
 class TestCraftingMenu (unittest.TestCase):
+      
+      
       screen = pygame.display
       crafter = CraftingMenu.Crafting(screen)
+      
+      
       def test_relativeSize(self):
              self.assertTrue(self.crafter.relativeSize >= 0 and self.crafter.relativeSize <= gs.blockSize*3)
       def test_allItems(self):
              self.assertIsInstance(list(),  type(self.crafter.allItems))
-      def test_menuBackround(self):
-             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.menuBackround))
-      def test_craftables(self):
-             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.craftables))
-      def test_itemName(self):
-             self.assertIsInstance(pygame.sprite.GroupSingle(),  type(self.crafter.itemName))
-      def test_itemRecipe(self):
-             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.itemRecipe))
-      def test_itemsNeeded(self):
-             self.assertIsInstance(dict(),  type(self.crafter.itemsNeeded))
-      def test_canCraft(self):
+      def test_emptyTable(self):
+             NullItem=item.Item("null",-1)
+             self.crafter.emptyTable();
+             for i in range (3):
+               for j in range(3):
+                  self.assertEqual(self.crafter.craftArray[i][j].itemID,-1)
              self.assertEqual(self.crafter.canCraft, False)
-      def test_createdItem(self):
-             self.assertGreaterEqual(self.crafter.createdItem, -1)
-      def test_craftButton(self):#10
-             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.craftButton))
-#       def test_makeScreen(self):
-#              self.assertIsInstance(NULL,  type(self.crafter.makeBackground()))
-      def test_makeBackground(self):
-             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.makeBackground()))
-      def test_populatePossibleItems(self):
-             self.assertIsInstance(pygame.sprite.Group(),  type(self.crafter.populatePossibleItems()))
-      def test_populateRecipe(self):
-             self.crafter.populateRecipe(self.crafter.craftables)
-             self.crafter.populateRecipe(self.crafter.craftables)
-             self.crafter.populateRecipe(self.crafter.craftables)
-             self.crafter.populateRecipe(self.crafter.craftables)
-             self.assertTrue(self.crafter.itemRecipe.__sizeof__() >= 0)
-      def test_resetTable(self):
-             self.crafter.resetTable();
-             self.assertEqual(self.crafter.itemRecipe.has(), False)
-             self.assertEqual(self.crafter.craftButton.has(), False)
-      def test_checkClick(self):
-             self.crafter.checkClick((0,0))
-             self.assertTrue(self.crafter.craftButton.has()>= 0)
-      def test_makeItem(self):
-             self.crafter.makeItem((0,0))
-             self.assertEqual(self.crafter.itemRecipe.has(), False)
-             self.assertEqual(self.crafter.craftButton.has(), False)
-      def test_isCraftable(self):
-             for menuItem in self.crafter.craftables:
-                    if(self.crafter.isCraftable(menuItem.itemID,ih.getInv())):
-                          self.assertIsInstance(True,  type(self.crafter.isCraftable(menuItem.itemID,ih.getInv())))
-                    else:
-                          self.assertIsInstance(False,  type(self.crafter.isCraftable(menuItem.itemID,ih.getInv())))
+             self.assertEqual(self.crafter.craftID, -1)
+      def test_checkCanCraft(self):
+               self.crafter.emptyTable();
+               self.crafter.checkCanCraft()
+               self.assertEqual(self.crafter.canCraft, False)
+               self.assertEqual(self.crafter.craftID, -1)
+               self.crafter.craftArray[1][1]=item.Item("Logs",7)
+               self.crafter.checkCanCraft()
+               self.assertEqual(self.crafter.canCraft, True)
+               self.assertEqual(self.crafter.craftID, 8)
+      def test_doCraft(self):
+               NullItem=item.Item("null",-1)
+               self.crafter.emptyTable();
+               self.crafter.doCraft()
+               self.assertEqual(self.crafter.canCraft, False)
+               self.assertEqual(self.crafter.craftID, -1)
+               self.crafter.craftArray[1][1]=item.Item("Logs",7)
+               ih.invArray=np.full(40,NullItem,dtype=item.Item)
+               curr=ih.getItemCount(8)
+               self.crafter.doCraft()
+               self.assertEqual(ih.getItemCount(8),curr+4)
+               for i in range (3):
+                  for j in range(3):
+                     self.assertEqual(self.crafter.craftArray[i][j].itemID,-1)
+               self.assertEqual(self.crafter.canCraft, False)
+               self.assertEqual(self.crafter.craftID, -1)
+               ih.invArray=np.full(40,NullItem,dtype=item.Item)
+
+    
+
+    
 class TestGameSettings(unittest.TestCase):
    def test_properties(self):
       self.assertIsInstance(gs.blockSize, int)
