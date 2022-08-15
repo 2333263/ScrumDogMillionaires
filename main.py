@@ -369,11 +369,11 @@ while gameRunning:
         informationButonText = buttonFont.render('?', True, (255, 255, 255))
     
 
-        #render seed box
-        pygame.draw.rect(screen, color, input_rect)
-        text_surface = base_font.render(user_text, False, (0,0,0))
-        screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
-        screen.blit(text, textRect)
+    #render seed box
+    pygame.draw.rect(screen, color, input_rect)
+    text_surface = base_font.render(user_text, False, (0,0,0))
+    screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
+    screen.blit(text, textRect)
 
     # display text on information button
     screen.blit(informationButonText, (gs.width-100, 17))
