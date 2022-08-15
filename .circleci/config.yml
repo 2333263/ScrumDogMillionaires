@@ -17,6 +17,7 @@ jobs:
           name: Run tests and collect coverage
           command: |
             coverage run test.py
+            coverage report --omit=soundHandler.py
             coverage xml
       - codecov/upload: 
           token: CODECOV_TOKEN
