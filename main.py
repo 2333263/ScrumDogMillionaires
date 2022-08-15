@@ -304,7 +304,7 @@ while gameRunning:
                 activeBox= True
             else:
                 activeBox= False
-        if events.type == pygame.KEYDOWN:
+        if events.type == pygame.KEYDOWN and activeBox==True:
             #check for backspace
             if events.key == pygame.K_BACKSPACE:
                 user_text = user_text[:-1]
@@ -349,7 +349,7 @@ while gameRunning:
         exitButtonText = buttonFont.render('EXIT GAME', True, (255, 255, 255))
 
     if gs.width-110 <= mouse[0] <= gs.width-70 and 10 <= mouse[1] <= 50:
-        # if we are hovering over the information button, draw it with the lighter colour
+        # if we are hovering over the information button ?, draw it with the lighter colour
         pygame.draw.rect(screen, color_light, [gs.width-110, 10, 40, 40])
         # rendering a text written in this font for the information button
         informationButonText = buttonFont.render('?', True, (0, 0, 0))
