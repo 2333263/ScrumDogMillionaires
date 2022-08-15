@@ -3,3 +3,4 @@ pygame
 pytest
 pygame_gui
 perlin-noise
+pytest-cov
