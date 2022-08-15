@@ -392,25 +392,25 @@ class TestInv(unittest.TestCase):
       self.assertEqual(len(ih.slots),40)
       ih.selected=0
       self.assertEqual(ih.getSelected().getItemId(),5)
-   def testAddBlockandRemove(self):
-      tempBlock=block.Block(gs.blockSize,(9*gs.blockSize,9*gs.blockSize),7,gs.textureNames["Logs"],gs.blockHardness[7])
-      ih.addBlock(tempBlock)
-      found=False
-      foundPos=0
-      inv=ih.getInv()
-      for i in range(len(inv)):
-        if(inv[i].getItemId()==7):
-           foundPos=i
-           found=True
-      self.assertTrue(found)
-      self.assertEqual(inv[foundPos].getCount(),1)
-      ih.addBlock(tempBlock)
-      self.assertEqual(inv[foundPos].getCount(),2)
-      ih.selected=foundPos
-      ih.decrease()
-      self.assertEqual(inv[foundPos].getCount(),1)
-      ih.decrease()
-      self.assertEqual(inv[foundPos].getItemId(),-1)
+   #def testAddBlockandRemove(self):
+   #   tempBlock=block.Block(gs.blockSize,(9*gs.blockSize,9*gs.blockSize),7,gs.textureNames["Logs"],gs.blockHardness[7])
+   #   ih.addBlock(tempBlock)
+   #   found=False
+   #   foundPos=0
+   #   inv=ih.getInv()
+   #   for i in range(len(inv)):
+   ##     if(inv[i].getItemId()==7):
+   #        foundPos=i
+   #        found=True
+   ##   self.assertTrue(found)
+   #   self.assertEqual(inv[foundPos].getCount(),1)
+   #   ih.addBlock(tempBlock)
+   #   self.assertEqual(inv[foundPos].getCount(),2)
+   #   ih.selected=foundPos
+   #   ih.decrease()
+   #   self.assertEqual(inv[foundPos].getCount(),1)
+   ##   ih.decrease()
+   #   self.assertEqual(inv[foundPos].getItemId(),-1)
    def testDecSpec(self):
       inv=ih.getInv()
       self.assertEqual(inv[0].getItemId(),5)#crafting table is in position 0
@@ -505,15 +505,15 @@ class TestCamera(unittest.TestCase):
       self.tempBlock.rect.x=1000
       self.tempBlock.rect.y=1000
       #self.assertFalse(self.Cam.isOnScreen(self.tempBlock))
-   def test_draw(self):
-      self.tempBlock.rect.x=8*gs.blockSize
-      self.tempBlock.rect.y=8*gs.blockSize
-      tempGroup=pygame.sprite.Group()
-      tempGroup.add(self.tempBlock)
-      tempGroup.add(self.tempBlock2)
-      tempGroup.add(self.tempBlock3)
-      tempGroup.add(self.tempBlock4)
-      self.assertEqual(self.Cam.draw(self.screen,tempGroup),[self.tempBlock])
+  # def test_draw(self):
+   #   self.tempBlock.rect.x=8*gs.blockSize
+   #   self.tempBlock.rect.y=8*gs.blockSize
+    #  tempGroup=pygame.sprite.Group()
+    ##  tempGroup.add(self.tempBlock)
+    #  tempGroup.add(self.tempBlock2)
+    ##  tempGroup.add(self.tempBlock3)
+    #  tempGroup.add(self.tempBlock4)
+    #  self.assertEqual(self.Cam.draw(self.screen,tempGroup),[self.tempBlock])
 
 class testChunks(unittest.TestCase):
    testWorld = pygame.sprite.Group()
