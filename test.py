@@ -343,6 +343,10 @@ class TestCraftingMenu (unittest.TestCase):
                      self.assertEqual(self.crafter.craftArray[i][j].itemID,-1)
                self.assertEqual(self.crafter.canCraft, False)
                self.assertEqual(self.crafter.craftID, -1)
+               self.crafter.craftArray[1][1]=item.Item("Gold Ore",15)
+               curr=ih.getItemCount(21)
+               self.crafter.doCraft()
+               self.assertEqual(ih.getItemCount(21),curr+1)
                ih.invArray=np.full(40,NullItem,dtype=item.Item)
 
     
