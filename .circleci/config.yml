@@ -16,8 +16,7 @@ jobs:
       - run:
           name: Run tests and collect coverage
           command: pytest --cov api/test.py
-      - codecov/upload:
-          validate_url: true 
+      - codecov/upload: 
           token: CODECOV_TOKEN
 
 workflows:
