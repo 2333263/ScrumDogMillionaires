@@ -18,7 +18,7 @@ jobs:
           command: pytest --cov api/test.py
       - codecov/upload:
           validate_url: true 
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: CODECOV_TOKEN
 
 workflows:
   example-workflow:
