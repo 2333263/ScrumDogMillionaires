@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import pygame
 import gameSettings as gs
 import breakPlaceHandler as bph
@@ -283,6 +282,8 @@ def gameMenu():
 
         checkChunkUpdates(player, worldBlocks)
 
+        print(player.getPlayerPos())
+
         # Finally update the  screen with all the above changes
         pygame.display.update()
 
@@ -381,5 +382,7 @@ while gameRunning:
     screen.blit(exitButtonText, (gs.width/2-90, gs.height/2+225))
     # display text on start button
     screen.blit(startButtonText, (gs.width/2-107, gs.height/2+75))
+
+    
 
     pygame.display.flip()

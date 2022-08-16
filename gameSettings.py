@@ -3,6 +3,18 @@ import random
 
 #sets seed taken from user text input or a random number if no seed is given
 seed=1
+
+
+actions = {
+        "NONE" : -1,
+        "JUMP" : 0,
+        "LEFT" : 1,
+        "RIGHT": 2,
+        "EXIT" : 3,
+        "INVENTORY" : 4
+}
+
+
 def setSeed(string):   
     global seed
     if len(string)!=0:

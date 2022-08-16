@@ -1,5 +1,6 @@
 import pygame
-audio=True
+import gameSettings as gs 
+audio = True
 try:
     pygame.mixer.init()
     grassSound = pygame.mixer.Sound("Sound Effects\grass6.ogg")
