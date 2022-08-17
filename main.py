@@ -12,10 +12,6 @@ from ChunkHandler import checkChunkUpdates
 from soundHandler import playMusic
 import Portal as po
 from block import Block
-from itemHandler import populateDictionaries
-
-#Populate item dictionaries
-populateDictionaries()
 
 #force update
 # Initialising PyGame & creating a clock in order to limit frame drawing
@@ -25,12 +21,12 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((gs.width, gs.height), vsync=1)
 pygame.display.set_caption("2D Minecraft")
 
-# Game runing variable
+# Game running variable
 gameRunning = True
 
 
 color_light = (250, 250, 250)  # colour of button when hover over
-color_dark = (64, 64, 64)  # colour of button- default
+color_dark = (64, 64, 64)  # colour of button-default
 
 buttonFont = pygame.font.Font('Minecraft.ttf', 40)  # font for button
 # load image for start screen

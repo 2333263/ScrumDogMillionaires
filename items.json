@@ -9,7 +9,7 @@
         "toolType": "null",
         "texture": "Textures/null",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "grass_block": {
         "itemID": 0,
@@ -21,7 +21,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/grass.png",
         "isPlaceable": true,
-        "drops" : "grass_block"
+        "drops" : 0
     },
     "dirt_block": {
         "itemID": 1,
@@ -33,7 +33,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/dirt.png",
         "isPlaceable": true,
-        "drops" : "dirt_block"
+        "drops" : 1
     },
     "stone_block": {
         "itemID": 2,
@@ -45,7 +45,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/stone.png",
         "isPlaceable": true,
-        "drops" : "stone_block"
+        "drops" : 2
     },
     "cloud": {
         "itemID": 3,
@@ -57,7 +57,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/cloud.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "bedrock": {
         "itemID": 4,
@@ -69,7 +69,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/bedrock.png",
         "isPlaceable": true,
-        "drops" : "null"
+        "drops" : -1
     },
     "crafting_table": {
         "itemID": 5,
@@ -81,7 +81,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/crafting_table_top.png",
         "isPlaceable": true,
-        "drops" : "crafting_table"
+        "drops" : 5
     },
     "oak_leaves": {
         "itemID": 6,
@@ -93,7 +93,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/leaves.png",
         "isPlaceable": true,
-        "drops" : "oak_leaves"
+        "drops" : 6
     },
     "oak_log": {
         "itemID": 7,
@@ -105,7 +105,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/log.png",
         "isPlaceable": true,
-        "drops" : "oak_log"
+        "drops" : 7
     },
     "oak_planks": {
         "itemID": 8,
@@ -117,7 +117,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/wood_planks.png",
         "isPlaceable": true,
-        "drops" : "oak_planks"
+        "drops" : 8
     },
     "crafting_background": {
         "itemID": 9,
@@ -129,7 +129,7 @@
         "toolType": "none",
         "texture": "Textures/Screens/CraftingMenu.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "sky": {
         "itemID": 10,
@@ -141,7 +141,7 @@
         "toolType": "none",
         "texture": "Textures/Screens/sky.png",
         "isPlaceable": true,
-        "drops" : "null"
+        "drops" : -1
     },
     "wooden_pickaxe": {
         "itemID": 11,
@@ -153,7 +153,7 @@
         "toolType": "pickaxe",
         "texture": "Textures/Tools/wooden_pickaxe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "wooden_axe": {
         "itemID": 12,
@@ -165,7 +165,7 @@
         "toolType": "axe",
         "texture": "Textures/Tools/wooden_axe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "wooden_shovel": {
         "itemID": 13,
@@ -177,7 +177,7 @@
         "toolType": "shovel",
         "texture": "Textures/Tools/wooden_shovel.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "wooden_hoe": {
         "itemID": 14,
@@ -189,7 +189,7 @@
         "toolType": "hoe",
         "texture": "Textures/Tools/wooden_hoe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "wooden_sword": {
         "itemID": 15,
@@ -201,7 +201,7 @@
         "toolType": "sword",
         "texture": "Textures/Tools/wooden_sword.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "stone_pickaxe": {
         "itemID": 16,
@@ -213,7 +213,7 @@
         "toolType": "pickaxe",
         "texture": "Textures/Tools/stone_pickaxe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "stone_axe": {
         "itemID": 17,
@@ -225,7 +225,7 @@
         "toolType": "axe",
         "texture": "Textures/Tools/stone_axe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "stone_shovel": {
         "itemID": 18,
@@ -237,7 +237,7 @@
         "toolType": "shovel",
         "texture": "Textures/Tools/stone_shovel.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "stone_hoe": {
         "itemID": 19,
@@ -249,7 +249,7 @@
         "toolType": "hoe",
         "texture": "Textures/Tools/stone_hoe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "stone_sword": {
         "itemID": 20,
@@ -261,7 +261,7 @@
         "toolType": "sword",
         "texture": "Textures/Tools/stone_sword.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "golden_pickaxe": {
         "itemID": 21,
@@ -273,7 +273,7 @@
         "toolType": "pickaxe",
         "texture": "Textures/Tools/golden_pickaxe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "golden_axe": {
         "itemID": 22,
@@ -285,7 +285,7 @@
         "toolType": "axe",
         "texture": "Textures/Tools/golden_axe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "golden_shovel": {
         "itemID": 23,
@@ -297,7 +297,7 @@
         "toolType": "shovel",
         "texture": "Textures/Tools/golden_shovel.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "golden_hoe": {
         "itemID": 24,
@@ -309,7 +309,7 @@
         "toolType": "hoe",
         "texture": "Textures/Tools/golden_hoe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "golden_sword": {
         "itemID": 25,
@@ -321,7 +321,7 @@
         "toolType": "sword",
         "texture": "Textures/Tools/golden_sword.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "iron_pickaxe": {
         "itemID": 26,
@@ -333,7 +333,7 @@
         "toolType": "pickaxe",
         "texture": "Textures/Tools/iron_pickaxe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "iron_axe": {
         "itemID": 27,
@@ -345,7 +345,7 @@
         "toolType": "axe",
         "texture": "Textures/Tools/iron_axe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "iron_shovel": {
         "itemID": 28,
@@ -357,7 +357,7 @@
         "toolType": "shovel",
         "texture": "Textures/Tools/iron_shovel.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "iron_hoe": {
         "itemID": 29,
@@ -369,7 +369,7 @@
         "toolType": "hoe",
         "texture": "Textures/Tools/iron_hoe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "iron_sword": {
         "itemID": 30,
@@ -381,7 +381,7 @@
         "toolType": "sword",
         "texture": "Textures/Tools/iron_sword.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "diamond_pickaxe": {
         "itemID": 31,
@@ -393,7 +393,7 @@
         "toolType": "pickaxe",
         "texture": "Textures/Tools/diamond_pickaxe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "diamond_axe": {
         "itemID": 32,
@@ -405,7 +405,7 @@
         "toolType": "axe",
         "texture": "Textures/Tools/diamond_axe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "diamond_shovel": {
         "itemID": 33,
@@ -417,7 +417,7 @@
         "toolType": "shovel",
         "texture": "Textures/Tools/diamond_shovel.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "diamond_hoe": {
         "itemID": 34,
@@ -429,7 +429,7 @@
         "toolType": "hoe",
         "texture": "Textures/Tools/diamond_hoe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "diamond_sword": {
         "itemID": 35,
@@ -441,7 +441,7 @@
         "toolType": "sword",
         "texture": "Textures/Tools/diamond_sword.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "netherrite_pickaxe": {
         "itemID": 36,
@@ -453,7 +453,7 @@
         "toolType": "pickaxe",
         "texture": "Textures/Tools/netherrite_pickaxe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "netherrite_axe": {
         "itemID": 37,
@@ -465,7 +465,7 @@
         "toolType": "axe",
         "texture": "Textures/Tools/netherrite_axe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "netherrite_shovel": {
         "itemID": 38,
@@ -477,7 +477,7 @@
         "toolType": "shovel",
         "texture": "Textures/Tools/netherrite_shovel.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "netherrite_hoe": {
         "itemID": 39,
@@ -489,7 +489,7 @@
         "toolType": "hoe",
         "texture": "Textures/Tools/netherrite_hoe.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "netherrite_sword": {
         "itemID": 40,
@@ -501,7 +501,7 @@
         "toolType": "sword",
         "texture": "Textures/Tools/netherrite_sword.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "coal_ore": {
         "itemID": 41,
@@ -513,7 +513,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/coal_ore.png",
         "isPlaceable": true,
-        "drops" : "coal"
+        "drops" : 42
     },
     "coal": {
         "itemID": 42,
@@ -525,7 +525,7 @@
         "toolType": "none",
         "texture": "Textures/Items/coal.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "iron_ore": {
         "itemID": 43,
@@ -537,7 +537,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/iron_ore.png",
         "isPlaceable": true,
-        "drops" : "iron_ore"
+        "drops" : 43
     },
     "iron_ingot": {
         "itemID": 44,
@@ -549,7 +549,7 @@
         "toolType": "none",
         "texture": "Textures/Items/iron_ingot.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "iron_nugget": {
         "itemID": 45,
@@ -561,7 +561,7 @@
         "toolType": "none",
         "texture": "Textures/Items/iron_nugget.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "gold_ore": {
         "itemID": 46,
@@ -573,7 +573,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/gold_ore.png",
         "isPlaceable": true,
-        "drops" : "gold_ore"
+        "drops" : 46
     },
     "gold_ingot": {
         "itemID": 47,
@@ -585,7 +585,7 @@
         "toolType": "none",
         "texture": "Textures/Items/gold_ingot.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "gold_nugget": {
         "itemID": 48,
@@ -597,7 +597,7 @@
         "toolType": "none",
         "texture": "Textures/Items/gold_nugget.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "diamond_ore": {
         "itemID": 49,
@@ -609,7 +609,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/diamond_ore",
         "isPlaceable": true,
-        "drops" : "diamond"
+        "drops" : 50
     },
     "diamond": {
         "itemID": 50,
@@ -621,7 +621,7 @@
         "toolType": "none",
         "texture": "Textures/Items/diamond.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "block_frame": {
         "itemID": 51,
@@ -633,7 +633,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/block_frame.png",
         "isPlaceable": true,
-        "drops" : "null"
+        "drops" : -1
     },
     "charcoal": {
         "itemID": 52,
@@ -645,7 +645,7 @@
         "toolType": "none",
         "texture": "Textures/Items/charcoal.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "emerald": {
         "itemID": 53,
@@ -657,7 +657,7 @@
         "toolType": "none",
         "texture": "Textures/Items/emerald.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "flint": {
         "itemID": 54,
@@ -669,7 +669,7 @@
         "toolType": "none",
         "texture": "Textures/Items/flint.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "lapis_ore": {
         "itemID": 55,
@@ -681,7 +681,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/lapis_ore.png",
         "isPlaceable": true,
-        "drops" : "lapis"
+        "drops" : 56
     },
     "lapis": {
         "itemID": 56,
@@ -693,7 +693,7 @@
         "toolType": "none",
         "texture": "Textures/Items/lapis_lazuli.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "netherite_ingot": {
         "itemID": 57,
@@ -705,7 +705,7 @@
         "toolType": "none",
         "texture": "Textures/Items/netherite_ingot.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "stick": {
         "itemID": 58,
@@ -717,7 +717,7 @@
         "toolType": "none",
         "texture": "Textures/Items/stick.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "fishing_rod": {
         "itemID": 59,
@@ -729,7 +729,7 @@
         "toolType": "none",
         "texture": "Textures/Tools/fishing_rod.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "twig_oak_leaves": {
         "itemID": 60,
@@ -741,7 +741,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/leaves_twig.png",
         "isPlaceable": true,
-        "drops" : "stick"
+        "drops" : 58
     },
     "deepslate": {
         "itemID": 61,
@@ -753,7 +753,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/deepslate.png",
         "isPlaceable": true,
-        "drops" : "deepslate"
+        "drops" : 61
     },
     "coal_block": {
         "itemID": 62,
@@ -765,7 +765,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/coal_block.png",
         "isPlaceable": true,
-        "drops" : "coal_block"
+        "drops" : 62
     },
     "emerald_block": {
         "itemID": 63,
@@ -777,7 +777,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/emerald_block.png",
         "isPlaceable": true,
-        "drops" : "emerald_block"
+        "drops" : 63
     },
     "gold_block": {
         "itemID": 64,
@@ -789,7 +789,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/gold_block.png",
         "isPlaceable": true,
-        "drops" : "gold_block"
+        "drops" : 64
     },
     "iron_block": {
         "itemID": 65,
@@ -801,7 +801,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/iron_block.png",
         "isPlaceable": true,
-        "drops" : "iron_block"
+        "drops" : 65
     },
     "lapis_block": {
         "itemID": 66,
@@ -813,7 +813,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/lapis_block.png",
         "isPlaceable": true,
-        "drops" : "lapis_block"
+        "drops" : 66
     },
     "diamond_block": {
         "itemID": 67,
@@ -825,7 +825,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/diamond_block.png",
         "isPlaceable": true,
-        "drops" : "diamond_block"
+        "drops" : 67
     },
     "redstone_block": {
         "itemID": 68,
@@ -837,7 +837,7 @@
         "toolType": "none",
         "texture": "Textures/Blocks/redstone_block.png",
         "isPlaceable": true,
-        "drops" : "redstone_block"
+        "drops" : 68
     },
     "copper_ore": {
         "itemID": 69,
@@ -849,7 +849,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/copper_ore.png",
         "isPlaceable": true,
-        "drops" : "copper_ore"
+        "drops" : 69
     },
     "deepslate_coal_ore": {
         "itemID": 70,
@@ -861,7 +861,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/deepslate_coal_ore.png",
         "isPlaceable": true,
-        "drops" : "coal"
+        "drops" : 42
     },
     "deepslate_copper_ore": {
         "itemID": 71,
@@ -873,7 +873,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/deepslate_copper_ore.png",
         "isPlaceable": true,
-        "drops" : "deepslate_copper_ore"
+        "drops" : 71
     },
     "deepslate_diamond_ore": {
         "itemID": 72,
@@ -885,7 +885,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/deepslate_diamond_ore.png",
         "isPlaceable": true,
-        "drops" : "diamond"
+        "drops" : 50
     },
     "deepslate_emerald_ore": {
         "itemID": 73,
@@ -897,7 +897,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/deepslate_emerald_ore.png",
         "isPlaceable": true,
-        "drops" : "emerald"
+        "drops" : 53
     },
     "deepslate_gold_ore": {
         "itemID": 74,
@@ -909,7 +909,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/deepslate_gold_ore.png",
         "isPlaceable": true,
-        "drops" : "deepslate_gold_ore"
+        "drops" : 74
     },
     "deepslate_iron_ore": {
         "itemID": 75,
@@ -921,7 +921,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/deepslate_iron_ore.png",
         "isPlaceable": true,
-        "drops" : "deepslate_iron_ore"
+        "drops" : 75
     },
     "deepslate_lapis_ore": {
         "itemID": 76,
@@ -933,7 +933,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/deepslate_lapis_ore.png",
         "isPlaceable": true,
-        "drops" : "lapis"
+        "drops" : 56
     },
     "deepslate_redstone_ore": {
         "itemID": 77,
@@ -945,7 +945,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/deepslate_redstone_ore.png",
         "isPlaceable": true,
-        "drops" : "redstone_dust"
+        "drops" : 82
     },
     "emerald_ore": {
         "itemID": 78,
@@ -957,7 +957,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/emerald_ore.png",
         "isPlaceable": true,
-        "drops" : "emerald"
+        "drops" : 53
     },
     "nether_gold_ore": {
         "itemID": 79,
@@ -969,7 +969,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/nether_gold_ore.png",
         "isPlaceable": true,
-        "drops" : "nether_gold_ore"
+        "drops" : 79
     },
     "nether_quartz_ore": {
         "itemID": 80,
@@ -981,7 +981,7 @@
         "toolType": "none",
         "texture": "Textures/Ores/nether_quartz_ore.png",
         "isPlaceable": true,
-        "drops" : "nether_quartz_ore"
+        "drops" : 80
     },
     "redstone_ore": {
         "itemID": 81,
@@ -993,11 +993,11 @@
         "toolType": "none",
         "texture": "Textures/Ores/redstone_ore.png",
         "isPlaceable": true,
-        "drops" : "redstone_dust"
+        "drops" : 82
     },
     "redstone_dust": {
         "itemID": 82,
-        "itemDisplayName" : "Redstone Wiring",
+        "itemDisplayName" : "Redstone Dust",
         "breakTime": 99999,
         "blockHardness": 0,
         "itemHardness": 0,
@@ -1005,7 +1005,7 @@
         "toolType": "none",
         "texture": "Textures/Items/redstone.png",
         "isPlaceable": false,
-        "drops" : "null"
+        "drops" : -1
     },
     "end_game_block": {
         "itemID": 83,
@@ -1017,11 +1017,11 @@
         "toolType": "none",
         "texture": "Textures/Blocks/end_game_block.png",
         "isPlaceable": true,
-        "drops" : "null"
+        "drops" : -1
     },
     "portal block": {
         "itemID": 84,
-        "itemDisplayName" : "End Game Block",
+        "itemDisplayName" : "Portal Block",
         "breakTime": 99999,
         "blockHardness": 5,
         "itemHardness": 0,
@@ -1029,6 +1029,6 @@
         "toolType": "none",
         "texture": "Textures/Blocks/PortalBlock.png",
         "isPlaceable": true,
-        "drops" : "null"
+        "drops" : -1
     }
 }

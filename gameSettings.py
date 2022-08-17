@@ -1,9 +1,12 @@
 import math
 import random
+from itemHandler import fetchDicts
+
+#Populate item array; null item is at index zero but NOTE that item ID's begin at -1. IE: items[0].getItemId() == -1
+items = fetchDicts()[0]
 
 #sets seed taken from user text input or a random number if no seed is given
 seed = 1
-
 
 actions = {
         "NONE" : -1,
