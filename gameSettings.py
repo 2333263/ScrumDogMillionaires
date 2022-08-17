@@ -2,7 +2,7 @@ import math
 import random
 
 #sets seed taken from user text input or a random number if no seed is given
-seed=1
+seed = 1
 
 
 actions = {
