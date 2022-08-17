@@ -10,8 +10,8 @@ import Camera as cam
 class MinePy:
     def __init__(self):
         pygame.init()
-        #self.screen = pygame.display.set_mode((gs.width, gs.height))
-        self.screen = pygame.Surface((gs.width, gs.height))
+        self.screen = pygame.display.set_mode((gs.width, gs.height))
+        #self.screen = pygame.Surface((gs.width, gs.height))
         self.clock = pygame.time.Clock()
         self.game_speed = 60
         #self.mode = 0
@@ -56,6 +56,8 @@ class MinePy:
         self.collisionblocks = self.camera.draw(self.screen, self.worldBlocks)
         #pygame.display.update()
         pygame.display.flip()
-        self.clock.tick(self.game_speed)                    
+        self.clock.tick(self.game_speed)
+
+
 
     
