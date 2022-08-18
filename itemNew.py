@@ -1,12 +1,11 @@
-
-'''"comments":
+""""comments":
     "These are comment tags that do not define any item and are essentially garbage data, you'd have to try very hard to somehow grab this data x)"
 
     "                                       HARDNESS OVERHAUL                                       "
     "@Ben you should have enough with these properties to scale breaking speed and time with any tool permutations how you see fit"
-    "The hardness property has been seperated into five parts: 'breakTime', 'blockHardness', 'itemHardness', 'reqToolType' and 'toolType' "
+    "The hardness property has been separated into five parts: 'breakTime', 'blockHardness', 'itemHardness', 'reqToolType' and 'toolType' "
 
-        "The first 'breakTime' is now explicitely defined as an integer greater than 0 and gives the block the time given to break if the correct tool or above is provided"
+        "The first 'breakTime' is now explicitly defined as an integer greater than 0 and gives the block the time given to break if the correct tool or above is provided"
         "Measured in milliseconds"
 
             "0: The block will break instantly if the correct tool hardness (defined later) is provided"
@@ -15,7 +14,7 @@
 
         "The second hardness variable will now be blockHardness, an integer ranging from 0-5 (subject to change), defined below is what each integer indicates"
         "This is the effective hardness of an item when it is __PLACED AS A BLOCK__ in the world"
-        
+
 
             "0: No tool level, anything can break this block"
             "1: Wooden tool level or higher required to break this block"
@@ -25,14 +24,14 @@
             "5: THIS IS RESERVED FOR UNBREAKABLE BLOCKS ONLY!"
 
         "The third variable will be itemHardness, an integer ranging from 0-5 (subject to change), defined below is what each integer indicates"
-        "This is the effective hardness of an item when it is __USED AS AN ITEM TO BREAK A BLOCK__ in the wolrd"
+        "This is the effective hardness of an item when it is __USED AS AN ITEM TO BREAK A BLOCK__ in the world"
 
             "0: No tool level, this will break only blocks with blockHardness 0"
             "1: Wooden tool level, this will break only blocks with blockHardness 1 and below"
             "2: Stone tool level, this will break only blocks with blockHardness 2 and below"
             "3: Iron tool level, this will break only blocks with blockHardness 3 and below"
             "4: Diamond tool level, this will break only blocks with blockHardness 4 and below"
-            "5: UNATTAINABLE TOOL, could be used to debug later? Not sure, leaving it for consistency sake."
+            "5: UNATTAINABLE TOOL, could be used to debug later? Not sure, leaving it for consistency’s sake."
 
         "The fourth variable will be reqToolType, as implied, this will be the required type of tool needed to break a given block."
         "This is a fix for the otherwise unavoidable issue of breaking given level blocks with any equal given level tool/item"
@@ -46,17 +45,17 @@
             "sword"
 
         "The fifth and final variable will be toolType, as implied, this will be the type of tool a given item is specified as, used to compare with reqToolType"
-        "Ignore the / in front of /axe, /pickaxe, /shovel, /hoe and /sword, just was tired of json error saying there were dupilcates"
+        "Ignore the / in front of /axe, /pickaxe, /shovel, /hoe and /sword, just was tired of json error saying there were duplicates"
 
             "null: reserved for the null item, do not use this."
-            "none: reserved for items that are not explicitely tools."
+            "none: reserved for items that are not explicitly tools."
             "axe"
             "pickaxe"
             "shovel"
             "hoe"
             "sword"
 
-'''
+"""
 
 class Item:
 
