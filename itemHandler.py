@@ -1,6 +1,7 @@
 import json
 from itemNew import Item
 
+itemsDict = {}
 items = []
 
 #Pre-defined (These will slowly be phased out, one step at a time.)
@@ -16,7 +17,7 @@ craftingIDs = {
 
 
 #Populate Dictionaries
-def fetchDicts():
+def fetchDict():
     file = open("items.json")
     data = json.load(file)
     for i in data:
@@ -31,21 +32,22 @@ def fetchDicts():
                         data[i]['isPlaceable'],
                         data[i]['drops'])
         items.append(tempItem)
+        itemsDict[str(data[i]['itemID'])] = tempItem
         tempItem = None
-    return items, immovableBlocks, clickableBlocks, craftingIDs
+    return itemsDict
 
-fetchDicts()
-for i in items:
-    print("Item ID:\t" + str(i.getItemId()))                                #getItemId()
-    print("\tItem Name:\t\t " + str(i.getItemName()))                       #getItemName()
-    print("\tBreak Time:\t\t " + str(i.getBreakTime()))                     #getBreakTime()
-    print("\tBlock Hardness:\t " + str(i.getBlockHardness()))               #getBlockHardness()
-    print("\tItem Hardness:\t " + str(i.getItemHardness()))                 #getItemHardness
-    print("\tReq Tool Type:\t " + str(i.getReqToolType()))                  #getReqToolType()
-    print("\tSelf Tool Type:\t " + str(i.getToolType()))                    #getToolType()
-    print("\tTexture Path:\t " + str(i.getTexture()))                       #getTexture() -- Returns a file path as a string
-    print("\tIs Placeable:\t " + str(i.getIsPlaceable()))                   #getIsPlaceable()
-    print("\tDrops:\t\t\t " + str(items[i.getDrop()+1].getItemName()))      #getDrop() returns the item ID of the dropped item, add one to index in items array
+# fetchDicts()
+# for i in items:
+#     print("Item ID:\t" + str(i.getItemId()))                                #getItemId()
+#     print("\tItem Name:\t\t " + str(i.getItemName()))                       #getItemName()
+#     print("\tBreak Time:\t\t " + str(i.getBreakTime()))                     #getBreakTime()
+#     print("\tBlock Hardness:\t " + str(i.getBlockHardness()))               #getBlockHardness()
+#     print("\tItem Hardness:\t " + str(i.getItemHardness()))                 #getItemHardness
+#     print("\tReq Tool Type:\t " + str(i.getReqToolType()))                  #getReqToolType()
+#     print("\tSelf Tool Type:\t " + str(i.getToolType()))                    #getToolType()
+#     print("\tTexture Path:\t " + str(i.getTexture()))                       #getTexture() -- Returns a file path as a string
+#     print("\tIs Placeable:\t " + str(i.getIsPlaceable()))                   #getIsPlaceable()
+#     print("\tDrops:\t\t\t " + str(items[i.getDrop()+1].getItemName()))      #getDrop() returns the item ID of the dropped item, add one to index in items array
 
 
 

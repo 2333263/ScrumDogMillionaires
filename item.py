@@ -23,7 +23,7 @@ class Item:
             if(self.itemID!=-1):
                 self.texture = pygame.image.load(gs.textureNames[self.itemName])
         #When 3 args are given item(itemName, itemId, hardness)
-        #Non placeable item, tools or entity likes (e.g. piece of coal or wooden pickaxe)
+        #Non-placeable item, tools or entity likes (e.g. piece of coal or wooden pickaxe)
         elif len(args) == 3:
             self.itemName = args[0]
             self.itemID = args[1]

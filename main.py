@@ -12,6 +12,11 @@ from ChunkHandler import checkChunkUpdates
 from soundHandler import playMusic
 import Portal as po
 from block import Block
+import itemHandler as ih
+
+ih.fetchDict()
+for i in ih.itemsDict:
+    print(i + " : " + ih.itemsDict[i].getItemName())
 
 #force update
 # Initialising PyGame & creating a clock in order to limit frame drawing
@@ -278,7 +283,7 @@ def gameMenu():
 
         checkChunkUpdates(player, worldBlocks)
 
-        print(player.getPlayerPos())
+        #print(player.getPlayerPos()) //Disabled this for now, sorry if you were using it </3
 
         # Finally update the  screen with all the above changes
         pygame.display.update()
