@@ -47,7 +47,7 @@ pausePage = pygame.transform.scale(
 # load image for information screen
 infoPage = pygame.image.load("Textures/Screens/gameInfo.png")
 infoPage = pygame.transform.scale(
-    infoPage, (gs.width/1.5, gs.height/1.5))  # fit to page
+    infoPage, (gs.width/1.5, gs.height/1.3))  # fit to page
 
 # load image for end screen
 endPage = pygame.image.load("Textures/Screens/endscreenNorestart.png")
