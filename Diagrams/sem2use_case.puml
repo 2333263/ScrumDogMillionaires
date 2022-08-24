@@ -1,0 +1,35 @@
+@startuml uc
+skinparam Dpi 80
+skinparam Shadowing false
+skinparam Monochrome true
+
+left to right direction
+skinparam packageStyle rectangle
+actor User
+actor AIGymAgent
+actor Admin
+
+rectangle 2DMinecraft {
+  User --> (Generate World from Seed)
+  (Apply textures to differentiate blocks & resources) <-- Admin
+  (Change Rendering Mode) <-- Admin
+  User --> (Start Game)
+  User --> (View Information) 
+  User --> (Pause Game)
+  User --> (Exit Game)
+  User --> (Game control with keyboard & mouse) 
+  User --> (Move around game world)
+  User --> (Break blocks using appropriate tools)
+  User --> (Use hotbar to see items in use)
+  User --> (Use full inventory to see items collected)
+  User --> (Edit hotbar and inventory)
+  User --> (Place blocks in the world) 
+  User --> (Craft new items, blocks & tools) 
+  User --> (Achieve end item - Complete game)
+  User --> (Listen to interactive audio)
+  
+  AIGymAgent --> (Create Minecraft Environment)
+  AIGymAgent --> (Execute Moves)
+  
+}
+@enduml

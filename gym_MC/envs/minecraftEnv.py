@@ -31,14 +31,14 @@ class MinePy:
      
 
         self.player.update(self.clock.tick(), self.worldBlocks)  #may need to change to collison blocks later
-        print(self.player.getPlayerPos())
+        #print(self.player.getPlayerPos())
 
-    def evaluate(self):
+    def evaluate(self):      
         #if player die return -69 else yes
         return 0    
 
     def is_done(self):
-        return False
+        return False               
     
     def observe(self):
         #RGB array?? --> views
