@@ -1,7 +1,13 @@
 import gameSettings as gs
+from item import Item
 from block import Block
 import inventoryHandler as inv
+import itemHandler as itemJSON
 from soundHandler import playBreakSoundforID
+
+properties = itemJSON.itemsDict
+
+
 
 def checkBreakable(block, inHand):
     # a block can only be broken if the current tool is harder than the block's hardness
@@ -21,7 +27,7 @@ def notEmpty(hotbarSelected):
 '''
 
 # Block breaking logic, and inventory handler passover
-def blockBreak(python_pos, world_block, player,test):
+def blockBreak(python_pos, world_block, player, test):
     if gs.distance(player, python_pos) <= gs.playerRange * gs.blockSize:
         pos = gs.getPos(python_pos)
         block = getBlockFromPos(pos, world_block)
@@ -89,3 +95,29 @@ def getBlockFromPos(pos, world_block):  # find block based on position in world
             return block
     # if no block at position, return null block
     return Block(gs.blockSize, pos, -1,  gs.textureNames["Null_Block"], 0)
+
+def getBreakTime(block, tool):
+    breakTime = 0
+
+
+    #print(block.itemID)
+    #print(tool.itemID)
+    if (block.itemID == -1):
+        # Null block being broken
+        return 1;
+    blockItem = properties[str(block.itemID)]
+    #print(blockItem)
+    toolItem = properties[str(tool.itemID)]
+    #print(toolItem)
+    hardness = blockItem.blockHardness - toolItem.itemHardness
+    breakTime = 2**(hardness)*(blockItem.breakTime/1000.0)
+    print('-------')
+    print('break time : ' + str(breakTime))
+    print('block hardness : ' + str(blockItem.blockHardness))
+    print('item name : ' + str(toolItem.itemDisplayName))
+    print('item id : ' + str(toolItem.itemID))
+    #print('break time : ' + str(hardness))
+    print('hardness exp : ' + str(2 ** (hardness)))
+    print(blockItem.breakTime)
+    return breakTime
+

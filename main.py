@@ -18,7 +18,7 @@ ih.fetchDict()
 for i in ih.itemsDict:
     print(i + " : " + ih.itemsDict[i].getItemName())
 
-#force update
+
 # Initialising PyGame & creating a clock in order to limit frame drawing
 pygame.init()
 clock = pygame.time.Clock()
@@ -220,6 +220,9 @@ def gameMenu():
 
         # Breaking speed
         breakTime = 1
+        block = bph.getBlockFromPos(
+            gs.getPos(pygame.mouse.get_pos() + camera.getOffsets()), worldBlocks)  # Get the block being hovered
+        breakTime = bph.getBreakTime(block, inv.invArray[inv.selected])  # If valid block, calculate breaking time
         if (mouseDownCheck):
             if (startPos != gs.getPos(pygame.mouse.get_pos() + camera.getOffsets())):
                 # Restart timer if player moves blocks
@@ -227,13 +230,15 @@ def gameMenu():
                 startTime = time.time()
                 # print('moved cursor')
             if (time.time() - startTime >= breakTime):
-                bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player,False)
+                bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player, False)
             # Break block if timer is longer than required
         # Draws a box around the selected block
 
-        block = bph.getBlockFromPos(
-            gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()), worldBlocks)
+
         if(block.itemID != -1):
+
+
+
             if block.itemID in gs.clickableBlocks:
                 blockFrameImgName = "Block_Frame"
             if bph.checkBreakable(block, inv.invArray[inv.selected]):

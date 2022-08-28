@@ -60,6 +60,7 @@ def distance(player, python_pos): #Takes in player position and coords and retur
 
 #dictionary of all block types
 itemIDs = {
+    # ALL COMMENTS ARE ITEMS IN NEW ITEM JSON AND ARE MISSING HERE
    -1: "null",
     0 : "Grass",
     1 : "Dirt",
@@ -67,27 +68,35 @@ itemIDs = {
     3 : "Cloud",
     4 : "Bedrock",
     5 : "Crafting Table",
-    6 : "Leaves",
-    7 : "Logs",
-    8 : "Wooden Planks",
+    6 : "Leaves", #Oak
+    7 : "Logs", #Oak
+    8 : "Wooden Planks", #Oak
     9 : "Crafting Background",
-    10 : "Wooden Pickaxe",
-    11 : "Stone Pickaxe",
-    12 : "Stone Shovel",
-    13 : "Coal Ore",
-    14 : "Iron Ore",
-    15 : "Gold Ore",
-    16 : "Diamond Ore",
-    17 : "Portal",
-    18 : "Emerald Ore",
-    19 : "Diamond",
-    20 : "Emerald",
-    21 : "Gold Ingot",
-    22 : "Diamond Block",
-    23 : "Emerald Block",
-    24 : "Gold Block",
-    25 : "End Game Block",
-    26 : "Portal Block"
+    #10 is sky bugged in NEW JSON FORMAT
+    11 : "Wooden Pickaxe", #was 10
+    # More Sooden Tools
+    16 : "Stone Pickaxe", #was 11
+    # Stone Axe
+    18 : "Stone Shovel", #was 12
+    # More Stone Tools
+    # Gold Tools
+    # Iron Toolsz
+    # Diamond Tools
+    # Netherite Tools
+    41 : "Coal Ore", #was 13
+    43 : "Iron Ore", #was 14
+    46 : "Gold Ore", #was 15
+    49 : "Diamond Ore", #was 16
+    17 : "Portal", #was 17 ALSO WHAT DOES THIS DO
+    78 : "Emerald Ore", #was 18
+    50 : "Diamond", #was 19
+    53 : "Emerald", #was 20
+    47 : "Gold Ingot", #was 21
+    67 : "Diamond Block", #was 22
+    63 : "Emerald Block", #was 23
+    64 : "Gold Block", #was 24
+    83 : "End Game Block", #was 25
+    84 : "Portal Block" #was 26
 }
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
@@ -102,47 +111,58 @@ blockHardness = {
     7 : 0,
     8 : 0,
     9 : 999,
-    10 : 0,
     11 : 0,
-    12 : 0,
-    13 : 10,
-    14 : 15,
-    15 : 15,
-    16 : 15, 
-    17 : 999,
-    18 : 20,
-    22 : 20,
-    23 : 20,
-    24 : 20,
-    25 : 999,
-    26 : 999
+    16 : 0,
+    18 : 0,
+    41 : 10,
+    43 : 15,
+    46 : 15,
+    49 : 15,
+    84 : 999,
+    78 : 20,
+    67 : 20,
+    63 : 20,
+    64 : 20,
+    83 : 999,
+    84 : 999
 }
 #dictionary of tool hardness (strength) correlating to order of itemID dictionary
 itemHardness = {
-    -1: 0, #is a block, therefore has hardeness 0
-    0 : 0,
-    1 : 0,
-    2 : 0,
-    3 : 0,
-    4 : 0,
-    5 : 0,
-    6 : 0,
-    7 : 0,
-    8 : 0,
-    9 : 0,
-    10 : 10, #tool with hardness level 10
-    11 : 20, #tool
-    12 : 20, #tool
-    19 : 0,
-    20 : 0,
-    21 : 0
+    -1: 0,
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+    9: 0,
+    11: 10,
+    16: 20,
+    18: 20,
+    41: 0,
+    43: 0,
+    46: 0,
+    49: 0,
+    84: 0,
+    78: 0,
+    50: 0,
+    53: 0,
+    47: 0,
+    67: 0,
+    63: 0,
+    64: 0,
+    83: 0,
+    84: 0,
 }
 #dictionary controling whether an item can be placed into the world
 #tools and ore cannot be placed into the world
 #blocks can be pplaced into the world
 isPlaceable = {
-     -1: False,
-    0 : True,
+    -1: False,
+    0 : False,
     1 : True,
     2 : True,
     3 : True,
@@ -152,23 +172,23 @@ isPlaceable = {
     7 : True,
     8 : True,
     9 : True,
-    10 : False,
     11 : False,
-    12 : False,
-    13 : True,
-    14 : True,
-    15 : True,
-    16 : True,
-    17 : False,
-    18 : True,
-    19 : False,
-    20 : False,
-    21 : False,
-    22 : True,
-    23 : True,
-    24 : True,
-    25 : True,
-    26 : False
+    16 : False,
+    18 : False,
+    41 : True,
+    43 : True,
+    46 : True,
+    49 : True,
+    84 : False,
+    78 : True,
+    50 : False,
+    53 : False,
+    47 : False,
+    67 : True,
+    63 : True,
+    64 : True,
+    83 : True,
+    84 : False
 }
 
 
@@ -196,16 +216,17 @@ converterIDs = {
     'T' : 5, #Crafting Table
     'V' : 6, #Leaves 
     'L' : 7, #Logs,
-    "C" : 13, #Coal Ore
-    "I" : 14, #Iron Ore
-    "A" : 15, #Gold Ore
-    "M" : 16, #Diamond Ore
-    "E" : 18, #Emerald Ore
-    "O" : 22, #Diamond Block
-    "R" : 23, #Emerald Block
-    "U" : 24, #Gold Block
-    "X" : 25 #End Game Block
+    "C" : 41, #Coal Ore
+    "I" : 43, #Iron Ore
+    "A" : 46, #Gold Ore
+    "M" : 49, #Diamond Ore
+    "E" : 78, #Emerald Ore
+    "O" : 67, #Diamond Block
+    "R" : 63, #Emerald Block
+    "U" : 64, #Gold Block
+    "X" : 83 #End Game Block
 }
+
 
 textureNames = {
     #Ui Blocks
@@ -301,4 +322,4 @@ textureNames = {
     "Portal" : "Textures/Screens/portal.png"
 }
 immovableBlocks = [3, 5] #list used to store itemIDs of blocks that cannot be moved
-clickableBlocks = [5,25]
+clickableBlocks = [5,83]
