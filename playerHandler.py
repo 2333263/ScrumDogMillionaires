@@ -85,7 +85,7 @@ class Player(pygame.sprite.Sprite):
         return   collide_list
         
 
-    def update(self, dt, blocks):
+    def update(self, dt, blocks, sound = False):
         #if the player is jumping use the jump arc gravity instead of normal gravity
         if(self.jumped==True):
             self.jumpArc()
@@ -122,10 +122,11 @@ class Player(pygame.sprite.Sprite):
                 if self.direction.y>0:  # if moving down
                     self.rect.bottom=block.rect.top #collide with block on bottom
 
-                    if(self.count%20==0 and not self.direction.x==0): 
+                    if(self.count%20==0 and not self.direction.x==0 and sound): 
                         #player is walking and sound should play
                         #mod 20 so that sound does not play ontop of itself
                         playSoundforID(block.itemID) #call method in soundHandler.py
+
                     self.count+=1
                     self.direction.y=0 #no movement on y
                 elif self.direction.y<0: # if moving up
