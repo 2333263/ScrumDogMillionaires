@@ -87,7 +87,7 @@ itemIDs = {
     43 : "Iron Ore", #was 14
     46 : "Gold Ore", #was 15
     49 : "Diamond Ore", #was 16
-    17 : "Portal", #was 17 ALSO WHAT DOES THIS DO
+    17 : "Portal", #was 17 ALSO WHAT DOES THIS DO (kept 17)
     78 : "Emerald Ore", #was 18
     50 : "Diamond", #was 19
     53 : "Emerald", #was 20
