@@ -26,8 +26,9 @@ try:
 except:
     print("no audio device found")
     audio=False
+
 def getGrassSound():
-    return grassSound;
+    return grassSound
 
 def playMusic():
     # Loading and playing background music:
@@ -36,6 +37,9 @@ def playMusic():
     pygame.mixer.music.play(-1, 0.0) #-1 makes the track loop infintely, play from 0th second
     pygame.mixer.music.set_volume(0.5)
 
+def stopMusic():
+    pygame.mixer.music.stop()
+    
 def playSoundforID(id): #takes in block id from playerHandler and plays the appropriate sound
     if id==0 and audio:
         grassSound.play()
