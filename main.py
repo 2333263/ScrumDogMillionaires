@@ -12,10 +12,10 @@ from ChunkHandler import checkChunkUpdates
 from soundHandler import playMusic
 import Portal as po
 from block import Block
-from itemHandler import populateDictionaries
+#from itemHandler import populateDictionaries
 
 #Populate item dictionaries
-populateDictionaries()
+#populateDictionaries()
 
 #force update
 # Initialising PyGame & creating a clock in order to limit frame drawing
