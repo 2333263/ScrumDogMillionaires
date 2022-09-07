@@ -1,0 +1,26 @@
+@startuml state2
+
+skinparam dpi 500
+
+state fork_environment <<fork>>
+state join_environment <<join>> 
+state agent_fork <<fork>>
+
+[*] --> fork_environment
+fork_environment --> LoadAgent
+fork_environment --> LoadTextures 
+fork_environment --> LoadCamera
+fork_environment --> generateEnvironment
+
+LoadCamera --> join_environment
+LoadTextures --> join_environment
+LoadAgent --> join_environment
+generateEnvironment --> join_environment
+
+join_environment --> agent_fork
+
+agentMovments --> agent_fork
+agent_fork --> agentMovments
+agent_fork --> [*] : Press the exit button to end the game
+
+@enduml

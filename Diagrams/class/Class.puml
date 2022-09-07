@@ -14,8 +14,8 @@ class Block {
 
 class breakPlaceHandler {
     +checkBreakable(block, inHand)
-    +blockBreak(python_pos, world_block, player, test)
-    +blockPlace(python_pos, world_block, player, test)
+    +blockBreak(python_pos, world_block, player, test, sound)
+    +blockPlace(python_pos, world_block, player, test, sound)
     +getBlockFromPos(pos, world_block)
 }
 
@@ -54,37 +54,35 @@ class Button {
 }
 
 class Crafting {
+    +slots
+    +relative
+    +buttonFront
+    +NullItem
+    +craftArray
     +relativeSize
     +recipes
     +allItems
     +screen
-    +menuBackground
-    +craftables
-    +itemName
-    +itemRecipe
-    +itemsNeeded
+    +craftID
     +canCraft
-    +createdItem
-    +craftButton
     +init(screen)
-    +makeScreen()
-    +makeBackground()
-    +populatePossibleItems()
-    +populateRecipe(itemID)
-    +resetTable()
-    +checkClick(pos)
-    +makeItem(pos)
-    +isCraftabel(itemID, playerInventory)
+    +drawCraft()
+    +initGroup()
+    +doCraft()
+    +onClick(pos)
+    +checkCanCraft()
+    +emptyTable()
 }
 
 class gameSettings {
     +seed
+    +actions{}
     +octaves 
     +blockSize 
     +playerRange 
     +width 
     +height 
-    +generatedChunks 
+    +generatedChunks{}
     +CHUNK_SIZE 
     +visibleChunks
     +drawCrafting 
@@ -92,6 +90,8 @@ class gameSettings {
     +endGamePlaced 
     +drawPortal 
     +endGamePos 
+    +setSeed(string)
+    +hasher(string)
     +getPos(pos)
     +distance(player, python_pos)
     +itemIDs{}
@@ -119,6 +119,8 @@ class inventoryHandler {
     +addItem(item)
     +decrease()
     +decreaseSpec(itemID)
+    +getClicked()
+    +setClicked()
     +getSelected()
     +selectNext()
     +selectPrevious()
@@ -155,18 +157,44 @@ class Item {
     +getHardness()
 }
 
+/'
 class itemHandler {
-    +itemIDs
-    +blockHardness 
-    +itemHardness 
-    +isPlacable 
-    +textureNames 
+    +itemsDict{}
+    +items
     +immovableBlocks
     +clickableBlocks
     +craftingIDs{}
-    +converterIDs{}
-    +populateDictionaries()
+    +fetchDict()
 }
+
+class itemNew {
+    +itemID
+    +itemDisplayName
+    +breakTime
+    +blockHardness 
+    +itemHardness 
+    +reqToolType
+    +toolType 
+    +texture 
+    +isPlaceable
+    +drops 
+    +amount 
+    +init(itemID, itemDisplayName, breakTime, blockHardness, itemHardness, reqToolType, toolType, texture, isPlaceable, drops)
+    +increase()
+    +decrease()
+    +getCount()
+    +getItemID()
+    +getItemName()
+    +getBreakTime()
+    +getBlockHardness()
+    +getItemHardness()
+    +getReqToolType()
+    +getToolType()
+    +getTexture()
+    +getIsPlaceable()
+    +getDrop()
+}
+'/
 
 class main {
     +clock
@@ -179,6 +207,17 @@ class main {
     +PausePage
     +infoPage
     +endPage
+    +base_font
+    +seedFont 
+    +user_text
+    +input_rect
+    +text 
+    +textRect
+    +text_surface
+    +color_active
+    +color_passive
+    +color 
+    +activeBox
     +worldBlocks
     +collisionblocks
     +player
@@ -186,18 +225,25 @@ class main {
     +startTime 
     +startPos
     +crafter
+    +mouseDownCheck
     +fakeKeys{}
     +font
     +fpsText
     +seedText
+    +bg
+    +collisionblocks
     +blockFrameImgName
+    +breakTime
+    +block
     +blockFrameImg
     +blockFrame 
     +mousePos
     +blockPos 
     +mouse
+    +startButtonText
+    +exitButtonText
+    +informationButtonText
     +gameMenu()
-    +playMusic()
 }
 
 class menuHandler {
@@ -219,12 +265,12 @@ class Player {
     +keys
     +count
     +getPlayerPos()
-    +MoveOnX(fakeKeys)
+    +MoveOnX(fakeKeys, move)
     +useGravity()
     +jump()
     +jumpArc()
     +collided(blocks)
-    +update(dt, blocks)
+    +update(dt, blocks, sound)
     +stopMoveOnX()
     +willcollide(block)
 }
@@ -249,17 +295,20 @@ class RecipeHandler {
     +getRecipe(itemID)
     +getCraftingAmount(itemID)
     +getAllItemIDs()
-    +getCrafterShape(itemID)
+    +getCraftingShape(itemID)
+    +getCraftingMatrix(itemID)
 }
 
 class soundHandler {
     +audio 
     +getGrassSound()
     +playMusic()
+    +stopMusic()
     +playSoundForID(id)
     +playBreakSoundforID(id)
 }
 
+/'
 class Text {
     +my_font
     +words
@@ -267,6 +316,37 @@ class Text {
     +pos
     +rect
     +init(text, fontSize, color, pos, background)
+}
+'/
+
+class MainGym {
+    +env
+    +action
+}
+
+class CustomEnv {
+    +pygame 
+    +action_space
+    +observation_space
+    +init()
+    +reset()
+    +step()
+    +render(mode, clone)
+}
+class MinePy {
+    +screen
+    +clock 
+    +game_speed
+    +player 
+    +camera 
+    +worldBlocks 
+    +collisionblocks
+    +init()
+    +action(action)
+    +evalutate()
+    +is_done()
+    +observe()
+    +view()
 }
 
 
@@ -281,14 +361,12 @@ main --> ChunkGenerator
 main --> ChunkHandler
 main --> menuHandler
 main --> soundHandler
-main --> itemHandler
 
 breakPlaceHandler --* Block
 breakPlaceHandler --> Block
 breakPlaceHandler --> gameSettings
 breakPlaceHandler --> inventoryHandler
 breakPlaceHandler --> soundHandler
-breakPlaceHandler --> Player
 
 Camera --> gameSettings
 
@@ -300,17 +378,21 @@ ChunkHandler --> ChunkGenerator
 
 Button --> gameSettings
 
-Crafting --* RecipeHandler
+Crafting --> RecipeHandler
 Crafting --* Button
-Crafting --* Text
 Crafting --* Item
 Crafting --> gameSettings
 Crafting --> inventoryHandler
+Crafting --* slot
+Crafting --> slot
 
 inventoryHandler --* Item
 inventoryHandler --* slot
 inventoryHandler --* Block
 inventoryHandler --> gameSettings
+
+/'itemHandler --* itemNew
+'/
 
 Item --> gameSettings
 
@@ -322,4 +404,16 @@ Player --> soundHandler
 Portal --> gameSettings
 
 RecipeHandler --> gameSettings
+
+soundHandler --> gameSettings
+
+MinePy --> gameSettings
+MinePy --> ChunkGenerator
+MinePy --* Player
+MinePy --* Camera
+
+CustomEnv --* MinePy
+
+MainGym --> CustomEnv
+
 @enduml
