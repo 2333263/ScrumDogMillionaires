@@ -12,23 +12,37 @@
 [User Interface]
 [Game Menu]
 [Audio]
+[AI Agent] #ADD8E6
+
 folder "Files"{
     [Sprites]
-    [Recipe Json]
+
+}
+
+folder "JSON Files"{
+    [Item JSON]
+    [Recipe JSON]
 }
 () "Get Texture" as GT1
 () "Get Texture" as GT2
+() "Get Texture" as GT3
 [Sprites] -- GT1
-GT1 )-- [Game Settings]
+GT1 )-- [Block]
+[Sprites] -- GT3
+GT3 )-- [Item]
 [Sprites] -- GT2
 GT2 )-- [Player]
 
 () "Get Block Properties" as GBlockInfo
 () "Get Item Properties" as GBItemInfo
 [Block] --( GBlockInfo
-GBlockInfo -- [Game Settings]
+GBlockInfo -- [Item JSON]
 [Item] --( GBItemInfo
-GBItemInfo -- [Game Settings]
+GBItemInfo -- [Item JSON]
+
+() "Get Game Settings" as GGameSetting
+[Game World] --( GGameSetting
+GGameSetting -- [Game Settings]
 
 () "Get Block" as GBlock
 () "Get Item" as GItem
@@ -50,7 +64,7 @@ SelectItemBlock -- [Inventory]
 [Breaking and Placing] -- BreakPlaceBlock
 BreakPlaceBlock )-- [Player]
 
-() "Place Block" as PlaceBlock
+() "Break/Place Block" as PlaceBlock
 [Game World] -- PlaceBlock
 [Breaking and Placing] --( PlaceBlock
 
@@ -60,7 +74,7 @@ BreakPlaceBlock )-- [Player]
 
 () "Get Recipes" as GetRecipes
 [Crafting] --( GetRecipes
-[Recipe Json] -- GetRecipes
+[Recipe JSON] -- GetRecipes
 
 () "Store/Retrieve Item/Block" as StoreRetrieveBlockItem
 [Crafting] --( StoreRetrieveBlockItem
@@ -104,5 +118,10 @@ GenWorld )-- [Game Menu]
 () "Get Audio to Play" as playAudio
 [Audio] -- playAudio
 [Player] --( playAudio
+
+() "Interface through Gym" as AgentInterface #ADD8E6
+[AI Agent] --( AgentInterface
+[Player] -- AgentInterface
+
 
 @enduml
