@@ -5,10 +5,10 @@ import random
 seed = 1
 
 actionSpace = {
-    "MOVEMENT" : [i for i in range(-1, 3, 1)] ,
-    "WORLD" : [i for i in range(3, 23, 1)],
-    "HOTBAR" : [i for i in range(23, 63, 1)],
-    "CRAFTING" : [i for i in range(63, 72, 1)]
+    "MOVEMENT" : [i for i in range(-1, 5, 1)] ,
+    "WORLD" : [i for i in range(5, 25, 1)],
+    "HOTBAR" : [i for i in range(25, 65, 1)],
+    "CRAFTING" : [i for i in range(65, 75, 1)]
 }
 
 

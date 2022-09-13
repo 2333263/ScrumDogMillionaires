@@ -28,12 +28,23 @@ class MinePy:
         self.offset=[[-1,-1], [0,-1], [1,-1], #offsets of player positions, top row is above player
                     [-1,0], [-1,1], [1,0], [1, 1], #left down, left up, right down, right up
                     [-1,2], [0, 2], [1, 2]] #below the player
-   
+    
+
+    [-1, 0, 1, 2, 3, 4]
     def action(self, action):
         if action == gs.actionSpace["MOVEMENT"][2]:
             self.player.jump()
-        elif action in gs.actionSpace["MOVEMENT"][1:]:
+        elif action in gs.actionSpace["MOVEMENT"][1:3]:
             self.player.MoveOnX({}, action)
+            
+        elif action == gs.actionSpace["MOVEMENT"][4]:
+            self.player.jump()
+            self.player.MoveOnX({}, gs.actionSpace["MOVEMENT"][1])
+
+        elif action == gs.actionSpace["MOVEMENT"][5]:
+            self.player.jump()
+            self.player.MoveOnX({}, gs.actionSpace["MOVEMENT"][3])
+
         elif action in gs.actionSpace["WORLD"]:
             if action in gs.actionSpace["WORLD"][0:10]:
                 realAction = action - gs.actionSpace["WORLD"][0]
