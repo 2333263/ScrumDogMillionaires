@@ -100,7 +100,6 @@ class MinePy:
             return 0.01 #any other actions
         
         elif self.stage == 2: #craft wooden planks
-
             # Does not have enough planks and has no logs
             if inv.getItemCountFromInput(7, current) == 0 and inv.getItemCountFromInput(8, current) < 8:
                 #has a pickaxe (from stage 4) and has more than 2 wooden planks
@@ -133,7 +132,6 @@ class MinePy:
             return 0.01 #any other actions
 
         elif self.stage == 3: #craft a wooden pickaxe
-
             # less than minimum planks to craft one pickaxe and doesn't have a pickaxe
             # go to previous stage
             if inv.getItemCountFromInput(8, current) < 5 and inv.getItemCountFromInput(11, current) == 0:
@@ -159,7 +157,6 @@ class MinePy:
             return 0.01 # any other action
         
         elif self.stage == 4: # collect stone and wooden planks
-
             stageRewards = {2 : 40 , 8 : 40, 7 : 10, 6 : 2, 1 : 1, 0 : 3} # itemID : reward
             reward = 0
             # might need to reward the agent for selecting the pickaxe
@@ -195,7 +192,6 @@ class MinePy:
                 return 0.01 + reward #other actions
             
         elif self.stage == 5: #craft stone pickaxe
-
             # Have less than minimum stone or wood to craft one pickaxe, and dont have a stone pickaxe
             if inv.getItemCountFromInput(16, current) == 0 and (inv.getItemCountFromInput(2, current) < 3 or inv.getItemCountFromInput(8, current) < 2):
                 self.stage -= 1 
@@ -262,43 +258,21 @@ class MinePy:
                 if inv.getItemCountFromInput(46, current) == 0  and inv.getItemCountFromInput(49, current) == 0 and inv.getItemCountFromInput(78, current) == 0:
                     self.stage -= 1
                     return -70
-
-            # need 36 diamond, 36 gold ingot and 1 emerald
-            diamondOrePrevCount = inv.getItemCountFromInput(49, prev)
-            diamondOreCurrCount = inv.getItemCountFromInput(49, current)
-            diamondPrevCount = inv.getItemCountFromInput(50, prev)
-            diamondCurrCount = inv.getItemCountFromInput(50, current)
-
-            if diamondOrePrevCount > diamondOreCurrCount: # could've placed or crafted diamond ore
-                if diamondPrevCount < diamondCurrCount: # crafted a diamond
-                    return 70
-                return -50 # placed the block
-            
-            goldOrePrevCount = inv.getItemCountFromInput(46, prev)
-            goldOreCurrCount = inv.getItemCountFromInput(46, current)
-            goldPrevCount = inv.getItemCountFromInput(47, prev)
-            goldCurrCount = inv.getItemCountFromInput(47, current)
-
-            if goldOrePrevCount > goldOreCurrCount: # could've placed or crafted gold ore
-                if goldPrevCount < goldCurrCount: # crafted a gold ingot
-                    return 70
-                return -50 # placed the block
-
-            emeraldOrePrevCount = inv.getItemCountFromInput(78, prev)
-            emeraldOreCurrCount = inv.getItemCountFromInput(78, current)
-            emeraldPrevCount = inv.getItemCountFromInput(53, prev)
-            emeraldCurrCount = inv.getItemCountFromInput(53, current)
-
-            if emeraldOrePrevCount > emeraldOreCurrCount: # could've placed or crafted emerald ore
-                if emeraldPrevCount < emeraldCurrCount: # crafted an emerald
-                    return 70
-                return -50 # placed the block
+            minerals = [[49,50],[46,47],[78,53]]#diamond ore, diamond, gold ore, gold, emerald ore, emerald
+            for c in minerals:
+                OrePrevCount = inv.getItemCountFromInput(c[0], prev)
+                OreCurrCount = inv.getItemCountFromInput(c[0], current)
+                PrevCount = inv.getItemCountFromInput(c[1], prev)
+                CurrCount = inv.getItemCountFromInput(c[1], current)
+                if OrePrevCount > OreCurrCount: # could've placed or crafted  ore
+                    if PrevCount < CurrCount: # crafted a minerals
+                        return 70
+                    return -50 # placed the block
             
             return 0.01 #other actions
 
         elif self.stage == 8: #craft diamond, gold blocks
             enough = inv.getItemCountFromInput(64, current) >= 4 and inv.getItemCountFromInput(67, current) >= 4
-            print(self.stage)
             #have enough resources to go to the next stage
             if enough:
                 self.stage += 1
@@ -309,31 +283,21 @@ class MinePy:
                     self.stage -= 1
                     return -80
 
-            diamondPrevCount = inv.getItemCountFromInput(50, prev)
-            diamondCurrCount = inv.getItemCountFromInput(50, current)
-            diamondBlockPrevCount = inv.getItemCountFromInput(67, prev)
-            diamondBlockCurrCount = inv.getItemCountFromInput(67, current)
-
-            goldPrevCount = inv.getItemCountFromInput(47, prev)
-            goldCurrCount = inv.getItemCountFromInput(47, current)
-            goldBlockPrevCount = inv.getItemCountFromInput(64, prev)
-            goldBlockCurrCount = inv.getItemCountFromInput(64, current)
-
-            if goldPrevCount > goldCurrCount: # could've placed or crafted gold ingot
-                if goldBlockPrevCount < goldBlockCurrCount: # crafted a gold block
-                    return 100
-                return -70 # placed the block (incase gold becomes placable)
-
-            if diamondPrevCount > diamondCurrCount: # could've placed or crafted diamond
-                if diamondBlockPrevCount < diamondBlockCurrCount: # crafted a diamond block
-                    return 100
-                return -70 # placed the block (incase diamond becomes placable)
-            
+            minerals = [[50,67],[47,64]]#diamond, diamond block, gold, gold block
+            for c in minerals:
+                PrevCount = inv.getItemCountFromInput(c[0], prev)
+                CurrCount = inv.getItemCountFromInput(c[0], current)
+                BlockPrevCount = inv.getItemCountFromInput(c[1], prev)
+                BlockCurrCount = inv.getItemCountFromInput(c[1], current)
+                if PrevCount > CurrCount: # could've placed or crafted mineral
+                    if BlockPrevCount < BlockCurrCount: # crafted a mineral 
+                        return 100
+                    return -70 # placed the block (incase mineral becomes placable)
+           
             return 0.01 # random action
         
         
         elif self.stage == 9: #craft the end game block
-            print(self.stage)
             #crafted the end game block
             if inv.getItemCountFromInput(83, current) > 0:
                 self.done = True
@@ -344,8 +308,8 @@ class MinePy:
                     self.stage -= 1
                     return -100
             
-            diamondBlockPrevCount = inv.getItemCountFromInput(67, prev)
-            diamondBlockCurrCount = inv.getItemCountFromInput(67, current)
+            diamondPrevCount = inv.getItemCountFromInput(67, prev)
+            diamondCurrCount = inv.getItemCountFromInput(67, current)
             goldPrevCount = inv.getItemCountFromInput(64, prev)
             goldCurrCount = inv.getItemCountFromInput(64, current)
             emeraldPrevCount = inv.getItemCountFromInput(53, prev)
