@@ -7,7 +7,7 @@ import gameSettings as gs
 from ChunkGenerator import generateChunk
 import playerHandler as ph
 import Camera as cam
-import inventoryHandler
+import inventoryHandler as inv
 import breakPlaceHandler as bph
 from CraftingMenu import Crafting
 
@@ -18,6 +18,7 @@ class MinePy:
         #self.screen = pygame.Surface((gs.width, gs.height))
         self.clock = pygame.time.Clock()
         self.game_speed = 60
+        self.stage = 1
         #self.mode = 0
         self.player = ph.Player(((gs.width/2 - gs.blockSize * 4)+0.75*gs.blockSize, - gs.blockSize*2), gs.blockSize)
         self.camera = cam.Camera(self.player)
@@ -60,25 +61,67 @@ class MinePy:
                 bph.blockPlace(playerPos, self.worldBlocks, self.player,False, False)
             
         elif action in gs.actionSpace["HOTBAR"]:
-            inventoryHandler.selectInventory(action - gs.actionSpace["HOTBAR"][0])
+            inv.selectInventory(action - gs.actionSpace["HOTBAR"][0])
 
         elif action in gs.actionSpace["CRAFTING"]:
             craftingID = action - gs.actionSpace["CRAFTING"][0]
-            craftPossibility = self.crafter.craftSpec(craftingID, inventoryHandler.getInv())
+            craftPossibility = self.crafter.craftSpec(craftingID, inv.getInv())
 
 
         self.player.update(self.clock.tick(), self.worldBlocks)  #may need to change to collison blocks later
         #print(self.player.getPlayerPos())
 
-    def evaluate(self):      
-        return 0    
+    def evaluate(self, prev): 
+        current = inv.getInv()
+        
+        if self.stage == 1: #collect logs
+            stageRewards = {7 : 10, 6 : 2, 1 : 1, 0 : 3} #itemID : reward
+            for key in stageRewards.keys:
+                prevCount = inv.getItemCountFromInput(key, prev)
+                currCount = inv.getItemCountFromInput(key, current)
+                
+                if currCount == 4 and key == 7: # Complete stage 1
+                    self.stage += 1
+                    break
+
+                if prevCount < currCount: # if broke blocks
+                    return stageRewards[key]
+
+                if prevCount > currCount and key == 7: # If place wood logs
+                    return -5
+                
+                return 0.01 #any other actions
+            
+        if self.stage == 2: #craft wooden planks
+            # Does not have enough planks and no more logs can craft -> move back to previous stage 
+            if inv.getItemCountFromInput(7, current) == 0 and inv.getItemCountFromInput(8, current) < 8 :
+                self.stage -= 1
+            
+            #has enough planks to craft a pickaxe -> move to next stage
+            elif inv.getItemCountFromInput(8, current) >= 8:
+                self.stage += 1
+            
+            planksPrevCount = inv.getItemCountFromInput(8, prev)
+            planksCurrCount = inv.getItemCountFromInput(8, current)
+            logsPrevCount = inv.getItemCountFromInput(7, prev)
+            logsCurrCount = inv.getItemCountFromInput(7, current)
+            
+            if logsPrevCount > logsCurrCount: # less logs than before
+                if planksPrevCount < planksCurrCount:
+                    return 10
+                return -10
+            
+            return 0.01 #any other actions
+
+        return 0
+            
 
     def is_done(self):
         return False               
     
     def observe(self):
         #RGB array?? --> views
-        return self.player.getPlayerPos()
+        return inv.getInv()
 
     #Should be RGB array in future? 
     def view(self):
@@ -90,7 +133,7 @@ class MinePy:
         bg = pygame.Rect(0, 0, gs.width, gs.height)
         pygame.draw.rect(self.screen, (0, 0, 0), bg)
         self.collisionblocks = self.camera.draw(self.screen, self.worldBlocks)
-        inventoryHandler.drawHotBar(self.screen) #--> draw inventory 
+        inv.drawHotBar(self.screen) #--> draw inventory 
         #pygame.display.update()
         pygame.display.flip()
         self.clock.tick(self.game_speed)

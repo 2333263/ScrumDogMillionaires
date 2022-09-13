@@ -1,0 +1,84 @@
+stage 1: make wooden planks 
+need 2 wooden logs (id = 7) to make 8 planks (id = 8)
+
+wooden logs -> +5
+leafs (id = 6) -> +0.5
+grass (id = 0) -> +1
+dirt (id = 1) -> +0.5
+ 
+
+get stone pickaxe --> need stone and wooden planks (2 planks + 3 stone)
+
+get diamond ore, gold ore, emerald
+
+make diomand block and gold block
+
+make end game block
+
+Stage1: collect 
+logs 
+
+stage 2: craft 
+7 wooden planks -> need 2 logs
+
+stage 3: craft 
+1 wooden pickaxe -> 5 wooden planks
+
+stage 4: collect 
+stone and wooden planks 
+
+stage 5: craft
+1 stone pickaxe --> 3 stone + 2 wooden planks
+
+stage 6: Collect
+36 gold ores
+36 diamond ores
+1 emerald ore
+
+stage 7: Craft 
+diomand ingots
+gold ingots
+emerald
+
+stage 8: craft 
+end game block
+
+
+
+
+total needed:
+7 planks --> 2 logs
+3 stone
+4 gold blocks --> 36 gold ingots --> 36 gold ore
+4 diamond blocks --> 36 diamond ingots --> 36 diamond ore
+1 emerald --> 1 emerald ore
+
+
+limitDict = {
+    "log" : 4
+    "woodenpickaxe" : 1
+    }
+countItemID<=limifDict["woodenpickaxe"]
+Dic1 = {
+    "+lLog": 7, 
+    "+1Dirt" : 45, 
+    "-1Dirt" : 23, 
+    "+1Glass": 7, 
+    "-1Glass" : 10, 
+    "+1Leaf" : 45, 
+    "-1Leaf" : 23, 
+    "+4WoodenPlank": 7, 
+    "-5WooodenPlank" : 10, 
+    "+1Dirt" : 45, 
+    "-1Dirt" : 23,
+    "+lLog": 7, 
+    "-1Log" : 10, 
+    "+1Dirt" : 45, 
+    "-1Dirt" : 23, 
+    "+lLog": 7, 
+    "-1Log" : 10, 
+    "+1Dirt" : 45, 
+    "-1Dirt" : 23, }
+
+
+

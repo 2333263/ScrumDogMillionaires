@@ -96,6 +96,7 @@ itemIDs = {
     83 : "End Game Block", #was 25
     84 : "Portal Block" #was 26
 }
+
 #dictionary of block hardnesses, correlating to itemIDs order
 blockHardness = {
     -1: 0,
