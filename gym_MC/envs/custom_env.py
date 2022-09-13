@@ -7,7 +7,7 @@ class CustomEnv(gym.Env):
     #metadata = {'render.modes' : ['human']}
     def __init__(self):
         self.pygame = MinePy()
-        self.action_space = spaces.Discrete(3)
+        self.action_space = spaces.Discrete(72)
         self.observation_space = spaces.Box(np.array([0, 0]), np.array([10, 10])) ##im not sure how to change this
 
     def reset(self):
@@ -25,3 +25,4 @@ class CustomEnv(gym.Env):
 
     def render(self, mode="human", close=False):
         self.pygame.view()
+        

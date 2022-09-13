@@ -4,13 +4,11 @@ import random
 #sets seed taken from user text input or a random number if no seed is given
 seed = 1
 
-actions = {
-        "NONE" : -1,
-        "JUMP" : 0,
-        "LEFT" : 1,
-        "RIGHT": 2,
-        "EXIT" : 3,
-        "INVENTORY" : 4
+actionSpace = {
+    "MOVEMENT" : [i for i in range(-1, 3, 1)] ,
+    "WORLD" : [i for i in range(3, 23, 1)],
+    "HOTBAR" : [i for i in range(23, 63, 1)],
+    "CRAFTING" : [i for i in range(63, 72, 1)]
 }
 
 

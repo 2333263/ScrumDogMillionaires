@@ -25,6 +25,7 @@ class Crafting():
         self.screen = screen #Must be of data type pygame screen 
         self.canCraft = False #Must be a boolean 
         self.craftID=-1 #ID of item to be crafted
+        self.itemsNeeded = dict() 
         
             
     def drawCraft(self):
@@ -133,7 +134,7 @@ class Crafting():
                     
                     else: #if nothing was previously selected and if selecet craft item slot not null
                         if(craftItem.getItemId()!=-1):
-                            addItem(craftItem) #add the item to the inventory
+                            addItem(craftItem) #aWSdd the item to the inventory
                             self.craftArray[j][i]=NullItem
                     self.checkCanCraft() #check if the crafting table matches any valid recipes
                 break
@@ -149,6 +150,32 @@ class Crafting():
         self.canCraft=False #can't craft an item
         self.craftID=-1 #no item to craft
 
+    def CraftSpec(self, itemID, playerInventory): #Test return boolean
+        if(len(playerInventory) == 0):
+            return False
+        self.itemsNeeded = self.recipies.getRecipe(itemID)
+        for resource in self.itemsNeeded:
+            found = False
+            for item in playerInventory:
+                if(item.itemID == resource):
+                    found = True
+                    if(item.amount < self.itemsNeeded[resource]):
+                        return False
+            if (not found):
+                return False
+        for item in self.itemsNeeded:
+                        for i in range(self.itemsNeeded[item]):
+                            if(item.amount > 0):
+                                decreaseSpec(item)
+        for i in range(self.recipies.getCraftingAmount(self.createdItem)):
+                        #If item is a placeable object, it is then counted as a block
+                        if (isPlaceable[tempItem.getItemId()]):
+                            addBlock(tempItem)
+                        #Else the item is added as an item with an item hardness, defined in gameSettings.py
+                        else:
+                            newTempItem = Item(tempItem.itemName, tempItem.itemID, itemHardness[tempItem.getItemId()])
+                            addItem(newTempItem)
+        return True
 
 
    
