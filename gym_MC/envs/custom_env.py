@@ -13,7 +13,7 @@ class CustomEnv(gym.Env):
     def reset(self):
         del self.pygame
         self.pygame = MinePy()
-        obs = np.array(self.pygame.observe(),dtype=np.float32)
+        obs = np.array(self.pygame.observe())
         return obs
 
     def step(self, action):
@@ -21,7 +21,7 @@ class CustomEnv(gym.Env):
         self.pygame.action(action)
         reward = self.pygame.evaluate(prevObs)
         done = self.pygame.is_done()
-        return obs, reward, done, {}, {}
+        return prevObs, reward, done, {}, {}
 
     def render(self, mode="human", close=False):
         self.pygame.view()
