@@ -149,6 +149,12 @@ def getItemCount(itemID):
             return i.amount
     return 0
 
+def getItemCountFromInput(itemID, invArrayInput):
+    for i in invArrayInput:
+         if( i.itemID==itemID):
+            return i.amount
+    return 0
+
 #same as other draw function, but draws the rest of the inventory other than the hot bar
 def drawInv(screen):
     pygame.draw.rect(screen,(180,180,180),[5*relative,140*relative,850*relative,100*relative*3],0)
