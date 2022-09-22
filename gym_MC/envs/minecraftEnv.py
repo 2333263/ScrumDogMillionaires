@@ -11,26 +11,64 @@ import inventoryHandler as inv
 import breakPlaceHandler as bph
 from CraftingMenu import Crafting
 from item import Item
+from block import Block
 itemIDs=gs.itemIDs
+
 class MinePy:
+    
     metadata = {"render_modes" : ["human"], "render_fps": 64}
     #if render mode is human, render game to screen- if it is None- render game to surface
     #if seed is empty, random seed is used, else hash of seed is used.
-    def __init__(self,render_mode="human", seed=""): #if easy start is 1 add all wooden tools  --easyStart=1
+    
+    def __init__(self,render_mode="human", seed="", easyStart=2,playerRange=7): #if easy start is 1 add all wooden tools 
         pygame.init()
         if(render_mode==None):
+            #if render mode is none do not render game to screen, render to surface
             self.screen = pygame.Surface((gs.width, gs.height))
         elif(render_mode=="human"):
+            #if render mode is human render game to the screen
             self.screen = pygame.display.set_mode((gs.width, gs.height))
-        # if(easyStart==1):
-        #     inv.addItem(11)
+        
+        #there are three levels for easyStart:
+        #level 0: empty inventory
+        #level 1: wooden pickaxe, 4 wooden planks
+        if(easyStart==1):
+            print("here")
+            newTempItem = Item("Wooden Pickaxe",11, 0)
+            inv.addItem(newTempItem)
+            tempBlock=Item(itemIDs[8],8)
+            inv.addBlock(tempBlock)
+            inv.addBlock(tempBlock)
+            inv.addBlock(tempBlock)
+            inv.addBlock(tempBlock)
+        #level 2: wooden pickaxe, 4 wooden planks, a stone pickaxe and a diamond, and an emerald!
+        #really easy start
+        if(easyStart==2):
+            print("here")
+            newTempItem = Item("Wooden Pickaxe",11, 0)
+            inv.addItem(newTempItem)
+            newTempItem2 = Item("Diamond",50, 0)
+            inv.addItem(newTempItem2)
+            tempBlock=Item(itemIDs[8],8)
+            inv.addBlock(tempBlock)
+            inv.addBlock(tempBlock)
+            inv.addBlock(tempBlock)
+            inv.addBlock(tempBlock)
+            newTempItem3 = Item("Stone Pickaxe",16, 0)
+            inv.addItem(newTempItem3)
+            newTempItem4 = Item("Emerald" ,53, 0)
+            inv.addItem(newTempItem4)
+            
         self.clock = pygame.time.Clock()
         self.game_speed = 60
         self.stage = 1
         self.done = False
+        #set the seed
         gs.seed=gs.setSeed(seed)
-        print("gs.seed is=", gs.seed)
-        #self.mode = 0
+        #set the player range for breaking and placing blocks, clicking on items
+        gs.playerRange=playerRange
+        # print("gs.playerRange is=", gs.playerRange)
+        # print("gs.seed is=", gs.seed)
         self.player = ph.Player(((gs.width/2 - gs.blockSize * 4)+0.75*gs.blockSize, - gs.blockSize*2), gs.blockSize)
         self.camera = cam.Camera(self.player)
         self.worldBlocks = pygame.sprite.Group()
@@ -40,6 +78,9 @@ class MinePy:
         self.offset=[[-1,-1], [0,-1], [1,-1], #offsets of player positions, top row is above player
                     [-1,0], [-1,1], [1,0], [1, 1], #left down, left up, right down, right up
                     [-1,2], [0, 2], [1, 2]] #below the player
+    
+    
+  
     
     def action(self, action):
         if action == gs.actionSpace["MOVEMENT"][2]:

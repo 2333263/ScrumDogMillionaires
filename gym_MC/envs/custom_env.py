@@ -13,7 +13,7 @@ class CustomEnv(gym.Env):
         assert render_mode is None or render_mode in self.metadata["render_modes"]
         self.render_mode = render_mode
 
-    def reset(self):
+    def reset(self): #seems to be called all way too frequently
         del self.pygame
         self.pygame = MinePy()
         obs = np.array(self.pygame.observe())
