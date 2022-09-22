@@ -98,7 +98,7 @@ def selectPrevious():
     else:
         selected-=1
 
-#Masively complex function to select an item from the hot dog bar
+#Massively complex function to select an item from the hot dog bar
 def selectInventory(pos):
     global selected
     selected = pos

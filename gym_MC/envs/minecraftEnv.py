@@ -10,16 +10,26 @@ import Camera as cam
 import inventoryHandler as inv
 import breakPlaceHandler as bph
 from CraftingMenu import Crafting
-
+from item import Item
+itemIDs=gs.itemIDs
 class MinePy:
-    def __init__(self):
+    metadata = {"render_modes" : ["human"], "render_fps": 64}
+    #if render mode is human, render game to screen- if it is None- render game to surface
+    #if seed is empty, random seed is used, else hash of seed is used.
+    def __init__(self,render_mode="human", seed=""): #if easy start is 1 add all wooden tools  --easyStart=1
         pygame.init()
-        self.screen = pygame.display.set_mode((gs.width, gs.height))
-        #self.screen = pygame.Surface((gs.width, gs.height))
+        if(render_mode==None):
+            self.screen = pygame.Surface((gs.width, gs.height))
+        elif(render_mode=="human"):
+            self.screen = pygame.display.set_mode((gs.width, gs.height))
+        # if(easyStart==1):
+        #     inv.addItem(11)
         self.clock = pygame.time.Clock()
         self.game_speed = 60
         self.stage = 1
         self.done = False
+        gs.seed=gs.setSeed(seed)
+        print("gs.seed is=", gs.seed)
         #self.mode = 0
         self.player = ph.Player(((gs.width/2 - gs.blockSize * 4)+0.75*gs.blockSize, - gs.blockSize*2), gs.blockSize)
         self.camera = cam.Camera(self.player)
@@ -73,7 +83,7 @@ class MinePy:
     def evaluate(self, prev): 
         current = inv.getInv()
 
-        print("In stage: ", self.stage)
+        #print("In stage: ", self.stage)
         
         if self.stage == 1: #collect logs
             # 8 = wooden planks is here because if we get sent back to stage 1 

@@ -4,11 +4,14 @@ import numpy as np
 from gym_MC.envs.minecraftEnv import MinePy
 
 class CustomEnv(gym.Env):
-    #metadata = {'render.modes' : ['human']}
-    def __init__(self):
+    #if render mode is human, render game to screen- if it is None- render game to surface
+    metadata = {"render_modes" : ["human"],"render_fps": 64}
+    def __init__(self,render_mode="human"):
         self.pygame = MinePy()
         self.action_space = spaces.Discrete(75)
         self.observation_space = spaces.Box(np.array([0, 0]), np.array([10, 10])) #low=0 high =255 shape is (width,height,3)
+        assert render_mode is None or render_mode in self.metadata["render_modes"]
+        self.render_mode = render_mode
 
     def reset(self):
         del self.pygame
@@ -23,6 +26,8 @@ class CustomEnv(gym.Env):
         done = self.pygame.is_done()
         return prevObs, reward, done, {}, {}
 
-    def render(self, mode="human", close=False):
-        self.pygame.view()
-        
+    def render(self):
+        if(self.render_mode=="human"):
+            self.pygame.view()
+    
+    

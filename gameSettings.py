@@ -18,6 +18,8 @@ def setSeed(string):
         seed = int(hasher(string))
     else:
         seed = random.randint(-10000, 10000)
+    return seed
+
 def hasher(string):
     hash=""
     for char in string:
