@@ -332,6 +332,8 @@ class MinePy:
     
     def observe(self):
         #RGB array?? --> views
+        # our observations shouldn't be the inventory, inventory should be in info for new step function
+        # obersvations returns an RGB array of the frame
         return inv.getInv()
 
     #Should be RGB array in future? 
