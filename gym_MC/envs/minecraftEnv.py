@@ -20,7 +20,7 @@ class MinePy:
     #if render mode is human, render game to screen- if it is None- render game to surface
     #if seed is empty, random seed is used, else hash of seed is used.
     
-    def __init__(self,render_mode="human", seed="", easyStart=2,playerRange=7): #if easy start is 1 add all wooden tools 
+    def __init__(self,render_mode="human", seed="", easyStart=2,playerRange=7): 
         pygame.init()
         if(render_mode==None):
             #if render mode is none do not render game to screen, render to surface
