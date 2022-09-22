@@ -8,7 +8,7 @@ class CustomEnv(gym.Env):
     def __init__(self):
         self.pygame = MinePy()
         self.action_space = spaces.Discrete(75)
-        self.observation_space = spaces.Box(np.array([0, 0]), np.array([10, 10])) ##im not sure how to change this
+        self.observation_space = spaces.Box(np.array([0, 0]), np.array([10, 10])) #low=0 high =255 shape is (width,height,3)
 
     def reset(self):
         del self.pygame
@@ -21,7 +21,7 @@ class CustomEnv(gym.Env):
         obs = self.pygame.observe()
         reward = self.pygame.evaluate()
         done = self.pygame.is_done()
-        return obs, reward, done, {}, {}
+        return obs, reward, done, {},{}
 
     def render(self, mode="human", close=False):
         self.pygame.view()

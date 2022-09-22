@@ -29,8 +29,6 @@ class MinePy:
                     [-1,0], [-1,1], [1,0], [1, 1], #left down, left up, right down, right up
                     [-1,2], [0, 2], [1, 2]] #below the player
     
-
-    [-1, 0, 1, 2, 3, 4]
     def action(self, action):
         if action == gs.actionSpace["MOVEMENT"][2]:
             self.player.jump()
