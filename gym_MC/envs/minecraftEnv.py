@@ -16,14 +16,15 @@ itemIDs=gs.itemIDs
 
 class MinePy:
     
-    metadata = {"render_modes" : ["human"], "render_fps": 64}
+    metadata = {"render_modes" : ["human","rgb_array"], "render_fps": 64}
     #if render mode is human, render game to screen- if it is None- render game to surface
     #if seed is empty, random seed is used, else hash of seed is used.
     
     def __init__(self,render_mode="human", seed="", easyStart=2,playerRange=7): 
         pygame.init()
-        if(render_mode==None):
-            #if render mode is none do not render game to screen, render to surface
+        self.render_mode=render_mode
+        if(render_mode=="rgb_array"):
+            #if render mode is rgb_array do not render game to screen, render to surface
             self.screen = pygame.Surface((gs.width, gs.height))
         elif(render_mode=="human"):
             #if render mode is human render game to the screen
@@ -69,7 +70,7 @@ class MinePy:
         gs.playerRange=playerRange
         # print("gs.playerRange is=", gs.playerRange)
         # print("gs.seed is=", gs.seed)
-        self.player = ph.Player(((gs.width/2 - gs.blockSize * 4)+0.75*gs.blockSize, - gs.blockSize*2), gs.blockSize)
+        self.player = ph.Player(((gs.width/2 - gs.blockSize * 4)+0.75*gs.blockSize, - gs.blockSize*30), gs.blockSize)
         self.camera = cam.Camera(self.player)
         self.worldBlocks = pygame.sprite.Group()
         self.collisionblocks = self.worldBlocks 
@@ -396,8 +397,10 @@ class MinePy:
         pygame.draw.rect(self.screen, (0, 0, 0), bg)
         self.collisionblocks = self.camera.draw(self.screen, self.worldBlocks)
         inv.drawHotBar(self.screen) #--> draw inventory 
-        #pygame.display.update()
-        pygame.display.flip()
+        if(self.render_mode=="human"):
+            pygame.display.flip()
+        #else:
+            #pygame.display.update()
         self.clock.tick(self.game_speed)
 
 

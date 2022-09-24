@@ -10,8 +10,6 @@ actionSpace = {
     "HOTBAR" : [i for i in range(25, 65, 1)],
     "CRAFTING" : [i for i in range(65, 75, 1)]
 }
-
-
 def setSeed(string):   
     global seed
     if len(string)!=0:

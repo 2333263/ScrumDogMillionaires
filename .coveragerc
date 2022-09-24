@@ -1,4 +1,6 @@
 [run]
 branch=False
 omit=
-    soundHandler.py
+    soundHandler.py,
+    config-3.py,
+    config.py

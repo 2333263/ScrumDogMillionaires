@@ -24,7 +24,7 @@ class CustomEnv(gym.Env):
         self.pygame.action(action)
         reward = self.pygame.evaluate(prevObs)
         done = self.pygame.is_done()
-        return prevObs, reward, done, {}, {}
+        return prevObs, reward, done, {},{}
 
     def render(self):
         if(self.render_mode=="human"):
