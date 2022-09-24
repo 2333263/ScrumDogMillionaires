@@ -84,18 +84,26 @@ class MinePy:
   
     
     def action(self, action):
+        fakeKeys={pygame.K_LEFT:False,pygame.K_RIGHT:False,pygame.K_UP:False,pygame.K_a:False,pygame.K_d:False,pygame.K_w:False,pygame.K_SPACE:False}
         if action == gs.actionSpace["MOVEMENT"][2]:
             self.player.jump()
-        elif action in gs.actionSpace["MOVEMENT"][1:3]:
-            self.player.MoveOnX({}, action)
-            
+        elif action == gs.actionSpace["MOVEMENT"][1]:
+            fakeKeys[pygame.K_LEFT]=True
+            #self.player.MoveOnX(fakeKeys, action)
+            self.player.MoveOnX(fakeKeys)
+        elif action == gs.actionSpace["MOVEMENT"][3]:
+            fakeKeys[pygame.K_RIGHT]=True
+            #self.player.MoveOnX(fakeKeys, action)
+            self.player.MoveOnX(fakeKeys)
         elif action == gs.actionSpace["MOVEMENT"][4]:
             self.player.jump()
-            self.player.MoveOnX({}, gs.actionSpace["MOVEMENT"][1])
-
+            fakeKeys[pygame.K_LEFT]=True
+            #self.player.MoveOnX(fakeKeys, gs.actionSpace["MOVEMENT"][1])
+            self.player.MoveOnX(fakeKeys)
         elif action == gs.actionSpace["MOVEMENT"][5]:
             self.player.jump()
-            self.player.MoveOnX({}, gs.actionSpace["MOVEMENT"][3])
+            fakeKeys[pygame.K_RIGHT]=True
+            self.player.MoveOnX(fakeKeys)
 
         elif action in gs.actionSpace["WORLD"]:
             if action in gs.actionSpace["WORLD"][0:10]:
@@ -118,7 +126,7 @@ class MinePy:
             craftingID = action - gs.actionSpace["CRAFTING"][0]
             craftPossibility = self.crafter.craftSpec(craftingID, inv.getInv())
 
-
+        
         self.player.update(self.clock.tick(), self.worldBlocks)  #may need to change to collison blocks later
         #print(self.player.getPlayerPos())
 

@@ -35,26 +35,26 @@ class Player(pygame.sprite.Sprite):
 
 
     
-    def MoveOnX(self, fakeKeys, move = -1):
+    def MoveOnX(self, fakeKeys):
         #gets a list of all keys currently being pressed
         if(len(fakeKeys)==0):
             self.keys=pygame.key.get_pressed()
         else:
             self.keys=fakeKeys
         #if the left arrow is being pressed
-        if(self.keys[pygame.K_LEFT] or self.keys[pygame.K_a] or move == gs.actionSpace["MOVEMENT"][1]):
+        if(self.keys[pygame.K_LEFT] or self.keys[pygame.K_a]):
             #flip the sprite so its facing left
             self.image=pygame.transform.flip(self.character,True, False)
             #set the change in directions vector to -2 in position x
             self.direction.x=-2
         #if the right arrow is being pressed
-        if(self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d] or move == gs.actionSpace["MOVEMENT"][3]):
+        if(self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d]):
             #set the sprite to be the direction of the original image
             self.image=self.character
             #set the change in directions vector to 2 in position x
             self.direction.x=2
         #if neither the left nor right arrow is being pressed
-        if(not self.keys[pygame.K_RIGHT] and not self.keys[pygame.K_LEFT] and not self.keys[pygame.K_d] and not self.keys[pygame.K_a] and move == gs.actionSpace["MOVEMENT"][0]):
+        if(not self.keys[pygame.K_RIGHT] and not self.keys[pygame.K_LEFT] and not self.keys[pygame.K_d] and not self.keys[pygame.K_a]):
             #run the stop Move on X method which sets the direction vector as position x to 0
             self.stopMoveOnX()
         
