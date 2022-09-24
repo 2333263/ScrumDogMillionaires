@@ -905,4 +905,5 @@ class testMinecraftEnv(unittest.TestCase):
          count+=1
          self.ENV.action(gs.actionSpace["WORLD"][i])#break blocks around the player
          self.assertEqual(ih.getItemCount(7),count) #see if it got readded to the inventory
+      ih.invArray=np.full(40,self.NullItem,dtype=item.Item)
 unittest.main()
