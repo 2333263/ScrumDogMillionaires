@@ -786,15 +786,15 @@ class testMinecraftEnv(unittest.TestCase):
    NullItem=item.Item("null",-1)
    def testStartModes(self):
       self.ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=1)
-      self.assertEquals(ih.getItemCount(11),1)#check if the game starts witha wooden pickaxe
-      self.assertEquals(ih.getItemCount(8),4) #and 4 wooden planks
+      self.assertEqual(ih.getItemCount(11),1)#check if the game starts witha wooden pickaxe
+      self.assertEqual(ih.getItemCount(8),4) #and 4 wooden planks
       ih.invArray=np.full(40,self.NullItem,dtype=item.Item)
       self.ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=2)
-      self.assertEquals(ih.getItemCount(11),1)#check if the game starts witha wooden pickaxe
-      self.assertEquals(ih.getItemCount(8),4) #and 4 wooden planks
-      self.assertEquals(ih.getItemCount(16),1)#check if the game starts witha Stone pickaxe
-      self.assertEquals(ih.getItemCount(50),1)#check if the game starts with a diamon
-      self.assertEquals(ih.getItemCount(53),1)#check if the game starts with an emerald
+      self.assertEqual(ih.getItemCount(11),1)#check if the game starts witha wooden pickaxe
+      self.assertEqual(ih.getItemCount(8),4) #and 4 wooden planks
+      self.assertEqual(ih.getItemCount(16),1)#check if the game starts witha Stone pickaxe
+      self.assertEqual(ih.getItemCount(50),1)#check if the game starts with a diamon
+      self.assertEqual(ih.getItemCount(53),1)#check if the game starts with an emerald
       ih.invArray=np.full(40,self.NullItem,dtype=item.Item)
       
    def testActionSpaceMovement(self):
