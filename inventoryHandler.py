@@ -29,7 +29,7 @@ clicked=-1
 def addBlock(block):
     id = block.itemID
     #tempItem=Item(block.itemID,itemIDs[id],breakTime[id],blockHardness[id],itemHardness[id],)
-    tempItem = items[id]
+    tempItem = items[id+1]
     smallest_empty=40
     for i in range(len(invArray)):
         if( invArray[i].itemID==block.itemID):
@@ -42,11 +42,13 @@ def addBlock(block):
         invArray[smallest_empty].increase()
 
 #Add non placeable item or tool (Coal, Ingots, Stone Pickaxe etc...)
-def addItem(item):
-    tempItem=Item(itemIDs[item.itemID],item.itemID, gs.itemHardness[item.itemID])
+def addItem(itemIn):
+    id = itemIn.itemID+1
+    pi = items[id]
+    tempItem=Item(pi.getItemId(),pi.getItemName(),pi.getBreakTime(),pi.getBlockHardness(),pi.getItemHardness(),pi.getReqToolType(),pi.getToolType(),pi.getTexture(),pi.getIsPlaceable(),pi.getDrop())
     smallest_empty=40
     for i in range(len(invArray)):
-        if( invArray[i].itemID==item.itemID):
+        if( invArray[i].itemID==itemIn.itemID):
             invArray[i].increase()
             return
         if(invArray[i].itemID==-1 and i<smallest_empty):

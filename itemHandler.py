@@ -17,7 +17,7 @@ craftingIDs = {
     0 : "Wooden Planks",
     1 : "Wooden Pickaxe",
     2 : "Stone Pickaxe",
-    3 :  "Diamond",
+    3 : "Diamond",
     4 : "Emerald",
     5 : "Gold Ingot",
     6 : "Diamond Block",

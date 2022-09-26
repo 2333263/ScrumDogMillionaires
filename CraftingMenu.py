@@ -1,18 +1,22 @@
 import pygame
 from gameSettings import blockSize
+import itemHandler as ih
 import gameSettings as gs
 from TextHandler import Text
-from item import Item
+from itemNew import Item
 import recipeHandler as rh
 import numpy as np
 from inventoryHandler import addBlock, addItem, decreaseSpec, getClicked, invArray, setClicked
 from InventorySlots import slot
 
+itemIDs = ih.fetchItemIDs()
+textureNames = ih.fetchTextureNames()
+items = ih.fetchDict()
 slots = pygame.sprite.Group()
 relative = gs.blockSize/30
 buttonFont = pygame.font.Font('Minecraft.ttf', 40)  # font for button
 # invArray=np.full(40,NullItem,dtype=Item)
-NullItem = Item("null", -1)
+NullItem = items[0]
 
 
 class Crafting():
@@ -58,10 +62,8 @@ class Crafting():
             for i in range(3):
                 if(self.craftArray[j][i].itemID != -1):
                     currTexture = self.craftArray[j][i].texture
-                    currTexture = pygame.transform.scale(
-                        currTexture, (50*relative, 50*relative))
-                    self.screen.blit(
-                        currTexture, (917*relative+(i)*85*relative, 65*relative + relative * (j+1)*100))
+                    currTexture = pygame.transform.scale(pygame.image.load(currTexture), (50*relative, 50*relative))
+                    self.screen.blit(currTexture, (917*relative+(i)*85*relative, 65*relative + relative * (j+1)*100))
 
    # initlize the slots as a sprite group
 
@@ -129,8 +131,18 @@ class Crafting():
                         # if a slot was previously selected in the inventory, place that selected item in the
                         # chosen block in the crafting table
                         inventoryItem = invArray[clicked]
-                        self.craftArray[j][i] = Item(
-                            inventoryItem.getItemName(), inventoryItem.getItemId())
+                        id = inventoryItem.getItemId()+1
+                        tempItem = items[id]
+                        self.craftArray[j][i] = Item(id
+                                                    ,tempItem.getItemName()
+                                                    ,tempItem.getBreakTime()
+                                                    ,tempItem.getBlockHardness()
+                                                    ,tempItem.getItemHardness()
+                                                    ,tempItem.getReqToolType()
+                                                    ,tempItem.getToolType()
+                                                    ,tempItem.getTexture()
+                                                    ,tempItem.getIsPlaceable()
+                                                    ,tempItem.getDrop())
                         decreaseSpec(inventoryItem.getItemId())
                         if(craftItem.getItemId() != -1):
                             # replace the item in the crafting table with one of item in the inventory
