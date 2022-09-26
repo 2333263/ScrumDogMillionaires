@@ -1,14 +1,20 @@
-from item import Item
+from itemNew import Item
 import pygame
 import gameSettings as gs
+import itemHandler as ih
 import numpy as np
 from InventorySlots import slot
 from block import Block
 
+items = ih.fetchDict()
+breakTime = ih.fetchBreakTime()
+itemIDs = ih.fetchItemIDs()
+blockHardness = ih.fetchBlockHardness()
+itemHardness = ih.fetchItemHardness()
 #Init inv with item objects
-NullItem=Item("null",-1)
+#ItemNew declaration = Item(itemID, itemDisplayName, breakTime, blockHardness, itemHardness, reqToolType, toolType, texture, isPlaceable, drops)
+NullItem=Item(-1,"null",99999,5,0,"none","null","Textures/null",False,-1)
 invArray=np.full(40, NullItem, dtype=Item)
-itemIDs=gs.itemIDs
 #Hotbar can be the entire inv, with only the first 10 items beings being displaying in the on-screen hotbar. The player should then be able to change to order of the items.
 global selected
 selected = 0
@@ -21,7 +27,9 @@ clicked=-1
 
 #Add placeable block (Dirt, Stone, etc...)
 def addBlock(block):
-    tempItem=Item(itemIDs[block.itemID],block.itemID)
+    id = block.itemID
+    #tempItem=Item(block.itemID,itemIDs[id],breakTime[id],blockHardness[id],itemHardness[id],)
+    tempItem = items[id]
     smallest_empty=40
     for i in range(len(invArray)):
         if( invArray[i].itemID==block.itemID):
@@ -117,7 +125,8 @@ def drawHotBar(screen):
         #if the slot isnt empty
         if(invArray[i].itemID!=-1):
             #get the items texture
-            currTexture = invArray[i].texture
+            currTexture = pygame.image.load(invArray[i].texture)
+            #print(currTexture)
             currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
             #draw into the slot on the hotbar
             screen.blit(currTexture,(22*relative+(i)*85*relative,45*relative))
@@ -162,7 +171,7 @@ def drawInv(screen):
     for j in range (3):
         for i in range(10):
             if(invArray[(j+1)*10+i].itemID!=-1):
-                currTexture = invArray[(j+1)*10+i].texture
+                currTexture = pygame.image.load(invArray[(j+1)*10+i].texture)
                 currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
                 screen.blit(currTexture,(22*relative+(i)*85*relative,65*relative + relative* (j+1)*100))
                 font = pygame.font.Font('Minecraft.ttf', int(16*relative))
@@ -189,7 +198,7 @@ def initGroup():
         for i in range(10):
             s=slot((0,0,0),12*relative+i*85*relative,150*relative+j*100*relative,70*relative,80*relative)
             slots.add(s)
-    cTable= Block(gs.blockSize, (0,0), 5, "Textures/Blocks/crafting.png", 999)
+    cTable= Block(gs.blockSize, (0,0), 5, "Textures/Blocks/crafting.png", 999, ih.breakTime[5])
     addBlock(cTable)   
  #runs when a slot is clicked on           
 def onClick(pos):

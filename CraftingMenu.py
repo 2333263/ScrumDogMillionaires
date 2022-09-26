@@ -1,5 +1,5 @@
 import pygame
-from gameSettings import itemIDs, blockSize, isPlaceable, itemHardness
+from gameSettings import blockSize
 import gameSettings as gs
 from TextHandler import Text
 from item import Item

@@ -1,11 +1,12 @@
 import pygame
 
 class Block(pygame.sprite.Sprite):
-    def __init__(self, blockSize, blockPosition, itemID, textureName, hardness):
+    def __init__(self, blockSize, blockPosition, itemID, textureName, hardness, breakTime):
         super().__init__()
         self.blockPosition = blockPosition
         self.itemID = itemID
         self.textureName = textureName
+        self.breakTime = breakTime
         self.hardness = hardness
         self.image = pygame.image.load(self.textureName)
         self.image = pygame.transform.scale(self.image, (blockSize, blockSize))

@@ -2,11 +2,18 @@ import gameSettings as gs
 from block import Block
 import inventoryHandler as inv
 from soundHandler import playBreakSoundforID
+import itemHandler as ih
 
+immovableBlocks = ih.immovableBlocks
+clickableBlock = ih.clickableBlocks
+textureNames = ih.fetchTextureNames()
+itemIDs = ih.fetchItemIDs()
+breakTimes = ih.fetchBreakTime()
+blockHardness = ih.fetchBlockHardness()
 def checkBreakable(block, inHand):
     # a block can only be broken if the current tool is harder than the block's hardness
     blockHardness = block.getHardness()
-    itemHardness = inHand.getHardness()
+    itemHardness = inHand.getItemHardness()
     if(itemHardness >= blockHardness):
         return True
     else:
@@ -27,7 +34,7 @@ def blockBreak(python_pos, world_block, player,test, sound = False):
         block = getBlockFromPos(pos, world_block)
         # find correct block to break. Check if block is breakable. i.e. not bed rock/ crafting table
         if(block.itemID != -1):
-            if block.itemID not in gs.immovableBlocks and len(inv.invArray) > 0:
+            if block.itemID not in ih.immovableBlocks and len(inv.invArray) > 0:
                 if checkBreakable(block, inv.invArray[inv.selected]):
                     # Remove block from world
                     world_block.remove(block)
@@ -37,7 +44,7 @@ def blockBreak(python_pos, world_block, player,test, sound = False):
                      #call sound effect
                     if(test==False and sound):
                         playBreakSoundforID(block.itemID)
-            elif block.itemID not in gs.immovableBlocks:
+            elif block.itemID not in ih.immovableBlocks:
                 # payer is not holding a tool
                 if block.getHardness() <= 0:
                     # Remove block from world
@@ -56,7 +63,7 @@ def blockPlace(python_pos, world_block, player,test, sound = False):
             gs.endGamePos = block.blockPosition
             gs.drawPortal = True
 
-        if(block.itemID in gs.clickableBlocks):
+        if(block.itemID in ih.clickableBlocks):
             if(gs.drawCrafting):
                 gs.drawCrafting = False
             else:
@@ -68,10 +75,10 @@ def blockPlace(python_pos, world_block, player,test, sound = False):
                 # Decrease inventory item
 
                 # Add block to world
-                if(gs.textureNames.__contains__(gs.itemIDs[inv.invArray[inv.selected].getItemId()])):
-                    currTexture = gs.textureNames[gs.itemIDs[inv.invArray[inv.selected].getItemId()]]
+                if(textureNames.__contains__(itemIDs[inv.invArray[inv.selected].getItemId()])):
+                    currTexture = textureNames[itemIDs[inv.invArray[inv.selected].getItemId()]]
                     if inv.invArray[inv.selected].isPlaceable:
-                        tempBlock = Block(gs.blockSize, pos,  inv.invArray[inv.selected].getItemId(), currTexture, hardness=gs.blockHardness[inv.invArray[inv.selected].getItemId()])
+                        tempBlock = Block(gs.blockSize, pos,  inv.invArray[inv.selected].getItemId(), currTexture, blockHardness[inv.invArray[inv.selected].getItemId()],breakTimes[inv.invArray[inv.selected].getItemId()])
                         # only added to world if block will not cause collision
                         if(not (player.willcollide(tempBlock))):
                             world_block.add(tempBlock)
@@ -88,4 +95,4 @@ def getBlockFromPos(pos, world_block):  # find block based on position in world
         if block.blockPosition == pos:
             return block
     # if no block at position, return null block
-    return Block(gs.blockSize, pos, -1,  gs.textureNames["Null_Block"], 0)
+    return Block(gs.blockSize, pos, -1,  textureNames["null"], 0, 99999)
