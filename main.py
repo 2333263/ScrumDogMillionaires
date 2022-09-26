@@ -12,11 +12,10 @@ from ChunkHandler import checkChunkUpdates
 from soundHandler import playMusic
 import Portal as po
 from block import Block
-import itemHandler as ih
+#from itemHandler import populateDictionaries
 
-ih.fetchDict()
-for i in ih.itemsDict:
-    print(i + " : " + ih.itemsDict[i].getItemName())
+#Populate item dictionaries
+#populateDictionaries()
 
 #force update
 # Initialising PyGame & creating a clock in order to limit frame drawing
@@ -26,12 +25,12 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((gs.width, gs.height), vsync=1)
 pygame.display.set_caption("2D Minecraft")
 
-# Game running variable
+# Game runing variable
 gameRunning = True
 
 
 color_light = (250, 250, 250)  # colour of button when hover over
-color_dark = (64, 64, 64)  # colour of button-default
+color_dark = (64, 64, 64)  # colour of button- default
 
 buttonFont = pygame.font.Font('Minecraft.ttf', 40)  # font for button
 # load image for start screen
@@ -78,7 +77,6 @@ activeBox= False
 inv.initGroup()
 # Loading and playing a sound effect:
 playMusic()
-
 
 # main game loop:
 
@@ -153,7 +151,7 @@ def gameMenu():
                         # Place a block
 
                         bph.blockPlace(pygame.mouse.get_pos(
-                        ) + camera.getOffsets(), worldBlocks, player,False)  # place the block
+                        ) + camera.getOffsets(), worldBlocks, player,False, True)  # place the block
 
                     # Scroll UP to select next item in hotbar
                     elif events.button == 4:
@@ -192,7 +190,7 @@ def gameMenu():
             fakeKeys = {}
             player.MoveOnX(fakeKeys)
             # update the player position
-            player.update(clock.tick(),  collisionblocks)
+            player.update(clock.tick(),  collisionblocks, True)
 
         # Font to draw the FPS
         font = pygame.font.Font('Minecraft.ttf', 16)
@@ -227,7 +225,7 @@ def gameMenu():
                 startTime = time.time()
                 # print('moved cursor')
             if (time.time() - startTime >= breakTime):
-                bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player,False)
+                bph.blockBreak(pygame.mouse.get_pos() + camera.getOffsets(), worldBlocks, player,False, True)
             # Break block if timer is longer than required
         # Draws a box around the selected block
 
@@ -283,7 +281,7 @@ def gameMenu():
 
         checkChunkUpdates(player, worldBlocks)
 
-        #print(player.getPlayerPos()) //Disabled this for now, sorry if you were using it </3
+        print(player.getPlayerPos())
 
         # Finally update the  screen with all the above changes
         pygame.display.update()

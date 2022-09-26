@@ -47,3 +47,10 @@ class RecipeHandler():
         return self.data[craftID]['shape']
     def getCraftingMatrix(self,itemID):
         return  np.reshape( np.array(self.getCraftingShape(itemID)), (3,3))
+
+    
+    def getItemIDFromCraftingID(self, craftingID):
+        for recipe in self.data:
+            if(recipe["craftingID"] == craftingID):
+                return recipe["itemID"]
+        return -1

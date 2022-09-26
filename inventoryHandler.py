@@ -7,7 +7,7 @@ from block import Block
 
 #Init inv with item objects
 NullItem=Item("null",-1)
-invArray=np.full(40,NullItem,dtype=Item)
+invArray=np.full(40, NullItem, dtype=Item)
 itemIDs=gs.itemIDs
 #Hotbar can be the entire inv, with only the first 10 items beings being displaying in the on-screen hotbar. The player should then be able to change to order of the items.
 global selected
@@ -98,6 +98,10 @@ def selectPrevious():
     else:
         selected-=1
 
+#Massively complex function to select an item from the hot dog bar
+def selectInventory(pos):
+    global selected
+    selected = pos
 
 def drawHotBar(screen):
     # draws background of hotbar
@@ -136,14 +140,17 @@ def drawHotBar(screen):
              pygame.draw.rect(screen, (0, 255, 0), (12*relative+(i)*85*relative, 30*relative, 70*relative, 80*relative), 3)
    
 
-        
-            
-
 def getInv():
     return invArray
 
 def getItemCount(itemID):
     for i in invArray:
+         if( i.itemID==itemID):
+            return i.amount
+    return 0
+
+def getItemCountFromInput(itemID, invArrayInput):
+    for i in invArrayInput:
          if( i.itemID==itemID):
             return i.amount
     return 0

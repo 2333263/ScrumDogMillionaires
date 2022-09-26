@@ -3,4 +3,6 @@ pygame
 pytest
 pygame_gui
 perlin-noise
-pytest-cov
+pytest-cov==3.0.0
+gym
+gym[all]

@@ -1,0 +1,48 @@
+@startuml sequence
+skinparam Dpi 350
+skinparam Monochrome true
+skinparam Shadowing false
+
+actor AIAgent
+entity Game
+queue MovementQueue
+Database Inventory
+
+
+alt ifAgentInitialised
+    AIAgent -> Game : startGame
+    Game -> Game : generateChunks
+    Game --> AIAgent : sendGameInfo
+    AIAgent -> AIAgent : createGymEnvironment
+    activate Game
+    activate AIAgent
+
+    alt ifRenderingEnabled        
+        Game --> AIAgent : OpenGameWindow
+    end
+
+    alt ifActionQueued
+        AIAgent -> Game : actionInput
+        Game -> MovementQueue : sendKeys
+        activate MovementQueue
+        MovementQueue --> Game : sendNewCoordinates
+        deactivate MovementQueue
+    Game --> AIAgent : sendNewGameState
+    end
+
+else ifAgentCompleted
+    AIAgent -> Game : exitGame
+    Game -> Inventory : clearItems
+    activate Inventory
+    Inventory --> Game : itemsCleared
+    deactivate Inventory
+    alt ifRenderingEnabled        
+        Game --> AIAgent : closeGameWindow
+    end
+    deactivate Game
+    activate AIAgent
+end
+
+
+
+@enduml

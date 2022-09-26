@@ -1,0 +1,43 @@
+@startuml deployment
+skinparam Dpi 350
+skinparam Monochrome true
+skinparam Shadowing false
+
+node <<device>>\nClientDevice as ClientDevice  { 
+node <<executionEnvironment>>\nPython as Python {
+    artifact <<Artifact>>\nGameClient as GameClient{
+
+    }
+    artifact <<Artifact>>\nAIAgentInterface as AIAgentInterface{
+
+    }
+}
+database <<Artifact>>\nInventoryDatabase as InventoryDatabase {
+    
+}
+
+file <<File>>\nWorldFallbackFile as WorldFile{
+
+}
+
+file <<File>>\nGameItemProperties as GameItems {
+    
+}
+folder <<Folder>>\nTextures as Textures {
+
+}
+folder <<Folder>>\nSounds as Sounds {
+
+}
+folder <<Folder>>\nGymEnvironment as GymEnvironment {
+
+}
+}
+GameClient -- InventoryDatabase
+GameClient -- WorldFile
+GameClient -- Textures
+GameClient -- Sounds
+GameClient -- GymEnvironment
+GameClient -- GameItems
+AIAgentInterface -- GameClient
+@enduml

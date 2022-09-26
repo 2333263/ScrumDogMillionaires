@@ -35,26 +35,26 @@ class Player(pygame.sprite.Sprite):
 
 
     
-    def MoveOnX(self, fakeKeys, move = -1):
+    def MoveOnX(self, fakeKeys):
         #gets a list of all keys currently being pressed
         if(len(fakeKeys)==0):
             self.keys=pygame.key.get_pressed()
         else:
             self.keys=fakeKeys
         #if the left arrow is being pressed
-        if(self.keys[pygame.K_LEFT] or self.keys[pygame.K_a] or move==gs.actions["LEFT"]):
+        if(self.keys[pygame.K_LEFT] or self.keys[pygame.K_a]):
             #flip the sprite so its facing left
             self.image=pygame.transform.flip(self.character,True, False)
             #set the change in directions vector to -2 in position x
             self.direction.x=-2
         #if the right arrow is being pressed
-        if(self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d] or move==gs.actions["RIGHT"]):
+        if(self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d]):
             #set the sprite to be the direction of the original image
             self.image=self.character
             #set the change in directions vector to 2 in position x
             self.direction.x=2
         #if neither the left nor right arrow is being pressed
-        if(not self.keys[pygame.K_RIGHT] and not self.keys[pygame.K_LEFT] and not self.keys[pygame.K_d] and not self.keys[pygame.K_a] and move == gs.actions["NONE"]):
+        if(not self.keys[pygame.K_RIGHT] and not self.keys[pygame.K_LEFT] and not self.keys[pygame.K_d] and not self.keys[pygame.K_a]):
             #run the stop Move on X method which sets the direction vector as position x to 0
             self.stopMoveOnX()
         
@@ -85,7 +85,7 @@ class Player(pygame.sprite.Sprite):
         return   collide_list
         
 
-    def update(self, dt, blocks):
+    def update(self, dt, blocks, sound = False):
         #if the player is jumping use the jump arc gravity instead of normal gravity
         if(self.jumped==True):
             self.jumpArc()
@@ -122,10 +122,11 @@ class Player(pygame.sprite.Sprite):
                 if self.direction.y>0:  # if moving down
                     self.rect.bottom=block.rect.top #collide with block on bottom
 
-                    if(self.count%20==0 and not self.direction.x==0): 
+                    if(self.count%20==0 and not self.direction.x==0 and sound): 
                         #player is walking and sound should play
                         #mod 20 so that sound does not play ontop of itself
                         playSoundforID(block.itemID) #call method in soundHandler.py
+
                     self.count+=1
                     self.direction.y=0 #no movement on y
                 elif self.direction.y<0: # if moving up

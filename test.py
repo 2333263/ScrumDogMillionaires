@@ -1,4 +1,4 @@
-from tarfile import BLOCKSIZE
+
 import unittest
 from numpy import ndarray
 import Camera
@@ -16,14 +16,12 @@ import breakPlaceHandler as bph
 import InventorySlots
 import ChunkGenerator as CG
 import ChunkHandler as CH
-import copy
 import Portal
-import soundHandler
-import unittest.mock as um
 import itemNew
-from itemHandler import populateDictionaries
+#from itemHandler import populateDictionaries
 import itemHandler
 import numpy as np
+from gym_MC.envs import minecraftEnv as MCENV
 #update test for sound
 class TestItem(unittest.TestCase):
    tempItem = item.Item("Grass", 0)
@@ -304,7 +302,10 @@ class TestCraftingMenu (unittest.TestCase):
       
       screen = pygame.display
       crafter = CraftingMenu.Crafting(screen)
-      
+      def test_innit(self):# I had to call it AAinit so it would run before the other test cases
+         self.crafter.initGroup()
+         self.assertIsInstance(CraftingMenu.slots,pygame.sprite.Group)
+         self.assertEqual(len(CraftingMenu.slots),10)
       
       def test_relativeSize(self):
              self.assertTrue(self.crafter.relativeSize >= 0 and self.crafter.relativeSize <= gs.blockSize*3)
@@ -312,14 +313,14 @@ class TestCraftingMenu (unittest.TestCase):
              self.assertIsInstance(list(),  type(self.crafter.allItems))
       def test_emptyTable(self):
              NullItem=item.Item("null",-1)
-             self.crafter.emptyTable();
+             self.crafter.emptyTable()
              for i in range (3):
                for j in range(3):
                   self.assertEqual(self.crafter.craftArray[i][j].itemID,-1)
              self.assertEqual(self.crafter.canCraft, False)
              self.assertEqual(self.crafter.craftID, -1)
       def test_checkCanCraft(self):
-               self.crafter.emptyTable();
+               self.crafter.emptyTable()
                self.crafter.checkCanCraft()
                self.assertEqual(self.crafter.canCraft, False)
                self.assertEqual(self.crafter.craftID, -1)
@@ -327,6 +328,7 @@ class TestCraftingMenu (unittest.TestCase):
                self.crafter.checkCanCraft()
                self.assertEqual(self.crafter.canCraft, True)
                self.assertEqual(self.crafter.craftID, 8)
+               
       def test_doCraft(self):
                NullItem=item.Item("null",-1)
                self.crafter.emptyTable();
@@ -343,11 +345,27 @@ class TestCraftingMenu (unittest.TestCase):
                      self.assertEqual(self.crafter.craftArray[i][j].itemID,-1)
                self.assertEqual(self.crafter.canCraft, False)
                self.assertEqual(self.crafter.craftID, -1)
-               self.crafter.craftArray[1][1]=item.Item("Gold Ore",15)
-               curr=ih.getItemCount(21)
+               self.crafter.craftArray[1][1]=item.Item("Gold Ore",46)
+               curr=ih.getItemCount(47)
                self.crafter.doCraft()
-               self.assertEqual(ih.getItemCount(21),curr+1)
+               self.assertEqual(ih.getItemCount(47),curr+1)
                ih.invArray=np.full(40,NullItem,dtype=item.Item)
+      def testCraftSpec(self):
+         tempBlock=block.Block(gs.blockSize,(9*gs.blockSize,9*gs.blockSize),7,gs.textureNames["Logs"],gs.blockHardness[7])
+         ih.addBlock(tempBlock)
+         self.assertFalse(self.crafter.craftSpec(7,ih.getInv())) #tries to craft gold, should fail
+         self.assertFalse(self.crafter.craftSpec(-1,ih.getInv())) #tries to craft a fake block, should fail
+         self.assertFalse(self.crafter.craftSpec(0,{})) #tries to craft planks with empty inventory
+         self.assertTrue(self.crafter.craftSpec(0,ih.getInv())) #tries to craft wooden planks should work
+         self.assertFalse(self.crafter.craftSpec(1,ih.getInv())) #tries to craft a pickaxe without enough wood, should fail
+         ih.addBlock(tempBlock) #add more logs 
+         self.crafter.craftSpec(0,ih.getInv()) # add more planks
+         self.assertTrue(self.crafter.craftSpec(1,ih.getInv())) #tries to craft pick now with enough wood, should pass
+         inv=ih.getInv()
+         for i in range(len(inv)):
+            while(inv[i].getItemId()!=-1):
+               ih.decreaseSpec(inv[i].getItemId())
+
 
     
 
@@ -379,6 +397,8 @@ class TestGameSettings(unittest.TestCase):
 
       self.assertIsInstance(gs.immovableBlocks, list)
       self.assertIsInstance(gs.clickableBlocks, list)
+
+      
 class TestInv(unittest.TestCase): 
    def testAAInit(self):# I had to call it AAinit so it would run before the other test cases
       inventory=ih.getInv()
@@ -425,26 +445,26 @@ class TestInv(unittest.TestCase):
       found=False
       inv=ih.getInv()
       for i in inv:
-         if(i.getItemId()==10):
+         if(i.getItemId()==11):
             found=True
       self.assertFalse(found)
-      tempItem=item.Item(gs.itemIDs[10],10,gs.itemHardness[10])
+      tempItem=item.Item("Wooden Pickaxe",11)
       ih.addItem(tempItem)
       ih.addItem(tempItem)
       found=False
       inv=ih.getInv()
       for i in inv:
-         if(i.getItemId()==10):
+         if(i.getItemId()==11):
             found=True
       self.assertTrue(found)
       foundpos=0
       inv=ih.getInv()
       for i in range(len(inv)):
-         if(inv[i].getItemId()==10):
+         if(inv[i].getItemId()==11):
             foundpos=i
       self.assertEqual(inv[foundpos].getCount(),2)
-      ih.decreaseSpec(10)
-      ih.decreaseSpec(10)
+      ih.decreaseSpec(11)
+      ih.decreaseSpec(11)
    def testSelection(self):
       ih.selected=0
       ih.selectNext()
@@ -456,7 +476,11 @@ class TestInv(unittest.TestCase):
       self.assertEqual(ih.selected,9)
       ih.selectPrevious()
       self.assertEqual(ih.selected,8)
+      ih.selectInventory(7)
+      self.assertEqual(ih.selected,7)
       ih.selected=0
+      
+
    def testGetitemCount(self):
       self.assertEqual(ih.getItemCount(5),1)
       self.assertEqual(ih.getItemCount(14),0)
@@ -467,11 +491,11 @@ class TestInv(unittest.TestCase):
       ih.onClick((12*ih.relative+3*85*ih.relative,30*ih.relative+15*ih.relative))
       self.assertEqual(ih.selected,3)
       ih.fullInv=True
-      self.assertEqual(ih.clicked,-1)
+      self.assertEqual(ih.getClicked(),-1)
       ih.onClick((12*ih.relative+0*85*ih.relative,30*ih.relative+15*ih.relative))
       self.assertEqual(ih.clicked,0)
       ih.onClick((12*ih.relative+3*85*ih.relative,30*ih.relative+15*ih.relative))
-      self.assertEqual(ih.clicked,-1)
+      self.assertEqual(ih.getClicked(),-1)
       foundPos=0
       inv=ih.getInv()
       for i in range(len(inv)):
@@ -482,6 +506,8 @@ class TestInv(unittest.TestCase):
       self.assertEqual(ih.clicked,0)
       ih.onClick((12*ih.relative+3*85*ih.relative,30*ih.relative+15*ih.relative))
       self.assertEqual(ih.clicked,-1)
+      ih.setClicked()
+      self.assertEqual(ih.getClicked(),-1)
 class TestCamera(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    Cam=Camera.Camera(TempPlayer)
@@ -552,7 +578,7 @@ class TestBreakPlace(unittest.TestCase):
    TempPlayer=ph.Player((8*gs.blockSize, 8*gs.blockSize), 24)
    pos=(8,8)
    tempBlock = block.Block(gs.blockSize, (8*gs.blockSize, 7*gs.blockSize), 0, gs.textureNames[gs.itemIDs[0]],1)
-   tempItem = item.Item("Wooden Pickaxe", 3)
+   tempItem = item.Item("Wooden Pickaxe", 11)
    tempItem.hardness=3
    spriteGroup=pygame.sprite.Group()
    spriteGroup.add(tempBlock)
@@ -604,7 +630,7 @@ class TestBreakPlace(unittest.TestCase):
          if(inventory[i].itemID==2 and inventory[i].getCount()==1):
             found=True
       self.assertFalse(found)
-      tempItem=item.Item(gs.itemIDs[10],10,gs.itemHardness[10])
+      tempItem=item.Item("Wooden Pickaxe",11)
       ih.addItem(tempItem)
       bph.blockBreak((9*gs.blockSize,9*gs.blockSize),self.spriteGroup,self.TempPlayer,True)
       inventory=ih.getInv()
@@ -643,7 +669,7 @@ class TestBreakPlace(unittest.TestCase):
                ih.decrease()
       ih.selected=0
       gs.generatedChunks[0]=self.spriteGroup
-      tempBlock=block.Block(gs.blockSize,(15*gs.blockSize,15*gs.blockSize),14,gs.textureNames["Iron Ore"],gs.blockHardness[14])
+      tempBlock=block.Block(gs.blockSize,(15*gs.blockSize,15*gs.blockSize),43,gs.textureNames["Iron Ore"],gs.blockHardness[43])
       ih.addBlock(tempBlock)
       self.TempPlayer.rect.x=8*gs.blockSize
       self.TempPlayer.rect.y=8*gs.blockSize
@@ -651,7 +677,7 @@ class TestBreakPlace(unittest.TestCase):
       found=False
       inventory=ih.getInv()
       for i in range(len(inventory)):
-         if(inventory[i].itemID==14 and inventory[i].getCount()==1):
+         if(inventory[i].itemID==43 and inventory[i].getCount()==1):
             found=True
       ih.addBlock(tempBlock)
       ih.addBlock(tempBlock)
@@ -659,34 +685,34 @@ class TestBreakPlace(unittest.TestCase):
       found=False
       inventory=ih.getInv()
       for i in range(len(inventory)):
-         if(inventory[i].itemID==14 and inventory[i].getCount()==1):
+         if(inventory[i].itemID==43 and inventory[i].getCount()==1):
             found=True
       bph.blockPlace((8*gs.blockSize,8*gs.blockSize),self.spriteGroup,self.TempPlayer,True)
       found=False
       inventory=ih.getInv()
       for i in range(len(inventory)):
-         if(inventory[i].itemID==14 and inventory[i].getCount()==1):
+         if(inventory[i].itemID==43 and inventory[i].getCount()==1):
             found=True
       self.assertTrue(found)
       bph.blockPlace((800000*gs.blockSize,800000*gs.blockSize),self.spriteGroup,self.TempPlayer,True)
       found=False
       inventory=ih.getInv()
       for i in range(len(inventory)):
-         if(inventory[i].itemID==14 and inventory[i].getCount()==1):
+         if(inventory[i].itemID==43 and inventory[i].getCount()==1):
             found=True
       self.assertTrue(found)
       bph.blockPlace((5*gs.blockSize,6*gs.blockSize),self.spriteGroup,self.TempPlayer,True)
       found=False
       inventory=ih.getInv()
       for i in range(len(inventory)):
-         if(inventory[i].itemID==14 and inventory[i].getCount()==1):
+         if(inventory[i].itemID==43 and inventory[i].getCount()==1):
             found=True
       self.assertTrue(found)
       bph.blockPlace((8*gs.blockSize,10*gs.blockSize),self.spriteGroup,self.TempPlayer,True)
       found=False
       inventory=ih.getInv()
       for i in range(len(inventory)):
-         if(inventory[i].itemID==14 and inventory[i].getCount()==1):
+         if(inventory[i].itemID==43 and inventory[i].getCount()==1):
             found=True
       self.assertFalse(found)
       
@@ -746,10 +772,138 @@ class TestItemNew (unittest.TestCase):
       self.assertEqual(newItems.getTexture(),"texture")
       self.assertEqual(newItems.getIsPlaceable(),False)
       self.assertEqual(newItems.getDrop(),"drops")
+
+'''
 class TestItemHandler (unittest.TestCase):
        def test_populateDictionaries(self):
-         self.assertEqual(populateDictionaries(),None);
+         self.assertEqual(populateDictionaries(),None); 
          self.assertEqual(dict,  type(itemHandler.itemIDs));
 #unittest.TestLoader.sortTestMethodsUsing=None
+'''
+#commented out because its complaining that neither populate dictionaries and itemhandler dont exist
+class testMinecraftEnv(unittest.TestCase):
+   ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=0,seed="555")
+   NullItem=item.Item("null",-1)
+   def testStartModes(self):
+      self.ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=1)
+      self.assertEqual(ih.getItemCount(11),1)#check if the game starts witha wooden pickaxe
+      self.assertEqual(ih.getItemCount(8),4) #and 4 wooden planks
+      ih.invArray=np.full(40,self.NullItem,dtype=item.Item)
+      self.ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=2)
+      self.assertEqual(ih.getItemCount(11),1)#check if the game starts witha wooden pickaxe
+      self.assertEqual(ih.getItemCount(8),4) #and 4 wooden planks
+      self.assertEqual(ih.getItemCount(16),1)#check if the game starts witha Stone pickaxe
+      self.assertEqual(ih.getItemCount(50),1)#check if the game starts with a diamon
+      self.assertEqual(ih.getItemCount(53),1)#check if the game starts with an emerald
+      ih.invArray=np.full(40,self.NullItem,dtype=item.Item)
+      
+   def testActionSpaceMovement(self):
+      self.ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=0,seed="555")
+      prevpos=(0,0)
+      currpos=self.ENV.player.getPlayerPos()
+      while(prevpos!=currpos):
 
+         self.ENV.action(gs.actionSpace["MOVEMENT"][0]) #forces the players position to be set to the ground
+         prevpos=currpos
+         currpos=self.ENV.player.getPlayerPos()
+      currpos=self.ENV.player.getPlayerPos()
+      self.ENV.action(gs.actionSpace["MOVEMENT"][1])
+      self.assertNotEqual(currpos,self.ENV.player.getPlayerPos())
+      self.ENV.action(gs.actionSpace["MOVEMENT"][0])
+      currpos=self.ENV.player.getPlayerPos()
+      self.ENV.action(gs.actionSpace["MOVEMENT"][3])
+      self.assertNotEqual(currpos,self.ENV.player.getPlayerPos())
+      self.ENV.action(gs.actionSpace["MOVEMENT"][0])
+      currpos=self.ENV.player.getPlayerPos()
+      self.ENV.action(gs.actionSpace["MOVEMENT"][2])
+      self.assertNotEqual(currpos,self.ENV.player.getPlayerPos())
+
+      prevpos=(0,0)#wait for the player to stop jumping
+      currpos=self.ENV.player.getPlayerPos()
+      while(prevpos!=currpos):
+
+         self.ENV.action(gs.actionSpace["MOVEMENT"][0]) #forces the players position to be set to the ground
+         prevpos=currpos
+         currpos=self.ENV.player.getPlayerPos()
+
+      self.ENV.action(gs.actionSpace["MOVEMENT"][0])
+      currpos=self.ENV.player.getPlayerPos()
+      self.ENV.action(gs.actionSpace["MOVEMENT"][4])
+      self.assertNotEqual(currpos,self.ENV.player.getPlayerPos())
+
+      prevpos=(0,0)#wait for the player to stop jumping
+      currpos=self.ENV.player.getPlayerPos()
+      while(prevpos!=currpos):
+
+         self.ENV.action(gs.actionSpace["MOVEMENT"][0]) #forces the players position to be set to the ground
+         prevpos=currpos
+         currpos=self.ENV.player.getPlayerPos()
+      self.ENV.action(gs.actionSpace["MOVEMENT"][0])
+      currpos=self.ENV.player.getPlayerPos()
+      self.ENV.action(gs.actionSpace["MOVEMENT"][5])
+      self.assertNotEqual(currpos,self.ENV.player.getPlayerPos())
+
+      prevpos=(0,0)#wait for the player to stop jumping
+      currpos=self.ENV.player.getPlayerPos()
+      while(prevpos!=currpos):
+
+         self.ENV.action(gs.actionSpace["MOVEMENT"][0]) #forces the players position to be set to the ground
+         prevpos=currpos
+         currpos=self.ENV.player.getPlayerPos()
+   def testActionSpaceHotBar(self):
+      self.ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=0,seed="555")
+      ih.selected=0
+      for i in range(40):
+         self.ENV.action(gs.actionSpace["HOTBAR"][i])
+         self.assertEqual(ih.selected,i)
+   def testActionSpaceCrafting(self):
+      self.ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=0,seed="555")
+      tempBlock=block.Block(gs.blockSize,(9*gs.blockSize,9*gs.blockSize),7,gs.textureNames["Logs"],gs.blockHardness[7])
+      ih.addBlock(tempBlock)
+      inv=ih.getInv()
+      found=False
+      for i in inv:
+         if(i.itemID==8): #see if there are logs in the inventory
+            found=True
+            break
+      self.assertFalse(found)
+      self.ENV.action(gs.actionSpace["CRAFTING"][0])
+      found=False
+      for i in inv:
+         if(i.itemID==8): #see if there are logs in the inventory
+            found=True
+            break
+      self.assertTrue(found)
+      ih.invArray=np.full(40,self.NullItem,dtype=item.Item)
+   def testActionSpacePlaceAndBreak(self):
+      self.ENV=MCENV.MinePy(render_mode="rgb_array",easyStart=0,seed="555")
+      prevpos=(0,0)
+      currpos=self.ENV.player.getPlayerPos()
+      while(prevpos!=currpos):
+
+         self.ENV.action(gs.actionSpace["MOVEMENT"][0]) #forces the players position to be set to the ground
+         prevpos=currpos
+         currpos=self.ENV.player.getPlayerPos()
+
+
+      tempBlock=block.Block(gs.blockSize,(9*gs.blockSize,9*gs.blockSize),7,gs.textureNames["Logs"],gs.blockHardness[7])
+      for i in range(5):
+         ih.addBlock(tempBlock)
+      self.assertEqual(ih.getItemCount(7),5)#check that there are 10 logs in the inventory
+      inv=ih.getInv()
+      for i in range(len(inv)):
+         if(inv[i].itemID==7):
+            ih.selected=i
+            break
+      count=5
+      for i in range(5):
+         count-=1
+         self.ENV.action(gs.actionSpace["WORLD"][10+i])
+         self.assertEqual(ih.getItemCount(7),count)
+      count=0
+      for i in range(5):
+         count+=1
+         self.ENV.action(gs.actionSpace["WORLD"][i])#break blocks around the player
+         self.assertEqual(ih.getItemCount(7),count) #see if it got readded to the inventory
+      ih.invArray=np.full(40,self.NullItem,dtype=item.Item)
 unittest.main()
