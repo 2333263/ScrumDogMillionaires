@@ -11,6 +11,8 @@ from InventorySlots import slot
 
 itemIDs = ih.fetchItemIDs()
 textureNames = ih.fetchTextureNames()
+isPlaceable = ih.fetchIsPlaceable()
+itemHardness = ih.fetchItemHardness()
 items = ih.fetchDict()
 slots = pygame.sprite.Group()
 relative = gs.blockSize/30
@@ -41,10 +43,11 @@ class Crafting():
             # change the colour of craft from white to green
             colour = (0, 255, 0)
             # place the craftable item next to the word craft
-            tempItem = Item(itemIDs[self.craftID], self.craftID)
+            tempItem = items[self.craftID+1]
+            #tempItem = Item(itemIDs[self.craftID], self.craftID)
             currTexture = tempItem.texture
             currTexture = pygame.transform.scale(
-                currTexture, (50*relative, 50*relative))
+                pygame.image.load(currTexture), (50*relative, 50*relative))
             self.screen.blit(currTexture, (928*relative, 463*relative))
         else:
             # question mark is displayed until an item can be craftaed
@@ -85,6 +88,8 @@ class Crafting():
         for i in range(3):
             for j in range(3):
                 craftIDArray[i][j] = self.craftArray[i][j].itemID
+                if(self.craftArray[i][j].itemID!=-1):
+                    print(self.craftArray[i][j].itemID,"\n")
 
         for i in self.allItems:
             # compares crafting table to all recipe matrices
@@ -103,12 +108,14 @@ class Crafting():
             for i in range(self.recipes.getCraftingAmount(self.craftID)):
              # If item is a placeable object, it is then counted as a block
                 if (isPlaceable[self.craftID]):
-                    newTempItem = Item(itemIDs[self.craftID], self.craftID)
+                    newTempItem = items[self.craftID+1]
+                    #newTempItem = Item(itemIDs[self.craftID], self.craftID)
                     addBlock(newTempItem)
                 # Else the item is added as an item with an item hardness, defined in gameSettings.py
                 else:
-                    newTempItem = Item(
-                        itemIDs[self.craftID], self.craftID, itemHardness[self.craftID])
+                    #newTempItem = Item(
+                        #itemIDs[self.craftID], self.craftID, itemHardness[self.craftID])
+                    newTempItem = items[self.craftID+1]
                     addItem(newTempItem)
             self.emptyTable()
 
@@ -131,8 +138,8 @@ class Crafting():
                         # if a slot was previously selected in the inventory, place that selected item in the
                         # chosen block in the crafting table
                         inventoryItem = invArray[clicked]
-                        id = inventoryItem.getItemId()+1
-                        tempItem = items[id]
+                        id = inventoryItem.getItemId()
+                        tempItem = items[id+1]
                         self.craftArray[j][i] = Item(id
                                                     ,tempItem.getItemName()
                                                     ,tempItem.getBreakTime()
