@@ -200,15 +200,17 @@ class Crafting():
             for i in range(self.itemsNeeded[item]):
                 if(item> 0):
                     decreaseSpec(item)
-        tempItem = Item(
-            itemIDs[itemID], itemID)
+        #tempItem = Item(
+            #itemIDs[itemID], itemID)
+        tempItem = items[itemID+1]
         for i in range(self.recipes.getCraftingAmount(itemID)):
             # If item is a placeable object, it is then counted as a block
             if (isPlaceable[tempItem.getItemId()]):
                 addBlock(tempItem)
             # Else the item is added as an item with an item hardness, defined in gameSettings.py
             else:
-                newTempItem = Item(
-                    tempItem.itemName, tempItem.itemID, itemHardness[tempItem.getItemId()])
+                #newTempItem = Item(
+                    #tempItem.itemName, tempItem.itemID, itemHardness[tempItem.getItemId()])
+                newTempItem = items[tempItem.itemID+1]
                 addItem(newTempItem)
         return True

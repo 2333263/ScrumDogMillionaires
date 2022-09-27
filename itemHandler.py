@@ -1,6 +1,7 @@
 import json
 from itemNew import Item
 
+#WHEN USING items = [] FROM THE fetchDict() FUNCTION, ENSURE YOU ADD ONE TO ALL THE ENTRIES
 items = []
 itemIDs = {}
 isPlaceable = {}
