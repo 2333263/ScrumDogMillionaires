@@ -72,11 +72,12 @@ class Crafting {
     +onClick(pos)
     +checkCanCraft()
     +emptyTable()
+    +craftSpec(cradtingID, playerInventory)
 }
 
 class gameSettings {
     +seed
-    +actions{}
+    +actionSpace{}
     +octaves 
     +blockSize 
     +playerRange 
@@ -124,9 +125,11 @@ class inventoryHandler {
     +getSelected()
     +selectNext()
     +selectPrevious()
+    +selectinventory(pos)
     +drawHotBar(screen)
     +getInv()
     +getItemCount(itemID)
+    +getItemCountFromInput(ietmID, invArrayInput)
     +drawInv(screen)
     +initGroup()
     +onClick(pos)
@@ -265,7 +268,7 @@ class Player {
     +keys
     +count
     +getPlayerPos()
-    +MoveOnX(fakeKeys, move)
+    +MoveOnX(fakeKeys)
     +useGravity()
     +jump()
     +jumpArc()
@@ -297,6 +300,7 @@ class RecipeHandler {
     +getAllItemIDs()
     +getCraftingShape(itemID)
     +getCraftingMatrix(itemID)
+    +getItemIDFromCraftingID(craftingID)
 }
 
 class soundHandler {
@@ -325,25 +329,33 @@ class MainGym {
 }
 
 class CustomEnv {
+    +metadata{}
     +pygame 
     +action_space
     +observation_space
+    +render_mode
     +init()
     +reset()
-    +step()
-    +render(mode, clone)
+    +step(action)
+    +render()
 }
 class MinePy {
+    +metadata
+    +render_mode
     +screen
     +clock 
     +game_speed
+    +stage 
+    +done
     +player 
     +camera 
     +worldBlocks 
     +collisionblocks
-    +init()
+    +crafter 
+    +offset
+    +init(render_mode, seed, easyStart, playerRange)
     +action(action)
-    +evalutate()
+    +evalutate(prev)
     +is_done()
     +observe()
     +view()
@@ -411,6 +423,11 @@ MinePy --> gameSettings
 MinePy --> ChunkGenerator
 MinePy --* Player
 MinePy --* Camera
+Minepy --* Item
+MinePy --> inventoryHandler
+MinePy --> breakPlaceHandler
+MinePy --* Crafting
+MinePy --> Crafting
 
 CustomEnv --* MinePy
 

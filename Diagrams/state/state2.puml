@@ -10,17 +10,18 @@ state agent_fork <<fork>>
 fork_environment --> LoadAgent
 fork_environment --> LoadTextures 
 fork_environment --> LoadCamera
-fork_environment --> generateEnvironment
+fork_environment --> generateCustomEnv
 
 LoadCamera --> join_environment
 LoadTextures --> join_environment
 LoadAgent --> join_environment
-generateEnvironment --> join_environment
+generateCustomEnv --> join_environment
 
 join_environment --> agent_fork
 
-agentMovments --> agent_fork
-agent_fork --> agentMovments
 agent_fork --> [*] : Press the exit button to end the game
+agent_fork --> agentActions
+agentActions --> agentRewards
+agentRewards --> agent_fork
 
 @enduml
