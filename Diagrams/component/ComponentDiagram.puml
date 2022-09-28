@@ -12,7 +12,8 @@
 [User Interface]
 [Game Menu]
 [Audio]
-[AI Agent] #ADD8E6
+[AI Environment] #ADD8E6
+[Minecraft Environment] #ADD8E6
 
 folder "Files"{
     [Sprites]
@@ -120,8 +121,12 @@ GenWorld )-- [Game Menu]
 [Player] --( playAudio
 
 () "Interface through Gym" as AgentInterface #ADD8E6
-[AI Agent] --( AgentInterface
-[Player] -- AgentInterface
+[AI Environment] -- AgentInterface
+[Player] --( AgentInterface
+
+() "Get next move" as nextAIMove #ADD8E6
+[AI Environment] --( nextAIMove
+[Minecraft Environment] -- nextAIMove
 
 
 @enduml
