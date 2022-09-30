@@ -208,7 +208,7 @@
         "itemDisplayName" : "Stone Pickaxe",
         "breakTime": 99999,
         "blockHardness": 0,
-        "itemHardness": 2,
+        "itemHardness": 6,
         "reqToolType": "none",
         "toolType": "pickaxe",
         "texture": "Textures/Tools/stone_pickaxe.png",

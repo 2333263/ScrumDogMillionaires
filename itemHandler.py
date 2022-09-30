@@ -2,6 +2,7 @@ import json
 from itemNew import Item
 
 #WHEN USING items = [] FROM THE fetchDict() FUNCTION, ENSURE YOU ADD ONE TO ALL THE ENTRIES
+
 items = []
 itemIDs = {}
 isPlaceable = {}
@@ -63,6 +64,7 @@ def fetchDict():
                         data[i]['drops'])
         items.append(tempItem)
         tempItem = None
+    file.close()
     return items
 
 def fetchItemIDs():
@@ -71,6 +73,7 @@ def fetchItemIDs():
     for i in data:
         itemIDs[data[i]['itemID']] = data[i]['itemDisplayName']
         tempItem = None
+    file.close()
     return itemIDs
 
 def fetchIsPlaceable():
@@ -78,6 +81,7 @@ def fetchIsPlaceable():
     data = json.load(file)
     for i in data:
         isPlaceable[data[i]['itemID']] = data[i]['isPlaceable']
+    file.close()
     return isPlaceable
 
 def fetchBlockHardness():
@@ -85,6 +89,7 @@ def fetchBlockHardness():
     data = json.load(file)
     for i in data:
         blockHardness[data[i]['itemID']] = data[i]['blockHardness']
+    file.close()
     return blockHardness
 
 def fetchBreakTime():
@@ -92,6 +97,7 @@ def fetchBreakTime():
     data = json.load(file)
     for i in data:
         breakTime[data[i]['itemID']] = data[i]['breakTime']
+    file.close()
     return breakTime
 
 def fetchItemHardness():
@@ -99,6 +105,7 @@ def fetchItemHardness():
     data = json.load(file)
     for i in data:
         itemHardness[data[i]['itemID']] = data[i]['itemHardness']
+    file.close()
     return itemHardness
 
 def fetchTextureNames():
@@ -106,8 +113,10 @@ def fetchTextureNames():
     data = json.load(file)
     for i in data:
         textureNames[data[i]['itemDisplayName']] = data[i]['texture']
+    file.close()
     return textureNames
-# fetchDicts()
+
+# fetchDict()
 # for i in items:
 #     print("Item ID:\t" + str(i.getItemId()))                                #getItemId()
 #     print("\tItem Name:\t\t " + str(i.getItemName()))                       #getItemName()

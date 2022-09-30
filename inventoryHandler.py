@@ -211,7 +211,7 @@ def onClick(pos):
     for box in slots:
         #if the inventory is closed and the first 10 sprites have been checked end the loop
         if(fullInv==False and i>9):
-            break;
+            break
         #if a sprite collides with where you clicked
         if(box.rect.collidepoint(pos)):
             #if the invetory is closed set that position in the hotbar as selected
