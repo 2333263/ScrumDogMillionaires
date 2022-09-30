@@ -36,11 +36,13 @@ clickableBlocks = itemHandler.clickableBlocks
 breakSpeed = itemHandler.breakTime
 
 itemArr = itemHandler.fetchDict()
+
 # update test for sound
 class TestItem(unittest.TestCase):
     tempItem = itemArr[1]  # Item("Grass", 0)
     tempItem1 = itemArr[2]  # Item("Dirt", 0, 20)]
-    tempItem1.itemHardness=20
+
+
 
     def test_itemID(self):
         self.assertIsInstance(self.tempItem.itemID, int)
@@ -65,14 +67,14 @@ class TestItem(unittest.TestCase):
         self.assertEqual(self.tempItem.amount, self.tempItem.getCount())
 
     def test_name(self):
-        self.assertIsInstance(self.tempItem.itemDisplayName, str)
-        self.assertEqual(self.tempItem.getItemName(), "Grass Block")
-        self.assertIsInstance(self.tempItem1.itemDisplayName, str)
-        self.assertEqual(self.tempItem1.getItemName(), "Dirt Block")
+        self.assertIsInstance(self.tempItem.itemName, str)
+        self.assertEqual(self.tempItem.getItemName(), "Grass")
+        self.assertIsInstance(self.tempItem1.itemName, str)
+        self.assertEqual(self.tempItem1.getItemName(), "Dirt")
 
     def test_Hardness(self):
-        self.assertEqual(self.tempItem.getItemHardness(), 0)
-        self.assertEqual(self.tempItem1.getItemHardness(), 20)
+        self.assertEqual(self.tempItem.getHardness(), 0)
+        self.assertEqual(self.tempItem1.getHardness(), 20)
 
 
 class TestBlock(unittest.TestCase):
@@ -383,11 +385,9 @@ class TestCraftingMenu(unittest.TestCase):
         self.crafter.doCraft()
         self.assertEqual(ih.getItemCount(47), curr + 1)
         ih.invArray = np.full(40, NullItem, dtype=itemNew.Item)
-        for i in itemArr:
-            if(i.amount>0):
-                i.amount=0
+
     def testCraftSpec(self):
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Logs"],
                                 blockHardness[7], breakSpeed[7])
         ih.addBlock(tempBlock)
         self.assertFalse(self.crafter.craftSpec(7, ih.getInv()))  # tries to craft gold, should fail
@@ -403,7 +403,7 @@ class TestCraftingMenu(unittest.TestCase):
         for i in range(len(inv)):
             while (inv[i].getItemId() != -1):
                 ih.decreaseSpec(inv[i].getItemId())
-    
+
 
 class TestGameSettings(unittest.TestCase):
     def test_properties(self):
@@ -449,7 +449,7 @@ class TestInv(unittest.TestCase):
         self.assertEqual(ih.getSelected().getItemId(), 5)
 
     def testAddBlockandRemove(self):
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Logs"],
                                 blockHardness[7], breakSpeed[7])
         ih.addBlock(tempBlock)
         found = False
@@ -472,7 +472,7 @@ class TestInv(unittest.TestCase):
     def testDecSpec(self):
         inv = ih.getInv()
         self.assertEqual(inv[0].getItemId(), 5)  # crafting table is in position 0
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Logs"],
                                 blockHardness[7], breakSpeed[7])
         ih.addBlock(tempBlock)  # should be in position 1
         inv = ih.getInv()
@@ -632,7 +632,7 @@ class TestBreakPlace(unittest.TestCase):
     tempBlock = block.Block(gs.blockSize, (8 * gs.blockSize, 7 * gs.blockSize), 0, textureNames[itemIDs[0]],
                             1, breakSpeed[0])
     tempItem = itemArr[12]  # Item("Wooden Pickaxe", 11)
-    tempItem.itemHardness = 3
+    tempItem.hardness = 3
     spriteGroup = pygame.sprite.Group()
     spriteGroup.add(tempBlock)
 
@@ -646,7 +646,7 @@ class TestBreakPlace(unittest.TestCase):
     #    self.assertEqual(int(gs.distance(self.TempPlayer,self.pos)),226)
     def test_checkBreak(self):
         self.assertTrue(bph.checkBreakable(self.tempBlock, self.tempItem))
-        self.tempItem.itemHardness = 0
+        self.tempItem.hardness = 0
         self.assertFalse(bph.checkBreakable(self.tempBlock, self.tempItem))
         '''removed depricated function
    def test_notEmpty(self):
@@ -656,7 +656,7 @@ class TestBreakPlace(unittest.TestCase):
       '''
 
     def test_breakBlock(self):
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
+        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass"],
                                 blockHardness[0], breakSpeed[0])
         self.spriteGroup.add(tempBlock)
         gs.generatedChunks[0] = self.spriteGroup
@@ -669,7 +669,7 @@ class TestBreakPlace(unittest.TestCase):
                 ih.decrease()
                 found = True
         self.assertTrue(found)
-        tempBlock = block.Block(gs.blockSize, (30 * gs.blockSize, 30 * gs.blockSize), 0, textureNames["Grass Block"],
+        tempBlock = block.Block(gs.blockSize, (30 * gs.blockSize, 30 * gs.blockSize), 0, textureNames["Grass"],
                                 blockHardness[0], breakSpeed[0])
         self.spriteGroup.add(tempBlock)
         bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
@@ -679,7 +679,7 @@ class TestBreakPlace(unittest.TestCase):
             if (inventory[i].itemID == 0 and inventory[i].getCount() == 1):
                 found = True
         self.assertFalse(found)
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
+        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone"],
                                 blockHardness[2], breakSpeed[2])
         self.spriteGroup.add(tempBlock)
         bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
@@ -851,23 +851,14 @@ class TestItemHandler (unittest.TestCase):
 
 # commented out because its complaining that neither populate dictionaries and itemhandler dont exist
 class testMinecraftEnv(unittest.TestCase):
-    NullItem = itemArr[0]  # Item("null", -1)
-    ih.invArray=np.full(40, NullItem, dtype=itemNew.Item)
     ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="555")
-    
+    NullItem = itemArr[0]  # Item("null", -1)
 
     def testStartModes(self):
-        for i in itemArr:
-            if(i.amount>0):
-                i.amount=0
-        ih.invArray=np.full(40, self.NullItem, dtype=itemNew.Item)
         self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=1)
         self.assertEqual(ih.getItemCount(11), 1)  # check if the game starts witha wooden pickaxe
         self.assertEqual(ih.getItemCount(8), 4)  # and 4 wooden planks
         ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
-        for i in itemArr:
-            if(i.amount>0):
-                i.amount=0
         self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=2)
         self.assertEqual(ih.getItemCount(11), 1)  # check if the game starts witha wooden pickaxe
         self.assertEqual(ih.getItemCount(8), 4)  # and 4 wooden planks
@@ -935,7 +926,7 @@ class testMinecraftEnv(unittest.TestCase):
 
     def testActionSpaceCrafting(self):
         self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="555")
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Logs"],
                                 blockHardness[7], breakSpeed[7])
         ih.addBlock(tempBlock)
         inv = ih.getInv()
@@ -963,7 +954,7 @@ class testMinecraftEnv(unittest.TestCase):
             prevpos = currpos
             currpos = self.ENV.player.getPlayerPos()
 
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Logs"],
                                 blockHardness[7], breakSpeed[7])
         for i in range(5):
             ih.addBlock(tempBlock)
