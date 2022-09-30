@@ -4,8 +4,12 @@ import gameSettings as gs
 import random
 import pygame
 from block import Block
+import itemHandler as ih
 
-
+textureNames = ih.fetchTextureNames()
+itemIDs = ih.fetchItemIDs()
+blockHardness = ih.fetchBlockHardness()
+breakTime = ih.fetchBreakTime()
 def drawOre(world, x, y, ore):
     xChange = yChange =  [-1, 0, 1]
     for xVal in xChange:
@@ -48,12 +52,12 @@ def getWorldSprites(world, generatePos):
             if(world[j][i] == ' '):
                 continue
              #Create a block using the current number in the level
-            currItemID = int(gs.converterIDs[world[j][i]])
-            if(gs.itemIDs.__contains__(currItemID)):
+            currItemID = int(ih.converterIDs[world[j][i]])
+            if(itemIDs.__contains__(currItemID)):
                 if(currItemID == 5): #Deal with crafting table
-                    b = Block(gs.blockSize, (currHeight + (generatePos * gs.blockSize), currWidth), currItemID, gs.textureNames[gs.itemIDs[currItemID]], gs.blockHardness[currItemID])
+                    b = Block(gs.blockSize, (currHeight + (generatePos * gs.blockSize), currWidth), currItemID, textureNames[itemIDs[currItemID]], blockHardness[currItemID], breakTime[currItemID])
                 else: #Deal with all other blocks in the world
-                    b = Block(gs.blockSize, (currHeight + (generatePos * gs.blockSize), currWidth), currItemID, gs.textureNames[gs.itemIDs[currItemID]], gs.blockHardness[currItemID])
+                    b = Block(gs.blockSize, (currHeight + (generatePos * gs.blockSize), currWidth), currItemID, textureNames[itemIDs[currItemID]], blockHardness[currItemID], breakTime[currItemID])
                 worldGroup.add(b)
     return worldGroup
 

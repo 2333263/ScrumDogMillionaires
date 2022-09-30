@@ -7,7 +7,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "null",
-        "texture": "Textures/null",
+        "texture": "Textures/Blocks/null_block.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -79,7 +79,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "Textures/Blocks/crafting_table_top.png",
+        "texture": "Textures/Blocks/crafting.png",
         "isPlaceable": true,
         "drops" : 5
     },
@@ -91,7 +91,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "Textures/Blocks/leaves.png",
+        "texture": "Textures/Blocks/leaves_dense.png",
         "isPlaceable": true,
         "drops" : 6
     },
@@ -103,7 +103,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "Textures/Blocks/log.png",
+        "texture": "Textures/Blocks/wood_log.png",
         "isPlaceable": true,
         "drops" : 7
     },
@@ -133,7 +133,7 @@
     },
     "sky": {
         "itemID": 10,
-        "itemDisplayName" : "Sky BUGGED",
+        "itemDisplayName" : "Sky",
         "breakTime": 99999,
         "blockHardness": 5,
         "itemHardness": 0,
@@ -511,7 +511,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/coal_ore.png",
+        "texture": "Textures/Blocks/coal_ore.png",
         "isPlaceable": true,
         "drops" : 42
     },
@@ -535,7 +535,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/iron_ore.png",
+        "texture": "Textures/Blocks/iron_ore.png",
         "isPlaceable": true,
         "drops" : 43
     },
@@ -571,7 +571,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/gold_ore.png",
+        "texture": "Textures/Blocks/gold_ore.png",
         "isPlaceable": true,
         "drops" : 46
     },
@@ -607,7 +607,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/diamond_ore",
+        "texture": "Textures/Blocks/diamond_ore.png",
         "isPlaceable": true,
         "drops" : 50
     },
@@ -679,7 +679,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/lapis_ore.png",
+        "texture": "Textures/Blocks/lapis_ore.png",
         "isPlaceable": true,
         "drops" : 56
     },
@@ -847,7 +847,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/copper_ore.png",
+        "texture": "Textures/Blocks/copper_ore.png",
         "isPlaceable": true,
         "drops" : 69
     },
@@ -859,7 +859,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/deepslate_coal_ore.png",
+        "texture": "Textures/Blocks/deepslate_coal_ore.png",
         "isPlaceable": true,
         "drops" : 42
     },
@@ -871,7 +871,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/deepslate_copper_ore.png",
+        "texture": "Textures/Blocks/deepslate_copper_ore.png",
         "isPlaceable": true,
         "drops" : 71
     },
@@ -883,7 +883,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/deepslate_diamond_ore.png",
+        "texture": "Textures/Blocks/deepslate_diamond_ore.png",
         "isPlaceable": true,
         "drops" : 50
     },
@@ -895,7 +895,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/deepslate_emerald_ore.png",
+        "texture": "Textures/Blocks/deepslate_emerald_ore.png",
         "isPlaceable": true,
         "drops" : 53
     },
@@ -907,7 +907,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/deepslate_gold_ore.png",
+        "texture": "Textures/Blocks/deepslate_gold_ore.png",
         "isPlaceable": true,
         "drops" : 74
     },
@@ -919,7 +919,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/deepslate_iron_ore.png",
+        "texture": "Textures/Blocks/deepslate_iron_ore.png",
         "isPlaceable": true,
         "drops" : 75
     },
@@ -931,7 +931,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/deepslate_lapis_ore.png",
+        "texture": "Textures/Blocks/deepslate_lapis_ore.png",
         "isPlaceable": true,
         "drops" : 56
     },
@@ -943,7 +943,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/deepslate_redstone_ore.png",
+        "texture": "Textures/Blocks/deepslate_redstone_ore.png",
         "isPlaceable": true,
         "drops" : 82
     },
@@ -955,7 +955,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/emerald_ore.png",
+        "texture": "Textures/Blocks/emerald_ore.png",
         "isPlaceable": true,
         "drops" : 53
     },
@@ -967,7 +967,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/nether_gold_ore.png",
+        "texture": "Textures/Blocks/nether_gold_ore.png",
         "isPlaceable": true,
         "drops" : 79
     },
@@ -979,7 +979,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/nether_quartz_ore.png",
+        "texture": "Textures/Blocks/nether_quartz_ore.png",
         "isPlaceable": true,
         "drops" : 80
     },
@@ -991,7 +991,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "Textures/Ores/redstone_ore.png",
+        "texture": "Textures/Blocks/redstone_ore.png",
         "isPlaceable": true,
         "drops" : 82
     },
@@ -1028,6 +1028,90 @@
         "reqToolType": "none",
         "toolType": "none",
         "texture": "Textures/Blocks/PortalBlock.png",
+        "isPlaceable": true,
+        "drops" : -1
+    },
+    "Block_Frame": {
+        "itemID": 85,
+        "itemDisplayName" : "Block_Frame",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/block_frame.png",
+        "isPlaceable": true,
+        "drops" : -1
+    },
+    "Block_Frame_Red": {
+        "itemID": 86,
+        "itemDisplayName" : "Block_Frame_Red",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/block_frame_red.png",
+        "isPlaceable": true,
+        "drops" : -1
+    },
+    "Block_Frame_Green": {
+        "itemID": 87,
+        "itemDisplayName" : "Block_Frame_Green",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/block_frame_green.png",
+        "isPlaceable": true,
+        "drops" : -1
+    },
+    "Block_Frame_Green_1_4": {
+        "itemID": 88,
+        "itemDisplayName" : "Block_Frame_Green_1_4",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/block_frame_green_1-4.png",
+        "isPlaceable": true,
+        "drops" : -1
+    },
+    "Block_Frame_Green_2_4": {
+        "itemID": 89,
+        "itemDisplayName" : "Block_Frame_Green_2_4",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/block_frame_green_2-4.png",
+        "isPlaceable": true,
+        "drops" : -1
+    },
+    "Block_Frame_Green_3_4": {
+        "itemID": 90,
+        "itemDisplayName" : "Block_Frame_Green_3_4",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/block_frame_green_3-4.png",
+        "isPlaceable": true,
+        "drops" : -1
+    },
+    "Block_Frame_Green_4_4": {
+        "itemID": 91,
+        "itemDisplayName" : "Block_Frame_Green_4_4",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/block_frame_green_4-4.png",
         "isPlaceable": true,
         "drops" : -1
     }

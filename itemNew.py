@@ -1,4 +1,5 @@
-""""comments":
+""""
+comments":
     "These are comment tags that do not define any item and are essentially garbage data, you'd have to try very hard to somehow grab this data x)"
 
     "                                       HARDNESS OVERHAUL                                       "

@@ -10,9 +10,11 @@ import Camera as cam
 import inventoryHandler as inv
 import breakPlaceHandler as bph
 from CraftingMenu import Crafting
-from item import Item
+from itemNew import Item
+import itemHandler as ih
 from block import Block
-itemIDs=gs.itemIDs
+itemIDs = ih.fetchItemIDs()
+items = ih.fetchDict()
 
 class MinePy:
     
@@ -46,18 +48,23 @@ class MinePy:
         #really easy start
         if(easyStart==2):
             print("here")
-            newTempItem = Item("Wooden Pickaxe",11, 0)
+            #newTempItem = Item("Wooden Pickaxe",11, 0)
+            newTempItem = items[12]
             inv.addItem(newTempItem)
-            newTempItem2 = Item("Diamond",50, 0)
+            #newTempItem2 = Item("Diamond",50, 0)
+            newTempItem2 = items[51]
             inv.addItem(newTempItem2)
-            tempBlock=Item(itemIDs[8],8)
+            #tempBlock=Item(itemIDs[8],8)
+            tempBlock = items[9]
             inv.addBlock(tempBlock)
             inv.addBlock(tempBlock)
             inv.addBlock(tempBlock)
             inv.addBlock(tempBlock)
-            newTempItem3 = Item("Stone Pickaxe",16, 0)
+            #newTempItem3 = Item("Stone Pickaxe",16, 0)
+            newTempItem3 = items[17]
             inv.addItem(newTempItem3)
-            newTempItem4 = Item("Emerald" ,53, 0)
+            #newTempItem4 = Item("Emerald" ,53, 0)
+            newTempItem4 = items[54]
             inv.addItem(newTempItem4)
             
         self.clock = pygame.time.Clock()

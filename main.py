@@ -2,6 +2,7 @@ import pygame
 import gameSettings as gs
 import breakPlaceHandler as bph
 import inventoryHandler as inv
+import itemHandler
 import playerHandler as ph
 import Camera as cam
 import CraftingMenu as cm
@@ -13,9 +14,12 @@ from soundHandler import playMusic
 import Portal as po
 from block import Block
 #from itemHandler import populateDictionaries
+import itemHandler as ih
 
 #Populate item dictionaries
-#populateDictionaries()
+textureNames = ih.fetchTextureNames()
+itemIDs = ih.fetchItemIDs()
+breakTimes = ih.fetchBreakTime()
 
 #force update
 # Initialising PyGame & creating a clock in order to limit frame drawing
@@ -199,7 +203,7 @@ def gameMenu():
         seedText = font.render("Seed: " + str(gs.seed), 1, (255, 255, 255))
 
         # Create the sky background
-        bg = pygame.image.load(gs.textureNames["Sky"]).convert()
+        bg = pygame.image.load(textureNames["Sky"]).convert()
         bg = pygame.transform.scale(bg, (gs.width, gs.height))
         screen.blit(bg, (0, 0))
 
@@ -232,7 +236,7 @@ def gameMenu():
         block = bph.getBlockFromPos(
             gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()), worldBlocks)
         if(block.itemID != -1):
-            if block.itemID in gs.clickableBlocks:
+            if block.itemID in ih.clickableBlocks:
                 blockFrameImgName = "Block_Frame"
             if bph.checkBreakable(block, inv.invArray[inv.selected]):
                 # Different cursors for different levels of breakage
@@ -254,7 +258,7 @@ def gameMenu():
 
         else:
             blockFrameImgName = "Block_Frame"
-        blockFrameImg = pygame.image.load(gs.textureNames[blockFrameImgName]).convert_alpha()
+        blockFrameImg = pygame.image.load(textureNames[blockFrameImgName]).convert_alpha()
         blockFrame = pygame.transform.scale(
             blockFrameImg, (gs.blockSize, gs.blockSize))
         mousePos = pygame.mouse.get_pos()[0] + camera.getOffsets()[0] % gs.blockSize, \
@@ -265,8 +269,8 @@ def gameMenu():
             gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
        
         # Draw cursor only if block is within interactable range (place/break) and won't collide with player
-        tempNullBlock = Block(gs.blockSize, gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()),
-                              1, gs.textureNames[gs.itemIDs[1]], hardness=1)  # replace with nulltexture when added
+        tempNullBlock = Block(gs.blockSize,gs.getPos(pygame.mouse.get_pos()+camera.getOffsets()),
+                              1,textureNames[itemIDs[1]],1,breakTimes[1])  # replace with nulltexture when added
         if (not inv.fullInv):
             if gs.distance(player, pygame.mouse.get_pos()+camera.getOffsets()) <= gs.playerRange * gs.blockSize and (not player.willcollide(tempNullBlock) or not blockFrameImgName == "Block_Frame"):
                 screen.blit(blockFrame, blockPos)
@@ -281,7 +285,7 @@ def gameMenu():
 
         checkChunkUpdates(player, worldBlocks)
 
-        print(player.getPlayerPos())
+        #print(player.getPlayerPos())
 
         # Finally update the  screen with all the above changes
         pygame.display.update()

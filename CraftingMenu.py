@@ -1,18 +1,24 @@
 import pygame
-from gameSettings import itemIDs, blockSize, isPlaceable, itemHardness
+from gameSettings import blockSize
+import itemHandler as ih
 import gameSettings as gs
 from TextHandler import Text
-from item import Item
+from itemNew import Item
 import recipeHandler as rh
 import numpy as np
 from inventoryHandler import addBlock, addItem, decreaseSpec, getClicked, invArray, setClicked
 from InventorySlots import slot
 
+itemIDs = ih.fetchItemIDs()
+textureNames = ih.fetchTextureNames()
+isPlaceable = ih.fetchIsPlaceable()
+itemHardness = ih.fetchItemHardness()
+items = ih.fetchDict()
 slots = pygame.sprite.Group()
 relative = gs.blockSize/30
 buttonFont = pygame.font.Font('Minecraft.ttf', 40)  # font for button
 # invArray=np.full(40,NullItem,dtype=Item)
-NullItem = Item("null", -1)
+NullItem = items[0]
 
 
 class Crafting():
@@ -37,10 +43,11 @@ class Crafting():
             # change the colour of craft from white to green
             colour = (0, 255, 0)
             # place the craftable item next to the word craft
-            tempItem = Item(itemIDs[self.craftID], self.craftID)
+            tempItem = items[self.craftID+1]
+            #tempItem = Item(itemIDs[self.craftID], self.craftID)
             currTexture = tempItem.texture
             currTexture = pygame.transform.scale(
-                currTexture, (50*relative, 50*relative))
+                pygame.image.load(currTexture), (50*relative, 50*relative))
             self.screen.blit(currTexture, (928*relative, 463*relative))
         else:
             # question mark is displayed until an item can be craftaed
@@ -58,10 +65,8 @@ class Crafting():
             for i in range(3):
                 if(self.craftArray[j][i].itemID != -1):
                     currTexture = self.craftArray[j][i].texture
-                    currTexture = pygame.transform.scale(
-                        currTexture, (50*relative, 50*relative))
-                    self.screen.blit(
-                        currTexture, (917*relative+(i)*85*relative, 65*relative + relative * (j+1)*100))
+                    currTexture = pygame.transform.scale(pygame.image.load(currTexture), (50*relative, 50*relative))
+                    self.screen.blit(currTexture, (917*relative+(i)*85*relative, 65*relative + relative * (j+1)*100))
 
    # initlize the slots as a sprite group
 
@@ -83,6 +88,8 @@ class Crafting():
         for i in range(3):
             for j in range(3):
                 craftIDArray[i][j] = self.craftArray[i][j].itemID
+                if(self.craftArray[i][j].itemID!=-1):
+                    print(self.craftArray[i][j].itemID,"\n")
 
         for i in self.allItems:
             # compares crafting table to all recipe matrices
@@ -101,12 +108,14 @@ class Crafting():
             for i in range(self.recipes.getCraftingAmount(self.craftID)):
              # If item is a placeable object, it is then counted as a block
                 if (isPlaceable[self.craftID]):
-                    newTempItem = Item(itemIDs[self.craftID], self.craftID)
+                    newTempItem = items[self.craftID+1]
+                    #newTempItem = Item(itemIDs[self.craftID], self.craftID)
                     addBlock(newTempItem)
                 # Else the item is added as an item with an item hardness, defined in gameSettings.py
                 else:
-                    newTempItem = Item(
-                        itemIDs[self.craftID], self.craftID, itemHardness[self.craftID])
+                    #newTempItem = Item(
+                        #itemIDs[self.craftID], self.craftID, itemHardness[self.craftID])
+                    newTempItem = items[self.craftID+1]
                     addItem(newTempItem)
             self.emptyTable()
 
@@ -129,8 +138,18 @@ class Crafting():
                         # if a slot was previously selected in the inventory, place that selected item in the
                         # chosen block in the crafting table
                         inventoryItem = invArray[clicked]
-                        self.craftArray[j][i] = Item(
-                            inventoryItem.getItemName(), inventoryItem.getItemId())
+                        id = inventoryItem.getItemId()
+                        tempItem = items[id+1]
+                        self.craftArray[j][i] = Item(id
+                                                    ,tempItem.getItemName()
+                                                    ,tempItem.getBreakTime()
+                                                    ,tempItem.getBlockHardness()
+                                                    ,tempItem.getItemHardness()
+                                                    ,tempItem.getReqToolType()
+                                                    ,tempItem.getToolType()
+                                                    ,tempItem.getTexture()
+                                                    ,tempItem.getIsPlaceable()
+                                                    ,tempItem.getDrop())
                         decreaseSpec(inventoryItem.getItemId())
                         if(craftItem.getItemId() != -1):
                             # replace the item in the crafting table with one of item in the inventory
@@ -181,15 +200,17 @@ class Crafting():
             for i in range(self.itemsNeeded[item]):
                 if(item> 0):
                     decreaseSpec(item)
-        tempItem = Item(
-            itemIDs[itemID], itemID)
+        #tempItem = Item(
+            #itemIDs[itemID], itemID)
+        tempItem = items[itemID+1]
         for i in range(self.recipes.getCraftingAmount(itemID)):
             # If item is a placeable object, it is then counted as a block
             if (isPlaceable[tempItem.getItemId()]):
                 addBlock(tempItem)
             # Else the item is added as an item with an item hardness, defined in gameSettings.py
             else:
-                newTempItem = Item(
-                    tempItem.itemName, tempItem.itemID, itemHardness[tempItem.getItemId()])
+                #newTempItem = Item(
+                    #tempItem.itemName, tempItem.itemID, itemHardness[tempItem.getItemId()])
+                newTempItem = items[tempItem.itemID+1]
                 addItem(newTempItem)
         return True
