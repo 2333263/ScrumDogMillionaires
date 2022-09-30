@@ -26,8 +26,11 @@ class MinePy:
     # if render mode is human, render game to screen- if it is None- render game to surface
     # if seed is empty, random seed is used, else hash of seed is used.
 
-    def __init__(self,render_mode="human",seed="",easyStart=2,playerRange=7):
+    def __init__(self,render_mode="human",seed="",easyStart=1,playerRange=7):
         pygame.init()
+        for i in items:
+            if(i.amount>0):
+                i.amount=0
         self.render_mode = render_mode
         if (render_mode == "rgb_array"):
             # if render mode is rgb_array do not render game to screen, render to surface
@@ -40,10 +43,9 @@ class MinePy:
         # level 0: empty inventory
         # level 1: wooden pickaxe, 4 wooden planks
         if (easyStart == 1):
-            print("here")
-            newTempItem = Item("Wooden Pickaxe",11,0)
+            newTempItem = items[12]
             inv.addItem(newTempItem)
-            tempBlock = Item(itemIDs[8],8)
+            tempBlock = items[9]
             inv.addBlock(tempBlock)
             inv.addBlock(tempBlock)
             inv.addBlock(tempBlock)
@@ -51,7 +53,6 @@ class MinePy:
         # level 2: wooden pickaxe, 4 wooden planks, a stone pickaxe and a diamond, and an emerald!
         # really easy start
         if (easyStart == 2):
-            print("here")
             # newTempItem = Item("Wooden Pickaxe",11, 0)
             newTempItem = items[12]
             inv.addItem(newTempItem)
