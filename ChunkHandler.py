@@ -5,7 +5,6 @@ def updateChunkPositions(playerChunk):
     gs.visibleChunks[0] = playerChunk - 1
     gs.visibleChunks[1] = playerChunk
     gs.visibleChunks[2] = playerChunk + 1
-
 def checkChunkUpdates(player, worldBlocks):
 
     newPlayerChunk = (player.rect.x//gs.blockSize)//gs.CHUNK_SIZE[0]

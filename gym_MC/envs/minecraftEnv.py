@@ -15,6 +15,7 @@ from itemNew import Item
 import itemHandler as ih
 import rewardsHandler as rw
 from block import Block
+from ChunkHandler import checkChunkUpdates
 
 itemIDs = ih.fetchItemIDs()
 items = ih.fetchDict()
@@ -82,18 +83,25 @@ class MinePy:
         gs.playerRange = playerRange
         # print("gs.playerRange is=", gs.playerRange)
         # print("gs.seed is=", gs.seed)
-        self.player = ph.Player(((gs.width / 2 - gs.blockSize * 4) + 0.75 * gs.blockSize,- gs.blockSize * 30),
-                                gs.blockSize)
+        #(((gs.width / 2 - gs.blockSize * 4) + 0.75 * gs.blockSize,- gs.blockSize ),gs.blockSize)
+        #((gs.width/2 - gs.blockSize * 4,- gs.blockSize*2), gs.blockSize)
+        self.player = ph.Player((gs.width/2 - gs.blockSize * 4,- gs.height-gs.CHUNK_SIZE[1]*gs.blockSize-3*gs.blockSize), gs.blockSize)
         self.camera = cam.Camera(self.player)
         self.worldBlocks = pygame.sprite.Group()
         self.collisionblocks = self.worldBlocks
         self.crafter = Crafting(self.screen)
-        gs.generatedChunks[0] = generateChunk(0,self.worldBlocks)
+        #gs.generatedChunks[0] = generateChunk(0,self.worldBlocks)
+        gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], self.worldBlocks)
+        gs.generatedChunks[0] = generateChunk(0, self.worldBlocks)
+        gs.generatedChunks[1] = generateChunk(gs.CHUNK_SIZE[0], self.worldBlocks)
+        checkChunkUpdates(self.player, self.worldBlocks)
+
         self.offset = [[-1,-1],[0,-1],[1,-1],  # offsets of player positions, top row is above player
                        [-1,0],[-1,1],[1,0],[1,1],  # left down, left up, right down, right up
                        [-1,2],[0,2],[1,2]]  # below the player
 
     def action(self,action):
+        
         fakeKeys = {pygame.K_LEFT: False,pygame.K_RIGHT: False,pygame.K_UP: False,pygame.K_a: False,pygame.K_d: False,
                     pygame.K_w: False,pygame.K_SPACE: False}
         if action == gs.actionSpace["MOVEMENT"][2]:
@@ -138,7 +146,8 @@ class MinePy:
             craftPossibility = self.crafter.craftSpec(craftingID,inv.getInv())
 
         self.player.update(self.clock.tick(),self.worldBlocks)  # may need to change to collison blocks later
-        # print(self.player.getPlayerPos())
+        #print(self.player.getPlayerPos())
+        checkChunkUpdates(self.player, self.worldBlocks)
 
     def evaluate(self,prev):
         stages = rw.populateStages()

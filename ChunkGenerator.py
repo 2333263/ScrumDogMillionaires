@@ -1,5 +1,6 @@
 from perlin_noise import PerlinNoise
 import numpy as np
+from scipy import rand
 import gameSettings as gs
 import random
 import pygame
@@ -84,13 +85,13 @@ def generateChunk(generatePos, worldBlocks):
                 world[y][x] = 'D' #Dirt
             elif(y > h + heightNoise[x] and y > h + heightNoise[x] + dirt):
                 world[y][x] = 'S' #Stone
-            
             else:
                 world[y][x] = ' ' #Sky
             if(y == h + heightNoise[x] - 1 and (x > 0 and x < gs.CHUNK_SIZE[0] - 3)):
                 if (random.randint(1, 25) == 1):
                     drawTree(world, y, x) #Tree
-            
+                elif(random.randint(1,80)==1):
+                    world[y][x]='T'
             if(y > h + heightNoise[x] and y > h + heightNoise[x] + 12):
                 if(random.randint(1, 150) == 69):
                     drawCave(world, x, y)
