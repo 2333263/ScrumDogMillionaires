@@ -112,6 +112,7 @@ def selectPrevious():
 def selectInventory(pos):
     global selected
     selected = pos
+    
 
 def drawHotBar(screen):
     # draws background of hotbar
@@ -123,7 +124,20 @@ def drawHotBar(screen):
     else:
         #else draw just the hot bar slots
         hotBarrSprite.draw(screen)
-    for i in range(10):
+    rangeB=0
+    rangeT=10
+    if(not fullInv):
+        if(selected>=10 and selected<20):
+            rangeB=10
+            rangeT=20
+        elif(selected>=20 and selected<30):
+            rangeB=20
+            rangeT=30
+        elif(selected>=30 ):
+            rangeB=30
+            rangeT=40
+    
+    for i in range(rangeB,rangeT):
         #if the slot isnt empty
         if(invArray[i].itemID!=-1):
             #get the items texture
@@ -131,7 +145,7 @@ def drawHotBar(screen):
             #print(currTexture)
             currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
             #draw into the slot on the hotbar
-            screen.blit(currTexture,(22*relative+(i)*85*relative,45*relative))
+            screen.blit(currTexture,(22*relative+(i-rangeB)*85*relative,45*relative))
             #draw the number of items underneath it
             font = pygame.font.Font('Minecraft.ttf', int(16*relative))
             count=invArray[i].getCount()
@@ -142,10 +156,10 @@ def drawHotBar(screen):
                 shift-=5
             if(count>=100):
                 shift-=5
-            screen.blit(text2,(42*relative+(i)*85*relative+shift*relative,95*relative))
+            screen.blit(text2,(42*relative+(i-rangeB)*85*relative+shift*relative,95*relative))
             #if the inventory is closed, draw a yellow square around the part that is selected
         if (i==selected and not fullInv):
-            pygame.draw.rect(screen, (255, 255, 0), (12*relative+(i)*85*relative, 30*relative, 70*relative, 80*relative), 3)
+            pygame.draw.rect(screen, (255, 255, 0), (12*relative+(i-rangeB)*85*relative, 30*relative, 70*relative, 80*relative), 3)
             #if the inventory is open, draw a green sqiare around the slot that is selected
         if(i==clicked and fullInv):
              pygame.draw.rect(screen, (0, 255, 0), (12*relative+(i)*85*relative, 30*relative, 70*relative, 80*relative), 3)
