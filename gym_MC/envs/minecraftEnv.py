@@ -2,6 +2,7 @@ from math import ceil
 from tarfile import BLOCKSIZE
 import pygame
 import sys
+import numpy as np
 
 sys.path.append("../Scrum-Dog-Millionaires")
 import gameSettings as gs
@@ -27,7 +28,7 @@ class MinePy:
     # if render mode is human, render game to screen- if it is None- render game to surface
     # if seed is empty, random seed is used, else hash of seed is used.
 
-    def __init__(self,render_mode="human",seed="",easyStart=1,playerRange=7):
+    def __init__(self, render_mode="human", easyStart=1, playerRange=7):
         pygame.init()
         for i in items:
             if(i.amount>0):
@@ -35,11 +36,11 @@ class MinePy:
         self.render_mode = render_mode
         if (render_mode == "rgb_array"):
             # if render mode is rgb_array do not render game to screen, render to surface
-            self.screen = pygame.Surface((gs.width,gs.height))
+            self.screen = pygame.Surface((gs.width,gs.height)) 
         elif (render_mode == "human"):
             # if render mode is human render game to the screen
             self.screen = pygame.display.set_mode((gs.width,gs.height))
-
+       
         # there are three levels for easyStart:
         # level 0: empty inventory
         # level 1: wooden pickaxe, 4 wooden planks
@@ -78,7 +79,7 @@ class MinePy:
         self.stage = 1
         self.done = False
         # set the seed
-        gs.seed = gs.setSeed(seed)
+        gs.seed = gs.setSeed()
         # set the player range for breaking and placing blocks, clicking on items
         gs.playerRange = playerRange
         # print("gs.playerRange is=", gs.playerRange)
@@ -431,10 +432,10 @@ class MinePy:
             return False
 
     def observe(self):
-        # RGB array?? --> views
-        # our observations shouldn't be the inventory, inventory should be in info for new step function
-        # obersvations returns an RGB array of the frame
-        return inv.getInv()
+        img = pygame.image.tostring(self.screen, "RGBA")
+        newScreen = pygame.image.fromstring(img, (gs.width, gs.height), "RGBA")
+        rgbarr = np.array(pygame.surfarray.pixels3d(newScreen), dtype=np.float32)
+        return rgbarr
 
     # Should be RGB array in future?
     def view(self):

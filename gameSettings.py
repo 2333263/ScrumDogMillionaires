@@ -11,7 +11,7 @@ actionSpace = {
     "CRAFTING" : [i for i in range(65, 75, 1)]
 }
 
-def setSeed(string):   
+def setSeed(string = ""):   
     global seed
     if len(string)!=0:
         seed = abs(int(hasher(string)))
