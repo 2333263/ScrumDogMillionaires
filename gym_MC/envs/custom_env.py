@@ -27,15 +27,15 @@ class CustomEnv(gym.Env):
         return (obs, infoDict)
 
     def step(self, action):
-        prevObs = self.pygame.observe()
+        obs = self.pygame.observe()
+        prevInv = inventoryHandler.getInv()
         self.pygame.action(action)
-        #reward = self.pygame.evaluate(prevObs)
         done = self.pygame.is_done()
-        reward = 1 if done else 0  # Binary sparse rewards
         infoDict = {
                 "inventory" : inventoryHandler.getInv()
             }
-        return prevObs, reward, done, False, infoDict
+        reward = self.pygame.evaluate(prevInv)
+        return obs, reward, done, False, infoDict
 
     def render(self):
         if(self.render_mode=="human"):

@@ -154,7 +154,7 @@ class MinePy:
         stages = rw.populateStages()
         current = inv.getInv()
 
-        # print("In stage: ", self.stage)
+        #print("In stage: ", self.stage)
         currStage = stages["Stage" + str(self.stage)]
         rewardInt = currStage.getReward()
         completeInt = currStage.getComplete()
