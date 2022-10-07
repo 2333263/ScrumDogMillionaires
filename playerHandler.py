@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.image=Image
         #declare a change in direction vector
         self.direction=pygame.math.Vector2(0.0,0.0)
-        self.gravity = 2
+        self.gravity = 4
         #save a copy of the sprite for later
         self.character=Image
         self.y_momentum=0
@@ -32,8 +32,6 @@ class Player(pygame.sprite.Sprite):
 
     def getPlayerPos(self):
         return self.rect.x, self.rect.y
-
-
     
     def MoveOnX(self, fakeKeys):
         #gets a list of all keys currently being pressed
@@ -66,13 +64,13 @@ class Player(pygame.sprite.Sprite):
         #if the player is not moving in the y direction
         if(self.direction.y==0):
             #set the change of direction to -3 in the y direction (ie go up by 3 places)
-            self.direction.y=-2.5
+            self.direction.y=-8.5
             #set jump to true
             self.jumped=True
 
     def jumpArc(self):
         #add 1/15th of gravity to the current change in direction (this causes an arc when jumping)
-        self.direction.y+=self.gravity/20
+        self.direction.y+=self.gravity/5
         #when the player reaches his arc set jumped to false so normal gravity functions
         if(math.floor(self.direction.y)==0):
             self.jumped=False
