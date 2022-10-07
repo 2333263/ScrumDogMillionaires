@@ -90,6 +90,11 @@ class MinePy:
         self.worldBlocks = pygame.sprite.Group()
         self.collisionblocks = self.worldBlocks
         self.crafter = Crafting(self.screen)
+
+        self.playerPos = [0, 0]
+
+        self.textureNames = ih.fetchTextureNames()
+
         #gs.generatedChunks[0] = generateChunk(0,self.worldBlocks)
         gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], self.worldBlocks)
         gs.generatedChunks[0] = generateChunk(0, self.worldBlocks)
@@ -129,14 +134,15 @@ class MinePy:
                 realAction = action - gs.actionSpace["WORLD"][0]
             else:
                 realAction = action - gs.actionSpace["WORLD"][10]
-            playerPos = [self.player.getPlayerPos()[0],self.player.getPlayerPos()[1]]
-            playerPos[0] += self.offset[realAction][0] * gs.blockSize
-            playerPos[1] += self.offset[realAction][1] * gs.blockSize
+
+            self.playerPos = [self.player.getPlayerPos()[0],self.player.getPlayerPos()[1]]
+            self.playerPos[0] += self.offset[realAction][0] * gs.blockSize
+            self.playerPos[1] += self.offset[realAction][1] * gs.blockSize
 
             if action in gs.actionSpace["WORLD"][0:10]:
-                bph.blockBreak(playerPos,self.worldBlocks,self.player,False,False)
+                bph.blockBreak(self.playerPos,self.worldBlocks,self.player,False,False)
             else:
-                bph.blockPlace(playerPos,self.worldBlocks,self.player,False,False)
+                bph.blockPlace(self.playerPos,self.worldBlocks,self.player,False,False)
 
         elif action in gs.actionSpace["HOTBAR"]:
             inv.selectInventory(action - gs.actionSpace["HOTBAR"][0])
@@ -447,6 +453,14 @@ class MinePy:
         pygame.draw.rect(self.screen,(0,0,0),bg)
         self.collisionblocks = self.camera.draw(self.screen,self.worldBlocks)
         inv.drawHotBar(self.screen)  # --> draw inventory
+
+        blockFrameImg = pygame.image.load(self.textureNames["Block_Frame"]).convert_alpha()
+        blockFrame = pygame.transform.scale(blockFrameImg, (gs.blockSize, gs.blockSize))
+        #blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \ gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
+        self.playerPos[0] -=  self.camera.getOffsets()[0] % gs.blockSize
+        self.playerPos[1] -=  self.camera.getOffsets()[1] % gs.blockSize
+        self.screen.blit(blockFrame, self.playerPos)
+
         if (self.render_mode == "human"):
             pygame.display.flip()
         # else:
