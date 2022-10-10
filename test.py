@@ -217,7 +217,7 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(self.TempPlayer.jumped, False)
         self.TempPlayer.jump()
         self.assertEqual(self.TempPlayer.jumped, True)
-        self.assertEqual(self.TempPlayer.direction.y, -2.5)
+        self.assertEqual(self.TempPlayer.direction.y, -8.5)
         self.TempPlayer.jumped = False
 
     def test_jumping_acceleration(self):
@@ -227,7 +227,7 @@ class TestPlayer(unittest.TestCase):
         self.TempPlayer.direction.y = -5
         # testing if the grabity acceleration changes
         self.TempPlayer.jumpArc()
-        self.assertEqual(self.TempPlayer.direction.y, -5 + self.TempPlayer.gravity / 20)
+        self.assertEqual(self.TempPlayer.direction.y, -5 + self.TempPlayer.gravity / 5)
         self.TempPlayer.direction.y = 0
 
     # NEED TO BE REWRITTEN
@@ -239,11 +239,11 @@ class TestPlayer(unittest.TestCase):
         self.TempPlayer.update(0, tempGroup)
         self.assertEqual(self.TempPlayer.jumped, False)
         self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.y, 2.0)
+        self.assertEqual(self.TempPlayer.direction.y, 4.0)
         for x in tempGroup:
             x.blockPosition = (8 * gs.blockSize, 10 * gs.blockSize)
         self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.y, 2.0)
+        self.assertEqual(self.TempPlayer.direction.y, 4.0)
         self.TempPlayer.direction.x = -1
         for x in tempGroup:
             x.blockPosition = (7 * gs.blockSize, 8 * gs.blockSize)
@@ -268,7 +268,7 @@ class TestPlayer(unittest.TestCase):
         for x in tempGroup:
             x.blockPosition = (8 * gs.blockSize, 8 * gs.blockSize)
         self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.y, 2.1)
+        self.assertEqual(self.TempPlayer.direction.y, 4.8)
         self.TempPlayer.direction.x = 1
         self.TempPlayer.direction.y = 1
         tempPosX = self.TempPlayer.rect.x
@@ -279,7 +279,7 @@ class TestPlayer(unittest.TestCase):
         self.TempPlayer.rect.x = tempPosX
         self.TempPlayer.rect.y = tempPosY
         self.TempPlayer.update(2, tempGroup)
-        self.assertEqual(self.TempPlayer.rect.y, tempPosY + 2)
+        self.assertEqual(self.TempPlayer.rect.y, tempPosY + 5)
         self.assertEqual(self.TempPlayer.rect.x, tempPosX + 2)
         tempBlock = block.Block(gs.blockSize, (8 * gs.blockSize, 7 * gs.blockSize), 0, textureNames[itemIDs[0]],
                                 0, breakSpeed[0])
