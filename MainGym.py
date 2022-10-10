@@ -15,6 +15,7 @@ for episode in range(100000):
        #     env.render()
         #    done=True
     env.step(action)
+    #env.step(gs.actionSpace["MOVEMENT"][3])
     env.render()
     
     #make sure crafting only happens in range of crafting table
