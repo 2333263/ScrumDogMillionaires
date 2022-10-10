@@ -892,6 +892,10 @@ class testMinecraftEnv(unittest.TestCase):
         self.ENV.action(gs.actionSpace["MOVEMENT"][0])
         currpos = self.ENV.player.getPlayerPos()
         self.ENV.action(gs.actionSpace["MOVEMENT"][3])
+        self.ENV.action(gs.actionSpace["MOVEMENT"][3])
+        self.ENV.action(gs.actionSpace["MOVEMENT"][3])
+        self.ENV.action(gs.actionSpace["MOVEMENT"][3])
+        
         self.ENV.player.update(2,self.ENV.worldBlocks)
         self.assertNotEqual(currpos, self.ENV.player.getPlayerPos())
         self.ENV.action(gs.actionSpace["MOVEMENT"][0])
