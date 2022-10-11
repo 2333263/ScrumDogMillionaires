@@ -1,0 +1,8 @@
+numpy
+pygame
+pytest
+pygame_gui
+perlin-noise
+pytest-cov==3.0.0
+gym
+gym[all]
