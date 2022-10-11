@@ -10,12 +10,13 @@ actionSpace = {
     "HOTBAR" : [i for i in range(25, 65, 1)],
     "CRAFTING" : [i for i in range(65, 75, 1)]
 }
-def setSeed(string):   
+
+def setSeed(string = ""):   
     global seed
     if len(string)!=0:
-        seed = int(hasher(string))
+        seed = abs(int(hasher(string)))
     else:
-        seed = random.randint(-10000, 10000)
+        seed = abs(random.randint(-10000, 10000))
     return seed
 
 def hasher(string):
