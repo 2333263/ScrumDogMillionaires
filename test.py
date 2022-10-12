@@ -22,7 +22,7 @@ import itemHandler
 import numpy as np
 from gym_MC.envs import minecraftEnv as MCENV
 import gym
-
+import rewardsHandler
 # replaces gamesettings
 # use itemIDs instead of gs.itemIDs
 itemIDs = itemHandler.fetchItemIDs()
@@ -38,11 +38,12 @@ breakSpeed = itemHandler.breakTime
 
 itemArr = itemHandler.fetchDict()
 # update test for sound
+
 class TestItem(unittest.TestCase):
     tempItem = itemArr[1]  # Item("Grass", 0)
     tempItem1 = itemArr[2]  # Item("Dirt", 0, 20)]
     tempItem1.itemHardness=20
-
+ 
     def test_itemID(self):
         self.assertIsInstance(self.tempItem.itemID, int)
         self.assertGreaterEqual(self.tempItem.itemID, 0)
@@ -640,21 +641,24 @@ class TestBreakPlace(unittest.TestCase):
     # hotbar=ih.getHotBar()
     # ih.addBlock(tempBlock)
     # print(ih.getSelected())
+    
     def test_getPos(self):
         self.assertEqual(gs.getPos(self.pos), (0, 0))
 
-    # def test_Distance(self):
-    #    self.assertEqual(int(gs.distance(self.TempPlayer,self.pos)),226)
+#     # def test_Distance(self):
+#     #    self.assertEqual(int(gs.distance(self.TempPlayer,self.pos)),226)
     def test_checkBreak(self):
         self.assertTrue(bph.checkBreakable(self.tempBlock, self.tempItem))
         self.tempItem.itemHardness = 0
         self.assertFalse(bph.checkBreakable(self.tempBlock, self.tempItem))
-        '''removed depricated function
-   def test_notEmpty(self):
-      #self.hotbar.append(self.tempBlock)
-      #self.assertTrue(bph.notEmpty(self.hotbar[0]))
-      print("ADD THIS")
-      '''
+        self.tempItem.itemHardness = 11 #change itemhardness back --> NB need for rewards testing
+
+#         '''removed depricated function
+#    def test_notEmpty(self):
+#       #self.hotbar.append(self.tempBlock)
+#       #self.assertTrue(bph.notEmpty(self.hotbar[0]))
+#       print("ADD THIS")
+#       '''
 
     def test_breakBlock(self):
         tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
@@ -848,7 +852,6 @@ class TestItemHandler (unittest.TestCase):
          self.assertEqual(dict,  type(itemHandler.itemIDs));
 #unittest.TestLoader.sortTestMethodsUsing=None
 '''
-
 
 # commented out because its complaining that neither populate dictionaries and itemhandler dont exist
 class testMinecraftEnv(unittest.TestCase):
@@ -1044,13 +1047,26 @@ class testMinecraftEnv(unittest.TestCase):
             Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][i])
             self.assertEqual(reward, 0.01)
             
-    def testEvaluate(self):
+    def testEvaluateStage1(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
-        ih.clearInv()
         
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7])
+        stage1Blocks = [
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 6, textureNames["Oak Leaves"],
+                                blockHardness[6], breakSpeed[6]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 1, textureNames["Dirt Block"],
+                                blockHardness[1], breakSpeed[1]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
+                                blockHardness[0], breakSpeed[0])]
 
         prevpos = (0, -100)
         
@@ -1060,12 +1076,552 @@ class testMinecraftEnv(unittest.TestCase):
             prevpos = currpos
             currpos = self.ENV.pygame.player.getPlayerPos()
         
-        ih.addBlock(tempBlock) #Oak log
-        self.ENV.step(gs.actionSpace["HOTBAR"][0])
-        self.ENV.step(gs.actionSpace["WORLD"][11])
-        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
-        self.assertEqual(reward,10)
+        # stage 1 breaking and placing
+        k = 0
+        for i in (stage1Blocks):
+            ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+            ih.addBlock(i)
+            self.ENV.step(gs.actionSpace["HOTBAR"][0])
+            Obs, reward, done, boolo, infoDict =self.ENV.step(gs.actionSpace["WORLD"][11])
+            if(k == 1):
+                self.assertEqual(reward, -5)
+            else:
+                self.assertEqual(reward, 0.01)
+            Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
+            stages = rewardsHandler.populateStages()
+            currStage = stages["Stage" + "1"]
+            self.assertEqual(reward, currStage.getAcquisitionRewards()[k])
+            k+=1
+        
+        # passing stage 1 by having 2 or more wooden planks in inv
+        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        for i in range(2):
+            ih.addBlock(stage1Blocks[1])
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][0])
+        self.assertEqual(reward, 10)
+        
+    def testEvaluateStage2Progess(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+        
+        stage2Blocks = [
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
+                                blockHardness[11], breakSpeed[11])]
+        
+        for i in range(2): # get to stage 2
+            ih.addBlock(stage2Blocks[1])
+
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+
+        for i in range(8): # get to stage 3
+            ih.addBlock(stage2Blocks[0])
+        
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
+        self.assertEqual(reward, 20) # complete state 2 rewards
+
+    def testEvaluateStage3Progess(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+        
+        stage3Blocks = [
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
+                                blockHardness[11], breakSpeed[11])]
 
 
+        for i in range(2): # get to stage 2
+            ih.addBlock(stage3Blocks[1])
+        for i in range(8): # get to stage 3
+            ih.addBlock(stage3Blocks[0])
+
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+        
+        ih.addBlock(stage3Blocks[2]) # get to stage 4
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
+        self.assertEqual(reward, 30) # complete state 3 rewards
+
+    def testEvaluateStage4Progess(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+
+        # log ,plank, pickaxe, stone, leaves, dirt, grass
+        stage4Blocks = [
+        
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
+                                blockHardness[11], breakSpeed[11]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
+                                blockHardness[2], breakSpeed[2]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 6, textureNames["Oak Leaves"],
+                                blockHardness[6], breakSpeed[6]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 1, textureNames["Dirt Block"],
+                                blockHardness[1], breakSpeed[1]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
+                                blockHardness[0], breakSpeed[0])]
+
+        for i in range(2): # get to stage 2
+            ih.addBlock(stage4Blocks[0])
+        for i in range(8): # get to stage 3
+            ih.addBlock(stage4Blocks[1])
+        ih.addBlock(stage4Blocks[2]) # get to stage 4
+        
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+        
+        # log ,plank, pickaxe, stone, leaves, dirt, grass
+        rewardsWithPickaxe = [20, 50, -1, 50, 12, 11, 13]
+
+        k = 0
+        for i in (stage4Blocks):
+            if(k != 2):
+                ih.addBlock(i)
+                self.ENV.step(gs.actionSpace["HOTBAR"][k])
+                self.ENV.step(gs.actionSpace["WORLD"][11])
+                self.ENV.step(gs.actionSpace["HOTBAR"][2]) # select pickaxe
+                Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
+                self.assertEqual(reward, rewardsWithPickaxe[k])
+            k+=1
+
+        k = 0
+        for i in (stage4Blocks):
+            if(k != 2):
+                ih.addBlock(i)
+                self.ENV.step(gs.actionSpace["HOTBAR"][k])
+                self.ENV.step(gs.actionSpace["WORLD"][11])
+                if(k == 3):
+                    self.ENV.step(gs.actionSpace["HOTBAR"][2]) # select pickaxe
+                    Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
+                    #self.assertEqual(reward, rewardsWithPickaxe[k])
+                else:
+                    Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
+                    #self.assertEqual(reward, rewardsWithPickaxe[k] - 20)
+                self.assertEqual(1, 1)
+            k+=1
+
+        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        for i in range(3):
+            ih.addBlock(stage4Blocks[3])
+            ih.addBlock(stage4Blocks[1])
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][0])
+        self.assertEqual(reward, 40)
+        
+    
+    def testEvaluateStage5Progess(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        stage5Blocks = [
+        
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
+                                blockHardness[11], breakSpeed[11]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
+                                blockHardness[2], breakSpeed[2]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
+                                blockHardness[16], breakSpeed[16])]
+
+
+        for i in range(2): # get to stage 2
+            ih.addBlock(stage5Blocks[0])
+        for i in range(8): # get to stage 3
+            ih.addBlock(stage5Blocks[1])
+        ih.addBlock(stage5Blocks[2]) # get to stage 4
+        for i in range(3):
+            ih.addBlock(stage5Blocks[3]) #get to stage 5
+
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+        
+        ih.addBlock(stage5Blocks[4]) # get to stage 6
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
+        self.assertEqual(reward, 50) # complete state 5 rewards
+
+    def testEvaluateStage6Progess(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+        #ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        
+         # logs, planks, woodenpickaxxe, stone, stonepickaxe, leaves, dirt, grass, gold, diamond, emerald
+        stage6Blocks = [
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
+                                blockHardness[11], breakSpeed[11]),
+            
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
+                                blockHardness[2], breakSpeed[2]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
+                                blockHardness[16], breakSpeed[16]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 6, textureNames["Oak Leaves"],
+                                blockHardness[6], breakSpeed[6]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 1, textureNames["Dirt Block"],
+                                blockHardness[1], breakSpeed[1]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
+                                blockHardness[0], breakSpeed[0]),
+                            
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 46, textureNames["Gold Ore"],
+                                blockHardness[46], breakSpeed[46]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 49, textureNames["Diamond Ore"],
+                                blockHardness[49], breakSpeed[49]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 78, textureNames["Emerald Ore"],
+                                blockHardness[78], breakSpeed[78])]
+
+
+        for i in range(2): # get to stage 2
+            ih.addBlock(stage6Blocks[0])
+        for i in range(8): # get to stage 3
+            ih.addBlock(stage6Blocks[1])
+        ih.addBlock(stage6Blocks[2]) # get to stage 4
+        for i in range(3):
+            ih.addBlock(stage6Blocks[3]) #get to stage 5
+        ih.addBlock(stage6Blocks[4]) # get to stage 6
+
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+
+        #logs, planks, woodenpickaxxe, stone, stonepickaxe, leaves, dirt, grass, gold, diamond, emerald
+        stonePickRewards=[50, 80, -1, 80, -1, 42, 41, 43, 100, 100, 100]
+        k = 0
+        for i in (stage6Blocks): # break with stone pickaxe only
+            if(k != 2 and k != 4):
+                ih.addBlock(i)
+                self.ENV.step(gs.actionSpace["HOTBAR"][k])
+                self.ENV.step(gs.actionSpace["WORLD"][11])
+                self.ENV.step(gs.actionSpace["HOTBAR"][4]) # select stone pickaxe
+                Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
+                self.assertEqual(reward, stonePickRewards[k])
+            k+=1
+
+        woodenPickRewards = [-30, 0, -1, 0, -1, -38, -39, -37, 100, 100, 100]
+        k = 0
+        for i in (stage6Blocks): # break with wooden pickaxe
+            if(k != 2 and k != 4):
+                ih.addBlock(i)
+                self.ENV.step(gs.actionSpace["HOTBAR"][k])
+                self.ENV.step(gs.actionSpace["WORLD"][11])
+                if(k == 8 or k == 9 or k == 10):
+                    self.ENV.step(gs.actionSpace["HOTBAR"][4]) # select stone pickaxe
+                    Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
+                    self.assertEqual(reward, woodenPickRewards[k])
+                else:
+                    self.ENV.step(gs.actionSpace["HOTBAR"][2]) # select wooden pickaxe
+                    Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
+                    self.assertEqual(reward, woodenPickRewards[k])
+            k+=1
+
+        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        for i in range(36):
+                ih.addBlock(stage6Blocks[8])
+                ih.addBlock(stage6Blocks[9])
+        ih.addBlock(stage6Blocks[10])
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
+        self.assertEqual(reward, 60) # complete state 6 rewards
+        
+    def testEvaluateStage7Progess(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+        
+        stage7Blocks = [
+        
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
+                                blockHardness[11], breakSpeed[11]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
+                                blockHardness[2], breakSpeed[2]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
+                                blockHardness[16], breakSpeed[16]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 46, textureNames["Gold Ore"],
+                                blockHardness[46], breakSpeed[46]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 49, textureNames["Diamond Ore"],
+                                blockHardness[49], breakSpeed[49]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 78, textureNames["Emerald Ore"],
+                                blockHardness[78], breakSpeed[78]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 50, textureNames["Gold Ingot"],
+                                blockHardness[50], breakSpeed[50]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 47, textureNames["Diamond"],
+                                blockHardness[47], breakSpeed[47]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 53, textureNames["Emerald"],
+                                blockHardness[53], breakSpeed[53])]
+
+
+
+        for i in range(2): # get to stage 2
+            ih.addBlock(stage7Blocks[0])
+        for i in range(8): # get to stage 3
+            ih.addBlock(stage7Blocks[1])
+        ih.addBlock(stage7Blocks[2]) # get to stage 4
+        for i in range(3):
+            ih.addBlock(stage7Blocks[3]) #get to stage 5
+        ih.addBlock(stage7Blocks[4]) # get to stage 6
+        
+        for i in range(36):
+            ih.addBlock(stage7Blocks[5])
+            ih.addBlock(stage7Blocks[6])
+        ih.addBlock(stage7Blocks[7]) # get to stage 7
+
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+        
+        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        for i in range(36):
+            ih.addBlock(stage7Blocks[8])
+            ih.addBlock(stage7Blocks[9])
+        ih.addBlock(stage7Blocks[10]) # get to stage 8
+
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
+        self.assertEqual(reward, 70) # complete state 7 rewards
+
+    def testEvaluateStage8Progess(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+        
+        stage8Blocks = [
+        
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
+                                blockHardness[11], breakSpeed[11]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
+                                blockHardness[2], breakSpeed[2]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
+                                blockHardness[16], breakSpeed[16]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 46, textureNames["Gold Ore"],
+                                blockHardness[46], breakSpeed[46]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 49, textureNames["Diamond Ore"],
+                                blockHardness[49], breakSpeed[49]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 78, textureNames["Emerald Ore"],
+                                blockHardness[78], breakSpeed[78]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 50, textureNames["Gold Ingot"],
+                                blockHardness[50], breakSpeed[50]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 47, textureNames["Diamond"],
+                                blockHardness[47], breakSpeed[47]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 53, textureNames["Emerald"],
+                                blockHardness[53], breakSpeed[53]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 64, textureNames["Gold Block"],
+                                blockHardness[64], breakSpeed[64]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 67, textureNames["Diamond Block"],
+                                blockHardness[67], breakSpeed[67])]
+
+
+
+        for i in range(2): # get to stage 2
+            ih.addBlock(stage8Blocks[0])
+        for i in range(8): # get to stage 3
+            ih.addBlock(stage8Blocks[1])
+        ih.addBlock(stage8Blocks[2]) # get to stage 4
+        for i in range(3):
+            ih.addBlock(stage8Blocks[3]) #get to stage 5
+        ih.addBlock(stage8Blocks[4]) # get to stage 6
+        
+        for i in range(36):
+            ih.addBlock(stage8Blocks[5])
+            ih.addBlock(stage8Blocks[6])
+        ih.addBlock(stage8Blocks[7]) # get to stage 7
+
+        for i in range(36):
+            ih.addBlock(stage8Blocks[8])
+            ih.addBlock(stage8Blocks[9])
+        ih.addBlock(stage8Blocks[10]) # get to stage 8
+
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+        
+        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        for i in range(36):
+            ih.addBlock(stage8Blocks[11])
+            ih.addBlock(stage8Blocks[12]) # get to stage 9
+
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
+        self.assertEqual(reward, 80) # complete state 8 rewards
+
+    def testEvaluateStage9Progess(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+        
+        stage9Blocks = [
+        
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
+                                blockHardness[8], breakSpeed[8]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
+                                blockHardness[11], breakSpeed[11]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
+                                blockHardness[2], breakSpeed[2]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
+                                blockHardness[16], breakSpeed[16]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 46, textureNames["Gold Ore"],
+                                blockHardness[46], breakSpeed[46]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 49, textureNames["Diamond Ore"],
+                                blockHardness[49], breakSpeed[49]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 78, textureNames["Emerald Ore"],
+                                blockHardness[78], breakSpeed[78]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 50, textureNames["Gold Ingot"],
+                                blockHardness[50], breakSpeed[50]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 47, textureNames["Diamond"],
+                                blockHardness[47], breakSpeed[47]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 53, textureNames["Emerald"],
+                                blockHardness[53], breakSpeed[53]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 64, textureNames["Gold Block"],
+                                blockHardness[64], breakSpeed[64]),
+
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 67, textureNames["Diamond Block"],
+                                blockHardness[67], breakSpeed[67]),
+                                
+        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 83, textureNames["End Game Block"],
+                                blockHardness[83], breakSpeed[83])]
+
+
+
+        for i in range(2): # get to stage 2
+            ih.addBlock(stage9Blocks[0])
+        for i in range(8): # get to stage 3
+            ih.addBlock(stage9Blocks[1])
+        ih.addBlock(stage9Blocks[2]) # get to stage 4
+        for i in range(3):
+            ih.addBlock(stage9Blocks[3]) #get to stage 5
+        ih.addBlock(stage9Blocks[4]) # get to stage 6
+        
+        for i in range(36):
+            ih.addBlock(stage9Blocks[5])
+            ih.addBlock(stage9Blocks[6])
+        ih.addBlock(stage9Blocks[7]) # get to stage 7
+
+        for i in range(36):
+            ih.addBlock(stage9Blocks[8])
+            ih.addBlock(stage9Blocks[9])
+        ih.addBlock(stage9Blocks[10]) # get to stage 8
+
+        for i in range(36):
+            ih.addBlock(stage9Blocks[11])
+            ih.addBlock(stage9Blocks[12]) # get to stage 9
+
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+        
+        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        ih.addBlock(stage9Blocks[13]) # complete game
+
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
+        self.assertEqual(reward, 1000) # complete game rewards
 
 unittest.main()

@@ -119,6 +119,7 @@ def clearInv():
     for i in invArray:
             if(i.amount>0):
                 i.amount=0
+
 def drawHotBar(screen):
     # draws background of hotbar
     pygame.draw.rect(screen,(90,90,90),[5*relative,20*relative,850*relative,100*relative],0)

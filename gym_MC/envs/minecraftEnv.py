@@ -200,7 +200,7 @@ class MinePy:
 
                 if prevCount > currCount and key == 7:  # If place wood logs
                     return penaltyInt
-
+    
             return miscInt  # any other actions
 
         elif self.stage == 2:  # craft wooden planks
@@ -209,6 +209,7 @@ class MinePy:
                 # has a pickaxe (from stage 4) and has more than 2 wooden planks
                 if inv.getItemCountFromInput(8,current) >= 2 and inv.getItemCountFromInput(11,current) > 0:
                     self.stage = 4  # go to stage 4 and try get enough stone
+                    print(rewardInt - 5)
                     return rewardInt-5
                 else:  # go back to stage 1
                     self.stage -= 1
@@ -232,7 +233,7 @@ class MinePy:
             # if sent back to this stage and can break planks that were placed
             if planksPrevCount < planksCurrCount:
                 return currStage.getReward()
-
+            
             return miscInt  # any other actions
 
         elif self.stage == 3:  # craft a wooden pickaxe
@@ -262,7 +263,6 @@ class MinePy:
 
         elif self.stage == 4:  # collect stone and wooden planks
             #stageRewards = {2: 40,8: 40,7: 10,6: 2,1: 1,0: 3}  # itemID : reward
-
             stageRewards = {}
             k = 0
             for i in currStage.getGoalItems():
@@ -300,7 +300,7 @@ class MinePy:
                     if key == 2 or 8:
                         return penaltyInt
 
-                return 0.01 + reward  # other actions
+            return 0.01 + reward  # other actions
 
         elif self.stage == 5:  # craft stone pickaxe
             # Have less than minimum stone or wood to craft one pickaxe, and dont have a stone pickaxe
@@ -331,7 +331,6 @@ class MinePy:
             return miscInt # other actions
 
         elif self.stage == 6:  # collect gold ores, diamond ores and emerald ore
-
             stageRewards = {}
             k = 0
             for i in currStage.getGoalItems():
@@ -361,7 +360,7 @@ class MinePy:
                 if prevCount > currCount:  # placed blocks
                     if key == 46 or 49 or 78:
                         return penaltyInt
-                return miscInt + reward  # other actions
+            return miscInt + reward  # other actions
 
         elif self.stage == 7:  # craft diamond, gold ingot and emerald
             enough = inv.getItemCountFromInput(50,current) >= 36 and inv.getItemCountFromInput(47,current) >= 36 and inv.getItemCountFromInput(53,current) >= 1
