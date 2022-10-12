@@ -990,6 +990,7 @@ class testMinecraftEnv(unittest.TestCase):
         obs, info = self.ENV.reset(seed=1212)
         prevpos = (0, 0)
         #
+        self.ENV.pygame.player.rect.y-=100
         currpos = self.ENV.pygame.player.getPlayerPos()
         while (prevpos != currpos):
             self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
