@@ -1030,5 +1030,42 @@ class testMinecraftEnv(unittest.TestCase):
             self.assertEqual(ih.getItemCount(7), count)  # see if it got readded to the inventory
         ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
 
+    def testEvaluateGeneralRewards(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+
+        # test general movement reward
+        for i in range(5):
+            Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["MOVEMENT"][i])
+            self.assertEqual(reward, 0.01)
+
+        # test general hotbar
+        for i in range(40):
+            Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][i])
+            self.assertEqual(reward, 0.01)
+            
+    def testEvaluate(self):
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
+        ih.clearInv()
+        
+        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
+                                blockHardness[7], breakSpeed[7])
+
+        prevpos = (0, -100)
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
+        
+        ih.addBlock(tempBlock) #Oak log
+        self.ENV.step(gs.actionSpace["HOTBAR"][0])
+        self.ENV.step(gs.actionSpace["WORLD"][11])
+        Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
+        self.assertEqual(reward,10)
+
+
 
 unittest.main()

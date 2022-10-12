@@ -4,6 +4,7 @@ import numpy as np
 from gym_MC.envs.minecraftEnv import MinePy
 import gameSettings as gs
 import inventoryHandler
+
 class CustomEnv(gym.Env):
     #if render mode is human, render game to screen- if it is None- render game to surface
     metadata = {"render_modes" : ["human","rgb_array"],"render_fps": 60,"easyStart":[0,1,2]}
@@ -36,8 +37,8 @@ class CustomEnv(gym.Env):
         return (obs, infoDict)
 
     def step(self, action):
+        prevInv = self.pygame.getPrevInv()
         obs = self.pygame.observe()
-        prevInv = inventoryHandler.getInv()
         self.pygame.action(action)
         done = self.pygame.is_done()
         infoDict = {

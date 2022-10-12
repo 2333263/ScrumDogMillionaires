@@ -6,7 +6,7 @@ import gameSettings as gs
 from gym.version import VERSION
 print("GYM VERSION: ", VERSION)
 
-env = gym.make("MinePy-1", render_mode="human", easyStart=2, seed=1212)
+env = gym.make("MinePy-1", render_mode="human", easyStart=0, seed=1212)
 #env.action_space.seed(45)
 
 obs, info = env.reset(seed=1212)

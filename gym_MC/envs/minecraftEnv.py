@@ -17,6 +17,7 @@ import itemHandler as ih
 import rewardsHandler as rw
 from block import Block
 from ChunkHandler import checkChunkUpdates
+import copy
 
 itemIDs = ih.fetchItemIDs()
 items = ih.fetchDict()
@@ -168,7 +169,6 @@ class MinePy:
     def evaluate(self,prev):
         stages = rw.populateStages()
         current = inv.getInv()
-
         #print("In stage: ", self.stage)
         currStage = stages["Stage" + str(self.stage)]
         rewardInt = currStage.getReward()
@@ -439,6 +439,10 @@ class MinePy:
                 return failureInt  # placed blocks
 
             return miscInt  # other actions
+
+    def getPrevInv(self):
+        return copy.deepcopy(inv.getInv())        
+   
 
     def is_done(self):
         if self.done:
