@@ -42,6 +42,7 @@ class MinePy:
             self.screen = pygame.Surface((gs.width,gs.height)) 
         elif (render_mode == "human"):
             # if render mode is human render game to the screen
+            
             self.screen = pygame.display.set_mode((gs.width,gs.height))
        
         # there are three levels for easyStart:
@@ -106,7 +107,8 @@ class MinePy:
         self.crafter = Crafting(self.screen)
         
         self.playerPos = [0, 0]
-
+        self.cursorPos = [0, 0]
+        self.isBP=False
         self.textureNames = ih.fetchTextureNames()
 
       
@@ -141,6 +143,7 @@ class MinePy:
             self.player.MoveOnX(fakeKeys)
 
         elif action in gs.actionSpace["WORLD"]:
+            self.isBP=True
             if action in gs.actionSpace["WORLD"][0:10]:
                 realAction = action - gs.actionSpace["WORLD"][0]
             else:
@@ -149,7 +152,7 @@ class MinePy:
             self.playerPos = [self.player.getPlayerPos()[0],self.player.getPlayerPos()[1]]
             self.playerPos[0] += self.offset[realAction][0] * gs.blockSize
             self.playerPos[1] += self.offset[realAction][1] * gs.blockSize
-
+            self.cursorPos=[self.offset[realAction][0] * gs.blockSize, self.offset[realAction][1] * gs.blockSize]
             if action in gs.actionSpace["WORLD"][0:10]:
                 bph.blockBreak(self.playerPos,self.worldBlocks,self.player,False,False)
             else:
@@ -161,7 +164,8 @@ class MinePy:
         elif action in gs.actionSpace["CRAFTING"]:
             craftingID = action - gs.actionSpace["CRAFTING"][0]
             craftPossibility = self.crafter.craftSpec(craftingID,inv.getInv())
-
+        if action not in gs.actionSpace["WORLD"]:
+            self.isBP=False
         self.player.update(0,self.worldBlocks)  # may need to change to collison blocks later
         #print(self.player.getPlayerPos())
         checkChunkUpdates(self.player, self.worldBlocks)
@@ -470,10 +474,15 @@ class MinePy:
         blockFrameImg = pygame.image.load(self.textureNames["Block_Frame"]).convert_alpha()
         blockFrame = pygame.transform.scale(blockFrameImg, (gs.blockSize, gs.blockSize))
         #blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \ gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
-        self.playerPos[0] -=  self.camera.getOffsets()[0] % gs.blockSize
-        self.playerPos[1] -=  self.camera.getOffsets()[1] % gs.blockSize
-        self.screen.blit(blockFrame, self.playerPos)
-
+        if(self.isBP):
+            self.cursorPos[0] +=  self.camera.hWidth 
+            self.cursorPos[1] +=  self.camera.hHeight
+        
+            blockPos =gs.getPos( (self.cursorPos))[0] - self.camera.getOffsets()[0] % gs.blockSize, gs.getPos( (self.cursorPos))[1] - self.camera.getOffsets()[1] % gs.blockSize
+      
+            self.screen.blit(blockFrame,blockPos)
+            
+        print(self.cursorPos)
         if (self.render_mode == "human"):
             pygame.display.flip()
         # else:
