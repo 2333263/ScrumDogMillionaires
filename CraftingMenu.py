@@ -88,8 +88,8 @@ class Crafting():
         for i in range(3):
             for j in range(3):
                 craftIDArray[i][j] = self.craftArray[i][j].itemID
-                if(self.craftArray[i][j].itemID!=-1):
-                    print(self.craftArray[i][j].itemID,"\n")
+        #         if(self.craftArray[i][j].itemID!=-1):
+                    #print(self.craftArray[i][j].itemID,"\n")
 
         for i in self.allItems:
             # compares crafting table to all recipe matrices

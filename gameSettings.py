@@ -1,8 +1,8 @@
 import math
 import random
 
-#sets seed taken from user text input or a random number if no seed is given
-seed = 1
+#Sets seed taken from user text input or a random number if no seed is given
+seed = 69
 
 actionSpace = {
     "MOVEMENT" : [i for i in range(-1, 5, 1)] ,
@@ -25,6 +25,11 @@ def hasher(string):
         hash+=str(ord(char))
     return hash
 
+#Incase need to use a random value instead of a constant 
+def genRandomSeed():
+    return(abs(random.randint(-10000, 10000)))
+    
+    
 octaves = 1
 
 

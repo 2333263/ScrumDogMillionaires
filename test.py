@@ -21,6 +21,7 @@ import itemNew
 import itemHandler
 import numpy as np
 from gym_MC.envs import minecraftEnv as MCENV
+import gym
 
 # replaces gamesettings
 # use itemIDs instead of gs.itemIDs
@@ -853,95 +854,118 @@ class TestItemHandler (unittest.TestCase):
 class testMinecraftEnv(unittest.TestCase):
     NullItem = itemArr[0]  # Item("null", -1)
     ih.invArray=np.full(40, NullItem, dtype=itemNew.Item)
-    ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="555")
-    
+   #ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="6942034")
+    ENV = gym.make("MinePy-1", render_mode="rgb_array")
 
     def testStartModes(self):
         for i in itemArr:
             if(i.amount>0):
                 i.amount=0
         ih.invArray=np.full(40, self.NullItem, dtype=itemNew.Item)
-        self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=1)
-        self.assertEqual(ih.getItemCount(11), 1)  # check if the game starts witha wooden pickaxe
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=1)
+        obs, info = self.ENV.reset(seed=6942034)
+        self.assertEqual(ih.getItemCount(11), 2)  # check if the game starts with 2 wooden pickaxes
         self.assertEqual(ih.getItemCount(8), 4)  # and 4 wooden planks
         ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
         for i in itemArr:
             if(i.amount>0):
                 i.amount=0
-        self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=2)
-        self.assertEqual(ih.getItemCount(11), 1)  # check if the game starts witha wooden pickaxe
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=2)
+        obs, info = self.ENV.reset(seed=6942034)
+        self.assertEqual(ih.getItemCount(11), 2)  # check if the game starts with 2 wooden pickaxes
         self.assertEqual(ih.getItemCount(8), 4)  # and 4 wooden planks
-        self.assertEqual(ih.getItemCount(16), 1)  # check if the game starts witha Stone pickaxe
-        self.assertEqual(ih.getItemCount(50), 1)  # check if the game starts with a diamon
-        self.assertEqual(ih.getItemCount(53), 1)  # check if the game starts with an emerald
+        self.assertEqual(ih.getItemCount(16), 2)  # check if the game starts with 2 Stone pickaxes
+        self.assertEqual(ih.getItemCount(50), 2)  # check if the game starts with a diamond
+        self.assertEqual(ih.getItemCount(53), 2)  # check if the game starts with an emerald
         ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
 
     def testActionSpaceMovement(self):
-        self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="555")
+        
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0,seed=1212)
+        
+        obs, info = self.ENV.reset(seed=1212)
         prevpos = (0, 0)
-        currpos = self.ENV.player.getPlayerPos()
+        ih.fullInv=False
+        #self.ENV.pygame.player.rect.x=0
+        #self.ENV.pygame.player.rect.y=-6500
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
         while (prevpos != currpos):
-            self.ENV.action(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
             prevpos = currpos
-            currpos = self.ENV.player.getPlayerPos()
-        currpos = self.ENV.player.getPlayerPos()
-        self.ENV.action(gs.actionSpace["MOVEMENT"][1])
-        self.assertNotEqual(currpos, self.ENV.player.getPlayerPos())
-        self.ENV.action(gs.actionSpace["MOVEMENT"][0])
-        self.ENV.action(gs.actionSpace["MOVEMENT"][0])
-        self.ENV.action(gs.actionSpace["MOVEMENT"][0])
-        currpos = self.ENV.player.getPlayerPos()
-       # self.ENV.action(gs.actionSpace["MOVEMENT"][3])
-       # self.ENV.action(gs.actionSpace["MOVEMENT"][3])
-       # self.ENV.action(gs.actionSpace["MOVEMENT"][3])
-        self.ENV.action(gs.actionSpace["MOVEMENT"][3])
-
-        self.ENV.player.update(2,self.ENV.worldBlocks)
-        #self.assertNotEqual(currpos, self.ENV.player.getPlayerPos())
-        self.ENV.action(gs.actionSpace["MOVEMENT"][0])
-        currpos = self.ENV.player.getPlayerPos()
-        self.ENV.action(gs.actionSpace["MOVEMENT"][2])
-        self.assertNotEqual(currpos, self.ENV.player.getPlayerPos())
+            currpos = self.ENV.pygame.player.getPlayerPos()
+            
+            print(currpos," ",prevpos)
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        self.ENV.step(gs.actionSpace["MOVEMENT"][1])
+        
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+       # self.ENV.step(gs.actionSpace["MOVEMENT"][3])
+       # self.ENV.step(gs.actionSpace["MOVEMENT"][3])
+       # self.ENV.step(gs.actionSpace["MOVEMENT"][3])
+        self.ENV.step(gs.actionSpace["MOVEMENT"][3])
+        
+        #self.ENV.player.update(2,self.ENV.worldBlocks)
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        self.ENV.step(gs.actionSpace["MOVEMENT"][2])
+        
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
 
         prevpos = (0, 0)  # wait for the player to stop jumping
-        currpos = self.ENV.player.getPlayerPos()
+        currpos = self.ENV.pygame.player.getPlayerPos()
         while (prevpos != currpos):
-            self.ENV.action(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
             prevpos = currpos
-            currpos = self.ENV.player.getPlayerPos()
-
-        self.ENV.action(gs.actionSpace["MOVEMENT"][0])
-        currpos = self.ENV.player.getPlayerPos()
-        self.ENV.action(gs.actionSpace["MOVEMENT"][4])
-        self.assertNotEqual(currpos, self.ENV.player.getPlayerPos())
-
-        prevpos = (0, 0)  # wait for the player to stop jumping
-        currpos = self.ENV.player.getPlayerPos()
-        while (prevpos != currpos):
-            self.ENV.action(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
-            prevpos = currpos
-            currpos = self.ENV.player.getPlayerPos()
-        self.ENV.action(gs.actionSpace["MOVEMENT"][0])
-        currpos = self.ENV.player.getPlayerPos()
-        self.ENV.action(gs.actionSpace["MOVEMENT"][5])
-        self.assertNotEqual(currpos, self.ENV.player.getPlayerPos())
+            currpos = self.ENV.pygame.player.getPlayerPos()
+            
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        self.ENV.step(gs.actionSpace["MOVEMENT"][4])
+        
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
 
         prevpos = (0, 0)  # wait for the player to stop jumping
-        currpos = self.ENV.player.getPlayerPos()
+        currpos = self.ENV.pygame.player.getPlayerPos()
         while (prevpos != currpos):
-            self.ENV.action(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
             prevpos = currpos
-            currpos = self.ENV.player.getPlayerPos()
+            currpos = self.ENV.pygame.player.getPlayerPos()
+            
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        self.ENV.step(gs.actionSpace["MOVEMENT"][5])
+        
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
+
+        prevpos = (0, 0)  # wait for the player to stop jumping
+        currpos = self.ENV.pygame.player.getPlayerPos()
+        while (prevpos != currpos):
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            
+            prevpos = currpos
+            currpos = self.ENV.pygame.player.getPlayerPos()
 
     def testActionSpaceHotBar(self):
-        self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="555")
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=6942034)
         ih.selected = 0
         for i in range(40):
-            self.ENV.action(gs.actionSpace["HOTBAR"][i])
+            self.ENV.step(gs.actionSpace["HOTBAR"][i])
             self.assertEqual(ih.selected, i)
 
     def testActionSpaceCrafting(self):
-        self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="555")
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=6942034)
         tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
                                 blockHardness[7], breakSpeed[7])
         ih.addBlock(tempBlock)
@@ -952,7 +976,7 @@ class testMinecraftEnv(unittest.TestCase):
                 found = True
                 break
         self.assertFalse(found)
-        self.ENV.action(gs.actionSpace["CRAFTING"][0])
+        self.ENV.step(gs.actionSpace["CRAFTING"][0])
         found = False
         for i in inv:
             if (i.itemID == 8):  # see if there are logs in the inventory
@@ -962,19 +986,23 @@ class testMinecraftEnv(unittest.TestCase):
         ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
 
     def testActionSpacePlaceAndBreak(self):
-        self.ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="555")
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
+        obs, info = self.ENV.reset(seed=1212)
         prevpos = (0, 0)
-        currpos = self.ENV.player.getPlayerPos()
+        #
+        currpos = self.ENV.pygame.player.getPlayerPos()
         while (prevpos != currpos):
-            self.ENV.action(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
+            self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
             prevpos = currpos
-            currpos = self.ENV.player.getPlayerPos()
-
+            currpos = self.ENV.pygame.player.getPlayerPos()
+            #
+        ih.clearInv()
         tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
                                 blockHardness[7], breakSpeed[7])
         for i in range(5):
             ih.addBlock(tempBlock)
         self.assertEqual(ih.getItemCount(7), 5)  # check that there are 10 logs in the inventory
+        #
         inv = ih.getInv()
         for i in range(len(inv)):
             if (inv[i].itemID == 7):
@@ -982,13 +1010,22 @@ class testMinecraftEnv(unittest.TestCase):
                 break
         count = 5
         for i in range(5):
-            count -= 1
-            self.ENV.action(gs.actionSpace["WORLD"][10 + i])
-            self.assertEqual(ih.getItemCount(7), count)
+            playerPos=[self.ENV.pygame.player.getPlayerPos()[0],self.ENV.pygame.player.getPlayerPos()[1]]
+            offset = [[-1,-1],[0,-1],[1,-1],  # offsets of player positions, top row is above player
+                       [-1,0],[-1,1],[1,0],[1,1],  # left down, left up, right down, right up
+                       [-1,2],[0,2],[1,2]]
+            playerPos[0] += offset[i][0] * gs.blockSize
+            playerPos[1] += offset[i][1] * gs.blockSize                       
+            bPos = bph.getBlockFromPos(playerPos, self.ENV.pygame.worldBlocks)
+            if(bPos.itemID==-1):
+                count -= 1
+                self.ENV.step(gs.actionSpace["WORLD"][10 + i])
+                self.assertEqual(ih.getItemCount(7), count)
+            
         count = 0
         for i in range(5):
             count += 1
-            self.ENV.action(gs.actionSpace["WORLD"][i])  # break blocks around the player
+            self.ENV.step(gs.actionSpace["WORLD"][i])  # break blocks around the player
             self.assertEqual(ih.getItemCount(7), count)  # see if it got readded to the inventory
         ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
 

@@ -113,7 +113,12 @@ def selectInventory(pos):
     global selected
     selected = pos
     
-
+def clearInv():
+    NullItem=Item(-1,"null",99999,5,0,"none","null","Textures/null",False,-1)
+    invArray=np.full(40, NullItem, dtype=Item)
+    for i in invArray:
+            if(i.amount>0):
+                i.amount=0
 def drawHotBar(screen):
     # draws background of hotbar
     pygame.draw.rect(screen,(90,90,90),[5*relative,20*relative,850*relative,100*relative],0)

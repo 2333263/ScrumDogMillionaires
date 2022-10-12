@@ -23,17 +23,19 @@ items = ih.fetchDict()
 
 
 class MinePy:
-    metadata = {"render_modes": ["human","rgb_array"],"render_fps": 64}
+    metadata = {"render_modes": ["human","rgb_array"],"render_fps": 60,"easyStart":[0,1,2]}
 
     # if render mode is human, render game to screen- if it is None- render game to surface
     # if seed is empty, random seed is used, else hash of seed is used.
 
-    def __init__(self, render_mode="human", easyStart=1, playerRange=7):
+    def __init__(self, render_mode="human", easyStart=1, playerRange=7, seed=None):
         pygame.init()
+        self.seed=seed
         for i in items:
             if(i.amount>0):
                 i.amount=0
         self.render_mode = render_mode
+        self.inv=inv
         if (render_mode == "rgb_array"):
             # if render mode is rgb_array do not render game to screen, render to surface
             self.screen = pygame.Surface((gs.width,gs.height)) 
@@ -79,7 +81,11 @@ class MinePy:
         self.stage = 1
         self.done = False
         # set the seed
-        gs.seed = gs.setSeed()
+
+        if(self.seed == None):
+            self.seed = gs.genRandomSeed()
+        gs.seed=self.seed
+
         # set the player range for breaking and placing blocks, clicking on items
         gs.playerRange = playerRange
         # print("gs.playerRange is=", gs.playerRange)
@@ -107,9 +113,10 @@ class MinePy:
                        [-1,0],[-1,1],[1,0],[1,1],  # left down, left up, right down, right up
                        [-1,2],[0,2],[1,2]]  # below the player
         
-        self.player.rect.y-=6500
+        #self.player.rect.y-=6500
 
     def action(self,action):
+
         fakeKeys = {pygame.K_LEFT: False,pygame.K_RIGHT: False,pygame.K_UP: False,pygame.K_a: False,pygame.K_d: False,
                     pygame.K_w: False,pygame.K_SPACE: False}
         if action == gs.actionSpace["MOVEMENT"][2]:
@@ -154,7 +161,7 @@ class MinePy:
             craftingID = action - gs.actionSpace["CRAFTING"][0]
             craftPossibility = self.crafter.craftSpec(craftingID,inv.getInv())
 
-        self.player.update(self.clock.tick(),self.worldBlocks)  # may need to change to collison blocks later
+        self.player.update(0,self.worldBlocks)  # may need to change to collison blocks later
         #print(self.player.getPlayerPos())
         checkChunkUpdates(self.player, self.worldBlocks)
 
