@@ -11,16 +11,24 @@ node <<executionEnvironment>>\nPython as Python {
     artifact <<Artifact>>\nAIAgentInterface as AIAgentInterface{
 
     }
+    artifact <<Artifact>>\nGamePackage as GamePackage{
+
+    }
 }
 database <<Artifact>>\nInventoryDatabase as InventoryDatabase {
     
 }
 
+
 file <<File>>\nWorldFallbackFile as WorldFile{
 
 }
 
-file <<File>>\nGameItemProperties as GameItems {
+file <<File>>\nRecipes as Recipes {
+    
+}
+
+file <<File>>\nGameConfig as Config {
     
 }
 folder <<Folder>>\nTextures as Textures {
@@ -37,7 +45,8 @@ GameClient -- InventoryDatabase
 GameClient -- WorldFile
 GameClient -- Textures
 GameClient -- Sounds
-GameClient -- GymEnvironment
-GameClient -- GameItems
+GameClient -- Recipes
+GameClient -- Config
+AIAgentInterface -- GymEnvironment
 AIAgentInterface -- GameClient
 @enduml

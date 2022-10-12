@@ -11,32 +11,120 @@ Database Inventory
 
 alt ifAgentInitialised
     AIAgent -> Game : startGame
-    Game -> Game : generateChunks
+    Game -> Game : generateInfiniteChunks
+    Game -> Game : distributeCraftingTables
     Game --> AIAgent : sendGameInfo
-    AIAgent -> AIAgent : createGymEnvironment
+    AIAgent -> AIAgent : createGymEnvironment(environmentEncoding)
     activate Game
     activate AIAgent
 
-    alt ifRenderingEnabled        
+    alt ifRenderingEnabled
         Game --> AIAgent : OpenGameWindow
     end
 
-    alt ifActionQueued
+
+    alt currentStep < maxStep
+        AIAgent -> AIAgent : generateNewAction
+        alt ifAction == movementActions
+            AIAgent -> Game : actionInput
+            Game -> MovementQueue : sendKeys
+            activate MovementQueue
+            MovementQueue --> Game : sendNewCoordinates
+            deactivate MovementQueue
+            Game --> AIAgent : sendNewGameState
+        end
+    else ifAction == blockActions
         AIAgent -> Game : actionInput
-        Game -> MovementQueue : sendKeys
+
+        alt ifAction == blockPlacingAction
+            AIAgent -> Game : coordinateFromActionSpace
+            Game -> Game : checkCoordinates
+            activate Game
+            deactivate Game
+
+            Game -> Game : placeBlock
+            activate Game
+            deactivate Game
+            Game -> Inventory : removeBlockFromInventory
+            activate Inventory
+            Inventory --> Game : blockAdded
+            deactivate Inventory
+
+
+        else ifAction == blockBreakingAction
+            AIAgent -> Game : coordinateFromActionSpace
+            Game -> Game : checkCoordinates
+            activate Game
+            deactivate Game
+            alt ifCorrectTool
+                Game -> Game : removeBlock
+                activate Game
+                deactivate Game
+                Game -> Inventory : addBlockToInventory
+                activate Inventory
+                Inventory --> Game : blockRemoved
+                deactivate Inventory
+            end
+        end
+
+
         activate MovementQueue
         MovementQueue --> Game : sendNewCoordinates
         deactivate MovementQueue
-    Game --> AIAgent : sendNewGameState
-    end
+        Game --> AIAgent : sendNewGameState
 
-else ifAgentCompleted
+
+    else ifAction == inventoryActions
+        AIAgent -> Game : inventoryIndex
+        activate Game
+        deactivate Game
+        Game -> Inventory : retrieveSelectedItem
+        activate Inventory
+        Inventory --> Game : sendItem
+        deactivate Inventory
+        alt ifRenderingEnabled
+            Game --> AIAgent : displaySelectedItem
+        end
+
+
+    else ifAction == craftingActions and playerInRangeCrafting
+        activate Game
+        deactivate Game
+        AIAgent -> Game : selectCraftingItem
+        Game -> Inventory : checkResources
+        activate Inventory
+        Inventory --> Game : canCraft
+        deactivate Inventory
+        alt canCraft & ifCrafted
+            Game -> Inventory : removeResources
+            activate Inventory
+            Inventory --> Game : resourcesRemoved
+            deactivate Inventory
+            Game -> Inventory : addItem
+            activate Inventory
+            Inventory --> Game : resourcesAdded
+            deactivate Inventory
+        end
+
+    end
+    
+    AIAgent -> Inventory  : getCurrentInventory
+    activate Inventory
+    Inventory --> AIAgent : currentInventory
+    deactivate Inventory
+    AIAgent -> Inventory :  getPreviousInventory
+    activate Inventory
+    Inventory --> AIAgent : previousInventory
+    deactivate Inventory
+    AIAgent -> AIAgent : checkRewards(currentInventory, previousInventory)
+
+else steps == maxStep or rewardFinalState == true
     AIAgent -> Game : exitGame
     Game -> Inventory : clearItems
     activate Inventory
     Inventory --> Game : itemsCleared
     deactivate Inventory
-    alt ifRenderingEnabled        
+    alt ifRenderingEnabled
         Game --> AIAgent : closeGameWindow
     end
     deactivate Game

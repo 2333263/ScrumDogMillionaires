@@ -11,8 +11,12 @@ actor Admin
 
 rectangle 2DMinecraft {
   User --> (Generate World from Seed)
+
   (Apply textures to differentiate blocks & resources) <-- Admin
   (Change Rendering Mode) <-- Admin
+  (Define different AI environments) <-- Admin
+  (Edit Gym rewards for each level and item) <-- Admin
+
   User --> (Start Game)
   User --> (View Information) 
   User --> (Pause Game)
@@ -28,8 +32,12 @@ rectangle 2DMinecraft {
   User --> (Achieve end item - Complete game)
   User --> (Listen to interactive audio)
   
-  AIGymAgent --> (Create Minecraft Environment)
-  AIGymAgent --> (Execute Moves)
+  AIGymAgent --> (Execute Movement Actions)
+  AIGymAgent --> (Break blocks around agent)
+  AIGymAgent --> (Place blocks around agent)
+  AIGymAgent --> (Select an item from inventory/hotbar)
+  AIGymAgent --> (Craft a selected item)
+  AIGymAgent --> (Get rewards based on game progression)
   
 }
 @enduml
