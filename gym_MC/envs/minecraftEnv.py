@@ -90,15 +90,10 @@ class MinePy:
 
         # set the player range for breaking and placing blocks, clicking on items
         gs.playerRange = playerRange
-        # print("gs.playerRange is=", gs.playerRange)
-        # print("gs.seed is=", gs.seed)
-        #(((gs.width / 2 - gs.blockSize * 4) + 0.75 * gs.blockSize,- gs.blockSize ),gs.blockSize)
-        #((gs.width/2 - gs.blockSize * 4,- gs.blockSize*2), gs.blockSize)
-          #gs.generatedChunks[0] = generateChunk(0,self.worldBlocks)
         self.worldBlocks = pygame.sprite.Group()
         self.collisionblocks = self.worldBlocks
         gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], self.worldBlocks)
-        gs.generatedChunks[0] = generateChunk(0, self.worldBlocks)
+        gs.generatedChunks[0] = generateChunk(0, self.worldBlocks)#generate a random world to the left and right of the center chunk
         gs.generatedChunks[1] = generateChunk(gs.CHUNK_SIZE[0], self.worldBlocks)
         
         self.player = ph.Player((0, 0), gs.blockSize)
@@ -121,37 +116,34 @@ class MinePy:
     def action(self,action):
 
         fakeKeys = {pygame.K_LEFT: False,pygame.K_RIGHT: False,pygame.K_UP: False,pygame.K_a: False,pygame.K_d: False,
-                    pygame.K_w: False,pygame.K_SPACE: False}
-        if action == gs.actionSpace["MOVEMENT"][2]:
-            self.player.jump()
-        elif action == gs.actionSpace["MOVEMENT"][1]:
-            fakeKeys[pygame.K_LEFT] = True
-            # self.player.MoveOnX(fakeKeys, action)
-            self.player.MoveOnX(fakeKeys)
-        elif action == gs.actionSpace["MOVEMENT"][3]:
-            fakeKeys[pygame.K_RIGHT] = True
-            # self.player.MoveOnX(fakeKeys, action)
-            self.player.MoveOnX(fakeKeys)
-        elif action == gs.actionSpace["MOVEMENT"][4]:
-            self.player.jump()
-            fakeKeys[pygame.K_LEFT] = True
-            # self.player.MoveOnX(fakeKeys, gs.actionSpace["MOVEMENT"][1])
-            self.player.MoveOnX(fakeKeys)
-        elif action == gs.actionSpace["MOVEMENT"][5]:
-            self.player.jump()
-            fakeKeys[pygame.K_RIGHT] = True
-            self.player.MoveOnX(fakeKeys)
+                    pygame.K_w: False,pygame.K_SPACE: False} #list of fake keys the agent can press
 
-        elif action in gs.actionSpace["WORLD"]:
+        if action == gs.actionSpace["MOVEMENT"][2]: #jump up
+            self.player.jump()
+        elif action == gs.actionSpace["MOVEMENT"][1]: #move left
+            fakeKeys[pygame.K_LEFT] = True
+            self.player.MoveOnX(fakeKeys)
+        elif action == gs.actionSpace["MOVEMENT"][3]: #move right
+            fakeKeys[pygame.K_RIGHT] = True
+            self.player.MoveOnX(fakeKeys)
+        elif action == gs.actionSpace["MOVEMENT"][4]: #jump left
+            self.player.jump()
+            fakeKeys[pygame.K_LEFT] = True
+            self.player.MoveOnX(fakeKeys)
+        elif action == gs.actionSpace["MOVEMENT"][5]: #jump right
+            self.player.jump()
+            fakeKeys[pygame.K_RIGHT] = True
+            self.player.MoveOnX(fakeKeys)
+        elif action in gs.actionSpace["WORLD"]: #if break and place blocks
             self.isBP=True
             if action in gs.actionSpace["WORLD"][0:10]:
-                realAction = action - gs.actionSpace["WORLD"][0]
+                realAction = action - gs.actionSpace["WORLD"][0] #which block to place
             else:
-                realAction = action - gs.actionSpace["WORLD"][10]
+                realAction = action - gs.actionSpace["WORLD"][10] #which block to break
 
             self.playerPos = [self.player.getPlayerPos()[0],self.player.getPlayerPos()[1]]
             self.playerPos[0] += self.offset[realAction][0] * gs.blockSize
-            self.playerPos[1] += self.offset[realAction][1] * gs.blockSize
+            self.playerPos[1] += self.offset[realAction][1] * gs.blockSize #add the offset of the block the player wants to break or place to the position of the agent
             self.cursorPos=[self.offset[realAction][0] * gs.blockSize, self.offset[realAction][1] * gs.blockSize]
             if action in gs.actionSpace["WORLD"][0:10]:
                 bph.blockBreak(self.playerPos,self.worldBlocks,self.player,False,False)
@@ -167,7 +159,6 @@ class MinePy:
         if action not in gs.actionSpace["WORLD"]:
             self.isBP=False
         self.player.update(0,self.worldBlocks)  # may need to change to collison blocks later
-        #print(self.player.getPlayerPos())
         checkChunkUpdates(self.player, self.worldBlocks)
 
     def evaluate(self,prev):
@@ -213,7 +204,6 @@ class MinePy:
                 # has a pickaxe (from stage 4) and has more than 2 wooden planks
                 if inv.getItemCountFromInput(8,current) >= 2 and inv.getItemCountFromInput(11,current) > 0:
                     self.stage = 4  # go to stage 4 and try get enough stone
-                    print(rewardInt - 5)
                     return rewardInt-5
                 else:  # go back to stage 1
                     self.stage -= 1
@@ -482,7 +472,6 @@ class MinePy:
       
             self.screen.blit(blockFrame,blockPos)
             
-        print(self.cursorPos)
         if (self.render_mode == "human"):
             pygame.display.flip()
         # else:
