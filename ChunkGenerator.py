@@ -65,7 +65,7 @@ def getWorldSprites(world, generatePos):
 
 
 def generateChunk(generatePos, worldBlocks):
-    noise = PerlinNoise(gs.octaves, gs.seed + generatePos)
+    noise = PerlinNoise(gs.octaves, gs.seed + generatePos) #Create a new noise object
     xpix, ypix = gs.CHUNK_SIZE[0], 6
     heightNoise = (np.array([noise([2, j/ypix]) for j in range(xpix)]) * 10).astype(int)
 
@@ -73,7 +73,7 @@ def generateChunk(generatePos, worldBlocks):
 
     world =np.empty((gs.CHUNK_SIZE[1], gs.CHUNK_SIZE[0]), dtype='str')
     world[:] = ' '
-    random.seed(gs.seed)
+    random.seed(gs.seed) #Set the seed for the random number generator
 
     for y in range(gs.CHUNK_SIZE[1]):
         for x in range(gs.CHUNK_SIZE[0]):
