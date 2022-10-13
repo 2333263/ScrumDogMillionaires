@@ -5,14 +5,21 @@ class Block {
     +blockPosition
     +itemID
     +textureName
+    +breakTime
     +hardness
     +image
     +rect
-    +init(blockSize, blockPosition, itemID, textureName, hardness)
+    +init(blockSize, blockPosition, itemID, textureName, hardness, breakTime)
     +getHardness()
 }
 
 class breakPlaceHandler {
+    +immovableBlocks
+    +clickableBlocks
+    +textureNames
+    +itemIDs
+    +breakTimes
+    +blockHardness
     +checkBreakable(block, inHand)
     +blockBreak(python_pos, world_block, player, test, sound)
     +blockPlace(python_pos, world_block, player, test, sound)
@@ -33,6 +40,10 @@ class Camera {
 }
 
 class ChunkGenerator {
+    +textureNames
+    +itemIDs
+    +blockHardness
+    +breakTime
     +drawOre(world, x, y, ore)
     +drawCave(world, x, y)
     +drawTree(world, y, x)
@@ -46,6 +57,8 @@ class ChunkHandler {
 }
 
 class Button {
+    +itemIDs
+    +textureNames
     +itemID
     +pos
     +image
@@ -54,6 +67,11 @@ class Button {
 }
 
 class Crafting {
+    +itemIDs
+    +textureNames
+    +isPlaceable
+    +itemHardness
+    +items
     +slots
     +relative
     +buttonFront
@@ -93,23 +111,19 @@ class gameSettings {
     +endGamePos 
     +setSeed(string)
     +hasher(string)
+    +genRandomSeed()
     +getPos(pos)
     +distance(player, python_pos)
-    +itemIDs{}
-    +blockHardness{}
-    +itemHardness{}
-    +isPlaceable{}
-    +craftingIDs{}
-    +converterIDs{}
-    +textureNames{}
-    +immovableBlocks
-    +clickableBlocks
 }
 
 class inventoryHandler {
+    +itemIDs
+    +breakTime
+    +items
+    +blockHardness
+    +itemHardness
     +NullItem
     +invArray
-    +itemIDs
     +selected 
     +fullInv 
     +slots 
@@ -125,6 +139,7 @@ class inventoryHandler {
     +getSelected()
     +selectNext()
     +selectPrevious()
+    +clearInv()
     +selectinventory(pos)
     +drawHotBar(screen)
     +getInv()
@@ -133,7 +148,6 @@ class inventoryHandler {
     +drawInv(screen)
     +initGroup()
     +onClick(pos)
-
 }
 
 class slot {
@@ -160,15 +174,27 @@ class Item {
     +getHardness()
 }
 
-/'
+
 class itemHandler {
-    +itemsDict{}
-    +items
-    +immovableBlocks
-    +clickableBlocks
+    +items[]
+    +itemIDs{}
+    +isPlaceable{}
+    +blockHardness{}
+    +breakTime{}
+    +itemHardness{}
+    +textureNames{}
+    +immovableBlocks[]
+    +clickableBlocks[]
     +craftingIDs{}
+    +converterIDs{}
     +fetchDict()
+    +fetchItemIDs()
+    +fetchIsPlaceable()
+    +fetchBlockHardness()
+    +fetchItemHardness()
+    +fetchTextureNames()
 }
+
 
 class itemNew {
     +itemID
@@ -197,9 +223,12 @@ class itemNew {
     +getIsPlaceable()
     +getDrop()
 }
-'/
+
 
 class main {
+    +textureNames{}
+    +itemIDs{}
+    +breakTimes{}
     +clock
     +screen
     +gameRunning
@@ -303,6 +332,10 @@ class RecipeHandler {
     +getItemIDFromCraftingID(craftingID)
 }
 
+class rewardsHandler {
+    +populateStages()
+}
+
 class soundHandler {
     +audio 
     +getGrassSound()
@@ -310,6 +343,24 @@ class soundHandler {
     +stopMusic()
     +playSoundForID(id)
     +playBreakSoundforID(id)
+}
+
+class Stage {
+    +goalItems
+    +acquisitionRewards
+    +complete 
+    +failure
+    +reward 
+    +penalty
+    +misc 
+    +init(goalItems, acquisitionRewards, complete, failure, reward, penalty, misc)
+    +getGoalItems()
+    +getAquisitionRewards()
+    +getComplete()
+    +getFailure()
+    +getReward()
+    +getPenalty()
+    +getMisc()
 }
 
 /'
@@ -325,23 +376,33 @@ class Text {
 
 class MainGym {
     +env
+    +obs 
+    +info 
+    +done 
     +action
+    +envSeed
 }
 
 class CustomEnv {
     +metadata{}
+    +seed
     +pygame 
     +action_space
     +observation_space
     +render_mode
-    +init()
-    +reset()
+    +easyStart
+    +init(render_mode, easyStart, seed)
+    +reset(seed, options)
     +step(action)
     +render()
 }
 class MinePy {
-    +metadata
+    +itemIDs{}
+    +items{}
+    +metadata{}
+    +seed
     +render_mode
+    +inv
     +screen
     +clock 
     +game_speed
@@ -353,9 +414,14 @@ class MinePy {
     +collisionblocks
     +crafter 
     +offset
-    +init(render_mode, seed, easyStart, playerRange)
+    +playerPos 
+    +cursorPos
+    +isBP 
+    +textureNames{}
+    +init(render_mode, easyStart, playerRange, seed)
     +action(action)
     +evalutate(prev)
+    +getPrevInv()
     +is_done()
     +observe()
     +view()
@@ -373,49 +439,55 @@ main --> ChunkGenerator
 main --> ChunkHandler
 main --> menuHandler
 main --> soundHandler
+main --> itemHandler
 
 breakPlaceHandler --* Block
 breakPlaceHandler --> Block
 breakPlaceHandler --> gameSettings
 breakPlaceHandler --> inventoryHandler
 breakPlaceHandler --> soundHandler
+breakPlaceHandler --> itemHandler
 
 Camera --> gameSettings
 
 ChunkGenerator --> gameSettings
 ChunkGenerator --* Block
+ChunkGenerator --> itemHandler
 
 ChunkHandler --> gameSettings
 ChunkHandler --> ChunkGenerator
 
 Button --> gameSettings
+Button --> itemHandler
 
 Crafting --> RecipeHandler
 Crafting --* Button
-Crafting --* Item
 Crafting --> gameSettings
 Crafting --> inventoryHandler
 Crafting --* slot
 Crafting --> slot
+Crafting --* itemNew
+Crafting --> itemHandler
 
-inventoryHandler --* Item
+inventoryHandler --* itemNew
 inventoryHandler --* slot
 inventoryHandler --* Block
 inventoryHandler --> gameSettings
+inventoryHandler --> itemHandler
 
-/'itemHandler --* itemNew
-'/
+itemHandler --* itemNew
 
 Item --> gameSettings
 
 menuHandler --> gameSettings
 
-Player --> gameSettings
 Player --> soundHandler
 
 Portal --> gameSettings
 
-RecipeHandler --> gameSettings
+RecipeHandler --> itemHandler
+
+rewardsHandler --* Stage
 
 soundHandler --> gameSettings
 
@@ -423,13 +495,17 @@ MinePy --> gameSettings
 MinePy --> ChunkGenerator
 MinePy --* Player
 MinePy --* Camera
-Minepy --* Item
 MinePy --> inventoryHandler
 MinePy --> breakPlaceHandler
 MinePy --* Crafting
 MinePy --> Crafting
+MinePy --> itemHandler
+MinePy --> rewardsHandler
+MinePy --> ChunkHandler
 
 CustomEnv --* MinePy
+CustomEnv --> inventoryHandler
+CustomEnv --> gameSettings
 
 MainGym --> CustomEnv
 

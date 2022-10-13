@@ -20,7 +20,8 @@ generateCustomEnv --> join_environment
 join_environment --> agent_fork
 
 agent_fork --> [*] : Press the exit button to end the game
-agent_fork --> agentActions
+agent_fork --> agentObservation
+agentObservation --> agentActions
 agentActions --> agentRewards
 agentRewards --> agent_fork
 
