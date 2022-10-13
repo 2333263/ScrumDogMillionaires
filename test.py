@@ -1230,11 +1230,10 @@ class testMinecraftEnv(unittest.TestCase):
                 if(k == 3):
                     self.ENV.step(gs.actionSpace["HOTBAR"][2]) # select pickaxe
                     Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
-                    #self.assertEqual(reward, rewardsWithPickaxe[k])
+                    self.assertEqual(reward, rewardsWithPickaxe[k])
                 else:
                     Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["WORLD"][1])
-                    #self.assertEqual(reward, rewardsWithPickaxe[k] - 20)
-                self.assertEqual(1, 1)
+                    self.assertEqual(reward, rewardsWithPickaxe[k] - 20)
             k+=1
 
         ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
