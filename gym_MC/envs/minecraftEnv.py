@@ -135,7 +135,7 @@ class MinePy:
             fakeKeys[pygame.K_RIGHT] = True
             self.player.MoveOnX(fakeKeys)
         elif action in gs.actionSpace["WORLD"]: #if break and place blocks
-            self.isBP=True
+            self.isBP=True #used to show cursor
             if action in gs.actionSpace["WORLD"][0:10]:
                 realAction = action - gs.actionSpace["WORLD"][0] #which block to place
             else:
@@ -144,33 +144,34 @@ class MinePy:
             self.playerPos = [self.player.getPlayerPos()[0],self.player.getPlayerPos()[1]]
             self.playerPos[0] += self.offset[realAction][0] * gs.blockSize
             self.playerPos[1] += self.offset[realAction][1] * gs.blockSize #add the offset of the block the player wants to break or place to the position of the agent
-            self.cursorPos=[self.offset[realAction][0] * gs.blockSize, self.offset[realAction][1] * gs.blockSize]
+            self.cursorPos=[self.offset[realAction][0] * gs.blockSize, self.offset[realAction][1] * gs.blockSize] #cursor position is the offset of the block the player wants to break or place
             if action in gs.actionSpace["WORLD"][0:10]:
-                bph.blockBreak(self.playerPos,self.worldBlocks,self.player,False,False)
+                bph.blockBreak(self.playerPos,self.worldBlocks,self.player,False,False) #break block
             else:
-                bph.blockPlace(self.playerPos,self.worldBlocks,self.player,False,False)
+                bph.blockPlace(self.playerPos,self.worldBlocks,self.player,False,False) #place block
 
         elif action in gs.actionSpace["HOTBAR"]:
-            inv.selectInventory(action - gs.actionSpace["HOTBAR"][0])
+            inv.selectInventory(action - gs.actionSpace["HOTBAR"][0]) #select item anywhere in inventory
 
         elif action in gs.actionSpace["CRAFTING"]:
-            craftingID = action - gs.actionSpace["CRAFTING"][0]
-            craftPossibility = self.crafter.craftSpec(craftingID,inv.getInv())
+            craftingID = action - gs.actionSpace["CRAFTING"][0] #which craftingID to craft
+            craftPossibility = self.crafter.craftSpec(craftingID,inv.getInv()) #check if the player can craft the item and performs if possible
         if action not in gs.actionSpace["WORLD"]:
-            self.isBP=False
+            self.isBP=False #if the agent is not breaking or placing a block, the cursor is not shown
         self.player.update(0,self.worldBlocks)  # may need to change to collison blocks later
-        checkChunkUpdates(self.player, self.worldBlocks)
+        checkChunkUpdates(self.player, self.worldBlocks) #check if the player is in a new chunk and generate a new chunk if needed
 
     def evaluate(self,prev):
         stages = rw.populateStages()
         current = inv.getInv()
         #print("In stage: ", self.stage)
+        
         currStage = stages["Stage" + str(self.stage)]
-        rewardInt = currStage.getReward()
-        completeInt = currStage.getComplete()
-        penaltyInt = currStage.getPenalty()
-        failureInt = currStage.getFailure()
-        miscInt = currStage.getMisc()
+        rewardInt = currStage.getReward()  # get the reward for the current stage
+        completeInt = currStage.getComplete() # get the complete condition for the current stage
+        penaltyInt = currStage.getPenalty() # get the penalty for the current stage
+        failureInt = currStage.getFailure() # get the failure condition for the current stage
+        miscInt = currStage.getMisc() 
 
         if self.stage == 1:  # collect logs
             # 8 = wooden planks is here because if we get sent back to stage 1
@@ -416,7 +417,7 @@ class MinePy:
                 if inv.getItemCountFromInput(67,current) < 4 and inv.getItemCountFromInput(64,current) < 4 and inv.getItemCountFromInput(53,current) == 0:
                     self.stage -= 1
                     return failureInt
-
+            #keep track of the number of blocks we have and compares
             diamondPrevCount = inv.getItemCountFromInput(67,prev)
             diamondCurrCount = inv.getItemCountFromInput(67,current)
             goldPrevCount = inv.getItemCountFromInput(64,prev)
@@ -433,44 +434,44 @@ class MinePy:
 
             return miscInt  # other actions
 
-    def getPrevInv(self):
+    def getPrevInv(self): # used for inventory comparison
         return copy.deepcopy(inv.getInv())        
    
 
-    def is_done(self):
+    def is_done(self): # check game state based on reward system
         if self.done:
             return True  # game done
         else:
             return False
 
     def observe(self):
+        # returns the current state of the game in RGBA format
         img = pygame.image.tostring(self.screen, "RGBA")
         newScreen = pygame.image.fromstring(img, (gs.width, gs.height), "RGBA")
         rgbarr = np.array(pygame.surfarray.pixels3d(newScreen), dtype=np.float32)
         return rgbarr
 
-    # Should be RGB array in future?
+   
     def view(self):
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
                 quit()
 
         # DO drawing
-        bg = pygame.Rect(0,0,gs.width,gs.height)
+        bg = pygame.Rect(0,0,gs.width,gs.height) #no background image to save resources
         pygame.draw.rect(self.screen,(0,0,0),bg)
         self.collisionblocks = self.camera.draw(self.screen,self.worldBlocks)
         inv.drawHotBar(self.screen)  # --> draw inventory
 
-        blockFrameImg = pygame.image.load(self.textureNames["Block_Frame"]).convert_alpha()
-        blockFrame = pygame.transform.scale(blockFrameImg, (gs.blockSize, gs.blockSize))
+        blockFrameImg = pygame.image.load(self.textureNames["Block_Frame"]).convert_alpha() # --> load block cursor texture
+        blockFrame = pygame.transform.scale(blockFrameImg, (gs.blockSize, gs.blockSize)) # --> scale block cursor texture
         #blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \ gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize
-        if(self.isBP):
-            self.cursorPos[0] +=  self.camera.hWidth 
-            self.cursorPos[1] +=  self.camera.hHeight
-        
+        if(self.isBP): #if block placing
+            self.cursorPos[0] +=  self.camera.hWidth  # --> add camera offset
+            self.cursorPos[1] +=  self.camera.hHeight # --> add camera offset
+            #further offset to center the block, aka lock to grid
             blockPos =gs.getPos( (self.cursorPos))[0] - self.camera.getOffsets()[0] % gs.blockSize, gs.getPos( (self.cursorPos))[1] - self.camera.getOffsets()[1] % gs.blockSize
-      
-            self.screen.blit(blockFrame,blockPos)
+            self.screen.blit(blockFrame,blockPos)  #blits the block frame at the block position
             
         if (self.render_mode == "human"):
             pygame.display.flip()
