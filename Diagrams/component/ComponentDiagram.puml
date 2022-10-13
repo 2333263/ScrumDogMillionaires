@@ -23,6 +23,7 @@ folder "Files"{
 folder "JSON Files"{
     [Item JSON]
     [Recipe JSON]
+    [Rewards JSON]
 }
 () "Get Texture" as GT1
 () "Get Texture" as GT2
@@ -127,6 +128,10 @@ GenWorld )-- [Game Menu]
 () "Get next move" as nextAIMove #ADD8E6
 [AI Environment] --( nextAIMove
 [Minecraft Environment] -- nextAIMove
+
+() "Get reward values" as rewardValues #ADD8E6
+[Rewards JSON] -- rewardValues
+[Minecraft Environment] --( rewardValues
 
 
 @enduml
