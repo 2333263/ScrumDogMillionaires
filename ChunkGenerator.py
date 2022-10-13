@@ -89,8 +89,8 @@ def generateChunk(generatePos, worldBlocks):
             if(y == h + heightNoise[x] - 1 and (x > 0 and x < gs.CHUNK_SIZE[0] - 3)):
                 if (random.randint(1, 25) == 1):
                     drawTree(world, y, x) #Tree
-                elif(random.randint(1,80)==1):
-                    world[y][x]='T'
+                elif(random.randint(1,80)==1):#if a tree fails to spawn, there is a 1 in 80 chance that a crafting tabel will spawn in its place (1/2000 chance of spawning)
+                    world[y][x]='T' #set that block to be a table 
             if(y > h + heightNoise[x] and y > h + heightNoise[x] + 12):
                 if(random.randint(1, 150) == 69):
                     drawCave(world, x, y)
