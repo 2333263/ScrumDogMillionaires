@@ -3,26 +3,23 @@ import gym
 import gym_MC
 import gameSettings as gs
 
+#Check version 
 from gym.version import VERSION
 print("GYM VERSION: ", VERSION)
 
+#Create the gym environment 
 env = gym.make("MinePy-1", render_mode="human", easyStart=0, seed=1212)
 #env.action_space.seed(45)
 
+#Gets the osbervations and info before reset 
 obs, info = env.reset(seed=1212)
 done=False
+
+#Loops random actions for the agent obvervations 
 for episode in range(10000):
     action = random.choice([i for i in range(0, 75, 1)])
-    #action=gs.actionSpace["MOVEMENT"][4]
-    #if (done==False):
-     #   for i in range(10):
-      #      env.step(-1)
-       #     env.render()
-        #    done=True
-    env.step(action)
-    #env.step(gs.actionSpace["MOVEMENT"][3])
-    env.render()
     
-    #make sure crafting only happens in range of crafting table
-    #generate a crafting table in the chunks
-    #
+    #Advance the agent to the next step
+    env.step(action)
+
+    env.render()
