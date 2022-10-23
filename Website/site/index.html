@@ -32,8 +32,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Roboto Mono"}</style>
       
     
     
@@ -262,13 +262,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#setting-up-the-gym-agent" class="md-nav__link">
-    Setting up the Gym Agent
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -359,13 +352,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#setting-up-the-gym-agent" class="md-nav__link">
-    Setting up the Gym Agent
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -400,7 +386,7 @@ style="
 <p>In this version of Minecraft, one can break blocks, place blocks, craft new items using the crafting table and craft the end-game item.</p>
 <p>Instuctions below detail how one can install the 2D Minecraft game. In addition to the base interactive game, one can also install a gym agent which plays the game by itself!</p>
 <p>Gym is a Python library which provides a standard API for developing reinforcement learning algorithms. The team used gym to create an agent which takes actions in the minecraft environemnt, receives rewards for the actions it takes and the states it enters and checks to see whether the game has been completed.</p>
-<p>One is able to create custom tasks which the agent will have to complete and receive a reward. 
+<p>One is able to create custom tasks which the agent will have to complete and receive a reward thereafter. 
 In addition, you are able to make use of any of the built in tasks that the team has created for you. </p>
 <!--- Add in info about Jim & Michael (our lord and savior) here  -->
 
@@ -439,16 +425,16 @@ In addition, you are able to make use of any of the built in tasks that the team
 │
 │
 └───Textures
-│   │   ...          # Texture Files
+│   │   ...    # Texture Files
 │
 │
 └───Website
-│   │   ...          # Website Files
+│   │   ...     # Website Files
 │
 │
 └───MainGame
-│   │   main.py      # Main py file for the base interactive game
-│   │   ...          # Website Files
+│   │   main.py  # Main py file for the base interactive game
+│   │   ...      # Website Files
 </code></pre>
 <h2 id="packages-used">Packages used</h2>
 <ul>
@@ -459,10 +445,7 @@ In addition, you are able to make use of any of the built in tasks that the team
 </ul>
 <h2 id="installing-the-package">Installing the package</h2>
 <p>In order to install the package locally, please run this from your local terminal after setting your current working directory using <code>cd /directoy/</code>. Then run the following command.</p>
-<pre><code class="language-python">pip install -e scrumdogmillionaires
-</code></pre>
-<h2 id="setting-up-the-gym-agent">Setting up the Gym Agent</h2>
-<pre><code class="language-python">pip install -e scrumdogmillionaires
+<pre><code class="language-py">pip install -e scrumdogmillionaires
 </code></pre>
 
 

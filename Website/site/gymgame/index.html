@@ -32,8 +32,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Roboto Mono"}</style>
       
     
     
@@ -272,6 +272,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setting-up-new-environments" class="md-nav__link">
+    Setting up new environments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-functions" class="md-nav__link">
+    Other functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#creating-new-rewards" class="md-nav__link">
     Creating new rewards
   </a>
@@ -288,13 +302,6 @@
         <li class="md-nav__item">
   <a href="#adding-new-tasks-for-the-agent" class="md-nav__link">
     Adding new tasks for the agent
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-new-environments" class="md-nav__link">
-    Setting up new environments
   </a>
   
 </li>
@@ -339,6 +346,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setting-up-new-environments" class="md-nav__link">
+    Setting up new environments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-functions" class="md-nav__link">
+    Other functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#creating-new-rewards" class="md-nav__link">
     Creating new rewards
   </a>
@@ -355,13 +376,6 @@
         <li class="md-nav__item">
   <a href="#adding-new-tasks-for-the-agent" class="md-nav__link">
     Adding new tasks for the agent
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-new-environments" class="md-nav__link">
-    Setting up new environments
   </a>
   
 </li>
@@ -384,11 +398,75 @@
   <h1>Using the Gym Agent</h1>
 
 <h2 id="setting-up-the-agent">Setting up the Agent</h2>
-<!-- Environment variables,  -->
+<!-- Environment variables,  -->
+
+<p>Ensure you have the following code in your file:</p>
+<pre><code class="language-py">import gym
+import gym_MC
+
+env = gym.make(&quot;MinePy-1&quot;, render_mode=&quot;human&quot;,easyStart=0,seed=1024)
+
+</code></pre>
+<h2 id="setting-up-new-environments">Setting up new environments</h2>
+<p>render_mode:  </p>
+<ul>
+<li><code>human</code>: renders the game to a screen. </li>
+<li><code>rgb_array</code>: returns the screen as a 2d array of pixel colour values.</li>
+</ul>
+<p>easyStart:  </p>
+<ul>
+<li>
+<p><code>0:</code> no extra items.</p>
+</li>
+<li>
+<p><code>1:</code> player starts with wooden pickaxe and 4 wooden planks.</p>
+</li>
+<li>
+<p><code>2:</code> player starts with wooden pickaxe and 4 wooden planks, a stone pickaxe, a diamond and an emerald.</p>
+</li>
+</ul>
+<p>seed:</p>
+<ul>
+<li>integer value that acts as seed for both the world and the AI.</li>
+</ul>
+<p>In order to perform an action use the following:</p>
+<pre><code class="language-py">
+env.step(step)
+
+</code></pre>
+<p>where step is an integer value between 0 and 75, representing an action the player can take.</p>
+<ul>
+<li>
+<p><code>0:</code> no action.</p>
+</li>
+<li>
+<p><code>1-4:</code> movement actions.</p>
+</li>
+<li>
+<p><code>4-24:</code> break and placing actions.</p>
+</li>
+<li>
+<p><code>25-64:</code> change selected item.</p>
+</li>
+<li>
+<p><code>65-74:</code> when next to a crafting table, it will craft a specific item.</p>
+</li>
+</ul>
+<h2 id="other-functions">Other functions</h2>
+<ul>
+<li>
+<p><code>reset:</code> takes same options as above and resets the game.</p>
+</li>
+<li>
+<p><code>render:</code> forces game to render.</p>
+</li>
+<li>
+<p><code>step:</code> takes in an action, steps the agent forward, returns observations, reward, whether or not the game is done, and an dictionary of information, and will render if render mode is set to human.</p>
+</li>
+</ul>
 <h2 id="creating-new-rewards">Creating new rewards</h2>
 <h2 id="using-built-in-tasks-for-the-agent">Using built in tasks for the agent</h2>
 <h2 id="adding-new-tasks-for-the-agent">Adding new tasks for the agent</h2>
-<h2 id="setting-up-new-environments">Setting up new environments</h2>
 
 
 
