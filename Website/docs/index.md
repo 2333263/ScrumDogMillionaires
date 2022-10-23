@@ -94,10 +94,3 @@ pip install -e scrumdogmillionaires
 pip install -e scrumdogmillionaires
 ```
 
-## Instructions for the interactive game
-<img src="assets/Logo_Background.jpg" alt="FullLogo" width="400" 
-style="
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;"/>

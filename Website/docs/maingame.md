@@ -12,7 +12,7 @@ Clicking on play allows you to be moved into the playable game. Please see the s
 ![MainGame](/assets/PlayGame.png "Playing the game")
 
 ## Instructions for playing
-![Instructions](/assets/gameInfo.png "Playing the game")
+![Instructions](/assets/GameInfo2.png "Playing the game")
 
 
 <!-- <img src="assets/PlayGame.png" alt="FullLogo" width="400" 

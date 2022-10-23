@@ -1,5 +1,5 @@
 ## Setting up the Agent
-
+<!-- Environment variables,  -->
 ## Creating new rewards 
 
 ## Using built in tasks for the agent
