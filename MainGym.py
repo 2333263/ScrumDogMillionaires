@@ -3,10 +3,6 @@ import gym
 import gym_MC
 import gameSettings as gs
 
-#Check version 
-from gym.version import VERSION
-print("GYM VERSION: ", VERSION)
-
 #Create the gym environment 
 env = gym.make("MinePy-1", render_mode="human", easyStart=0, seed=1212)
 #env.action_space.seed(45)
@@ -21,5 +17,3 @@ for episode in range(10000):
     
     #Advance the agent to the next step
     env.step(action)
-
-    env.render()

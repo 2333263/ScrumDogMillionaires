@@ -36,6 +36,10 @@ class CustomEnv(gym.Env):
         }
         return (obs, infoDict)
 
+    def render(self):
+        if(self.render_mode=="human"):
+            self.pygame.view()
+
     def step(self, action):
         prevInv = self.pygame.getPrevInv()
         obs = self.pygame.observe()
@@ -45,10 +49,7 @@ class CustomEnv(gym.Env):
                 "inventory" : inventoryHandler.getInv()
             }
         reward = self.pygame.evaluate(prevInv)
+        self.render()
         return obs, reward, done, False, infoDict
-
-    def render(self):
-        if(self.render_mode=="human"):
-            self.pygame.view()
     
     
