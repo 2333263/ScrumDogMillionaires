@@ -62,16 +62,16 @@ SCRUM-DOG-MILLIONAIRES
 │
 │
 └───Textures
-│   │   ...          # Texture Files
+│   │   ...    # Texture Files
 │
 │
 └───Website
-│   │   ...          # Website Files
+│   │   ...     # Website Files
 │
 │
 └───MainGame
-│   │   main.py      # Main py file for the base interactive game
-│   │   ...          # Website Files
+│   │   main.py  # Main py file for the base interactive game
+│   │   ...      # Website Files
 ```
 
 ## Packages used
@@ -84,13 +84,7 @@ SCRUM-DOG-MILLIONAIRES
 
 ## Installing the package 
 In order to install the package locally, please run this from your local terminal after setting your current working directory using `cd /directoy/`. Then run the following command.
-```python
-pip install -e scrumdogmillionaires
-```
-
-## Setting up the Gym Agent
-
-```python
+```py
 pip install -e scrumdogmillionaires
 ```
 

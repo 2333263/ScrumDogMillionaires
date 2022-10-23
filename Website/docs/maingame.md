@@ -1,7 +1,7 @@
 ## Playing the Game
 In order to play the base interactive game, please run the following command after installing the package, within the games main directory: `/SCRUM-DOG-MILLIONAIRES/`
 
-```python
+```py
 python3 main.py 
 ```
 Once you open the game, you are greeted with a main start screen. 
@@ -43,32 +43,53 @@ Each block has a different hardness and some require stronger tools in order to 
 - iron
  
 ### Craftable items
+<figure>
+    <div style="float:left" >
+      <img src="/assets/1.png" title="crafting wooden planks" width="190.5" height="150">
+      <figcaption style="word-wrap: break-word; inline-size: 190px; " >1 wooden log crafts 4 wooden planks</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+        <img src="/assets/2.png" title="crafting wooden pickaxe" width="195" height="195">
+        <figcaption style="word-wrap: break-word; inline-size: 190px; ">5 wooden planks crafts 1 wooden pickaxe</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+       <img src="/assets/3.png" title= "crafting stone pickaxe" width="189.5" height="194">
+       <figcaption style="word-wrap: break-word; inline-size: 190px; ">3 stones and 2 wooden planks crafts 1 stone pickaxe</figcaption>
+    </div>
+</figure>
 
-#### wooden planks
-<p float="left">
-  <img src="/assets/1.png" div class="drawing" width="200"/>
-  <img src="/assets/2.png" alt="drawing" width="200"/>
-  <img src="/assets/3.png" alt="drawing" width="200"/>
-</p>
+<figure>
+    <div style="float:left" >
+      <img src="/assets/4.png" title="crafting gold ingot" width="191" height="150">
+      <figcaption style="word-wrap: break-word; inline-size: 190px; " >1 gold ore crafts 1 gold ingot</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+        <img src="/assets/5.png" title="crafting diamond" width="191" height="150">
+        <figcaption style="word-wrap: break-word; inline-size: 190px; ">1 diamond ore crafts 1 diamond</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+       <img src="/assets/6.png" title= "crafting emerald" width="191" height="195">
+       <figcaption style="word-wrap: break-word; inline-size: 190px; ">1 emerald ore crafts 1 emerald</figcaption>
+    </div>
+</figure>
 
-<figcaption>1 wooden log crafts 4 wooden planks</figcaption>
-
-#### wooden pickaxe
-
-![woodenpickaxe](/assets/2.png "crafting wooden pickaxe") 
-<figcaption>5 wooden planks crafts 1 wooden pickaxe</figcaption>
-
-#### stone pickaxe
-
-3 stones and 2 wooden planks crafts 1 stone pickaxe
-
-![stonepickaxe](/assets/3.png "crafting stone pickaxe") 
-
-
-
-<!-- <img src="assets/PlayGame.png" alt="FullLogo" width="400" 
-style="
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;"/> -->
+<figure>
+    <div style="float:left" >
+      <img src="/assets/8.png" title="crafting diamond blocks" width="191" height="150">
+      <figcaption style="word-wrap: break-word; inline-size: 190px; " >9 diamonds crafts 1 diamond block</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+        <img src="/assets/9.png" title="crafting gold blocks" width="191" height="150">
+        <figcaption style="word-wrap: break-word; inline-size: 190px; ">9 gold ingots crafts 1 gold block</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+       <img src="/assets/10.png" title= "crafting end game block" width="191" height="195">
+       <figcaption style="word-wrap: break-word; inline-size: 190px; ">4 gold blocks, 4 diamond blocks and 1 emerald crafts 1 end game block</figcaption>
+    </div>
+</figure>

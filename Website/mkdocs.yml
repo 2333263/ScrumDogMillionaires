@@ -10,6 +10,8 @@ theme:
   name: material
   logo: assets/scrumlogo.png
   favicon: assets/scrumlogo.png
+  font:
+    text: Fira Sans
   features:
     - navigation.sections
     - navigation.expand
