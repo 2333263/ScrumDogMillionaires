@@ -4,8 +4,11 @@ In order to play the base interactive game, please run the following command aft
 ```python
 python3 main.py 
 ```
-Once open, you are greeted with a main start screen. Here you can enter the seed (in the top left). This seed can be an integer value. In the top left, a question mark button is found that gives details on the controls of the game. 
-Clicking on play allows you to be moved into the playable game. Please see the screenshots below for a visual of what was explained.
+Once you open the game, you are greeted with a main start screen. 
+Here you can enter the seed in the top left corner. The seed can either be a string or an integer. 
+In the top right corner, a question mark button is found. When you click here, details on the controls of the game will appear. 
+Clicking on begin game allows you to be moved into the playable game.
+Please see the screenshots below for a visual guide. 
 
 ## Demo of the game screens
 ![StartScreen](/assets/StartScreen.png "Start Screen")  
@@ -14,7 +17,8 @@ Clicking on play allows you to be moved into the playable game. Please see the s
 ## Instructions for playing
 ![Instructions](/assets/GameInfo2.png "Playing the game")
 
-
+## How to craft
+In order to craft new blocks and tools, the player will have to be in range of the crafting table. 
 <!-- <img src="assets/PlayGame.png" alt="FullLogo" width="400" 
 style="
   display: block;

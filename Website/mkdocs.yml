@@ -2,7 +2,7 @@ site_name: ScrumDog Millionaires
 
 nav:
     - Home: index.md
-    - Playing the default game: maingame.md
+    - Playing the interactive game: maingame.md
     - Using the Gym Agent: gymgame.md
 
 

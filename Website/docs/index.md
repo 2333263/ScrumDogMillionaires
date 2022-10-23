@@ -20,7 +20,7 @@ Instuctions below detail how one can install the 2D Minecraft game. In addition 
 
 Gym is a Python library which provides a standard API for developing reinforcement learning algorithms. The team used gym to create an agent which takes actions in the minecraft environemnt, receives rewards for the actions it takes and the states it enters and checks to see whether the game has been completed.
 
-One is able to create custom tasks which the agent will have to complete and receive a reward. 
+One is able to create custom tasks which the agent will have to complete and receive a reward thereafter. 
 In addition, you are able to make use of any of the built in tasks that the team has created for you. 
 
 
