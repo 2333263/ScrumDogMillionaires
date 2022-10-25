@@ -1,10 +1,10 @@
 from perlin_noise import PerlinNoise
 import numpy as np
-import gameSettings as gs
+from MainGame.Settings import gameSettings as gs
 import random
 import pygame
-from block import Block
-import itemHandler as ih
+from MainGame.Blocks.block import Block
+from MainGame.Items import itemHandler as ih
 
 textureNames = ih.fetchTextureNames()
 itemIDs = ih.fetchItemIDs()

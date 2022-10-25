@@ -1,5 +1,5 @@
 import json
-from stage import Stage
+from MainGame.Stage.stage import Stage
 
 def populateStages():
     stages = {}

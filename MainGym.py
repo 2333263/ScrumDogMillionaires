@@ -1,7 +1,5 @@
 import random 
-import gym 
-import gym_MC
-import gameSettings as gs
+import gym
 
 #Create the gym environment 
 env = gym.make("MinePy-1", render_mode="human", easyStart=0, seed=1212)

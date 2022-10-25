@@ -1,6 +1,6 @@
 #Item class to make implementation of inventory system easier
 #Allows inventory to work with items that may not be Block objects
-import gameSettings as gs
+from MainGame.Settings import gameSettings as gs
 import pygame
 
 class Item:

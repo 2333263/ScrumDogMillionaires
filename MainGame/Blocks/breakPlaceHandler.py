@@ -1,8 +1,8 @@
-import gameSettings as gs
-from block import Block
-import inventoryHandler as inv
-from soundHandler import playBreakSoundforID
-import itemHandler as ih
+from MainGame.Settings import gameSettings as gs
+from MainGame.Blocks.block import Block
+from MainGame.Inventory import inventoryHandler as inv
+from MainGame.Audio.soundHandler import playBreakSoundforID
+from MainGame.Items import itemHandler as ih
 
 immovableBlocks = ih.immovableBlocks
 clickableBlock = ih.clickableBlocks

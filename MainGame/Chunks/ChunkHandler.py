@@ -1,5 +1,5 @@
-import gameSettings as gs
-from ChunkGenerator import generateChunk
+from MainGame.Settings import gameSettings as gs
+from MainGame.Chunks.ChunkGenerator import generateChunk
 
 def updateChunkPositions(playerChunk):
     gs.visibleChunks[0] = playerChunk - 1

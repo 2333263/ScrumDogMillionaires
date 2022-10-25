@@ -1,10 +1,10 @@
-from itemNew import Item
+from MainGame.Items.itemNew import Item
 import pygame
-import gameSettings as gs
-import itemHandler as ih
+from MainGame.Settings import gameSettings as gs
+from MainGame.Items import itemHandler as ih
 import numpy as np
-from InventorySlots import slot
-from block import Block
+from MainGame.Inventory.InventorySlots import slot
+from MainGame.Blocks.block import Block
 
 items = ih.fetchDict()
 breakTime = ih.fetchBreakTime()
@@ -153,7 +153,7 @@ def drawHotBar(screen):
             #draw into the slot on the hotbar
             screen.blit(currTexture,(22*relative+(i-rangeB)*85*relative,45*relative))
             #draw the number of items underneath it
-            font = pygame.font.Font('Minecraft.ttf', int(16*relative))
+            font = pygame.font.Font('../Font/Minecraft.ttf',int(16 * relative))
             count=invArray[i].getCount()
             text2 = font.render(str(count), 1*relative, (255, 255,255))
             #if the user has more than 10 items, shift the tex over slightly
@@ -196,7 +196,7 @@ def drawInv(screen):
                 currTexture = pygame.image.load(invArray[(j+1)*10+i].texture)
                 currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
                 screen.blit(currTexture,(22*relative+(i)*85*relative,65*relative + relative* (j+1)*100))
-                font = pygame.font.Font('Minecraft.ttf', int(16*relative))
+                font = pygame.font.Font('../Font/Minecraft.ttf',int(16 * relative))
                 count=invArray[(j+1)*10+i].getCount()
                 text2 = font.render(str(count), 1*relative, (255, 255,255))
                 shift=0

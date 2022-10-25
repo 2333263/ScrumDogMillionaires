@@ -2,8 +2,9 @@ import gym
 from gym import spaces
 import numpy as np
 from gym_MC.envs.minecraftEnv import MinePy
-import gameSettings as gs
-import inventoryHandler
+from MainGame.Settings import gameSettings as gs
+from MainGame.Inventory import inventoryHandler
+
 
 class CustomEnv(gym.Env):
     #if render mode is human, render game to screen- if it is None- render game to surface

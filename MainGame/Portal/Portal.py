@@ -1,5 +1,5 @@
 import pygame
-from gameSettings import blockSize
+
 
 class Portal(pygame.sprite.Sprite):
     def __init__(self, blockSize, blockPosition, itemID, textureName, hardness):

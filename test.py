@@ -1,28 +1,22 @@
 import unittest
-from numpy import ndarray
-import Camera
+from MainGame.Camera import Camera
 # import item
-import gameSettings as gs
-import block
+from MainGame.Settings import gameSettings as gs
+from MainGame.Blocks import block,breakPlaceHandler as bph
 import pygame
-import CraftButtonHandler
+from MainGame.Crafting import CraftButtonHandler,CraftingMenu
 import TextHandler
-import recipeHandler
-import playerHandler as ph
-import CraftingMenu
-import inventoryHandler as ih
-import breakPlaceHandler as bph
-import InventorySlots
-import ChunkGenerator as CG
-import ChunkHandler as CH
-import Portal
-import itemNew
+from MainGame.Recipes import recipeHandler
+from MainGame.Player import playerHandler as ph
+from MainGame.Inventory import inventoryHandler as ih,InventorySlots
+from MainGame.Chunks import ChunkGenerator as CG,ChunkHandler as CH
+from MainGame.Portal import Portal
 # from itemHandler import populateDictionaries
-import itemHandler
+from MainGame.Items import itemHandler,itemNew
 import numpy as np
-from gym_MC.envs import minecraftEnv as MCENV
 import gym
-import rewardsHandler
+from MainGame.Rewards import rewardsHandler
+
 # replaces gamesettings
 # use itemIDs instead of gs.itemIDs
 itemIDs = itemHandler.fetchItemIDs()
@@ -78,7 +72,7 @@ class TestItem(unittest.TestCase):
 
 
 class TestBlock(unittest.TestCase):
-    tempBlock = block.Block(gs.blockSize, (0, 0), 0, textureNames[itemIDs[0]], 0, breakSpeed[0])
+    tempBlock = block.Block(gs.blockSize,(0,0),0,textureNames[itemIDs[0]],0,breakSpeed[0])
 
     def test_itemIDs(self):
         self.assertIsInstance(self.tempBlock.itemID, int)
@@ -102,7 +96,7 @@ class TestBlock(unittest.TestCase):
 
 
 class TestCraftingButton(unittest.TestCase):
-    tempButton = CraftButtonHandler.Button(0, (0, 0), 50, 50)
+    tempButton = CraftButtonHandler.Button(0,(0,0),50,50)
     pygame.init()
 
     def test_itemIDs(self):
@@ -234,7 +228,7 @@ class TestPlayer(unittest.TestCase):
 
     # NEED TO BE REWRITTEN
     def test_update(self):
-        tempBlock = block.Block(gs.blockSize, (8, 7), 0, textureNames[itemIDs[0]], 0, breakSpeed[0])
+        tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
         tempGroup = pygame.sprite.Group()
         tempGroup.add(tempBlock)
         self.TempPlayer.jumped = True
@@ -283,8 +277,8 @@ class TestPlayer(unittest.TestCase):
         self.TempPlayer.update(2, tempGroup)
         self.assertEqual(self.TempPlayer.rect.y, tempPosY + 5)
         self.assertEqual(self.TempPlayer.rect.x, tempPosX + 2)
-        tempBlock = block.Block(gs.blockSize, (8 * gs.blockSize, 7 * gs.blockSize), 0, textureNames[itemIDs[0]],
-                                0, breakSpeed[0])
+        tempBlock = block.Block(gs.blockSize,(8 * gs.blockSize,7 * gs.blockSize),0,textureNames[itemIDs[0]],
+                                0,breakSpeed[0])
         tempGroup.add(tempBlock)
         self.TempPlayer.rect.x = 8 * gs.blockSize - 1
         self.TempPlayer.rect.y = 7 * gs.blockSize
@@ -318,7 +312,7 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(self.TempPlayer.direction.x, 0)
 
     def test_willcolide(self):
-        tempBlock = block.Block(gs.blockSize, (8, 7), 0, textureNames[itemIDs[0]], 0, breakSpeed[0])
+        tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
         tempGroup = pygame.sprite.Group()
         tempGroup.add(tempBlock)
 
@@ -336,8 +330,8 @@ class TestCraftingMenu(unittest.TestCase):
 
     def test_innit(self):  # I had to call it AAinit so it would run before the other test cases
         self.crafter.initGroup()
-        self.assertIsInstance(CraftingMenu.slots, pygame.sprite.Group)
-        self.assertEqual(len(CraftingMenu.slots), 10)
+        self.assertIsInstance(CraftingMenu.slots,pygame.sprite.Group)
+        self.assertEqual(len(CraftingMenu.slots),10)
 
     def test_relativeSize(self):
         self.assertTrue(self.crafter.relativeSize >= 0 and self.crafter.relativeSize <= gs.blockSize * 3)
@@ -371,7 +365,7 @@ class TestCraftingMenu(unittest.TestCase):
         self.assertEqual(self.crafter.canCraft, False)
         self.assertEqual(self.crafter.craftID, -1)
         self.crafter.craftArray[1][1] = itemArr[8]  # Item("Logs", 7)
-        ih.invArray = np.full(40, NullItem, dtype=itemNew.Item)
+        ih.invArray = np.full(40,NullItem,dtype=itemNew.Item)
         curr = ih.getItemCount(8)
         self.crafter.doCraft()
         self.assertEqual(ih.getItemCount(8), curr + 4)
@@ -384,13 +378,13 @@ class TestCraftingMenu(unittest.TestCase):
         curr = ih.getItemCount(47)
         self.crafter.doCraft()
         self.assertEqual(ih.getItemCount(47), curr + 1)
-        ih.invArray = np.full(40, NullItem, dtype=itemNew.Item)
+        ih.invArray = np.full(40,NullItem,dtype=itemNew.Item)
         for i in itemArr:
             if(i.amount>0):
                 i.amount=0
     def testCraftSpec(self):
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7])
+        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                                blockHardness[7],breakSpeed[7])
         ih.addBlock(tempBlock)
         self.assertFalse(self.crafter.craftSpec(7, ih.getInv()))  # tries to craft gold, should fail
         self.assertFalse(self.crafter.craftSpec(-1, ih.getInv()))  # tries to craft a fake block, should fail
@@ -451,8 +445,8 @@ class TestInv(unittest.TestCase):
         self.assertEqual(ih.getSelected().getItemId(), 5)
 
     def testAddBlockandRemove(self):
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7])
+        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                                blockHardness[7],breakSpeed[7])
         ih.addBlock(tempBlock)
         found = False
         foundPos = 0
@@ -474,8 +468,8 @@ class TestInv(unittest.TestCase):
     def testDecSpec(self):
         inv = ih.getInv()
         self.assertEqual(inv[0].getItemId(), 5)  # crafting table is in position 0
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7])
+        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                                blockHardness[7],breakSpeed[7])
         ih.addBlock(tempBlock)  # should be in position 1
         inv = ih.getInv()
         self.assertEqual(inv[1].getItemId(), 7)
@@ -558,10 +552,10 @@ class TestCamera(unittest.TestCase):
     Cam = Camera.Camera(TempPlayer)
     # pygame.display.set_mode((1280, 720))
     screen = pygame.Surface((gs.blockSize, gs.blockSize))
-    tempBlock = block.Block(gs.blockSize, (8, 7), 0, textureNames[itemIDs[0]], 0, breakSpeed[0])
-    tempBlock2 = block.Block(gs.blockSize, (20, 7), 1, textureNames[itemIDs[1]], 0, breakSpeed[1])
-    tempBlock3 = block.Block(gs.blockSize, (29, 7), 2, textureNames[itemIDs[1]], 0, breakSpeed[2])
-    tempBlock4 = block.Block(gs.blockSize, (50, 7), 3, textureNames[itemIDs[1]], 0, breakSpeed[3])
+    tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
+    tempBlock2 = block.Block(gs.blockSize,(20,7),1,textureNames[itemIDs[1]],0,breakSpeed[1])
+    tempBlock3 = block.Block(gs.blockSize,(29,7),2,textureNames[itemIDs[1]],0,breakSpeed[2])
+    tempBlock4 = block.Block(gs.blockSize,(50,7),3,textureNames[itemIDs[1]],0,breakSpeed[3])
 
     def test_Offset(self):
         self.Cam.scroll()
@@ -631,8 +625,8 @@ class testChunks(unittest.TestCase):
 class TestBreakPlace(unittest.TestCase):
     TempPlayer = ph.Player((8 * gs.blockSize, 8 * gs.blockSize), 24)
     pos = (8, 8)
-    tempBlock = block.Block(gs.blockSize, (8 * gs.blockSize, 7 * gs.blockSize), 0, textureNames[itemIDs[0]],
-                            1, breakSpeed[0])
+    tempBlock = block.Block(gs.blockSize,(8 * gs.blockSize,7 * gs.blockSize),0,textureNames[itemIDs[0]],
+                            1,breakSpeed[0])
     tempItem = itemArr[12]  # Item("Wooden Pickaxe", 11)
     tempItem.itemHardness = 3
     spriteGroup = pygame.sprite.Group()
@@ -661,8 +655,8 @@ class TestBreakPlace(unittest.TestCase):
 #       '''
 
     def test_breakBlock(self):
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
-                                blockHardness[0], breakSpeed[0])
+        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),0,textureNames["Grass Block"],
+                                blockHardness[0],breakSpeed[0])
         self.spriteGroup.add(tempBlock)
         gs.generatedChunks[0] = self.spriteGroup
         bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
@@ -674,8 +668,8 @@ class TestBreakPlace(unittest.TestCase):
                 ih.decrease()
                 found = True
         self.assertTrue(found)
-        tempBlock = block.Block(gs.blockSize, (30 * gs.blockSize, 30 * gs.blockSize), 0, textureNames["Grass Block"],
-                                blockHardness[0], breakSpeed[0])
+        tempBlock = block.Block(gs.blockSize,(30 * gs.blockSize,30 * gs.blockSize),0,textureNames["Grass Block"],
+                                blockHardness[0],breakSpeed[0])
         self.spriteGroup.add(tempBlock)
         bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
         inventory = ih.getInv()
@@ -684,8 +678,8 @@ class TestBreakPlace(unittest.TestCase):
             if (inventory[i].itemID == 0 and inventory[i].getCount() == 1):
                 found = True
         self.assertFalse(found)
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
-                                blockHardness[2], breakSpeed[2])
+        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"],
+                                blockHardness[2],breakSpeed[2])
         self.spriteGroup.add(tempBlock)
         bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
         inventory = ih.getInv()
@@ -708,8 +702,8 @@ class TestBreakPlace(unittest.TestCase):
         self.assertTrue(found)
 
     def test_getBlockFromPos(self):
-        craftableBlock = block.Block(gs.blockSize, (10 * gs.blockSize, 10 * gs.blockSize), 5,
-                                     textureNames[itemIDs[0]], 1, breakSpeed[5])
+        craftableBlock = block.Block(gs.blockSize,(10 * gs.blockSize,10 * gs.blockSize),5,
+                                     textureNames[itemIDs[0]],1,breakSpeed[5])
         self.spriteGroup.add(craftableBlock)
         self.assertEqual(craftableBlock.itemID,
                          bph.getBlockFromPos((10 * gs.blockSize, 10 * gs.blockSize), self.spriteGroup).itemID)
@@ -717,8 +711,8 @@ class TestBreakPlace(unittest.TestCase):
 
     def test_blockPlace(self):
 
-        craftableBlock = block.Block(gs.blockSize, (10 * gs.blockSize, 10 * gs.blockSize), 5,
-                                     textureNames[itemIDs[0]], 1, breakSpeed[5])
+        craftableBlock = block.Block(gs.blockSize,(10 * gs.blockSize,10 * gs.blockSize),5,
+                                     textureNames[itemIDs[0]],1,breakSpeed[5])
         self.spriteGroup.add(craftableBlock)
         bph.blockPlace(self.pos, self.spriteGroup, self.TempPlayer, True)
         self.assertFalse(gs.drawCrafting)
@@ -735,8 +729,8 @@ class TestBreakPlace(unittest.TestCase):
                     ih.decrease()
         ih.selected = 0
         gs.generatedChunks[0] = self.spriteGroup
-        tempBlock = block.Block(gs.blockSize, (15 * gs.blockSize, 15 * gs.blockSize), 43, textureNames["Iron Ore"],
-                                blockHardness[43], breakSpeed[43])
+        tempBlock = block.Block(gs.blockSize,(15 * gs.blockSize,15 * gs.blockSize),43,textureNames["Iron Ore"],
+                                blockHardness[43],breakSpeed[43])
         ih.addBlock(tempBlock)
         self.TempPlayer.rect.x = 8 * gs.blockSize
         self.TempPlayer.rect.y = 8 * gs.blockSize
@@ -785,7 +779,7 @@ class TestBreakPlace(unittest.TestCase):
 
 
 class TestInvinventorySlots(unittest.TestCase):
-    ins = InventorySlots.slot("red", 10, 20, 30, 40)
+    ins = InventorySlots.slot("red",10,20,30,40)
 
     def test_everything(self):
         self.assertEqual(self.ins.width, 30)
@@ -797,7 +791,7 @@ class TestInvinventorySlots(unittest.TestCase):
 
 
 class TestPortal(unittest.TestCase):
-    port = Portal.Portal(gs.blockSize, (8, 7), 26, textureNames[itemIDs[0]], 999)
+    port = Portal.Portal(gs.blockSize,(8,7),26,textureNames[itemIDs[0]],999)
 
     def test_init(self):
         self.assertEqual(self.port.textureName, textureNames[itemIDs[0]])
@@ -815,7 +809,7 @@ class TestPortal(unittest.TestCase):
 # need to change tooltype and reqtooltype and drops when we used it
 class TestItemNew(unittest.TestCase):
     def test_getDrop(self):
-        newItems = itemNew.Item(9, "Bigblock", 100, 3, 3, "axe", "pickaxe", "texture", False, "drops")
+        newItems = itemNew.Item(9,"Bigblock",100,3,3,"axe","pickaxe","texture",False,"drops")
         self.assertEqual(newItems.getCount(), 0)
         newItems.increase()
         self.assertEqual(newItems.getCount(), 1)
@@ -856,7 +850,7 @@ class TestItemHandler (unittest.TestCase):
 # commented out because its complaining that neither populate dictionaries and itemhandler dont exist
 class testMinecraftEnv(unittest.TestCase):
     NullItem = itemArr[0]  # Item("null", -1)
-    ih.invArray=np.full(40, NullItem, dtype=itemNew.Item)
+    ih.invArray=np.full(40,NullItem,dtype=itemNew.Item)
    #ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="6942034")
     ENV = gym.make("MinePy-1", render_mode="rgb_array")
 
@@ -864,12 +858,12 @@ class testMinecraftEnv(unittest.TestCase):
         for i in itemArr:
             if(i.amount>0):
                 i.amount=0
-        ih.invArray=np.full(40, self.NullItem, dtype=itemNew.Item)
+        ih.invArray=np.full(40,self.NullItem,dtype=itemNew.Item)
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=1)
         obs, info = self.ENV.reset(seed=6942034)
         self.assertEqual(ih.getItemCount(11), 2)  # check if the game starts with 2 wooden pickaxes
         self.assertEqual(ih.getItemCount(8), 4)  # and 4 wooden planks
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
         for i in itemArr:
             if(i.amount>0):
                 i.amount=0
@@ -880,7 +874,7 @@ class testMinecraftEnv(unittest.TestCase):
         self.assertEqual(ih.getItemCount(16), 2)  # check if the game starts with 2 Stone pickaxes
         self.assertEqual(ih.getItemCount(50), 2)  # check if the game starts with a diamond
         self.assertEqual(ih.getItemCount(53), 2)  # check if the game starts with an emerald
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
 
     def testActionSpaceMovement(self):
         
@@ -969,8 +963,8 @@ class testMinecraftEnv(unittest.TestCase):
     def testActionSpaceCrafting(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=6942034)
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7])
+        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                                blockHardness[7],breakSpeed[7])
         ih.addBlock(tempBlock)
         inv = ih.getInv()
         found = False
@@ -986,7 +980,7 @@ class testMinecraftEnv(unittest.TestCase):
                 found = True
                 break
         self.assertTrue(found)
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
 
     def testActionSpacePlaceAndBreak(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
@@ -1001,8 +995,8 @@ class testMinecraftEnv(unittest.TestCase):
             currpos = self.ENV.pygame.player.getPlayerPos()
             #
         ih.clearInv()
-        tempBlock = block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7])
+        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                                blockHardness[7],breakSpeed[7])
         for i in range(5):
             ih.addBlock(tempBlock)
         self.assertEqual(ih.getItemCount(7), 5)  # check that there are 10 logs in the inventory
@@ -1031,7 +1025,7 @@ class testMinecraftEnv(unittest.TestCase):
             count += 1
             self.ENV.step(gs.actionSpace["WORLD"][i])  # break blocks around the player
             self.assertEqual(ih.getItemCount(7), count)  # see if it got readded to the inventory
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item)
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
 
     def testEvaluateGeneralRewards(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
@@ -1053,20 +1047,20 @@ class testMinecraftEnv(unittest.TestCase):
         
         stage1Blocks = [
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 6, textureNames["Oak Leaves"],
-                                blockHardness[6], breakSpeed[6]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),6,textureNames["Oak Leaves"],
+                    blockHardness[6],breakSpeed[6]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 1, textureNames["Dirt Block"],
-                                blockHardness[1], breakSpeed[1]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),1,textureNames["Dirt Block"],
+                    blockHardness[1],breakSpeed[1]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
-                                blockHardness[0], breakSpeed[0])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),0,textureNames["Grass Block"],
+                    blockHardness[0],breakSpeed[0])]
 
         prevpos = (0, -100)
         
@@ -1079,7 +1073,7 @@ class testMinecraftEnv(unittest.TestCase):
         # stage 1 breaking and placing
         k = 0
         for i in (stage1Blocks):
-            ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+            ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
             ih.addBlock(i)
             self.ENV.step(gs.actionSpace["HOTBAR"][0])
             Obs, reward, done, boolo, infoDict =self.ENV.step(gs.actionSpace["WORLD"][11])
@@ -1094,7 +1088,7 @@ class testMinecraftEnv(unittest.TestCase):
             k+=1
         
         # passing stage 1 by having 2 or more wooden planks in inv
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
         for i in range(2):
             ih.addBlock(stage1Blocks[1])
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][0])
@@ -1106,14 +1100,14 @@ class testMinecraftEnv(unittest.TestCase):
         
         stage2Blocks = [
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
-                                blockHardness[11], breakSpeed[11])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),11,textureNames["Wooden Pickaxe"],
+                    blockHardness[11],breakSpeed[11])]
         
         for i in range(2): # get to stage 2
             ih.addBlock(stage2Blocks[1])
@@ -1138,14 +1132,14 @@ class testMinecraftEnv(unittest.TestCase):
         
         stage3Blocks = [
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
-                                blockHardness[11], breakSpeed[11])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),11,textureNames["Wooden Pickaxe"],
+                    blockHardness[11],breakSpeed[11])]
 
 
         for i in range(2): # get to stage 2
@@ -1172,26 +1166,26 @@ class testMinecraftEnv(unittest.TestCase):
         # log ,plank, pickaxe, stone, leaves, dirt, grass
         stage4Blocks = [
         
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
-                                blockHardness[11], breakSpeed[11]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),11,textureNames["Wooden Pickaxe"],
+                    blockHardness[11],breakSpeed[11]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
-                                blockHardness[2], breakSpeed[2]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"],
+                    blockHardness[2],breakSpeed[2]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 6, textureNames["Oak Leaves"],
-                                blockHardness[6], breakSpeed[6]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),6,textureNames["Oak Leaves"],
+                    blockHardness[6],breakSpeed[6]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 1, textureNames["Dirt Block"],
-                                blockHardness[1], breakSpeed[1]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),1,textureNames["Dirt Block"],
+                    blockHardness[1],breakSpeed[1]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
-                                blockHardness[0], breakSpeed[0])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),0,textureNames["Grass Block"],
+                    blockHardness[0],breakSpeed[0])]
 
         for i in range(2): # get to stage 2
             ih.addBlock(stage4Blocks[0])
@@ -1236,7 +1230,7 @@ class testMinecraftEnv(unittest.TestCase):
                     self.assertEqual(reward, rewardsWithPickaxe[k] - 20)
             k+=1
 
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
         for i in range(3):
             ih.addBlock(stage4Blocks[3])
             ih.addBlock(stage4Blocks[1])
@@ -1247,23 +1241,23 @@ class testMinecraftEnv(unittest.TestCase):
     def testEvaluateStage5Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
         stage5Blocks = [
         
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
-                                blockHardness[11], breakSpeed[11]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),11,textureNames["Wooden Pickaxe"],
+                    blockHardness[11],breakSpeed[11]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
-                                blockHardness[2], breakSpeed[2]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"],
+                    blockHardness[2],breakSpeed[2]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
-                                blockHardness[16], breakSpeed[16])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),16,textureNames["Stone Pickaxe"],
+                    blockHardness[16],breakSpeed[16])]
 
 
         for i in range(2): # get to stage 2
@@ -1293,38 +1287,38 @@ class testMinecraftEnv(unittest.TestCase):
         
          # logs, planks, woodenpickaxxe, stone, stonepickaxe, leaves, dirt, grass, gold, diamond, emerald
         stage6Blocks = [
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
-                                blockHardness[11], breakSpeed[11]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),11,textureNames["Wooden Pickaxe"],
+                    blockHardness[11],breakSpeed[11]),
             
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
-                                blockHardness[2], breakSpeed[2]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"],
+                    blockHardness[2],breakSpeed[2]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
-                                blockHardness[16], breakSpeed[16]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),16,textureNames["Stone Pickaxe"],
+                    blockHardness[16],breakSpeed[16]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 6, textureNames["Oak Leaves"],
-                                blockHardness[6], breakSpeed[6]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),6,textureNames["Oak Leaves"],
+                    blockHardness[6],breakSpeed[6]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 1, textureNames["Dirt Block"],
-                                blockHardness[1], breakSpeed[1]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),1,textureNames["Dirt Block"],
+                    blockHardness[1],breakSpeed[1]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 0, textureNames["Grass Block"],
-                                blockHardness[0], breakSpeed[0]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),0,textureNames["Grass Block"],
+                    blockHardness[0],breakSpeed[0]),
                             
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 46, textureNames["Gold Ore"],
-                                blockHardness[46], breakSpeed[46]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),46,textureNames["Gold Ore"],
+                    blockHardness[46],breakSpeed[46]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 49, textureNames["Diamond Ore"],
-                                blockHardness[49], breakSpeed[49]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),49,textureNames["Diamond Ore"],
+                    blockHardness[49],breakSpeed[49]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 78, textureNames["Emerald Ore"],
-                                blockHardness[78], breakSpeed[78])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),78,textureNames["Emerald Ore"],
+                    blockHardness[78],breakSpeed[78])]
 
 
         for i in range(2): # get to stage 2
@@ -1374,7 +1368,7 @@ class testMinecraftEnv(unittest.TestCase):
                     self.assertEqual(reward, woodenPickRewards[k])
             k+=1
 
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
         for i in range(36):
                 ih.addBlock(stage6Blocks[8])
                 ih.addBlock(stage6Blocks[9])
@@ -1388,38 +1382,38 @@ class testMinecraftEnv(unittest.TestCase):
         
         stage7Blocks = [
         
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
-                                blockHardness[11], breakSpeed[11]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),11,textureNames["Wooden Pickaxe"],
+                    blockHardness[11],breakSpeed[11]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
-                                blockHardness[2], breakSpeed[2]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"],
+                    blockHardness[2],breakSpeed[2]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
-                                blockHardness[16], breakSpeed[16]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),16,textureNames["Stone Pickaxe"],
+                    blockHardness[16],breakSpeed[16]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 46, textureNames["Gold Ore"],
-                                blockHardness[46], breakSpeed[46]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),46,textureNames["Gold Ore"],
+                    blockHardness[46],breakSpeed[46]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 49, textureNames["Diamond Ore"],
-                                blockHardness[49], breakSpeed[49]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),49,textureNames["Diamond Ore"],
+                    blockHardness[49],breakSpeed[49]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 78, textureNames["Emerald Ore"],
-                                blockHardness[78], breakSpeed[78]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),78,textureNames["Emerald Ore"],
+                    blockHardness[78],breakSpeed[78]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 50, textureNames["Gold Ingot"],
-                                blockHardness[50], breakSpeed[50]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),50,textureNames["Gold Ingot"],
+                    blockHardness[50],breakSpeed[50]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 47, textureNames["Diamond"],
-                                blockHardness[47], breakSpeed[47]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),47,textureNames["Diamond"],
+                    blockHardness[47],breakSpeed[47]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 53, textureNames["Emerald"],
-                                blockHardness[53], breakSpeed[53])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),53,textureNames["Emerald"],
+                    blockHardness[53],breakSpeed[53])]
 
 
 
@@ -1445,7 +1439,7 @@ class testMinecraftEnv(unittest.TestCase):
             prevpos = currpos
             currpos = self.ENV.pygame.player.getPlayerPos()
         
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
         for i in range(36):
             ih.addBlock(stage7Blocks[8])
             ih.addBlock(stage7Blocks[9])
@@ -1460,44 +1454,44 @@ class testMinecraftEnv(unittest.TestCase):
         
         stage8Blocks = [
         
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
-                                blockHardness[11], breakSpeed[11]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),11,textureNames["Wooden Pickaxe"],
+                    blockHardness[11],breakSpeed[11]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
-                                blockHardness[2], breakSpeed[2]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"],
+                    blockHardness[2],breakSpeed[2]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
-                                blockHardness[16], breakSpeed[16]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),16,textureNames["Stone Pickaxe"],
+                    blockHardness[16],breakSpeed[16]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 46, textureNames["Gold Ore"],
-                                blockHardness[46], breakSpeed[46]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),46,textureNames["Gold Ore"],
+                    blockHardness[46],breakSpeed[46]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 49, textureNames["Diamond Ore"],
-                                blockHardness[49], breakSpeed[49]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),49,textureNames["Diamond Ore"],
+                    blockHardness[49],breakSpeed[49]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 78, textureNames["Emerald Ore"],
-                                blockHardness[78], breakSpeed[78]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),78,textureNames["Emerald Ore"],
+                    blockHardness[78],breakSpeed[78]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 50, textureNames["Gold Ingot"],
-                                blockHardness[50], breakSpeed[50]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),50,textureNames["Gold Ingot"],
+                    blockHardness[50],breakSpeed[50]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 47, textureNames["Diamond"],
-                                blockHardness[47], breakSpeed[47]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),47,textureNames["Diamond"],
+                    blockHardness[47],breakSpeed[47]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 53, textureNames["Emerald"],
-                                blockHardness[53], breakSpeed[53]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),53,textureNames["Emerald"],
+                    blockHardness[53],breakSpeed[53]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 64, textureNames["Gold Block"],
-                                blockHardness[64], breakSpeed[64]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),64,textureNames["Gold Block"],
+                    blockHardness[64],breakSpeed[64]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 67, textureNames["Diamond Block"],
-                                blockHardness[67], breakSpeed[67])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),67,textureNames["Diamond Block"],
+                    blockHardness[67],breakSpeed[67])]
 
 
 
@@ -1528,7 +1522,7 @@ class testMinecraftEnv(unittest.TestCase):
             prevpos = currpos
             currpos = self.ENV.pygame.player.getPlayerPos()
         
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
         for i in range(36):
             ih.addBlock(stage8Blocks[11])
             ih.addBlock(stage8Blocks[12]) # get to stage 9
@@ -1542,47 +1536,47 @@ class testMinecraftEnv(unittest.TestCase):
         
         stage9Blocks = [
         
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 7, textureNames["Oak Log"],
-                                blockHardness[7], breakSpeed[7]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
+                    blockHardness[7],breakSpeed[7]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 8, textureNames["Oak Planks"],
-                                blockHardness[8], breakSpeed[8]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
+                    blockHardness[8],breakSpeed[8]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 11, textureNames["Wooden Pickaxe"],
-                                blockHardness[11], breakSpeed[11]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),11,textureNames["Wooden Pickaxe"],
+                    blockHardness[11],breakSpeed[11]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 2, textureNames["Stone Block"],
-                                blockHardness[2], breakSpeed[2]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"],
+                    blockHardness[2],breakSpeed[2]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 16, textureNames["Stone Pickaxe"],
-                                blockHardness[16], breakSpeed[16]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),16,textureNames["Stone Pickaxe"],
+                    blockHardness[16],breakSpeed[16]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 46, textureNames["Gold Ore"],
-                                blockHardness[46], breakSpeed[46]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),46,textureNames["Gold Ore"],
+                    blockHardness[46],breakSpeed[46]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 49, textureNames["Diamond Ore"],
-                                blockHardness[49], breakSpeed[49]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),49,textureNames["Diamond Ore"],
+                    blockHardness[49],breakSpeed[49]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 78, textureNames["Emerald Ore"],
-                                blockHardness[78], breakSpeed[78]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),78,textureNames["Emerald Ore"],
+                    blockHardness[78],breakSpeed[78]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 50, textureNames["Gold Ingot"],
-                                blockHardness[50], breakSpeed[50]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),50,textureNames["Gold Ingot"],
+                    blockHardness[50],breakSpeed[50]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 47, textureNames["Diamond"],
-                                blockHardness[47], breakSpeed[47]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),47,textureNames["Diamond"],
+                    blockHardness[47],breakSpeed[47]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 53, textureNames["Emerald"],
-                                blockHardness[53], breakSpeed[53]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),53,textureNames["Emerald"],
+                    blockHardness[53],breakSpeed[53]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 64, textureNames["Gold Block"],
-                                blockHardness[64], breakSpeed[64]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),64,textureNames["Gold Block"],
+                    blockHardness[64],breakSpeed[64]),
 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 67, textureNames["Diamond Block"],
-                                blockHardness[67], breakSpeed[67]),
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),67,textureNames["Diamond Block"],
+                    blockHardness[67],breakSpeed[67]),
                                 
-        block.Block(gs.blockSize, (9 * gs.blockSize, 9 * gs.blockSize), 83, textureNames["End Game Block"],
-                                blockHardness[83], breakSpeed[83])]
+        block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),83,textureNames["End Game Block"],
+                    blockHardness[83],breakSpeed[83])]
 
 
 
@@ -1617,7 +1611,7 @@ class testMinecraftEnv(unittest.TestCase):
             prevpos = currpos
             currpos = self.ENV.pygame.player.getPlayerPos()
         
-        ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
+        ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
         ih.addBlock(stage9Blocks[13]) # complete game
 
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])

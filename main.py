@@ -1,20 +1,18 @@
 import pygame
-import gameSettings as gs
-import breakPlaceHandler as bph
-import inventoryHandler as inv
-import itemHandler
-import playerHandler as ph
-import Camera as cam
-import CraftingMenu as cm
-import menuHandler as mh
+from MainGame.Settings import gameSettings as gs
+from MainGame.Blocks import breakPlaceHandler as bph
+from MainGame.Inventory import inventoryHandler as inv
+from MainGame.Player import playerHandler as ph
+from MainGame.Camera import Camera as cam
+from MainGame.Crafting import CraftingMenu as cm
+from MainGame.Menu import menuHandler as mh
 import time
-from ChunkGenerator import generateChunk
-from ChunkHandler import checkChunkUpdates
-from soundHandler import playMusic
-import Portal as po
-from block import Block
+from MainGame.Chunks.ChunkGenerator import generateChunk
+from MainGame.Chunks.ChunkHandler import checkChunkUpdates
+from MainGame.Audio.soundHandler import playMusic
+from MainGame.Blocks.block import Block
 #from itemHandler import populateDictionaries
-import itemHandler as ih
+from MainGame.Items import itemHandler as ih
 
 #Populate item dictionaries
 textureNames = ih.fetchTextureNames()
@@ -36,7 +34,7 @@ gameRunning = True
 color_light = (250, 250, 250)  # colour of button when hover over
 color_dark = (64, 64, 64)  # colour of button- default
 
-buttonFont = pygame.font.Font('Minecraft.ttf', 40)  # font for button
+buttonFont = pygame.font.Font('MainGame/Font/Minecraft.ttf',40)  # font for button
 # load image for start screen
 startPage = pygame.image.load("Textures/Screens/start.png")
 startPage = pygame.transform.scale(
@@ -197,7 +195,7 @@ def gameMenu():
             player.update(clock.tick(),  collisionblocks, True)
 
         # Font to draw the FPS
-        font = pygame.font.Font('Minecraft.ttf', 16)
+        font = pygame.font.Font('MainGame/Font/Minecraft.ttf',16)
         fpsText = font.render(
             "FPS: "+str(int(clock.get_fps())), 1, (255, 255, 255))
         seedText = font.render("Seed: " + str(gs.seed), 1, (255, 255, 255))

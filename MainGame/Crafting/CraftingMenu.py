@@ -1,13 +1,12 @@
 import pygame
-from gameSettings import blockSize
-import itemHandler as ih
-import gameSettings as gs
-from TextHandler import Text
-from itemNew import Item
-import recipeHandler as rh
+from MainGame.Settings.gameSettings import blockSize
+from MainGame.Items import itemHandler as ih
+from MainGame.Settings import gameSettings as gs
+from MainGame.Items.itemNew import Item
+from MainGame.Recipes import recipeHandler as rh
 import numpy as np
-from inventoryHandler import addBlock, addItem, decreaseSpec, getClicked, invArray, setClicked
-from InventorySlots import slot
+from MainGame.Inventory.inventoryHandler import addBlock, addItem, decreaseSpec, getClicked, invArray, setClicked
+from MainGame.Inventory.InventorySlots import slot
 
 itemIDs = ih.fetchItemIDs()
 textureNames = ih.fetchTextureNames()
@@ -16,7 +15,7 @@ itemHardness = ih.fetchItemHardness()
 items = ih.fetchDict()
 slots = pygame.sprite.Group()
 relative = gs.blockSize/30
-buttonFont = pygame.font.Font('Minecraft.ttf', 40)  # font for button
+buttonFont = pygame.font.Font('../Font/Minecraft.ttf',40)  # font for button
 # invArray=np.full(40,NullItem,dtype=Item)
 NullItem = items[0]
 

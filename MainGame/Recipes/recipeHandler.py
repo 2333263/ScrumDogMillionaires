@@ -1,5 +1,5 @@
 import json
-from itemHandler import craftingIDs
+from MainGame.Items.itemHandler import craftingIDs
 import numpy as np
 
 class RecipeHandler():

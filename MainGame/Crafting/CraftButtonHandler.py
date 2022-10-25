@@ -1,5 +1,6 @@
 import pygame
-import itemHandler as ih
+from MainGame.Items import itemHandler as ih
+
 itemIDs = ih.fetchItemIDs()
 textureNames = ih.fetchTextureNames()
 class Button(pygame.sprite.Sprite):

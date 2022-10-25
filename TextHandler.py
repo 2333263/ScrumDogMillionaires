@@ -7,7 +7,7 @@ class Text(pygame.sprite.Sprite):
         # Call the parent class (Sprite) constructor
         pygame.sprite.Sprite.__init__(self)
        
-        self.my_font = pygame.font.Font("Minecraft.ttf", fontSize)
+        self.my_font = pygame.font.Font("MainGame/Font/Minecraft.ttf",fontSize)
         self.words = text
         self.image = self.my_font.render(self.words, True, color, background)
         self.pos = pos

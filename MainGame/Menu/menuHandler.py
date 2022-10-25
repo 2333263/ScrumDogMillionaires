@@ -1,5 +1,6 @@
 import pygame
-import gameSettings as gs
+from MainGame.Settings import gameSettings as gs
+
 
 #game menus
 

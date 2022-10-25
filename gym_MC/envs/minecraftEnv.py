@@ -1,22 +1,18 @@
-from math import ceil
-from tarfile import BLOCKSIZE
 import pygame
 import sys
 import numpy as np
 
 sys.path.append("../Scrum-Dog-Millionaires")
-import gameSettings as gs
-from ChunkGenerator import generateChunk
-import playerHandler as ph
-import Camera as cam
-import inventoryHandler as inv
-import breakPlaceHandler as bph
-from CraftingMenu import Crafting
-from itemNew import Item
-import itemHandler as ih
-import rewardsHandler as rw
-from block import Block
-from ChunkHandler import checkChunkUpdates
+from MainGame.Settings import gameSettings as gs
+from MainGame.Chunks.ChunkGenerator import generateChunk
+from MainGame.Player import playerHandler as ph
+from MainGame.Camera import Camera as cam
+from MainGame.Inventory import inventoryHandler as inv
+from MainGame.Blocks import breakPlaceHandler as bph
+from MainGame.Crafting.CraftingMenu import Crafting
+from MainGame.Items import itemHandler as ih
+from MainGame.Rewards import rewardsHandler as rw
+from MainGame.Chunks.ChunkHandler import checkChunkUpdates
 import copy
 
 itemIDs = ih.fetchItemIDs()
