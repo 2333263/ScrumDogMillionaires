@@ -3,7 +3,7 @@ from MainGame.Stage.stage import Stage
 
 def populateStages():
     stages = {}
-    file = open("rewards.json")
+    file = open("MainGame/Rewards/rewards.json")
     data = json.load(file)
     for i in data:
         tempStage = Stage(data[i]['GoalItems'],

@@ -33,7 +33,7 @@ def getGrassSound():
 def playMusic():
     # Loading and playing background music:
 
-    pygame.mixer.music.load('../Assets/SelfExploration.wav')
+    pygame.mixer.music.load('MainGame/Assets/SelfExploration.wav')
     pygame.mixer.music.play(-1, 0.0) #-1 makes the track loop infintely, play from 0th second
     pygame.mixer.music.set_volume(0.5)
 

@@ -4,7 +4,7 @@ import numpy as np
 
 class RecipeHandler():
     def __init__(self):
-        self.file = open("recipes.json")
+        self.file = open("MainGame/Recipes/recipes.json")
         self.data = json.load(self.file)
         self.recipe = {}
 
