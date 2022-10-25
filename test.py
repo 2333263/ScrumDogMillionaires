@@ -15,6 +15,7 @@ from MainGame.Portal import Portal
 from MainGame.Items import itemHandler,itemNew
 import numpy as np
 import gym
+import gym_MC
 from MainGame.Rewards import rewardsHandler
 
 # replaces gamesettings
