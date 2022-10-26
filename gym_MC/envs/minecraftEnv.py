@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import pygame
 import sys
 import numpy as np
@@ -96,11 +97,12 @@ class MinePy:
         self.camera = cam.Camera(self.player)
         checkChunkUpdates(self.player, self.worldBlocks)
         self.crafter = Crafting(self.screen)
-        
+        self.textureNames = ih.fetchTextureNames()
+        self.actionImage=pygame.image.load(self.textureNames["null"]).convert_alpha() #load the image to show block being placed
         self.playerPos = [0, 0]
         self.cursorPos = [0, 0]
         self.isBP=False
-        self.textureNames = ih.fetchTextureNames()
+       
 
       
         self.offset = [[-1,-1],[0,-1],[1,-1],  # offsets of player positions, top row is above player
@@ -110,10 +112,11 @@ class MinePy:
         #self.player.rect.y-=6500
 
     def action(self,action):
-
+        
         fakeKeys = {pygame.K_LEFT: False,pygame.K_RIGHT: False,pygame.K_UP: False,pygame.K_a: False,pygame.K_d: False,
                     pygame.K_w: False,pygame.K_SPACE: False} #list of fake keys the agent can press
-
+        if action in gs.actionSpace["MOVEMENT"]:
+            self.actionImage=pygame.image.load(self.textureNames["Movement"]).convert_alpha()
         if action == gs.actionSpace["MOVEMENT"][2]: #jump up
             self.player.jump()
         elif action == gs.actionSpace["MOVEMENT"][1]: #move left
@@ -142,14 +145,18 @@ class MinePy:
             self.playerPos[1] += self.offset[realAction][1] * gs.blockSize #add the offset of the block the player wants to break or place to the position of the agent
             self.cursorPos=[self.offset[realAction][0] * gs.blockSize, self.offset[realAction][1] * gs.blockSize] #cursor position is the offset of the block the player wants to break or place
             if action in gs.actionSpace["WORLD"][0:10]:
+                self.actionImage = pygame.image.load(self.textureNames["Block_Break"]).convert_alpha() #load the image to show block being broken
                 bph.blockBreak(self.playerPos,self.worldBlocks,self.player,False,False) #break block
             else:
+                self.actionImage = pygame.image.load(self.textureNames["Grass Block"]).convert_alpha() #load the image to show block being placed
                 bph.blockPlace(self.playerPos,self.worldBlocks,self.player,False,False) #place block
 
         elif action in gs.actionSpace["HOTBAR"]:
+            self.actionImage = pygame.image.load(self.textureNames["Inv"]).convert_alpha() #load the image to show block being placed
             inv.selectInventory(action - gs.actionSpace["HOTBAR"][0]) #select item anywhere in inventory
 
         elif action in gs.actionSpace["CRAFTING"]:
+            self.actionImage = pygame.image.load(self.textureNames["Crafting Table"]).convert_alpha() #load the image to show currently crafting
             craftingID = action - gs.actionSpace["CRAFTING"][0] #which craftingID to craft
             craftPossibility = self.crafter.craftSpec(craftingID,inv.getInv()) #check if the player can craft the item and performs if possible
         if action not in gs.actionSpace["WORLD"]:
@@ -458,7 +465,14 @@ class MinePy:
         pygame.draw.rect(self.screen,(0,0,0),bg)
         self.collisionblocks = self.camera.draw(self.screen,self.worldBlocks)
         inv.drawHotBar(self.screen)  # --> draw inventory
+        relative=gs.blockSize/30
+        font = pygame.font.Font('MainGame/Font/Minecraft.ttf',int(16 * relative))
+        text = font.render("ACTION", 1*relative, (255, 255,255))
 
+        pygame.draw.rect(self.screen,(90,90,90),[900*relative,20*relative,85*relative,100*relative],0)
+        self.screen.blit(text, (910*relative, 30*relative))
+        self.actionImage=pygame.transform.scale(self.actionImage, (55*relative,55*relative))
+        self.screen.blit(self.actionImage, (915*relative, 50*relative))
         blockFrameImg = pygame.image.load(self.textureNames["Block_Frame"]).convert_alpha() # --> load block cursor texture
         blockFrame = pygame.transform.scale(blockFrameImg, (gs.blockSize, gs.blockSize)) # --> scale block cursor texture
         #blockPos = gs.getPos(mousePos)[0] - camera.getOffsets()[0] % gs.blockSize, \ gs.getPos(mousePos)[1] - camera.getOffsets()[1] % gs.blockSize

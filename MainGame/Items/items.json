@@ -1114,5 +1114,42 @@
         "texture": "Textures/Blocks/block_frame_green_4-4.png",
         "isPlaceable": true,
         "drops" : -1
+    },
+    "Block_Break": {
+        "itemID": 92,
+        "itemDisplayName" : "Block_Break",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/block_break.png",
+        "isPlaceable": false,
+        "drops" : -1
+    },
+    "Inventory": {
+        "itemID": 93,
+        "itemDisplayName" : "Inv",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/inventory.png",
+        "isPlaceable": false,
+        "drops" : -1
+    }
+    ,
+    "Movement": {
+        "itemID": 94,
+        "itemDisplayName" : "Movement",
+        "breakTime": 99999,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/arrows.png",
+        "isPlaceable": false,
+        "drops" : -1
     }
 }
