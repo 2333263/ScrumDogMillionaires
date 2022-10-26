@@ -34,6 +34,7 @@ class MinePy:
                 i.amount=0
         self.render_mode = render_mode
         self.inv=inv
+        self.inv.initGroup()
         if (render_mode == "rgb_array"):
             # if render mode is rgb_array do not render game to screen, render to surface
             self.screen = pygame.Surface((gs.width,gs.height)) 
@@ -461,8 +462,12 @@ class MinePy:
                 quit()
 
         # DO drawing
-        bg = pygame.Rect(0,0,gs.width,gs.height) #no background image to save resources
-        pygame.draw.rect(self.screen,(0,0,0),bg)
+        bg = pygame.image.load(self.textureNames["Sky"]).convert()
+        bg = pygame.transform.scale(bg, (gs.width, gs.height))
+     
+        self. screen.blit(bg, (0, 0))
+       # bg = pygame.Rect(0,0,gs.width,gs.height) #no background image to save resources
+       # pygame.draw.rect(self.screen,(0,0,0),bg)
         self.collisionblocks = self.camera.draw(self.screen,self.worldBlocks)
         inv.drawHotBar(self.screen)  # --> draw inventory
         relative=gs.blockSize/30
