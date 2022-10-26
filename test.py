@@ -726,7 +726,7 @@ class TestBreakPlace(unittest.TestCase):
         for i in range(len(inventory)):
             ih.selected = i
             if (ih.getSelected().itemID != -1):
-                for j in range(len(ih.getSelected().getCount())):
+                for j in range(ih.getSelected().getCount()):
                     ih.decrease()
         ih.selected = 0
         gs.generatedChunks[0] = self.spriteGroup

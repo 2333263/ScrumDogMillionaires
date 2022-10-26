@@ -210,6 +210,7 @@ def drawInv(screen):
 
 #initlize the slots as a sprite group
 def initGroup():
+    slots.empty()
     #loop to add the hot bar slots
     for i in range(10):
         s=slot((0,0,0),12*relative+i*85*relative,30*relative,70*relative,80*relative)

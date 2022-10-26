@@ -3,7 +3,7 @@ import gym
 import gym_MC
 
 #Create the gym environment 
-env = gym.make("MinePy-1", render_mode="human", easyStart=0, seed=1212)
+env = gym.make("MinePy-1", render_mode="human", easyStart=2, seed=1212)
 #env.action_space.seed(45)
 
 #Gets the osbervations and info before reset 
