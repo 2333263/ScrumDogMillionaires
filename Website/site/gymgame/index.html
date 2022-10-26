@@ -285,27 +285,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#creating-new-rewards" class="md-nav__link">
-    Creating new rewards
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-built-in-tasks-for-the-agent" class="md-nav__link">
-    Using built in tasks for the agent
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-new-tasks-for-the-agent" class="md-nav__link">
-    Adding new tasks for the agent
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -389,27 +368,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#creating-new-rewards" class="md-nav__link">
-    Creating new rewards
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-built-in-tasks-for-the-agent" class="md-nav__link">
-    Using built in tasks for the agent
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-new-tasks-for-the-agent" class="md-nav__link">
-    Adding new tasks for the agent
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -434,7 +392,7 @@
 <pre><code class="language-py">import gym
 import gym_MC
 
-env = gym.make(&quot;MinePy-1&quot;, render_mode=&quot;human&quot;,easyStart=0,seed=1024, spawnLoc=(1024,1024))
+env = gym.make(&quot;MinePy-1&quot;, render_mode=&quot;human&quot;,easyStart=0,seed=1024, spawnLoc=(1024,1024), task=&quot;1&quot;)
 
 obs, info = env.reset(seed=1212) #has to be the same seed as above
 done=False
@@ -468,6 +426,42 @@ done=False
 <li>If none is given, default spawn location is (0,0).</li>
 <li>Note that on a reset, if no spawn location is given, but one was given in the original initilization, the spawn location will be the one given in the intilization.</li>
 <li>Also note that the position is in blocks not pixels.</li>
+</ul>
+<p>task:</p>
+<ul>
+<li>
+<p>Number between 1 and 9 that sets the goal of the agent</p>
+<ul>
+<li>
+<p><code>1</code>: The agent must collect 2 or more wooden logs.</p>
+</li>
+<li>
+<p><code>2</code>: All the requirements of stage 1 and the agent mut craft 8 or more wooden planks.</p>
+</li>
+<li>
+<p><code>3</code>: All the requirements of stage 2 and the agent must craft 1 or more wooden pickaxes.</p>
+</li>
+<li>
+<p><code>4</code>: All the requirements of stage 3 and the agent must collect 3 stone, as well as have 2 wooden planks in its inventory.</p>
+</li>
+<li>
+<p><code>5</code>: All the requirements of stage 4 and the agent must craft a stone pickaxe.</p>
+</li>
+<li>
+<p><code>6</code>: All the requirements of stage 5 and the agent must collect 36 gold ore, 36 diamond ore and 1 emerald ore.</p>
+</li>
+<li>
+<p><code>7</code>: All the requirements of stage 6 and the agent must craft 9 diamonds, 9 gold ingots and 1 emerald.</p>
+</li>
+<li>
+<p><code>8</code>: All the requirements of stage 7 and the agent must craft 4 diamond blocks and 4 gold blocks.</p>
+</li>
+<li>
+<p><code>9</code>: All the requirements of stage 8 and the agent must craft the end game block.</p>
+</li>
+<li></li>
+</ul>
+</li>
 </ul>
 <p>In order to perform an action use the following:</p>
 <pre><code class="language-py">
@@ -504,9 +498,6 @@ env.step(step)
 <p><code>step:</code> takes in an action, steps the agent forward, returns observations, reward, whether or not the game is done, and an dictionary of information, and will render if render mode is set to human.</p>
 </li>
 </ul>
-<h2 id="creating-new-rewards">Creating new rewards</h2>
-<h2 id="using-built-in-tasks-for-the-agent">Using built in tasks for the agent</h2>
-<h2 id="adding-new-tasks-for-the-agent">Adding new tasks for the agent</h2>
 
 
 

@@ -8,7 +8,7 @@ Ensure you have the following code in your file:
 import gym
 import gym_MC
 
-env = gym.make("MinePy-1", render_mode="human",easyStart=0,seed=1024, spawnLoc=(1024,1024))
+env = gym.make("MinePy-1", render_mode="human",easyStart=0,seed=1024, spawnLoc=(1024,1024), task="1")
 
 obs, info = env.reset(seed=1212) #has to be the same seed as above
 done=False
@@ -45,6 +45,28 @@ spawnLoc:
 * Note that on a reset, if no spawn location is given, but one was given in the original initilization, the spawn location will be the one given in the intilization.
 * Also note that the position is in blocks not pixels.
 
+task:
+
+* Number between 1 and 9 that sets the goal of the agent
+
+    - `1`: The agent must collect 2 or more wooden logs.
+
+    - `2`: All the requirements of stage 1 and the agent mut craft 8 or more wooden planks.
+
+    - `3`: All the requirements of stage 2 and the agent must craft 1 or more wooden pickaxes.
+
+    - `4`: All the requirements of stage 3 and the agent must collect 3 stone, as well as have 2 wooden planks in its inventory.
+
+    - `5`: All the requirements of stage 4 and the agent must craft a stone pickaxe.
+
+    - `6`: All the requirements of stage 5 and the agent must collect 36 gold ore, 36 diamond ore and 1 emerald ore.
+
+    - `7`: All the requirements of stage 6 and the agent must craft 9 diamonds, 9 gold ingots and 1 emerald.
+
+    - `8`: All the requirements of stage 7 and the agent must craft 4 diamond blocks and 4 gold blocks.
+
+    - `9`: All the requirements of stage 8 and the agent must craft the end game block.
+* 
 
 In order to perform an action use the following:
 
@@ -73,16 +95,4 @@ where step is an integer value between 0 and 75, representing an action the play
 * `render:` forces game to render.
 
 * `step:` takes in an action, steps the agent forward, returns observations, reward, whether or not the game is done, and an dictionary of information, and will render if render mode is set to human.
-
-## Creating new rewards
-
-  
-
-## Using built in tasks for the agent
-
-  
-
-## Adding new tasks for the agent
-
-  
 

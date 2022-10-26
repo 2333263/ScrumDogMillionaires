@@ -30,7 +30,7 @@ class MinePy:
     #   Second number is amount of block to break, if the first number is negative
     #   e.g. "9," or "9,0" - complete stage 9
     #   e.g. "-9,5" - break 5 blocks of blockID 9
-    def __init__(self, render_mode="human", easyStart=0, playerRange=7, seed=None,spawnLoc=(None,None),task="2"):
+    def __init__(self, render_mode="human", easyStart=0, playerRange=7, seed=None,spawnLoc=(None,None),task="9"):
         pygame.init()
         self.seed=seed
         self.task = task
@@ -186,18 +186,11 @@ class MinePy:
     
         #if the first argument is negative, agent will get a reward for breaking 'amount' of that block id
         #task will be complete when the 'amount' of blocks specified is in the inventory
-        if (taskInt < 0):
-            amount = int(self.task.split('.')[1])
-            blockID = abs(taskInt)
-            if inv.getItemCountFromInput(blockID,current) >= amount :
-                self.done = True
-                return 1000
-        print(self.done)   
+        taskInt=abs(taskInt)
         #check the stage number is one bigger than task number, it basically mean complete stage number -1
         #then it return the done as True to end the game and return award value as 1000
         if (self.stage == taskInt+1):
             self.done = True
-            print(self.done)
             return 1000
         currStage = stages["Stage" + str(self.stage)]
         rewardInt = currStage.getReward()  # get the reward for the current stage
