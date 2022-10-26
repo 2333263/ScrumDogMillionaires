@@ -4,6 +4,7 @@ nav:
     - Home: index.md
     - Playing the interactive game: maingame.md
     - Using the Gym Agent: gymgame.md
+    - Add new items and crafting recipes: addnew.md
 
 
 theme:
