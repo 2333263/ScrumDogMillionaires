@@ -36,5 +36,5 @@ Wen Guan Gavin Chen -2302891
 
 Cool Seeds : 6969, -1524    
 
-[![codecov](https://codecov.io/gh/2333263/Scrum-Dog-Millionaires/branch/main/graph/badge.svg?token=S5G6FCJHRC)](https://codecov.io/gh/2333263/Scrum-Dog-Millionaires)
+[![codecov](https://codecov.io/gh/2333263/ScrumDogMillionaires/branch/main/graph/badge.svg?token=S5G6FCJHRC)](https://codecov.io/gh/2333263/ScrumDogMillionaires)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/2333263/ScrumDogMillionaires/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/2333263/ScrumDogMillionaires/tree/main)
