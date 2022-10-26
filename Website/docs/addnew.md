@@ -1,7 +1,7 @@
 In order to add new items and crafting recipies into the game you will need to navigate to where you installed main game package.
 
 ## Add new items
-* Go to ```install_location\Scrum-Dog-Millionaires\MainGame\Items\items.json```
+* Go to ```install_location\ScrumDogMillionaires\MainGame\Items\items.json```
 * Add an entry in the following format:
 
 ```json
@@ -17,6 +17,25 @@ In order to add new items and crafting recipies into the game you will need to n
         "isPlaceable": boolean representing if the new item is placeable: false for items; true for blocks,
         "drops": integer representing item id you want this block to drop when broken: set it to itself if you want it to drop itself; -1 if you dont want to drop anything at all; or any other item id in the game
 } 
+
+
+```
+* Example:
+```json 
+"dirt_block": {
+        "itemID": 1,
+        "itemDisplayName" : "Dirt Block",
+        "breakTime": 500,
+        "blockHardness": 0,
+        "itemHardness": 0,
+        "reqToolType": "none",
+        "toolType": "none",
+        "texture": "Textures/Blocks/dirt.png",
+        "isPlaceable": true,
+        "drops" : 1
+    },
+
+
 ```
 * Please note that if you want the block to spawn in the game naturally you will have to edit the chunk generator code in the chunks file.
 
@@ -46,3 +65,27 @@ In order to add new items and crafting recipies into the game you will need to n
 
 }
 ```
+
+* Example:
+
+```json
+{
+        "craftingID" : 1,
+        "toolName" : "Wooden Pickaxe",
+        "itemID" : 11,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID": 8,
+                "numBlocks" : 5
+            }
+        ],
+        "shape":
+        [8, 8, 8,
+        -1, 8, -1,
+        -1, 8, -1]
+    },
+
+```
+

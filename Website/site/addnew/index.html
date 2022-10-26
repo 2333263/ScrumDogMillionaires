@@ -301,6 +301,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../change/" class="md-nav__link">
+        Settings you can change
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -359,7 +374,7 @@
 <p>In order to add new items and crafting recipies into the game you will need to navigate to where you installed main game package.</p>
 <h2 id="add-new-items">Add new items</h2>
 <ul>
-<li>Go to <code>install_location\Scrum-Dog-Millionaires\MainGame\Items\items.json</code></li>
+<li>Go to <code>install_location\ScrumDogMillionaires\MainGame\Items\items.json</code></li>
 <li>Add an entry in the following format:</li>
 </ul>
 <pre><code class="language-json">&quot;itemname:&quot; {
@@ -374,6 +389,26 @@
         &quot;isPlaceable&quot;: boolean representing if the new item is placeable: false for items; true for blocks,
         &quot;drops&quot;: integer representing item id you want this block to drop when broken: set it to itself if you want it to drop itself; -1 if you dont want to drop anything at all; or any other item id in the game
 } 
+
+
+</code></pre>
+<ul>
+<li>Example:</li>
+</ul>
+<pre><code class="language-json">&quot;dirt_block&quot;: {
+        &quot;itemID&quot;: 1,
+        &quot;itemDisplayName&quot; : &quot;Dirt Block&quot;,
+        &quot;breakTime&quot;: 500,
+        &quot;blockHardness&quot;: 0,
+        &quot;itemHardness&quot;: 0,
+        &quot;reqToolType&quot;: &quot;none&quot;,
+        &quot;toolType&quot;: &quot;none&quot;,
+        &quot;texture&quot;: &quot;Textures/Blocks/dirt.png&quot;,
+        &quot;isPlaceable&quot;: true,
+        &quot;drops&quot; : 1
+    },
+
+
 </code></pre>
 <ul>
 <li>Please note that if you want the block to spawn in the game naturally you will have to edit the chunk generator code in the chunks file.</li>
@@ -404,6 +439,28 @@
 
 
 }
+</code></pre>
+<ul>
+<li>Example:</li>
+</ul>
+<pre><code class="language-json">{
+        &quot;craftingID&quot; : 1,
+        &quot;toolName&quot; : &quot;Wooden Pickaxe&quot;,
+        &quot;itemID&quot; : 11,
+        &quot;craftingAmount&quot; : 1,
+        &quot;recipe&quot; :
+        [
+            {
+                &quot;itemID&quot;: 8,
+                &quot;numBlocks&quot; : 5
+            }
+        ],
+        &quot;shape&quot;:
+        [8, 8, 8,
+        -1, 8, -1,
+        -1, 8, -1]
+    },
+
 </code></pre>
 
 
@@ -439,6 +496,21 @@
           </div>
         </a>
       
+      
+        
+        <a href="../change/" class="md-footer__link md-footer__link--next" aria-label="Next: Settings you can change" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Settings you can change
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
       
     </nav>
   

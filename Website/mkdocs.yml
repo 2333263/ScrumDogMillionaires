@@ -5,6 +5,7 @@ nav:
     - Playing the interactive game: maingame.md
     - Using the Gym Agent: gymgame.md
     - Add new items and crafting recipes: addnew.md
+    - Settings you can change: change.md
 
 
 theme:

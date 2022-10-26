@@ -13,7 +13,7 @@
     
     
       
-        <title>Using the Gym Agent - ScrumDog Millionaires</title>
+        <title>Settings you can change - ScrumDog Millionaires</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#setting-up-the-agent" class="md-skip">
+        <a href="#a-list-of-changeable-settings" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Using the Gym Agent
+              Settings you can change
             
           </span>
         </div>
@@ -233,83 +233,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Using the Gym Agent
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../gymgame/" class="md-nav__link">
         Using the Gym Agent
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-the-agent" class="md-nav__link">
-    Setting up the Agent
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-new-environments" class="md-nav__link">
-    Setting up new environments
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#other-functions" class="md-nav__link">
-    Other functions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creating-new-rewards" class="md-nav__link">
-    Creating new rewards
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-built-in-tasks-for-the-agent" class="md-nav__link">
-    Using built in tasks for the agent
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-new-tasks-for-the-agent" class="md-nav__link">
-    Adding new tasks for the agent
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -335,11 +263,48 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../change/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Settings you can change
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Settings you can change
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-list-of-changeable-settings" class="md-nav__link">
+    A list of changeable settings
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -369,43 +334,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#setting-up-the-agent" class="md-nav__link">
-    Setting up the Agent
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-new-environments" class="md-nav__link">
-    Setting up new environments
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#other-functions" class="md-nav__link">
-    Other functions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creating-new-rewards" class="md-nav__link">
-    Creating new rewards
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-built-in-tasks-for-the-agent" class="md-nav__link">
-    Using built in tasks for the agent
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-new-tasks-for-the-agent" class="md-nav__link">
-    Adding new tasks for the agent
+  <a href="#a-list-of-changeable-settings" class="md-nav__link">
+    A list of changeable settings
   </a>
   
 </li>
@@ -425,88 +355,21 @@
                   
 
 
-  <h1>Using the Gym Agent</h1>
+  <h1>Settings you can change</h1>
 
-<h2 id="setting-up-the-agent">Setting up the Agent</h2>
-<!-- Environment variables,  -->
-
-<p>Ensure you have the following code in your file:</p>
-<pre><code class="language-py">import gym
-import gym_MC
-
-env = gym.make(&quot;MinePy-1&quot;, render_mode=&quot;human&quot;,easyStart=0,seed=1024, spawnLoc=(1024,1024))
-
-obs, info = env.reset(seed=1212) #has to be the same seed as above
-done=False
-
-</code></pre>
-<h2 id="setting-up-new-environments">Setting up new environments</h2>
-<p>render_mode:  </p>
-<ul>
-<li><code>human</code>: renders the game to a screen. </li>
-<li><code>rgb_array</code>: returns the screen as a 2d array of pixel colour values.</li>
-</ul>
-<p>easyStart:  </p>
+<p>In order to change game settings you need to go to<code>install_location\ScrumDogMillionaires\MainGame\Settings\gameSettings.py</code></p>
+<h2 id="a-list-of-changeable-settings">A list of changeable settings</h2>
 <ul>
 <li>
-<p><code>0:</code> no extra items.</p>
+<p><code>blockSize</code>: an integer representing how many pixels a blocks width and height are</p>
 </li>
 <li>
-<p><code>1:</code> player starts with wooden pickaxe and 4 wooden planks.</p>
+<p><code>Width and Height</code>: integers representing the size of the window in pixels</p>
 </li>
 <li>
-<p><code>2:</code> player starts with wooden pickaxe and 4 wooden planks, a stone pickaxe, a diamond and an emerald.</p>
+<p><code>Player range</code>: an integer representing the circular distance around the player that the user can interact with</p>
 </li>
 </ul>
-<p>seed:</p>
-<ul>
-<li>integer value that acts as seed for both the world and the AI.</li>
-</ul>
-<p>spawnLoc:</p>
-<ul>
-<li>Takes in a pair of ints, and sets the agents spawn location.</li>
-<li>If none is given, default spawn location is (0,0).</li>
-<li>Note that on a reset, if no spawn location is given, but one was given in the original initilization, the spawn location will be the one given in the intilization.</li>
-<li>Also note that the position is in blocks not pixels.</li>
-</ul>
-<p>In order to perform an action use the following:</p>
-<pre><code class="language-py">
-env.step(step)
-
-</code></pre>
-<p>where step is an integer value between 0 and 75, representing an action the player can take.</p>
-<ul>
-<li>
-<p><code>0:</code> no action.</p>
-</li>
-<li>
-<p><code>1-4:</code> movement actions.</p>
-</li>
-<li>
-<p><code>4-24:</code> break and placing actions.</p>
-</li>
-<li>
-<p><code>25-64:</code> change selected item.</p>
-</li>
-<li>
-<p><code>65-74:</code> when next to a crafting table, it will craft a specific item.</p>
-</li>
-</ul>
-<h2 id="other-functions">Other functions</h2>
-<ul>
-<li>
-<p><code>reset:</code> takes same options as above and resets the game.</p>
-</li>
-<li>
-<p><code>render:</code> forces game to render.</p>
-</li>
-<li>
-<p><code>step:</code> takes in an action, steps the agent forward, returns observations, reward, whether or not the game is done, and an dictionary of information, and will render if render mode is set to human.</p>
-</li>
-</ul>
-<h2 id="creating-new-rewards">Creating new rewards</h2>
-<h2 id="using-built-in-tasks-for-the-agent">Using built in tasks for the agent</h2>
-<h2 id="adding-new-tasks-for-the-agent">Adding new tasks for the agent</h2>
 
 
 
@@ -527,7 +390,7 @@ env.step(step)
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../maingame/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Playing the interactive game" rel="prev">
+        <a href="../addnew/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Add new items and crafting recipes" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -536,26 +399,11 @@ env.step(step)
               <span class="md-footer__direction">
                 Previous
               </span>
-              Playing the interactive game
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../addnew/" class="md-footer__link md-footer__link--next" aria-label="Next: Add new items and crafting recipes" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
               Add new items and crafting recipes
             </div>
           </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
         </a>
+      
       
     </nav>
   
