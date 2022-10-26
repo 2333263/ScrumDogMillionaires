@@ -7,7 +7,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "null",
-        "texture": "scrumdogmillionaires/Textures/Blocks/null_block.png",
+        "texture": "./Textures/Blocks/null_block.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -19,7 +19,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/grass.png",
+        "texture": "./Textures/Blocks/grass.png",
         "isPlaceable": true,
         "drops" : 0
     },
@@ -31,7 +31,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/dirt.png",
+        "texture": "./Textures/Blocks/dirt.png",
         "isPlaceable": true,
         "drops" : 1
     },
@@ -43,7 +43,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/stone.png",
+        "texture": "./Textures/Blocks/stone.png",
         "isPlaceable": true,
         "drops" : 2
     },
@@ -55,7 +55,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/cloud.png",
+        "texture": "./Textures/Blocks/cloud.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -67,7 +67,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/bedrock.png",
+        "texture": "./Textures/Blocks/bedrock.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -79,7 +79,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/crafting.png",
+        "texture": "./Textures/Blocks/crafting.png",
         "isPlaceable": true,
         "drops" : 5
     },
@@ -91,7 +91,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/leaves_dense.png",
+        "texture": "./Textures/Blocks/leaves_dense.png",
         "isPlaceable": true,
         "drops" : 6
     },
@@ -103,7 +103,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/wood_log.png",
+        "texture": "./Textures/Blocks/wood_log.png",
         "isPlaceable": true,
         "drops" : 7
     },
@@ -115,7 +115,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/wood_planks.png",
+        "texture": "./Textures/Blocks/wood_planks.png",
         "isPlaceable": true,
         "drops" : 8
     },
@@ -127,7 +127,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Screens/CraftingMenu.png",
+        "texture": "./Textures/Screens/CraftingMenu.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -139,7 +139,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Screens/sky.png",
+        "texture": "./Textures/Screens/sky.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -151,7 +151,7 @@
         "itemHardness": 1,
         "reqToolType": "none",
         "toolType": "pickaxe",
-        "texture": "scrumdogmillionaires/Textures/Tools/wooden_pickaxe.png",
+        "texture": "./Textures/Tools/wooden_pickaxe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -163,7 +163,7 @@
         "itemHardness": 1,
         "reqToolType": "none",
         "toolType": "axe",
-        "texture": "scrumdogmillionaires/Textures/Tools/wooden_axe.png",
+        "texture": "./Textures/Tools/wooden_axe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -175,7 +175,7 @@
         "itemHardness": 1,
         "reqToolType": "none",
         "toolType": "shovel",
-        "texture": "scrumdogmillionaires/Textures/Tools/wooden_shovel.png",
+        "texture": "./Textures/Tools/wooden_shovel.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -187,7 +187,7 @@
         "itemHardness": 1,
         "reqToolType": "none",
         "toolType": "hoe",
-        "texture": "scrumdogmillionaires/Textures/Tools/wooden_hoe.png",
+        "texture": "./Textures/Tools/wooden_hoe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -199,7 +199,7 @@
         "itemHardness": 1,
         "reqToolType": "none",
         "toolType": "sword",
-        "texture": "scrumdogmillionaires/Textures/Tools/wooden_sword.png",
+        "texture": "./Textures/Tools/wooden_sword.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -211,7 +211,7 @@
         "itemHardness": 6,
         "reqToolType": "none",
         "toolType": "pickaxe",
-        "texture": "scrumdogmillionaires/Textures/Tools/stone_pickaxe.png",
+        "texture": "./Textures/Tools/stone_pickaxe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -223,7 +223,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "axe",
-        "texture": "scrumdogmillionaires/Textures/Tools/stone_axe.png",
+        "texture": "./Textures/Tools/stone_axe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -235,7 +235,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "shovel",
-        "texture": "scrumdogmillionaires/Textures/Tools/stone_shovel.png",
+        "texture": "./Textures/Tools/stone_shovel.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -247,7 +247,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "hoe",
-        "texture": "scrumdogmillionaires/Textures/Tools/stone_hoe.png",
+        "texture": "./Textures/Tools/stone_hoe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -259,7 +259,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "sword",
-        "texture": "scrumdogmillionaires/Textures/Tools/stone_sword.png",
+        "texture": "./Textures/Tools/stone_sword.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -271,7 +271,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "pickaxe",
-        "texture": "scrumdogmillionaires/Textures/Tools/golden_pickaxe.png",
+        "texture": "./Textures/Tools/golden_pickaxe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -283,7 +283,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "axe",
-        "texture": "scrumdogmillionaires/Textures/Tools/golden_axe.png",
+        "texture": "./Textures/Tools/golden_axe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -295,7 +295,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "shovel",
-        "texture": "scrumdogmillionaires/Textures/Tools/golden_shovel.png",
+        "texture": "./Textures/Tools/golden_shovel.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -307,7 +307,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "hoe",
-        "texture": "scrumdogmillionaires/Textures/Tools/golden_hoe.png",
+        "texture": "./Textures/Tools/golden_hoe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -319,7 +319,7 @@
         "itemHardness": 2,
         "reqToolType": "none",
         "toolType": "sword",
-        "texture": "scrumdogmillionaires/Textures/Tools/golden_sword.png",
+        "texture": "./Textures/Tools/golden_sword.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -331,7 +331,7 @@
         "itemHardness": 3,
         "reqToolType": "none",
         "toolType": "pickaxe",
-        "texture": "scrumdogmillionaires/Textures/Tools/iron_pickaxe.png",
+        "texture": "./Textures/Tools/iron_pickaxe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -343,7 +343,7 @@
         "itemHardness": 3,
         "reqToolType": "none",
         "toolType": "axe",
-        "texture": "scrumdogmillionaires/Textures/Tools/iron_axe.png",
+        "texture": "./Textures/Tools/iron_axe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -355,7 +355,7 @@
         "itemHardness": 3,
         "reqToolType": "none",
         "toolType": "shovel",
-        "texture": "scrumdogmillionaires/Textures/Tools/iron_shovel.png",
+        "texture": "./Textures/Tools/iron_shovel.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -367,7 +367,7 @@
         "itemHardness": 3,
         "reqToolType": "none",
         "toolType": "hoe",
-        "texture": "scrumdogmillionaires/Textures/Tools/iron_hoe.png",
+        "texture": "./Textures/Tools/iron_hoe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -379,7 +379,7 @@
         "itemHardness": 3,
         "reqToolType": "none",
         "toolType": "sword",
-        "texture": "scrumdogmillionaires/Textures/Tools/iron_sword.png",
+        "texture": "./Textures/Tools/iron_sword.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -391,7 +391,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "pickaxe",
-        "texture": "scrumdogmillionaires/Textures/Tools/diamond_pickaxe.png",
+        "texture": "./Textures/Tools/diamond_pickaxe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -403,7 +403,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "axe",
-        "texture": "scrumdogmillionaires/Textures/Tools/diamond_axe.png",
+        "texture": "./Textures/Tools/diamond_axe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -415,7 +415,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "shovel",
-        "texture": "scrumdogmillionaires/Textures/Tools/diamond_shovel.png",
+        "texture": "./Textures/Tools/diamond_shovel.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -427,7 +427,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "hoe",
-        "texture": "scrumdogmillionaires/Textures/Tools/diamond_hoe.png",
+        "texture": "./Textures/Tools/diamond_hoe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -439,7 +439,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "sword",
-        "texture": "scrumdogmillionaires/Textures/Tools/diamond_sword.png",
+        "texture": "./Textures/Tools/diamond_sword.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -451,7 +451,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "pickaxe",
-        "texture": "scrumdogmillionaires/Textures/Tools/netherrite_pickaxe.png",
+        "texture": "./Textures/Tools/netherrite_pickaxe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -463,7 +463,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "axe",
-        "texture": "scrumdogmillionaires/Textures/Tools/netherrite_axe.png",
+        "texture": "./Textures/Tools/netherrite_axe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -475,7 +475,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "shovel",
-        "texture": "scrumdogmillionaires/Textures/Tools/netherrite_shovel.png",
+        "texture": "./Textures/Tools/netherrite_shovel.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -487,7 +487,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "hoe",
-        "texture": "scrumdogmillionaires/Textures/Tools/netherrite_hoe.png",
+        "texture": "./Textures/Tools/netherrite_hoe.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -499,7 +499,7 @@
         "itemHardness": 4,
         "reqToolType": "none",
         "toolType": "sword",
-        "texture": "scrumdogmillionaires/Textures/Tools/netherrite_sword.png",
+        "texture": "./Textures/Tools/netherrite_sword.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -511,7 +511,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/coal_ore.png",
+        "texture": "./Textures/Blocks/coal_ore.png",
         "isPlaceable": true,
         "drops" : 42
     },
@@ -523,7 +523,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/coal.png",
+        "texture": "./Textures/Items/coal.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -535,7 +535,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/iron_ore.png",
+        "texture": "./Textures/Blocks/iron_ore.png",
         "isPlaceable": true,
         "drops" : 43
     },
@@ -547,7 +547,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/iron_ingot.png",
+        "texture": "./Textures/Items/iron_ingot.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -559,7 +559,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/iron_nugget.png",
+        "texture": "./Textures/Items/iron_nugget.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -571,7 +571,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/gold_ore.png",
+        "texture": "./Textures/Blocks/gold_ore.png",
         "isPlaceable": true,
         "drops" : 46
     },
@@ -583,7 +583,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/gold_ingot.png",
+        "texture": "./Textures/Items/gold_ingot.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -595,7 +595,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/gold_nugget.png",
+        "texture": "./Textures/Items/gold_nugget.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -607,7 +607,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/diamond_ore.png",
+        "texture": "./Textures/Blocks/diamond_ore.png",
         "isPlaceable": true,
         "drops" : 50
     },
@@ -619,7 +619,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/diamond.png",
+        "texture": "./Textures/Items/diamond.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -631,7 +631,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_frame.png",
+        "texture": "./Textures/Blocks/block_frame.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -643,7 +643,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/charcoal.png",
+        "texture": "./Textures/Items/charcoal.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -655,7 +655,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/emerald.png",
+        "texture": "./Textures/Items/emerald.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -667,7 +667,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/flint.png",
+        "texture": "./Textures/Items/flint.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -679,7 +679,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/lapis_ore.png",
+        "texture": "./Textures/Blocks/lapis_ore.png",
         "isPlaceable": true,
         "drops" : 56
     },
@@ -691,7 +691,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/lapis_lazuli.png",
+        "texture": "./Textures/Items/lapis_lazuli.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -703,7 +703,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/netherite_ingot.png",
+        "texture": "./Textures/Items/netherite_ingot.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -715,7 +715,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/stick.png",
+        "texture": "./Textures/Items/stick.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -727,7 +727,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Tools/fishing_rod.png",
+        "texture": "./Textures/Tools/fishing_rod.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -739,7 +739,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/leaves_twig.png",
+        "texture": "./Textures/Blocks/leaves_twig.png",
         "isPlaceable": true,
         "drops" : 58
     },
@@ -751,7 +751,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate.png",
+        "texture": "./Textures/Blocks/deepslate.png",
         "isPlaceable": true,
         "drops" : 61
     },
@@ -763,7 +763,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/coal_block.png",
+        "texture": "./Textures/Blocks/coal_block.png",
         "isPlaceable": true,
         "drops" : 62
     },
@@ -775,7 +775,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/emerald_block.png",
+        "texture": "./Textures/Blocks/emerald_block.png",
         "isPlaceable": true,
         "drops" : 63
     },
@@ -787,7 +787,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/gold_block.png",
+        "texture": "./Textures/Blocks/gold_block.png",
         "isPlaceable": true,
         "drops" : 64
     },
@@ -799,7 +799,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/iron_block.png",
+        "texture": "./Textures/Blocks/iron_block.png",
         "isPlaceable": true,
         "drops" : 65
     },
@@ -811,7 +811,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/lapis_block.png",
+        "texture": "./Textures/Blocks/lapis_block.png",
         "isPlaceable": true,
         "drops" : 66
     },
@@ -823,7 +823,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/diamond_block.png",
+        "texture": "./Textures/Blocks/diamond_block.png",
         "isPlaceable": true,
         "drops" : 67
     },
@@ -835,7 +835,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/redstone_block.png",
+        "texture": "./Textures/Blocks/redstone_block.png",
         "isPlaceable": true,
         "drops" : 68
     },
@@ -847,7 +847,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/copper_ore.png",
+        "texture": "./Textures/Blocks/copper_ore.png",
         "isPlaceable": true,
         "drops" : 69
     },
@@ -859,7 +859,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate_coal_ore.png",
+        "texture": "./Textures/Blocks/deepslate_coal_ore.png",
         "isPlaceable": true,
         "drops" : 42
     },
@@ -871,7 +871,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate_copper_ore.png",
+        "texture": "./Textures/Blocks/deepslate_copper_ore.png",
         "isPlaceable": true,
         "drops" : 71
     },
@@ -883,7 +883,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate_diamond_ore.png",
+        "texture": "./Textures/Blocks/deepslate_diamond_ore.png",
         "isPlaceable": true,
         "drops" : 50
     },
@@ -895,7 +895,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate_emerald_ore.png",
+        "texture": "./Textures/Blocks/deepslate_emerald_ore.png",
         "isPlaceable": true,
         "drops" : 53
     },
@@ -907,7 +907,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate_gold_ore.png",
+        "texture": "./Textures/Blocks/deepslate_gold_ore.png",
         "isPlaceable": true,
         "drops" : 74
     },
@@ -919,7 +919,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate_iron_ore.png",
+        "texture": "./Textures/Blocks/deepslate_iron_ore.png",
         "isPlaceable": true,
         "drops" : 75
     },
@@ -931,7 +931,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate_lapis_ore.png",
+        "texture": "./Textures/Blocks/deepslate_lapis_ore.png",
         "isPlaceable": true,
         "drops" : 56
     },
@@ -943,7 +943,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/deepslate_redstone_ore.png",
+        "texture": "./Textures/Blocks/deepslate_redstone_ore.png",
         "isPlaceable": true,
         "drops" : 82
     },
@@ -955,7 +955,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/emerald_ore.png",
+        "texture": "./Textures/Blocks/emerald_ore.png",
         "isPlaceable": true,
         "drops" : 53
     },
@@ -967,7 +967,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/nether_gold_ore.png",
+        "texture": "./Textures/Blocks/nether_gold_ore.png",
         "isPlaceable": true,
         "drops" : 79
     },
@@ -979,7 +979,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/nether_quartz_ore.png",
+        "texture": "./Textures/Blocks/nether_quartz_ore.png",
         "isPlaceable": true,
         "drops" : 80
     },
@@ -991,7 +991,7 @@
         "itemHardness": 0,
         "reqToolType": "pickaxe",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/redstone_ore.png",
+        "texture": "./Textures/Blocks/redstone_ore.png",
         "isPlaceable": true,
         "drops" : 82
     },
@@ -1003,7 +1003,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Items/redstone.png",
+        "texture": "./Textures/Items/redstone.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -1015,7 +1015,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/end_game_block.png",
+        "texture": "./Textures/Blocks/end_game_block.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1027,7 +1027,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/PortalBlock.png",
+        "texture": "./Textures/Blocks/PortalBlock.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1039,7 +1039,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_frame.png",
+        "texture": "./Textures/Blocks/block_frame.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1051,7 +1051,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_frame_red.png",
+        "texture": "./Textures/Blocks/block_frame_red.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1063,7 +1063,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_frame_green.png",
+        "texture": "./Textures/Blocks/block_frame_green.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1075,7 +1075,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_frame_green_1-4.png",
+        "texture": "./Textures/Blocks/block_frame_green_1-4.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1087,7 +1087,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_frame_green_2-4.png",
+        "texture": "./Textures/Blocks/block_frame_green_2-4.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1099,7 +1099,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_frame_green_3-4.png",
+        "texture": "./Textures/Blocks/block_frame_green_3-4.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1111,7 +1111,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_frame_green_4-4.png",
+        "texture": "./Textures/Blocks/block_frame_green_4-4.png",
         "isPlaceable": true,
         "drops" : -1
     },
@@ -1123,7 +1123,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/block_break.png",
+        "texture": "./Textures/Blocks/block_break.png",
         "isPlaceable": false,
         "drops" : -1
     },
@@ -1135,7 +1135,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/inventory.png",
+        "texture": "./Textures/Blocks/inventory.png",
         "isPlaceable": false,
         "drops" : -1
     }
@@ -1148,7 +1148,7 @@
         "itemHardness": 0,
         "reqToolType": "none",
         "toolType": "none",
-        "texture": "scrumdogmillionaires/Textures/Blocks/arrows.png",
+        "texture": "./Textures/Blocks/arrows.png",
         "isPlaceable": false,
         "drops" : -1
     }

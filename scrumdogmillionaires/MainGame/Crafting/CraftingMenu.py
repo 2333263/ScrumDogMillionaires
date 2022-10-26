@@ -16,7 +16,7 @@ itemHardness = ih.fetchItemHardness()
 items = ih.fetchDict()
 slots = pygame.sprite.Group()
 relative = gs.blockSize/30
-buttonFont = pygame.font.Font('scrumdogmillionaires/MainGame/Font/Minecraft.ttf',40)  # font for button
+buttonFont = pygame.font.Font('./MainGame/Font/Minecraft.ttf',40)  # font for button
 # invArray=np.full(40,NullItem,dtype=Item)
 NullItem = items[0]
 

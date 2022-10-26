@@ -37,24 +37,24 @@ def playGame():
     color_light = (250, 250, 250)  # colour of button when hover over
     color_dark = (64, 64, 64)  # colour of button- default
 
-    buttonFont = pygame.font.Font('scrumdogmillionaires/MainGame/Font/Minecraft.ttf',40)  # font for button
+    buttonFont = pygame.font.Font('./MainGame/Font/Minecraft.ttf',40)  # font for button
     # load image for start screen
-    startPage = pygame.image.load("scrumdogmillionaires/Textures/Screens/start.png")
+    startPage = pygame.image.load("./Textures/Screens/start.png")
     startPage = pygame.transform.scale(
         startPage, (gs.width, gs.height))  # fit to page
 
     # load image for pause screen
-    pausePage = pygame.image.load("scrumdogmillionaires/Textures/Screens/finalPause.png")
+    pausePage = pygame.image.load("./Textures/Screens/finalPause.png")
     pausePage = pygame.transform.scale(
         pausePage, (gs.width, gs.height))  # fit to page
 
     # load image for information screen
-    infoPage = pygame.image.load("scrumdogmillionaires/Textures/Screens/gameInfo.png")
+    infoPage = pygame.image.load("./Textures/Screens/gameInfo.png")
     infoPage = pygame.transform.scale(
         infoPage, (gs.width/1.5, gs.height/1.5))  # fit to page
 
     # load image for end screen
-    endPage = pygame.image.load("scrumdogmillionaires/Textures/Screens/endscreenNorestart.png")
+    endPage = pygame.image.load("./Textures/Screens/endscreenNorestart.png")
     endPage = pygame.transform.scale(endPage, (gs.width, gs.height))  # fit to page
 
     #seed box font
@@ -198,7 +198,7 @@ def playGame():
                 player.update(clock.tick(),  collisionblocks, True)
 
             # Font to draw the FPS
-            font = pygame.font.Font('scrumdogmillionaires/MainGame/Font/Minecraft.ttf',16)
+            font = pygame.font.Font('./MainGame/Font/Minecraft.ttf',16)
             fpsText = font.render(
                 "FPS: "+str(int(clock.get_fps())), 1, (255, 255, 255))
             seedText = font.render("Seed: " + str(gs.seed), 1, (255, 255, 255))

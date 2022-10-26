@@ -1,0 +1,16 @@
+MANIFEST.in
+README.md
+setup.py
+scrumdogmillionaires/TextHandler.py
+scrumdogmillionaires/__init__.py
+scrumdogmillionaires/mainGym.py
+scrumdogmillionaires/playGame.py
+scrumdogmillionaires.egg-info/PKG-INFO
+scrumdogmillionaires.egg-info/SOURCES.txt
+scrumdogmillionaires.egg-info/dependency_links.txt
+scrumdogmillionaires.egg-info/requires.txt
+scrumdogmillionaires.egg-info/top_level.txt
+scrumdogmillionaires/gym_MC/__init__.py
+scrumdogmillionaires/gym_MC/envs/__init__.py
+scrumdogmillionaires/gym_MC/envs/custom_env.py
+scrumdogmillionaires/gym_MC/envs/minecraftEnv.py

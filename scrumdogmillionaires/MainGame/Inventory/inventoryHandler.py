@@ -13,7 +13,7 @@ blockHardness = ih.fetchBlockHardness()
 itemHardness = ih.fetchItemHardness()
 #Init inv with item objects
 #ItemNew declaration = Item(itemID, itemDisplayName, breakTime, blockHardness, itemHardness, reqToolType, toolType, texture, isPlaceable, drops)
-NullItem=Item(-1,"null",99999,5,0,"none","null","scrumdogmillionaires/Textures/null",False,-1)
+NullItem=Item(-1,"null",99999,5,0,"none","null","./Textures/null",False,-1)
 invArray=np.full(40, NullItem, dtype=Item)
 #Hotbar can be the entire inv, with only the first 10 items beings being displaying in the on-screen hotbar. The player should then be able to change to order of the items.
 global selected
@@ -114,7 +114,7 @@ def selectInventory(pos):
     selected = pos
     
 def clearInv():
-    NullItem=Item(-1,"null",99999,5,0,"none","null","scrumdogmillionaires/Textures/null",False,-1)
+    NullItem=Item(-1,"null",99999,5,0,"none","null","./Textures/null",False,-1)
     invArray=np.full(40, NullItem, dtype=Item)
     for i in invArray:
             if(i.amount>0):
@@ -153,7 +153,7 @@ def drawHotBar(screen):
             #draw into the slot on the hotbar
             screen.blit(currTexture,(22*relative+(i-rangeB)*85*relative,45*relative))
             #draw the number of items underneath it
-            font = pygame.font.Font('scrumdogmillionaires/MainGame/Font/Minecraft.ttf',int(16 * relative))
+            font = pygame.font.Font('./MainGame/Font/Minecraft.ttf',int(16 * relative))
             count=invArray[i].getCount()
             text2 = font.render(str(count), 1*relative, (255, 255,255))
             #if the user has more than 10 items, shift the tex over slightly
@@ -196,7 +196,7 @@ def drawInv(screen):
                 currTexture = pygame.image.load(invArray[(j+1)*10+i].texture)
                 currTexture=pygame.transform.scale(currTexture,(50*relative,50*relative))
                 screen.blit(currTexture,(22*relative+(i)*85*relative,65*relative + relative* (j+1)*100))
-                font = pygame.font.Font('scrumdogmillionaires/MainGame/Font/Minecraft.ttf',int(16 * relative))
+                font = pygame.font.Font('./MainGame/Font/Minecraft.ttf',int(16 * relative))
                 count=invArray[(j+1)*10+i].getCount()
                 text2 = font.render(str(count), 1*relative, (255, 255,255))
                 shift=0
@@ -221,7 +221,7 @@ def initGroup():
         for i in range(10):
             s=slot((0,0,0),12*relative+i*85*relative,150*relative+j*100*relative,70*relative,80*relative)
             slots.add(s)
-    cTable= Block(gs.blockSize, (0,0), 5, "scrumdogmillionaires/Textures/Blocks/crafting.png", 999, ih.breakTime[5])
+    cTable= Block(gs.blockSize, (0,0), 5, "./Textures/Blocks/crafting.png", 999, ih.breakTime[5])
     addBlock(cTable)   
  #runs when a slot is clicked on           
 def onClick(pos):

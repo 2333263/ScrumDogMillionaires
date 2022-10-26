@@ -48,7 +48,7 @@ converterIDs = {
 
 #Populate Dictionary
 def fetchDict():
-    file = open("scrumdogmillionaires/MainGame/Items/items.json")
+    file = open("./MainGame/Items/items.json")
     
     data = json.load(file)
     for i in data:
@@ -68,7 +68,7 @@ def fetchDict():
     return items
 
 def fetchItemIDs():
-    file = open("scrumdogmillionaires/MainGame/Items/items.json")
+    file = open("./MainGame/Items/items.json")
     data = json.load(file)
     for i in data:
         itemIDs[data[i]['itemID']] = data[i]['itemDisplayName']
@@ -77,7 +77,7 @@ def fetchItemIDs():
     return itemIDs
 
 def fetchIsPlaceable():
-    file = open("scrumdogmillionaires/MainGame/Items/items.json")
+    file = open("./MainGame/Items/items.json")
     data = json.load(file)
     for i in data:
         isPlaceable[data[i]['itemID']] = data[i]['isPlaceable']
@@ -85,7 +85,7 @@ def fetchIsPlaceable():
     return isPlaceable
 
 def fetchBlockHardness():
-    file = open("scrumdogmillionaires/MainGame/Items/items.json")
+    file = open("./MainGame/Items/items.json")
     data = json.load(file)
     for i in data:
         blockHardness[data[i]['itemID']] = data[i]['blockHardness']
@@ -93,7 +93,7 @@ def fetchBlockHardness():
     return blockHardness
 
 def fetchBreakTime():
-    file = open("scrumdogmillionaires/MainGame/Items/items.json")
+    file = open("./MainGame/Items/items.json")
     data = json.load(file)
     for i in data:
         breakTime[data[i]['itemID']] = data[i]['breakTime']
@@ -101,7 +101,7 @@ def fetchBreakTime():
     return breakTime
 
 def fetchItemHardness():
-    file = open("scrumdogmillionaires/MainGame/Items/items.json")
+    file = open("./MainGame/Items/items.json")
     data = json.load(file)
     for i in data:
         itemHardness[data[i]['itemID']] = data[i]['itemHardness']
@@ -109,7 +109,7 @@ def fetchItemHardness():
     return itemHardness
 
 def fetchTextureNames():
-    file = open("scrumdogmillionaires/MainGame/Items/items.json")
+    file = open("./MainGame/Items/items.json")
     data = json.load(file)
     for i in data:
         textureNames[data[i]['itemDisplayName']] = data[i]['texture']

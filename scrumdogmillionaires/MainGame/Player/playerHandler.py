@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         #create a rect based on the size of the surface
         self.rect = self.image.get_rect(topleft=pos)
         #loads the sprite from the file
-        Image=pygame.image.load("scrumdogmillionaires/Textures/Player/sprite.png")
+        Image=pygame.image.load("./Textures/Player/sprite.png")
         Image=pygame.transform.scale(Image,(size,2*size))
         #swap the sprite drawn from the surface to the image
         self.image=Image
