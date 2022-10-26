@@ -404,7 +404,10 @@
 <pre><code class="language-py">import gym
 import gym_MC
 
-env = gym.make(&quot;MinePy-1&quot;, render_mode=&quot;human&quot;,easyStart=0,seed=1024)
+env = gym.make(&quot;MinePy-1&quot;, render_mode=&quot;human&quot;,easyStart=0,seed=1024, spawnLoc=(1024,1024))
+
+obs, info = env.reset(seed=1212) #has to be the same seed as above
+done=False
 
 </code></pre>
 <h2 id="setting-up-new-environments">Setting up new environments</h2>
@@ -428,6 +431,13 @@ env = gym.make(&quot;MinePy-1&quot;, render_mode=&quot;human&quot;,easyStart=0,s
 <p>seed:</p>
 <ul>
 <li>integer value that acts as seed for both the world and the AI.</li>
+</ul>
+<p>spawnLoc:</p>
+<ul>
+<li>Takes in a pair of ints, and sets the agents spawn location.</li>
+<li>If none is given, default spawn location is (0,0).</li>
+<li>Note that on a reset, if no spawn location is given, but one was given in the original initilization, the spawn location will be the one given in the intilization.</li>
+<li>Also note that the position is in blocks not pixels.</li>
 </ul>
 <p>In order to perform an action use the following:</p>
 <pre><code class="language-py">

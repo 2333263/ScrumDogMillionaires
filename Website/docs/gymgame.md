@@ -8,7 +8,10 @@ Ensure you have the following code in your file:
 import gym
 import gym_MC
 
-env = gym.make("MinePy-1", render_mode="human",easyStart=0,seed=1024)
+env = gym.make("MinePy-1", render_mode="human",easyStart=0,seed=1024, spawnLoc=(1024,1024))
+
+obs, info = env.reset(seed=1212) #has to be the same seed as above
+done=False
 
 ```
 
@@ -35,6 +38,13 @@ seed:
 * integer value that acts as seed for both the world and the AI.
 
   
+spawnLoc:
+
+* Takes in a pair of ints, and sets the agents spawn location.
+* If none is given, default spawn location is (0,0).
+* Note that on a reset, if no spawn location is given, but one was given in the original initilization, the spawn location will be the one given in the intilization.
+* Also note that the position is in blocks not pixels.
+
 
 In order to perform an action use the following:
 

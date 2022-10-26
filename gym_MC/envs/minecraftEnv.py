@@ -26,7 +26,7 @@ class MinePy:
     # if render mode is human, render game to screen- if it is None- render game to surface
     # if seed is empty, random seed is used, else hash of seed is used.
 
-    def __init__(self, render_mode="human", easyStart=1, playerRange=7, seed=None):
+    def __init__(self, render_mode="human", easyStart=1, playerRange=7, seed=None,spawnLoc=(None,None)):
         pygame.init()
         self.seed=seed
         for i in items:
@@ -112,7 +112,9 @@ class MinePy:
                        [-1,2],[0,2],[1,2]]  # below the player
         
         #self.player.rect.y-=6500
-
+        if(spawnLoc[0]!=None and spawnLoc[1]!=None):
+            self.player.rect.x=spawnLoc[0]*gs.blockSize
+            self.player.rect.y=spawnLoc[1]*gs.blockSize
     def action(self,action):
         
         fakeKeys = {pygame.K_LEFT: False,pygame.K_RIGHT: False,pygame.K_UP: False,pygame.K_a: False,pygame.K_d: False,
