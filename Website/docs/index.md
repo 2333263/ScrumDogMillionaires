@@ -35,7 +35,7 @@ In addition, you are able to make use of any of the built in tasks that the team
 * Benjamin Servant - 2420656
 * Wen Guan Gavin Chen - 2302891
 * Damion Harvey - 2303289
-* Stuart Groves - 2356823
+* Stuart 'Lazarus' Groves - 2356823
 * Jeremy Stott - 2368841
 
 ## Project layout
