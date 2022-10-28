@@ -158,22 +158,6 @@ class slot {
     +init(colour, left, top, width, height)
 }
 
-class Item {
-    +itemName
-    +itemID
-    +isPlaceable
-    +hardness
-    +amount
-    +texture
-    +init(*args)
-    +getItemName()
-    +getItemID()
-    +increase()
-    +decrease()
-    +getCount()
-    +getHardness()
-}
-
 
 class itemHandler {
     +items[]
@@ -307,16 +291,16 @@ class Player {
     +willcollide(block)
 }
 
-class Portal {
-    +blockPosition 
-    +itemID 
-    +textureName 
-    +hardness 
-    +image 
-    +rect 
-    +init(blockSize, blockPosition, itemID, textureName, hardness)
-    +getHardness()
-}
+' class Portal {
+'     +blockPosition 
+'     +itemID 
+'     +textureName 
+'     +hardness 
+'     +image 
+'     +rect 
+'     +init(blockSize, blockPosition, itemID, textureName, hardness)
+'     +getHardness()
+' }
 
 class RecipeHandler {
     +file
@@ -391,8 +375,9 @@ class CustomEnv {
     +observation_space
     +render_mode
     +easyStart
-    +init(render_mode, easyStart, seed)
-    +reset(seed, options)
+    +spawnLoc
+    +init(render_mode, easyStart, seed, spawnLoc)
+    +reset(seed, seed, options, spawnLoc)
     +step(action)
     +render()
 }
@@ -401,6 +386,7 @@ class MinePy {
     +items{}
     +metadata{}
     +seed
+    +task
     +render_mode
     +inv
     +screen
@@ -417,8 +403,10 @@ class MinePy {
     +playerPos 
     +cursorPos
     +isBP 
+    +actionImage
+    +textureNames
     +textureNames{}
-    +init(render_mode, easyStart, playerRange, seed)
+    +init(render_mode, easyStart, playerRange, seed, spawnLoc, task)
     +action(action)
     +evalutate(prev)
     +getPrevInv()
@@ -457,11 +445,9 @@ ChunkGenerator --> itemHandler
 ChunkHandler --> gameSettings
 ChunkHandler --> ChunkGenerator
 
-Button --> gameSettings
 Button --> itemHandler
 
 Crafting --> RecipeHandler
-Crafting --* Button
 Crafting --> gameSettings
 Crafting --> inventoryHandler
 Crafting --* slot
@@ -477,13 +463,9 @@ inventoryHandler --> itemHandler
 
 itemHandler --* itemNew
 
-Item --> gameSettings
-
 menuHandler --> gameSettings
 
 Player --> soundHandler
-
-Portal --> gameSettings
 
 RecipeHandler --> itemHandler
 
