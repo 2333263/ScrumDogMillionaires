@@ -26,15 +26,15 @@ Sprint 3: https://docs.google.com/document/d/1nXlopkxfVE0I7XDlrk-1_XpbnlVGgmI46G
 Sprint 4: https://docs.google.com/document/d/1WOrE7V6GzwyqxyOxoGKNCoL95_FeqsBGC6ekDfnlrsQ/edit#  
    
 Group members  
-Benjamin Servant - 2420656  
-Damion Harvey - 2303289  
-Jeremy Stott - 2368841  
-Justin Knopfmacher - 2356115 (scrum master)  
-Lior Becker - 2333263  
-Luciano Meixieira - 2332853  
-Michaela Klug - 2393033  
-Stuart 'Lazarus' Groves - 2356823  
-Wen Guan Gavin Chen -2302891  
+2420656  
+2303289  
+2368841  
+2356115 (scrum master)  
+2333263  
+2332853  
+2393033  
+2356823  
+2302891  
 
 Cool Seeds : 6969, -1524    
 

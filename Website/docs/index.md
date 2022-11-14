@@ -28,15 +28,15 @@ In addition, you are able to make use of any of the built in tasks that the team
 <!--- Add in info about Jim & Michael (our lord and savior) here  -->
 
 ## Group Members
-* Justin Knopfmacher (scrum master) - 2356115
-* Lior Becker - 2333263
-* Luciano Meixieira - 2332853
-* Michaela Klug - 2393033
-* Benjamin Servant - 2420656
-* Wen Guan Gavin Chen - 2302891
-* Damion Harvey - 2303289
-* Stuart 'Lazarus' Groves - 2356823
-* Jeremy Stott - 2368841
+* 2420656  
+* 2303289  
+* 2368841  
+* 2356115 (scrum master)  
+* 2333263  
+* 2332853  
+* 2393033  
+* 2356823  
+* 2302891  
 
 ## Project layout
 ```
