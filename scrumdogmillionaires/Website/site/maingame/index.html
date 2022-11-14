@@ -1,0 +1,667 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../assets/scrumlogo.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>Playing the interactive game - ScrumDog Millionaires</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="teal">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#playing-the-game" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ScrumDog Millionaires" class="md-header__button md-logo" aria-label="ScrumDog Millionaires" data-md-component="logo">
+      
+  <img src="../assets/scrumlogo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ScrumDog Millionaires
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Playing the interactive game
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="cyan" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="cyan" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ScrumDog Millionaires" class="md-nav__button md-logo" aria-label="ScrumDog Millionaires" data-md-component="logo">
+      
+  <img src="../assets/scrumlogo.png" alt="logo">
+
+    </a>
+    ScrumDog Millionaires
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Playing the interactive game
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Playing the interactive game
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#playing-the-game" class="md-nav__link">
+    Playing the Game
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demo-of-the-game-screens" class="md-nav__link">
+    Demo of the game screens
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instructions-for-playing" class="md-nav__link">
+    Instructions for playing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-craft" class="md-nav__link">
+    How to craft
+  </a>
+  
+    <nav class="md-nav" aria-label="How to craft">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#breaking-blocks" class="md-nav__link">
+    Breaking Blocks
+  </a>
+  
+    <nav class="md-nav" aria-label="Breaking Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blocks-that-can-be-broken-with-hands" class="md-nav__link">
+    Blocks that can be broken with hands:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocks-that-can-be-broken-with-a-wooden-pickaxe" class="md-nav__link">
+    Blocks that can be broken with a wooden pickaxe:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocks-that-can-be-broken-with-stone-pickaxe" class="md-nav__link">
+    Blocks that can be broken with stone pickaxe:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#craftable-items" class="md-nav__link">
+    Craftable items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gymgame/" class="md-nav__link">
+        Using the Gym Agent
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../addnew/" class="md-nav__link">
+        Add new items and crafting recipes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../change/" class="md-nav__link">
+        Settings you can change
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#playing-the-game" class="md-nav__link">
+    Playing the Game
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demo-of-the-game-screens" class="md-nav__link">
+    Demo of the game screens
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instructions-for-playing" class="md-nav__link">
+    Instructions for playing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-craft" class="md-nav__link">
+    How to craft
+  </a>
+  
+    <nav class="md-nav" aria-label="How to craft">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#breaking-blocks" class="md-nav__link">
+    Breaking Blocks
+  </a>
+  
+    <nav class="md-nav" aria-label="Breaking Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blocks-that-can-be-broken-with-hands" class="md-nav__link">
+    Blocks that can be broken with hands:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocks-that-can-be-broken-with-a-wooden-pickaxe" class="md-nav__link">
+    Blocks that can be broken with a wooden pickaxe:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocks-that-can-be-broken-with-stone-pickaxe" class="md-nav__link">
+    Blocks that can be broken with stone pickaxe:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#craftable-items" class="md-nav__link">
+    Craftable items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Playing the interactive game</h1>
+
+<h2 id="playing-the-game">Playing the Game</h2>
+<p>In order to play the base interactive game, please run the following command after installing the package, within the games main directory: <code>/SCRUM-DOG-MILLIONAIRES/</code></p>
+<pre><code class="language-py">python3 main.py 
+</code></pre>
+<p>Once you open the game, you are greeted with a main start screen. 
+Here you can enter the seed in the top left corner. The seed can either be a string or an integer. 
+In the top right corner, a question mark button is found. When you click here, details on the controls of the game will appear. 
+Clicking on begin game allows you to be moved into the playable game.
+Please see the screenshots below for a visual guide. </p>
+<h2 id="demo-of-the-game-screens">Demo of the game screens</h2>
+<p><img alt="StartScreen" src="../assets/StartScreen.png" title="Start Screen" /><br />
+<img alt="MainGame" src="../assets/PlayGame.png" title="Playing the game" /></p>
+<h2 id="instructions-for-playing">Instructions for playing</h2>
+<p><img alt="Instructions" src="../assets/GameInfo2.png" title="Playing the game" /></p>
+<h2 id="how-to-craft">How to craft</h2>
+<p>In order to craft new blocks and tools, the player will have to be in range of the crafting table and then right click on the crafting table block. One should then drag the blocks from the inventory into the crafting table. If the blocks are positioned in the correct position to craft an item, the question mark will display the item you are able to create. To create the item and add it to your inventory, click on 'craft' which will now be green.
+If the blocks are not positioned in an arrangement which corresponds to any craftable item or the player does not have enough blocks, then 'craft' will remain white and the question mark will still be displayed.</p>
+<h3 id="breaking-blocks">Breaking Blocks</h3>
+<p>Each block has a different hardness and some require stronger tools in order to be broken. </p>
+<h4 id="blocks-that-can-be-broken-with-hands">Blocks that can be broken with hands:</h4>
+<ul>
+<li>dirt</li>
+<li>grass</li>
+<li>wooden logs</li>
+<li>leaves</li>
+</ul>
+<h4 id="blocks-that-can-be-broken-with-a-wooden-pickaxe">Blocks that can be broken with a wooden pickaxe:</h4>
+<ul>
+<li>all blocks that can be broken with hands</li>
+<li>stone</li>
+</ul>
+<h4 id="blocks-that-can-be-broken-with-stone-pickaxe">Blocks that can be broken with stone pickaxe:</h4>
+<ul>
+<li>all blocks that can be broken with hands</li>
+<li>all blocks that can be broken with wooden pickaxe</li>
+<li>diamond</li>
+<li>gold</li>
+<li>emerald</li>
+<li>iron</li>
+</ul>
+<h3 id="craftable-items">Craftable items</h3>
+<figure>
+    <div style="float:left" >
+      <img src="../assets/1.png" title="crafting wooden planks" width="190.5" height="150">
+      <figcaption style="word-wrap: break-word; inline-size: 190px; " >1 wooden log crafts 4 wooden planks</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+        <img src="../assets/2.png" title="crafting wooden pickaxe" width="195" height="195">
+        <figcaption style="word-wrap: break-word; inline-size: 190px; ">5 wooden planks crafts 1 wooden pickaxe</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+       <img src="../assets/3.png" title= "crafting stone pickaxe" width="189.5" height="194">
+       <figcaption style="word-wrap: break-word; inline-size: 190px; ">3 stones and 2 wooden planks crafts 1 stone pickaxe</figcaption>
+    </div>
+</figure>
+
+<figure>
+    <div style="float:left" >
+      <img src="../assets/4.png" title="crafting gold ingot" width="191" height="150">
+      <figcaption style="word-wrap: break-word; inline-size: 190px; " >1 gold ore crafts 1 gold ingot</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+        <img src="../assets/5.png" title="crafting diamond" width="191" height="150">
+        <figcaption style="word-wrap: break-word; inline-size: 190px; ">1 diamond ore crafts 1 diamond</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+       <img src="../assets/6.png" title= "crafting emerald" width="191" height="195">
+       <figcaption style="word-wrap: break-word; inline-size: 190px; ">1 emerald ore crafts 1 emerald</figcaption>
+    </div>
+</figure>
+
+<figure>
+    <div style="float:left" >
+      <img src="../assets/8.png" title="crafting diamond blocks" width="191" height="150">
+      <figcaption style="word-wrap: break-word; inline-size: 190px; " >9 diamonds crafts 1 diamond block</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+        <img src="../assets/9.png" title="crafting gold blocks" width="191" height="150">
+        <figcaption style="word-wrap: break-word; inline-size: 190px; ">9 gold ingots crafts 1 gold block</figcaption>
+    </div>
+    <space>
+    <div style="float:left" >
+       <img src="../assets/10.png" title= "crafting end game block" width="191" height="195">
+       <figcaption style="word-wrap: break-word; inline-size: 190px; ">4 gold blocks, 4 diamond blocks and 1 emerald crafts 1 end game block</figcaption>
+    </div>
+</figure>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../gymgame/" class="md-footer__link md-footer__link--next" aria-label="Next: Using the Gym Agent" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Using the Gym Agent
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.expand"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>

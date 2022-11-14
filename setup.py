@@ -1,9 +1,11 @@
 from setuptools import setup, find_packages
-setup(name='scrumdogmillionairestest',
+
+
+setup(name='scrumdogmillionaires',
 version='0.19',
 description='A 2D Minecraft Project',
 url='https://github.com/2333263/ScrumDogMillionaires',
-author='scrumdogmillionairestest',
+author='scrumdogmillionaires',
 author_email='2333263@students.wits.ac.za',
 license='MIT',
 packages=find_packages(),
