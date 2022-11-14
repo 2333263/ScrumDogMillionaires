@@ -34,6 +34,7 @@ breakSpeed = itemHandler.breakTime
 itemArr = itemHandler.fetchDict()
 # update test for sound
 
+
 class TestItem(unittest.TestCase):
     tempItem = itemArr[1]  # Item("Grass", 0)
     tempItem1 = itemArr[2]  # Item("Dirt", 0, 20)]
@@ -153,23 +154,19 @@ class TestRecipeHandler(unittest.TestCase):
     def test_craftingShape(self):
         self.assertIsInstance(self.tempHandler.getCraftingShape(11), list)
 
-
+#this group of tests, tests various complenents of the player
 class TestPlayer(unittest.TestCase):
     TempPlayer = ph.Player((8 * gs.blockSize, 8 * gs.blockSize), 24)
-
+    #test the creation of the player worked
     def test_innit(self):
         self.assertEqual(self.TempPlayer.rect.x, 8 * gs.blockSize)
         self.assertEqual(self.TempPlayer.rect.y, 8 * gs.blockSize)
         self.assertTrue(type(self.TempPlayer) is ph.Player)
-
+    #test that the player spawnned in the correct location
     def test_pos(self):
         self.assertEqual(self.TempPlayer.getPlayerPos(), (8 * gs.blockSize, 8 * gs.blockSize))
-
-    # this is a comment
+    #tests the player moving left and right
     def test_MoveX(self):
-        # empty={}
-        # self.TempPlayer.MoveOnX(empty)
-        # self.assertNotEqual(len(self.TempPlayer.keys),0)
         self.simulatedKeys = {
             pygame.K_LEFT: False,
             pygame.K_RIGHT: False,
@@ -203,12 +200,12 @@ class TestPlayer(unittest.TestCase):
         self.simulatedKeys[pygame.K_d] = False
         self.TempPlayer.MoveOnX(self.simulatedKeys)
         self.assertEqual(self.TempPlayer.direction.x, 0)
-
+    #tests that when the player is in the air, gravity pulls him down
     def test_gravity(self):
         self.TempPlayer.useGravity()
         self.assertEqual(self.TempPlayer.direction.y, self.TempPlayer.gravity)
         self.TempPlayer.direction.y = 0
-
+    #tests that when the player jumps the characters moves up correctly and then falls back down correctly
     def test_jump(self):
         # jumped is false by default in case we spawn the player above the world
         self.assertEqual(self.TempPlayer.jumped, False)
@@ -216,7 +213,7 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(self.TempPlayer.jumped, True)
         self.assertEqual(self.TempPlayer.direction.y, -8.5)
         self.TempPlayer.jumped = False
-
+    #tests that the player falls correctly
     def test_jumping_acceleration(self):
         self.TempPlayer.jumpArc()
         # check if player is jumped get set to false when direction.y==0
@@ -227,7 +224,12 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(self.TempPlayer.direction.y, -5 + self.TempPlayer.gravity / 5)
         self.TempPlayer.direction.y = 0
 
-    # NEED TO BE REWRITTEN
+    #tests the following:
+    # 1) given a change in veclocity the player will move in that direction
+    # 2) given the player is in the air, he will slow down and eventually fall
+    # 3) given the player is falling, given there is a block under neath him he will stop falling
+    # 4) given the player is moving in a direction, if he collides with a block he cannot go through it and it stops him from moving in that direction
+    # 5) tests collision
     def test_update(self):
         tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
         tempGroup = pygame.sprite.Group()
@@ -308,10 +310,11 @@ class TestPlayer(unittest.TestCase):
         self.TempPlayer.update(1, tempGroup)
         self.assertEqual(tempBlock.rect.top, self.TempPlayer.rect.bottom)
 
+    #tests that when the user stops moving the player, the player stops moving
     def test_StopOnX(self):
         self.TempPlayer.stopMoveOnX()
         self.assertEqual(self.TempPlayer.direction.x, 0)
-
+    #test that when the player collides witha a block they stop moving
     def test_willcolide(self):
         tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
         tempGroup = pygame.sprite.Group()
@@ -324,22 +327,22 @@ class TestPlayer(unittest.TestCase):
         self.TempPlayer.rect.y = 22 * gs.blockSize
         self.assertFalse(self.TempPlayer.willcollide(tempBlock))
 
-
+#tests involving the crafting menu
 class TestCraftingMenu(unittest.TestCase):
     screen = pygame.display
     crafter = CraftingMenu.Crafting(screen)
-
+    #tests that the ininilziation of the crafting menu works
     def test_innit(self):  # I had to call it AAinit so it would run before the other test cases
         self.crafter.initGroup()
         self.assertIsInstance(CraftingMenu.slots,pygame.sprite.Group)
         self.assertEqual(len(CraftingMenu.slots),10)
-
+    #tests that the menu will scale with the window
     def test_relativeSize(self):
         self.assertTrue(self.crafter.relativeSize >= 0 and self.crafter.relativeSize <= gs.blockSize * 3)
-
+    #tests that the crafter gets a list of all craftable items
     def test_allItems(self):
         self.assertIsInstance(list(), type(self.crafter.allItems))
-
+    #tests that the empty crafting table function empties the crafting table
     def test_emptyTable(self):
         NullItem = itemArr[0]  # Null item, id -1
         self.crafter.emptyTable()
@@ -348,7 +351,8 @@ class TestCraftingMenu(unittest.TestCase):
                 self.assertEqual(self.crafter.craftArray[i][j].itemID, -1)
         self.assertEqual(self.crafter.canCraft, False)
         self.assertEqual(self.crafter.craftID, -1)
-
+    #checks that when given a valid crafting reciepie the crafting table detects it
+    #also checks that the crafting table does not detect invalid recepies as valid
     def test_checkCanCraft(self):
         self.crafter.emptyTable()
         self.crafter.checkCanCraft()
@@ -358,7 +362,7 @@ class TestCraftingMenu(unittest.TestCase):
         self.crafter.checkCanCraft()
         self.assertEqual(self.crafter.canCraft, True)
         self.assertEqual(self.crafter.craftID, 8)
-
+    #tests that when given a valid recipie the items are deleted and the crafted item is placed in the players invetory
     def test_doCraft(self):
         NullItem = itemArr[0]  # Null item, id -1
         self.crafter.emptyTable()
@@ -383,6 +387,7 @@ class TestCraftingMenu(unittest.TestCase):
         for i in itemArr:
             if(i.amount>0):
                 i.amount=0
+    #same as the above 3 tests, but this is commbined for when the gym agent crafts             
     def testCraftSpec(self):
         tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
                                 blockHardness[7],breakSpeed[7])
@@ -401,7 +406,7 @@ class TestCraftingMenu(unittest.TestCase):
             while (inv[i].getItemId() != -1):
                 ih.decreaseSpec(inv[i].getItemId())
     
-
+#tests that game settings intilizes correctly
 class TestGameSettings(unittest.TestCase):
     def test_properties(self):
         self.assertIsInstance(gs.blockSize, int)
@@ -430,8 +435,9 @@ class TestGameSettings(unittest.TestCase):
         self.assertIsInstance(immovableBlocks, list)
         self.assertIsInstance(clickableBlocks, list)
 
-
+#tests involving the players inventory 
 class TestInv(unittest.TestCase):
+    #tests that the intilization works correctly
     def testAAInit(self):  # I had to call it AAinit so it would run before the other test cases
         inventory = ih.getInv()
         empty = True
@@ -444,7 +450,7 @@ class TestInv(unittest.TestCase):
         self.assertEqual(len(ih.slots), 40)
         ih.selected = 0
         self.assertEqual(ih.getSelected().getItemId(), 5)
-
+    #tests that blocks get added and removed from the players inventory correctly
     def testAddBlockandRemove(self):
         tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
                                 blockHardness[7],breakSpeed[7])
@@ -465,7 +471,7 @@ class TestInv(unittest.TestCase):
         self.assertEqual(inv[foundPos].getCount(), 1)
         ih.decrease()
         self.assertEqual(inv[foundPos].getItemId(), -1)
-
+    #tests that when a specific item id is decremeneted it, gets decremented correctly from the players inventory
     def testDecSpec(self):
         inv = ih.getInv()
         self.assertEqual(inv[0].getItemId(), 5)  # crafting table is in position 0
@@ -477,7 +483,7 @@ class TestInv(unittest.TestCase):
         ih.selected = 0
         ih.decreaseSpec(7)
         self.assertEqual(inv[1].getItemId(), -1)
-
+    #tests that adding items works correctly
     def testAddItem(self):
         found = False
         inv = ih.getInv()
@@ -502,7 +508,7 @@ class TestInv(unittest.TestCase):
         self.assertEqual(inv[foundpos].getCount(), 2)
         ih.decreaseSpec(11)
         ih.decreaseSpec(11)
-
+    #tests that selecting a slot by various means all work correctly
     def testSelection(self):
         ih.selected = 0
         ih.selectNext()
@@ -517,11 +523,12 @@ class TestInv(unittest.TestCase):
         ih.selectInventory(7)
         self.assertEqual(ih.selected, 7)
         ih.selected = 0
-
+    #tests that an item count is returned correctly
     def testGetitemCount(self):
         self.assertEqual(ih.getItemCount(5), 1)
         self.assertEqual(ih.getItemCount(14), 0)
-
+    #tests that when clicking a slot that slot becomes selected
+    #also tests that when 2 slots are selected when the inv is open, those items are swapped
     def testClick(self):
         ih.fullInv = False
         ih.selected = 0
@@ -547,34 +554,32 @@ class TestInv(unittest.TestCase):
         ih.setClicked()
         self.assertEqual(ih.getClicked(), -1)
 
-
+#tests functions related to the camera
 class TestCamera(unittest.TestCase):
     TempPlayer = ph.Player((8 * gs.blockSize, 8 * gs.blockSize), 24)
     Cam = Camera.Camera(TempPlayer)
-    # pygame.display.set_mode((1280, 720))
     screen = pygame.Surface((gs.blockSize, gs.blockSize))
     tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
     tempBlock2 = block.Block(gs.blockSize,(20,7),1,textureNames[itemIDs[1]],0,breakSpeed[1])
     tempBlock3 = block.Block(gs.blockSize,(29,7),2,textureNames[itemIDs[1]],0,breakSpeed[2])
     tempBlock4 = block.Block(gs.blockSize,(50,7),3,textureNames[itemIDs[1]],0,breakSpeed[3])
 
+    #tests that when the player moves, the camera follows them correctly
     def test_Offset(self):
         self.Cam.scroll()
-        # self.assertEqual(self.Cam.offset,pygame.math.Vector2(-558,-176))
         self.assertEqual(self.Cam.getOffsets(), self.Cam.offset)
-
+    #tests that the only blocks the player can collide with are the blocks the camera can see
     def test_Collide(self):
         self.assertFalse(self.Cam.isColideable(self.tempBlock))
         self.tempBlock.rect.x = 8 * gs.blockSize
         self.tempBlock.rect.y = 8 * gs.blockSize
         self.assertTrue(self.Cam.isColideable(self.tempBlock))
-
+    #tests that the only blocks loaded are the ones on screen
     def test_onScreen(self):
         self.assertTrue(self.Cam.isOnScreen(self.tempBlock))
         self.tempBlock.rect.x = 1000
         self.tempBlock.rect.y = 1000
-        # self.assertFalse(self.Cam.isOnScreen(self.tempBlock))
-
+    #tests that the blitting to the screen wroks correctly
     def test_draw(self):
         self.tempBlock.rect.x = 8 * gs.blockSize
         self.tempBlock.rect.y = 8 * gs.blockSize
@@ -585,12 +590,12 @@ class TestCamera(unittest.TestCase):
         tempGroup.add(self.tempBlock4)
         self.assertEqual(self.Cam.draw(self.screen, tempGroup), [self.tempBlock])
 
-
+#tests related to handling of chunks
 class testChunks(unittest.TestCase):
     testWorld = pygame.sprite.Group()
     TempPlayer = ph.Player((gs.width / 2 - gs.blockSize * 4,
                             - gs.blockSize * 2), 24)
-
+    #tests that the chunks are generated correctly
     def test_generation(self):
         gs.generatedChunks[-1] = CG.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld)
         gs.generatedChunks[0] = CG.generateChunk(0, self.testWorld)
@@ -598,7 +603,7 @@ class testChunks(unittest.TestCase):
         self.assertIsInstance(gs.generatedChunks[-1], pygame.sprite.Group)
         self.assertIsInstance(gs.generatedChunks[0], pygame.sprite.Group)
         self.assertIsInstance(gs.generatedChunks[1], pygame.sprite.Group)
-
+    #tests that when the player moves to the next chunk, the chunk off screen unloads and a new chunk loads in
     def test_Load_Unload(self):
         gs.generatedChunks[-1] = CG.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld)
         gs.generatedChunks[0] = CG.generateChunk(0, self.testWorld)
@@ -622,7 +627,7 @@ class testChunks(unittest.TestCase):
         self.assertNotEqual(testChunk, gs.visibleChunks)
         self.assertEqual([-3, -2, -1], gs.visibleChunks)
 
-
+#tests related to breaking and placing of blocks
 class TestBreakPlace(unittest.TestCase):
     TempPlayer = ph.Player((8 * gs.blockSize, 8 * gs.blockSize), 24)
     pos = (8, 8)
@@ -632,29 +637,21 @@ class TestBreakPlace(unittest.TestCase):
     tempItem.itemHardness = 3
     spriteGroup = pygame.sprite.Group()
     spriteGroup.add(tempBlock)
-
-    # hotbar=ih.getHotBar()
-    # ih.addBlock(tempBlock)
-    # print(ih.getSelected())
     
+    #test tes function that takes in mouse coordinates and returns world coordinates
     def test_getPos(self):
         self.assertEqual(gs.getPos(self.pos), (0, 0))
-
-#     # def test_Distance(self):
-#     #    self.assertEqual(int(gs.distance(self.TempPlayer,self.pos)),226)
+    #tests if the player is holding a good enough tool they can break a given block
+    #else they cannot break a given block
     def test_checkBreak(self):
         self.assertTrue(bph.checkBreakable(self.tempBlock, self.tempItem))
         self.tempItem.itemHardness = 0
         self.assertFalse(bph.checkBreakable(self.tempBlock, self.tempItem))
         self.tempItem.itemHardness = 11 #change itemhardness back --> NB need for rewards testing
 
-#         '''removed depricated function
-#    def test_notEmpty(self):
-#       #self.hotbar.append(self.tempBlock)
-#       #self.assertTrue(bph.notEmpty(self.hotbar[0]))
-#       print("ADD THIS")
-#       '''
-
+    #testing that a block can be broken by the player, when they are able to (ie theyre holding a good enough tool)
+    #then that block gets placed into the inv
+    #else that they cannot break the block
     def test_breakBlock(self):
         tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),0,textureNames["Grass Block"],
                                 blockHardness[0],breakSpeed[0])
@@ -702,6 +699,7 @@ class TestBreakPlace(unittest.TestCase):
                 found = True
         self.assertTrue(found)
 
+    #test that when given a block in the world, we can get the item version of that block
     def test_getBlockFromPos(self):
         craftableBlock = block.Block(gs.blockSize,(10 * gs.blockSize,10 * gs.blockSize),5,
                                      textureNames[itemIDs[0]],1,breakSpeed[5])
@@ -710,6 +708,8 @@ class TestBreakPlace(unittest.TestCase):
                          bph.getBlockFromPos((10 * gs.blockSize, 10 * gs.blockSize), self.spriteGroup).itemID)
         self.assertEqual(-1, bph.getBlockFromPos((200 * gs.blockSize, 10 * gs.blockSize), self.spriteGroup).itemID)
 
+    #test that if the player is placing a block in a valid position (ie an empty spot)
+    #that block gets removed from the inv and placed into the world
     def test_blockPlace(self):
 
         craftableBlock = block.Block(gs.blockSize,(10 * gs.blockSize,10 * gs.blockSize),5,
