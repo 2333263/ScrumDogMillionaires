@@ -3,6 +3,7 @@ from MainGame.Items.itemNew import Item
 
 #WHEN USING items = [] FROM THE fetchDict() FUNCTION, ENSURE YOU ADD ONE TO ALL THE ENTRIES
 
+#initialise various dictionaries and arrays 
 items = []
 itemIDs = {}
 isPlaceable = {}
@@ -15,6 +16,7 @@ textureNames = {}
 immovableBlocks = [3, 5]
 clickableBlocks = [5]
 
+#dictionary of crrafting item IDs
 craftingIDs = {
     0 : "Wooden Planks",
     1 : "Wooden Pickaxe",
@@ -27,6 +29,7 @@ craftingIDs = {
     8 : "End Game Block"
 }
 
+#dictionary of converted IDs
 converterIDs = {
     'G' : 0, #Grass
     'D' : 1, #Dirt
@@ -66,7 +69,7 @@ def fetchDict():
         tempItem = None
     file.close()
     return items
-
+#returns a dictionary of item ids
 def fetchItemIDs():
     file = open("MainGame/Items/items.json")
     data = json.load(file)
@@ -75,7 +78,7 @@ def fetchItemIDs():
         tempItem = None
     file.close()
     return itemIDs
-
+#returns if an item is placeable or not
 def fetchIsPlaceable():
     file = open("MainGame/Items/items.json")
     data = json.load(file)
@@ -83,7 +86,7 @@ def fetchIsPlaceable():
         isPlaceable[data[i]['itemID']] = data[i]['isPlaceable']
     file.close()
     return isPlaceable
-
+#returns a blocs hardness level
 def fetchBlockHardness():
     file = open("MainGame/Items/items.json")
     data = json.load(file)
@@ -91,7 +94,7 @@ def fetchBlockHardness():
         blockHardness[data[i]['itemID']] = data[i]['blockHardness']
     file.close()
     return blockHardness
-
+#returns a tools break time for variable breaking speed
 def fetchBreakTime():
     file = open("MainGame/Items/items.json")
     data = json.load(file)
@@ -99,7 +102,7 @@ def fetchBreakTime():
         breakTime[data[i]['itemID']] = data[i]['breakTime']
     file.close()
     return breakTime
-
+#returns a blocs hardness level
 def fetchItemHardness():
     file = open("MainGame/Items/items.json")
     data = json.load(file)
@@ -107,7 +110,7 @@ def fetchItemHardness():
         itemHardness[data[i]['itemID']] = data[i]['itemHardness']
     file.close()
     return itemHardness
-
+#returns the texture name
 def fetchTextureNames():
     file = open("MainGame/Items/items.json")
     data = json.load(file)
@@ -115,19 +118,6 @@ def fetchTextureNames():
         textureNames[data[i]['itemDisplayName']] = data[i]['texture']
     file.close()
     return textureNames
-
-# fetchDict()
-# for i in items:
-#     print("Item ID:\t" + str(i.getItemId()))                                #getItemId()
-#     print("\tItem Name:\t\t " + str(i.getItemName()))                       #getItemName()
-#     print("\tBreak Time:\t\t " + str(i.getBreakTime()))                     #getBreakTime()
-#     print("\tBlock Hardness:\t " + str(i.getBlockHardness()))               #getBlockHardness()
-#     print("\tItem Hardness:\t " + str(i.getItemHardness()))                 #getItemHardness
-#     print("\tReq Tool Type:\t " + str(i.getReqToolType()))                  #getReqToolType()
-#     print("\tSelf Tool Type:\t " + str(i.getToolType()))                    #getToolType()
-#     print("\tTexture Path:\t " + str(i.getTexture()))                       #getTexture() -- Returns a file path as a string
-#     print("\tIs Placeable:\t " + str(i.getIsPlaceable()))                   #getIsPlaceable()
-#     print("\tDrops:\t\t\t " + str(items[i.getDrop()+1].getItemName()))      #getDrop() returns the item ID of the dropped item, add one to index in items array
 
 
 

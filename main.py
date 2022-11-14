@@ -11,7 +11,6 @@ from MainGame.Chunks.ChunkGenerator import generateChunk
 from MainGame.Chunks.ChunkHandler import checkChunkUpdates
 from MainGame.Audio.soundHandler import playMusic
 from MainGame.Blocks.block import Block
-#from itemHandler import populateDictionaries
 from MainGame.Items import itemHandler as ih
 
 #Populate item dictionaries

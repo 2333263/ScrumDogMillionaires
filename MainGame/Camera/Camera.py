@@ -15,11 +15,6 @@ class Camera(pygame.sprite.Group):
 
 #this function calculates the offset of the camera
     def scroll(self):
-      # if(self.Player.rect.centerx-self.hWidth<=0):
-       #    self.offset.x=0
-       #elif(self.Player.rect.centerx-self.hWidth>=gs.width-gs.blockSize*32) : 
-      #      self.offset.x=gs.width-gs.blockSize*32
-      # else:
           
        self.offset.x=self.Player.rect.centerx-self.hWidth
        self.offset.y=self.Player.rect.centery-self.hHeight

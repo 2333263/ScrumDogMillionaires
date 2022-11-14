@@ -62,22 +62,17 @@ class MinePy:
         # level 2: wooden pickaxe, 4 wooden planks, a stone pickaxe and a diamond, and an emerald!
         # really easy start
         if (easyStart == 2):
-            # newTempItem = Item("Wooden Pickaxe",11, 0)
             newTempItem = items[12]
             inv.addItem(newTempItem)
-            # newTempItem2 = Item("Diamond",50, 0)
             newTempItem2 = items[51]
             inv.addItem(newTempItem2)
-            # tempBlock=Item(itemIDs[8],8)
             tempBlock = items[9]
             inv.addBlock(tempBlock)
             inv.addBlock(tempBlock)
             inv.addBlock(tempBlock)
             inv.addBlock(tempBlock)
-            # newTempItem3 = Item("Stone Pickaxe",16, 0)
             newTempItem3 = items[17]
             inv.addItem(newTempItem3)
-            # newTempItem4 = Item("Emerald" ,53, 0)
             newTempItem4 = items[54]
             inv.addItem(newTempItem4)
 
@@ -85,8 +80,8 @@ class MinePy:
         self.game_speed = 60
         self.stage = 1
         self.done = False
+        
         # set the seed
-
         if(self.seed == None):
             self.seed = gs.genRandomSeed()
         gs.seed=self.seed
@@ -95,17 +90,21 @@ class MinePy:
         gs.playerRange = playerRange
         self.worldBlocks = pygame.sprite.Group()
         self.collisionblocks = self.worldBlocks
+        #generate a random world to the left and right of the center chunk
         gs.generatedChunks[-1] = generateChunk(-gs.CHUNK_SIZE[0], self.worldBlocks)
-        gs.generatedChunks[0] = generateChunk(0, self.worldBlocks)#generate a random world to the left and right of the center chunk
+        gs.generatedChunks[0] = generateChunk(0, self.worldBlocks)
         gs.generatedChunks[1] = generateChunk(gs.CHUNK_SIZE[0], self.worldBlocks)
         
+        #initialise player and camera
         self.player = ph.Player((0, 0), gs.blockSize)
         self.camera = cam.Camera(self.player)
+
         checkChunkUpdates(self.player, self.worldBlocks)
         self.crafter = Crafting(self.screen)
         self.textureNames = ih.fetchTextureNames()
+        #if render mode is human load the image to show block being placed
         if(render_mode=="human"):
-            self.actionImage=pygame.image.load(self.textureNames["null"]).convert_alpha() #load the image to show block being placed
+            self.actionImage=pygame.image.load(self.textureNames["null"]).convert_alpha() 
         self.playerPos = [0, 0]
         self.cursorPos = [0, 0]
         self.isBP=False
@@ -241,12 +240,12 @@ class MinePy:
                 self.stage += 1
                 return completeInt
 
-            planksPrevCount = inv.getItemCountFromInput(8,prev)
-            planksCurrCount = inv.getItemCountFromInput(8,current)
-            logsPrevCount = inv.getItemCountFromInput(7,prev)
-            logsCurrCount = inv.getItemCountFromInput(7,current)
+            planksPrevCount = inv.getItemCountFromInput(8,prev) #get previous amount of planks
+            planksCurrCount = inv.getItemCountFromInput(8,current)#get current amount of panks
+            logsPrevCount = inv.getItemCountFromInput(7,prev) #get previous amount of logs
+            logsCurrCount = inv.getItemCountFromInput(7,current)#get current amount of logs
 
-            if logsPrevCount > logsCurrCount:  # less logs than before
+            if logsPrevCount > logsCurrCount:  # If there are now fewer logs than previously 
                 if planksPrevCount < planksCurrCount:
                     return rewardInt+5
                 return penaltyInt
@@ -336,6 +335,7 @@ class MinePy:
                 return completeInt
 
             # need 3 stone and 2 planks to craft a stone pickaxe
+            # get previous and current amounts of stone, planks and pickaxe
             stonePrevCount = inv.getItemCountFromInput(2,prev)
             stoneCurrCount = inv.getItemCountFromInput(2,current)
             planksPrevCount = inv.getItemCountFromInput(8,prev)
@@ -444,7 +444,7 @@ class MinePy:
                 if inv.getItemCountFromInput(67,current) < 4 and inv.getItemCountFromInput(64,current) < 4 and inv.getItemCountFromInput(53,current) == 0:
                     self.stage -= 1
                     return failureInt
-            #keep track of the number of blocks we have and compares
+            #keep track of the number of blocks we have and what we had before
             diamondPrevCount = inv.getItemCountFromInput(67,prev)
             diamondCurrCount = inv.getItemCountFromInput(67,current)
             goldPrevCount = inv.getItemCountFromInput(64,prev)

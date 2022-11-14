@@ -1,6 +1,7 @@
 import json
 from MainGame.Stage.stage import Stage
 
+#populates each reward dictonary from the json file
 def populateStages():
     stages = {}
     file = open("MainGame/Rewards/rewards.json")

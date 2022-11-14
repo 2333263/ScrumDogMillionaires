@@ -28,12 +28,11 @@ clicked=-1
 #Add placeable block (Dirt, Stone, etc...)
 def addBlock(block):
     id = block.itemID
-    #tempItem=Item(block.itemID,itemIDs[id],breakTime[id],blockHardness[id],itemHardness[id],)
     tempItem = items[id+1]
     smallest_empty=40
     for i in range(len(invArray)):
         if( invArray[i].itemID==block.itemID):
-            invArray[i].increase()
+            invArray[i].increase() 
             return
         if(invArray[i].itemID==-1 and i<smallest_empty):
             smallest_empty=i
@@ -56,7 +55,6 @@ def addItem(itemIn):
     if (smallest_empty!=40):
         invArray[smallest_empty]=tempItem
         invArray[smallest_empty].increase()
-    #print(invArray)
 
 
 def decrease():
@@ -87,9 +85,6 @@ def getSelected():
     return invArray[selected]
 
 
-#def setSelected(i):
-    #selected = i
-
 def selectNext():
     #Changes the selected item to the next element in hotbarArr
     #Loops around if too big
@@ -113,13 +108,14 @@ def selectInventory(pos):
     global selected
     selected = pos
     
-def clearInv():
+def clearInv(): # clear the inventory so that it is empty
     NullItem=Item(-1,"null",99999,5,0,"none","null","Textures/null",False,-1)
     invArray=np.full(40, NullItem, dtype=Item)
     for i in invArray:
             if(i.amount>0):
                 i.amount=0
-
+                
+#this function draws the hotbar
 def drawHotBar(screen):
     # draws background of hotbar
     pygame.draw.rect(screen,(90,90,90),[5*relative,20*relative,850*relative,100*relative],0)
@@ -170,16 +166,16 @@ def drawHotBar(screen):
         if(i==clicked and fullInv):
              pygame.draw.rect(screen, (0, 255, 0), (12*relative+(i)*85*relative, 30*relative, 70*relative, 80*relative), 3)
    
-
+#returns the inv array
 def getInv():
     return invArray
-
+#returns the number of items in the inventory of a particular ID 
 def getItemCount(itemID):
     for i in invArray:
          if( i.itemID==itemID):
             return i.amount
     return 0
-
+#returns the number of items in the inventory of a particular ID 
 def getItemCountFromInput(itemID, invArrayInput):
     for i in invArrayInput:
          if( i.itemID==itemID):

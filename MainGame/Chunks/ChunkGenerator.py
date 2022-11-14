@@ -10,7 +10,8 @@ textureNames = ih.fetchTextureNames()
 itemIDs = ih.fetchItemIDs()
 blockHardness = ih.fetchBlockHardness()
 breakTime = ih.fetchBreakTime()
-def drawOre(world, x, y, ore):
+
+def drawOre(world, x, y, ore):  # draw an ore in the surface
     xChange = yChange =  [-1, 0, 1]
     for xVal in xChange:
         for yVal in yChange:
@@ -18,7 +19,8 @@ def drawOre(world, x, y, ore):
                 if ((y + yVal > 0 and y + yVal < gs.CHUNK_SIZE[1]) and (x + xVal > 1 and x + xVal < gs.CHUNK_SIZE[0] - 1)):
                     world[y + yVal][x + xVal] = ore
 
-def drawCave(world, x, y):
+
+def drawCave(world, x, y): # create caves by leaving 'holes' in the surface
     xChange = yChange =  [-4, -3, -2, -1, 0, 1, 2, 3, 4]
     for xVal in xChange:
         for yVal in yChange:
@@ -26,8 +28,8 @@ def drawCave(world, x, y):
                 if ((y + yVal > 0 and y + yVal < gs.CHUNK_SIZE[1]) and (x + xVal > 1 and x + xVal < gs.CHUNK_SIZE[0] - 1)):
                     world[y + yVal][x + xVal] = " "
 
-
-def drawTree(world, y, x):
+#Defines a general shape of a tree using a 2D array, where the index is the position in the world 
+def drawTree(world, y, x): # create a tree in the world 
     world[y][x] = 'L'
     world[y - 1][x] = 'L'
     world[y - 2][x] = 'L'
@@ -43,7 +45,7 @@ def drawTree(world, y, x):
     world[y - 4][x - 1] = 'V'
     world[y - 5][x] = 'V'
 
-def getWorldSprites(world, generatePos):
+def getWorldSprites(world, generatePos): #converts array of blocks into a sprite groups of sprites
     worldGroup = pygame.sprite.Group()
     for i in range(gs.CHUNK_SIZE[0]):
         for j in range(gs.CHUNK_SIZE[1]):
@@ -61,10 +63,7 @@ def getWorldSprites(world, generatePos):
                 worldGroup.add(b)
     return worldGroup
 
-
-
-
-def generateChunk(generatePos, worldBlocks):
+def generateChunk(generatePos, worldBlocks): # create the surface/chunk using a perlin noise object/function
     noise = PerlinNoise(gs.octaves, gs.seed + generatePos) #Create a new noise object
     xpix, ypix = gs.CHUNK_SIZE[0], 6
     heightNoise = (np.array([noise([2, j/ypix]) for j in range(xpix)]) * 10).astype(int)
@@ -94,7 +93,7 @@ def generateChunk(generatePos, worldBlocks):
             if(y > h + heightNoise[x] and y > h + heightNoise[x] + 12):
                 if(random.randint(1, 150) == 69):
                     drawCave(world, x, y)
-
+            #randomly spawn the different elements within the surface in a range of where they should spawn in
             if(y > h + heightNoise[x] - 1 and y > h + heightNoise[x] + int(gs.CHUNK_SIZE[1]/2)):
                 diamondRand = random.randint(1, 120) 
                 if (diamondRand == 1):

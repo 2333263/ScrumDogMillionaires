@@ -1,6 +1,8 @@
 import pygame
 
-class Block(pygame.sprite.Sprite):
+#a class for the block and its attributes
+
+class Block(pygame.sprite.Sprite): #creates a block object with the required properties
     def __init__(self, blockSize, blockPosition, itemID, textureName, hardness, breakTime):
         super().__init__()
         self.blockPosition = blockPosition
@@ -14,7 +16,7 @@ class Block(pygame.sprite.Sprite):
         self.rect.x = blockPosition[0]
         self.rect.y = blockPosition[1]
 
-    def getHardness(self): 
+    def getHardness(self):  #returns the hardness of the block
         return self.hardness
 
 

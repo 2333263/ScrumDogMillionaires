@@ -10,7 +10,7 @@ actionSpace = {
     "HOTBAR" : [i for i in range(25, 65, 1)],
     "CRAFTING" : [i for i in range(65, 75, 1)]
 }
-
+#set the world seed by encoding a string
 def setSeed(string = ""):   
     global seed
     if len(string)!=0:
@@ -18,7 +18,7 @@ def setSeed(string = ""):
     else:
         seed = abs(random.randint(-10000, 10000))
     return seed
-
+#hashes a string
 def hasher(string):
     hash=""
     for char in string:

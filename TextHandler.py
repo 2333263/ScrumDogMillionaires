@@ -2,7 +2,7 @@ from turtle import back
 import pygame
 pygame.font.init()
 
-class Text(pygame.sprite.Sprite):
+class Text(pygame.sprite.Sprite): #creates a sprite from text
     def __init__(self, text, fontSize, color, pos, background = None):
         # Call the parent class (Sprite) constructor
         pygame.sprite.Sprite.__init__(self)

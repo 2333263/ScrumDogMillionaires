@@ -28,7 +28,7 @@ class Player(pygame.sprite.Sprite):
         self.keys={}
          #used for audio
         self.count=0
-
+    #returns the position of the player (in world coordinates not block coordinates)
     def getPlayerPos(self):
         return self.rect.x, self.rect.y
     
@@ -73,7 +73,7 @@ class Player(pygame.sprite.Sprite):
         #when the player reaches his arc set jumped to false so normal gravity functions
         if(math.floor(self.direction.y)==0):
             self.jumped=False
-            
+    #returns a list of blocks the player has currently collided with
     def collided(self,blocks):
         collide_list=[]
         for block in blocks: #checks all nearby blocks
@@ -130,9 +130,10 @@ class Player(pygame.sprite.Sprite):
                     self.rect.top=block.rect.bottom #collide with block on top
                     self.direction.y=0 #no movement on y
                     self.jumped=False #no longer jumping
-
+    #stops moving the player on the x axis
     def stopMoveOnX(self):
         self.direction.x=0
+    #returns if the player us colliding with a block.
     def willcollide(self,block):
             if self.rect.colliderect(block): #uses sprite group collide
                  return True

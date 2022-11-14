@@ -20,7 +20,7 @@ buttonFont = pygame.font.Font('MainGame/Font/Minecraft.ttf',40)  # font for butt
 # invArray=np.full(40,NullItem,dtype=Item)
 NullItem = items[0]
 
-
+#a class to handle the crafting of objects in the 'crafting table'
 class Crafting():
     def __init__(self, screen):
         self.craftArray = np.full([3, 3], NullItem, dtype=Item)
@@ -88,8 +88,6 @@ class Crafting():
         for i in range(3):
             for j in range(3):
                 craftIDArray[i][j] = self.craftArray[i][j].itemID
-        #         if(self.craftArray[i][j].itemID!=-1):
-                    #print(self.craftArray[i][j].itemID,"\n")
 
         for i in self.allItems:
             # compares crafting table to all recipe matrices
@@ -101,8 +99,8 @@ class Crafting():
         self.canCraft = False
         self.craftID = -1
 
+     # this function crafts the craftable item
     def doCraft(self):
-        # this function crafts the craftable item
         self.checkCanCraft()
         if(self.canCraft):
             for i in range(self.recipes.getCraftingAmount(self.craftID)):
@@ -186,12 +184,15 @@ class Crafting():
             return False
         if(len(playerInventory) == 0):
             return False
+        #get items needed to craft a specific recipe 
         self.itemsNeeded = self.recipes.getRecipe(itemID)
         for resource in self.itemsNeeded:
             found = False
+            #check if the items in the players invetory are sufficient/match the recipe requirements 
             for item in playerInventory:
                 if(item.itemID == resource):
                     found = True
+                    #check if we have enough of that resource needed for the recipe
                     if(item.amount < self.itemsNeeded[resource]):
                         return False
             if (not found):
@@ -200,8 +201,6 @@ class Crafting():
             for i in range(self.itemsNeeded[item]):
                 if(item> 0):
                     decreaseSpec(item)
-        #tempItem = Item(
-            #itemIDs[itemID], itemID)
         tempItem = items[itemID+1]
         for i in range(self.recipes.getCraftingAmount(itemID)):
             # If item is a placeable object, it is then counted as a block
@@ -209,8 +208,6 @@ class Crafting():
                 addBlock(tempItem)
             # Else the item is added as an item with an item hardness, defined in gameSettings.py
             else:
-                #newTempItem = Item(
-                    #tempItem.itemName, tempItem.itemID, itemHardness[tempItem.getItemId()])
                 newTempItem = items[tempItem.itemID+1]
                 addItem(newTempItem)
         return True
