@@ -28,15 +28,16 @@ In addition, you are able to make use of any of the built in tasks that the team
 <!--- Add in info about Jim & Michael (our lord and savior) here  -->
 
 ## Group Members
-* 2420656  
-* 2303289  
-* 2368841  
-* 2356115 (scrum master)  
-* 2333263  
-* 2332853  
-* 2393033  
-* 2356823  
-* 2302891  
+* Justin (scrum master)
+* Lior
+* Luciano
+* Michaela
+* Benjamin
+* Gavin
+* Damion
+* Stuart 'Lazarus'
+* Jeremy
+
 
 ## Project layout
 ```
