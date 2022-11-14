@@ -399,13 +399,6 @@
 
   <h1>Home</h1>
 
-<!---
-<img src="assets/fullLogo.jpg" alt="FullLogo" width="400" style="
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;"/>
--->
 <p><img src="assets/Logo_Background.jpg" alt="FullLogo" width="400" 
 style="
   display: block;
@@ -418,8 +411,6 @@ style="
 <p>Gym is a Python library which provides a standard API for developing reinforcement learning algorithms. The team used gym to create an agent which takes actions in the minecraft environemnt, receives rewards for the actions it takes and the states it enters and checks to see whether the game has been completed.</p>
 <p>One is able to create custom tasks which the agent will have to complete and receive a reward thereafter. 
 In addition, you are able to make use of any of the built in tasks that the team has created for you. </p>
-<!--- Add in info about Jim & Michael (our lord and savior) here  -->
-
 <h2 id="group-members">Group Members</h2>
 <ul>
 <li>Justin (scrum master)</li>
@@ -436,6 +427,7 @@ In addition, you are able to make use of any of the built in tasks that the team
 <pre><code>SCRUM-DOG-MILLIONAIRES
 │   setup.py    # The configuration file for the package.  
 │   MainGym.py  # Gym current setup and runner file
+│   main.py     # Main py file for the base interactive game
 │
 └───Diagrams
 │   │   ...     # Diagrams outlining the implementation
@@ -463,8 +455,7 @@ In addition, you are able to make use of any of the built in tasks that the team
 │
 │
 └───MainGame
-│   │   main.py  # Main py file for the base interactive game
-│   │   ...      # Website Files
+│   │   ...      # Interactive Game Files
 </code></pre>
 <h2 id="packages-used">Packages used</h2>
 <ul>
@@ -474,9 +465,12 @@ In addition, you are able to make use of any of the built in tasks that the team
 <li>gym version: 0.26.1</li>
 </ul>
 <h2 id="installing-the-package">Installing the package</h2>
-<p>In order to install the package locally, please run this from your local terminal after setting your current working directory using <code>cd /directoy/</code>. Then run the following command.</p>
-<pre><code class="language-py">pip install -e scrumdogmillionaires
+<p>In order to install the package locally, please download the latest release (currently version <code>2.0.0</code>) from <a href="https://github.com/2333263/ScrumDogMillionaires/releases">here</a>.<br />
+Once downloaded, please extract the file into the desired directory and set it as the actice directoy. </p>
+<p>If it is your first time running, please run the following command from the root directory (<code>/SCRUM-DOG-MILLIONAIRES</code>) of the project in the terminal:</p>
+<pre><code class="language-py">pip install -r requirements.txt
 </code></pre>
+<p>Once the requirements are installed, navigate to the appropriate page on the website in order to see instructions on running the interactive game, or running the gym agent. </p>
 
 
 

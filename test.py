@@ -1030,38 +1030,38 @@ class testMinecraftEnv(unittest.TestCase):
     #tests that when performing the actions required for stage 1 of the rewards, the correct rewards are given
     def testEvaluateStage1(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
-        obs, info = self.ENV.reset(seed=1212)
+        obs, info = self.ENV.reset(seed=1212) #resets the environment
         
-        stage1Blocks = [
+        stage1Blocks = [ # list of blocks that are required for stage 1
 
         block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),8,textureNames["Oak Planks"],
-                    blockHardness[8],breakSpeed[8]),
+                    blockHardness[8],breakSpeed[8]), #Oak Planks
                                 
         block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
-                    blockHardness[7],breakSpeed[7]),
+                    blockHardness[7],breakSpeed[7]), #Oak Log
 
         block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),6,textureNames["Oak Leaves"],
-                    blockHardness[6],breakSpeed[6]),
+                    blockHardness[6],breakSpeed[6]), #Oak Leaves
 
         block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),1,textureNames["Dirt Block"],
-                    blockHardness[1],breakSpeed[1]),
+                    blockHardness[1],breakSpeed[1]), #Dirt Block
 
         block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),0,textureNames["Grass Block"],
-                    blockHardness[0],breakSpeed[0])]
+                    blockHardness[0],breakSpeed[0])] #Grass Block
 
         prevpos = (0, -100)
         
-        currpos = self.ENV.pygame.player.getPlayerPos()
-        while (prevpos != currpos):
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
+        while (prevpos != currpos): #loops until the player is on the ground
             self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
-            prevpos = currpos
-            currpos = self.ENV.pygame.player.getPlayerPos()
+            prevpos = currpos # sets the previous position to the current position
+            currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
         
         # stage 1 breaking and placing
         k = 0
         for i in (stage1Blocks):
             ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item) # clear the inv
-            ih.addBlock(i)
+            ih.addBlock(i) # add the block to the inventory
             self.ENV.step(gs.actionSpace["HOTBAR"][0])
             Obs, reward, done, boolo, infoDict =self.ENV.step(gs.actionSpace["WORLD"][11])
             if(k == 1):

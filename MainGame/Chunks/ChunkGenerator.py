@@ -11,6 +11,7 @@ itemIDs = ih.fetchItemIDs()
 blockHardness = ih.fetchBlockHardness()
 breakTime = ih.fetchBreakTime()
 
+#Defines a format to randomly generate ores in each chunk, where it generates in a circle
 def drawOre(world, x, y, ore):  # draw an ore in the surface
     xChange = yChange =  [-1, 0, 1]
     for xVal in xChange:
@@ -19,7 +20,8 @@ def drawOre(world, x, y, ore):  # draw an ore in the surface
                 if ((y + yVal > 0 and y + yVal < gs.CHUNK_SIZE[1]) and (x + xVal > 1 and x + xVal < gs.CHUNK_SIZE[0] - 1)):
                     world[y + yVal][x + xVal] = ore
 
-
+#Generates a chunk of the world using perlin noise and places it underground by setting blocks to 
+#air if they are below the surface
 def drawCave(world, x, y): # create caves by leaving 'holes' in the surface
     xChange = yChange =  [-4, -3, -2, -1, 0, 1, 2, 3, 4]
     for xVal in xChange:
@@ -45,6 +47,7 @@ def drawTree(world, y, x): # create a tree in the world
     world[y - 4][x - 1] = 'V'
     world[y - 5][x] = 'V'
 
+#Converts the random generated world into a sprite group of blocks in order to draw them to the screen 
 def getWorldSprites(world, generatePos): #converts array of blocks into a sprite groups of sprites
     worldGroup = pygame.sprite.Group()
     for i in range(gs.CHUNK_SIZE[0]):
@@ -63,6 +66,8 @@ def getWorldSprites(world, generatePos): #converts array of blocks into a sprite
                 worldGroup.add(b)
     return worldGroup
 
+#Generates a chunk of the world using perlin noise and places it underground by setting blocks in an array 
+#where each element is the item id 
 def generateChunk(generatePos, worldBlocks): # create the surface/chunk using a perlin noise object/function
     noise = PerlinNoise(gs.octaves, gs.seed + generatePos) #Create a new noise object
     xpix, ypix = gs.CHUNK_SIZE[0], 6
