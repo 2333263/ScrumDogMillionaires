@@ -33,12 +33,13 @@ breakSpeed = itemHandler.breakTime
 itemArr = itemHandler.fetchDict()
 # update test for sound
 
-
+#tests that the item class's properties and types
 class TestItem(unittest.TestCase):
     tempItem = itemArr[1]  # Item("Grass", 0)
     tempItem1 = itemArr[2]  # Item("Dirt", 0, 20)]
     tempItem1.itemHardness=20
- 
+    
+    #tests that the item id properties and ranges is set correctly
     def test_itemID(self):
         self.assertIsInstance(self.tempItem.itemID, int) # itemID type is int
         self.assertGreaterEqual(self.tempItem.itemID, 0) # itemID is greater than 0
@@ -49,6 +50,7 @@ class TestItem(unittest.TestCase):
         self.assertLessEqual(self.tempItem1.itemID, len(itemIDs) + 1) # itemID is less than the length of itemIDs
         self.assertEqual(self.tempItem1.getItemId(), self.tempItem1.itemID) # itemID is equal to the itemID of the item
 
+    #tests that the item amount properties and ranges is set correctly
     def test_amount(self):
         self.assertIsInstance(self.tempItem.amount, int) # amount type is int
         self.assertGreaterEqual(self.tempItem.amount, 0) # amount is greater equal than 0
@@ -61,17 +63,19 @@ class TestItem(unittest.TestCase):
         self.assertEqual(self.tempItem.amount, oldCount) # amount is equal to oldCount
         self.assertEqual(self.tempItem.amount, self.tempItem.getCount()) # amount is equal to the amount of the item
 
+    #tests that the item name properties and ranges is set correctly
     def test_name(self):
         self.assertIsInstance(self.tempItem.itemDisplayName, str) # itemDisplayName type is str
         self.assertEqual(self.tempItem.getItemName(), "Grass Block") # itemDisplayName is equal to the itemDisplayName of the item
         self.assertIsInstance(self.tempItem1.itemDisplayName, str) # itemDisplayName type is str
         self.assertEqual(self.tempItem1.getItemName(), "Dirt Block") # itemDisplayName is equal to the itemDisplayName of the item
 
+    #tests that the item hardness properties and ranges is set correctly
     def test_Hardness(self):
         self.assertEqual(self.tempItem.getItemHardness(), 0) # itemHardness is equal to the correct itemHardness of the item
         self.assertEqual(self.tempItem1.getItemHardness(), 20) # itemHardness is equal to the correct itemHardness of the item
 
-
+#test block's properties
 class TestBlock(unittest.TestCase):
     tempBlock = block.Block(gs.blockSize,(0,0),0,textureNames[itemIDs[0]],0,breakSpeed[0]) 
 
@@ -130,7 +134,7 @@ class TestTextHandler(unittest.TestCase):
         self.assertLessEqual(self.testText.pos[0], gs.width)
         self.assertLessEqual(self.testText.pos[1], gs.height)
 
-
+#tests that the recipehandler function's types
 class TestRecipeHandler(unittest.TestCase):
     tempHandler = recipeHandler.RecipeHandler()
     #tests that the recipe handler is created correctly by checking correct types
@@ -788,7 +792,7 @@ class TestInvinventorySlots(unittest.TestCase):
         self.assertEqual(self.ins.image.get_width(), 30)  #checks that the image width is correct
         self.assertEqual(self.ins.image.get_height(), 40) #checks that the image height is correct
 
-
+#test that the portal function with correct initlized
 class TestPortal(unittest.TestCase):
     port = Portal.Portal(gs.blockSize,(8,7),26,textureNames[itemIDs[0]],999)
 
@@ -1010,9 +1014,9 @@ class testMinecraftEnv(unittest.TestCase):
             self.assertEqual(ih.getItemCount(7), count)  # see if it got readded to the inventory
         ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
     #tests that recieving rewards work
-    def testEvaluateGeneralRewards(self):
+    def testEvaluateGeneralRewards(self): #tests that recieving rewards work
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
-        obs, info = self.ENV.reset(seed=1212)
+        obs, info = self.ENV.reset(seed=1212) #resets the environment
 
         # test general movement reward
         for i in range(5):
