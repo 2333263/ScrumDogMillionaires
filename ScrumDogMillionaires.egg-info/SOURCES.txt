@@ -1,7 +1,0 @@
-README.md
-setup.py
-ScrumDogMillionaires.egg-info/PKG-INFO
-ScrumDogMillionaires.egg-info/SOURCES.txt
-ScrumDogMillionaires.egg-info/dependency_links.txt
-ScrumDogMillionaires.egg-info/requires.txt
-ScrumDogMillionaires.egg-info/top_level.txt
