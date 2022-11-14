@@ -172,31 +172,31 @@ class TestPlayer(unittest.TestCase):
             pygame.K_d: False
         }
         self.simulatedKeys[pygame.K_LEFT] = True #move left
-        self.TempPlayer.MoveOnX(self.simulatedKeys)
-        self.assertEqual(self.TempPlayer.direction.x, -2)
-        self.simulatedKeys[pygame.K_LEFT] = False
-        self.TempPlayer.MoveOnX(self.simulatedKeys)
-        self.assertEqual(self.TempPlayer.direction.x, 0)
+        self.TempPlayer.MoveOnX(self.simulatedKeys) #move the player
+        self.assertEqual(self.TempPlayer.direction.x, -2) #check the player moved left
+        self.simulatedKeys[pygame.K_LEFT] = False #stop moving left
+        self.TempPlayer.MoveOnX(self.simulatedKeys) #move the player
+        self.assertEqual(self.TempPlayer.direction.x, 0) #check the player stopped moving
 
-        self.simulatedKeys[pygame.K_a] = True
-        self.TempPlayer.MoveOnX(self.simulatedKeys)
-        self.assertEqual(self.TempPlayer.direction.x, -2)
-        self.simulatedKeys[pygame.K_a] = False
-        self.TempPlayer.MoveOnX(self.simulatedKeys)
-        self.assertEqual(self.TempPlayer.direction.x, 0)
+        self.simulatedKeys[pygame.K_a] = True #move left
+        self.TempPlayer.MoveOnX(self.simulatedKeys)     #move the player
+        self.assertEqual(self.TempPlayer.direction.x, -2) #check the player moved left
+        self.simulatedKeys[pygame.K_a] = False #stop moving left
+        self.TempPlayer.MoveOnX(self.simulatedKeys) #move the player
+        self.assertEqual(self.TempPlayer.direction.x, 0) #check the player stopped moving
 
-        self.simulatedKeys[pygame.K_RIGHT] = True
-        self.TempPlayer.MoveOnX(self.simulatedKeys)
-        self.assertEqual(self.TempPlayer.direction.x, 2)
-        self.simulatedKeys[pygame.K_RIGHT] = False
-        self.TempPlayer.MoveOnX(self.simulatedKeys)
-        self.assertEqual(self.TempPlayer.direction.x, 0)
+        self.simulatedKeys[pygame.K_RIGHT] = True #move right
+        self.TempPlayer.MoveOnX(self.simulatedKeys) #move the player
+        self.assertEqual(self.TempPlayer.direction.x, 2) #check the player moved right
+        self.simulatedKeys[pygame.K_RIGHT] = False #stop moving right
+        self.TempPlayer.MoveOnX(self.simulatedKeys) #move the player
+        self.assertEqual(self.TempPlayer.direction.x, 0) #check the player stopped moving
 
-        self.simulatedKeys[pygame.K_d] = True
-        self.TempPlayer.MoveOnX(self.simulatedKeys)
-        self.assertEqual(self.TempPlayer.direction.x, 2)
-        self.simulatedKeys[pygame.K_d] = False
-        self.TempPlayer.MoveOnX(self.simulatedKeys)
+        self.simulatedKeys[pygame.K_d] = True #move right
+        self.TempPlayer.MoveOnX(self.simulatedKeys) #move the player
+        self.assertEqual(self.TempPlayer.direction.x, 2) #check the player moved right 
+        self.simulatedKeys[pygame.K_d] = False #stop moving right 
+        self.TempPlayer.MoveOnX(self.simulatedKeys) #move the player
         self.assertEqual(self.TempPlayer.direction.x, 0)
     #tests that when the player is in the air, gravity pulls him down
     def test_gravity(self):
@@ -229,84 +229,84 @@ class TestPlayer(unittest.TestCase):
     # 4) given the player is moving in a direction, if he collides with a block he cannot go through it and it stops him from moving in that direction
     # 5) tests collision
     def test_update(self):
-        tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
-        tempGroup = pygame.sprite.Group()
-        tempGroup.add(tempBlock)
-        self.TempPlayer.jumped = True
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.jumped, False)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.y, 4.0)
+        tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0]) #create a block
+        tempGroup = pygame.sprite.Group() #create a group
+        tempGroup.add(tempBlock) #add the block to the group
+        self.TempPlayer.jumped = True #set jumped to true
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.jumped, False) #check that jumped is now false
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.direction.y, 4.0) #check that the player is falling
         for x in tempGroup:
-            x.blockPosition = (8 * gs.blockSize, 10 * gs.blockSize)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.y, 4.0)
-        self.TempPlayer.direction.x = -1
+            x.blockPosition = (8 * gs.blockSize, 10 * gs.blockSize) #move the block under the player
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.direction.y, 4.0) #check that the player is falling
+        self.TempPlayer.direction.x = -1 #move the player left
         for x in tempGroup:
-            x.blockPosition = (7 * gs.blockSize, 8 * gs.blockSize)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.x, -1.0)
-        self.TempPlayer.direction.x = -1
+            x.blockPosition = (7 * gs.blockSize, 8 * gs.blockSize) #move the block to the left of the player
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.direction.x, -1.0) #check that the player is moving left
+        self.TempPlayer.direction.x = -1 #move the player left
         for x in tempGroup:
-            x.blockPosition = (7 * gs.blockSize, 9 * gs.blockSize)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.x, -1.0)
-        self.TempPlayer.direction.x = 1
+            x.blockPosition = (7 * gs.blockSize, 9 * gs.blockSize) #move the block to the left of the player
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.direction.x, -1.0) #check that the player is moving left
+        self.TempPlayer.direction.x = 1 #move the player right
         for x in tempGroup:
-            x.blockPosition = (9 * gs.blockSize, 8 * gs.blockSize)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.x, 1.0)
-        self.TempPlayer.direction.x = 1
+            x.blockPosition = (9 * gs.blockSize, 8 * gs.blockSize) #move the block to the right of the player
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.direction.x, 1.0) #check that the player is moving right
+        self.TempPlayer.direction.x = 1 #move the player right
         for x in tempGroup:
-            x.blockPosition = (9 * gs.blockSize, 9 * gs.blockSize)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.x, 1.0)
-        self.TempPlayer.jumped = True
+            x.blockPosition = (9 * gs.blockSize, 9 * gs.blockSize)  #move the block to the right of the player
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.direction.x, 1.0) #check that the player is moving right
+        self.TempPlayer.jumped = True #set jumped to true
         for x in tempGroup:
-            x.blockPosition = (8 * gs.blockSize, 8 * gs.blockSize)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.direction.y, 4.8)
-        self.TempPlayer.direction.x = 1
-        self.TempPlayer.direction.y = 1
-        tempPosX = self.TempPlayer.rect.x
-        tempPosY = self.TempPlayer.rect.y
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(self.TempPlayer.rect.y, tempPosY + 1)
-        self.assertEqual(self.TempPlayer.rect.x, tempPosX + 1)
-        self.TempPlayer.rect.x = tempPosX
-        self.TempPlayer.rect.y = tempPosY
-        self.TempPlayer.update(2, tempGroup)
-        self.assertEqual(self.TempPlayer.rect.y, tempPosY + 5)
-        self.assertEqual(self.TempPlayer.rect.x, tempPosX + 2)
+            x.blockPosition = (8 * gs.blockSize, 8 * gs.blockSize) #move the block under the player
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.direction.y, 4.8) #check that the player is falling
+        self.TempPlayer.direction.x = 1 #move the player right
+        self.TempPlayer.direction.y = 1 #move the player down
+        tempPosX = self.TempPlayer.rect.x #store the players x position
+        tempPosY = self.TempPlayer.rect.y #store the players y position
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.rect.y, tempPosY + 1) #check that the player moved down
+        self.assertEqual(self.TempPlayer.rect.x, tempPosX + 1) #check that the player moved right
+        self.TempPlayer.rect.x = tempPosX #reset the players x position
+        self.TempPlayer.rect.y = tempPosY #reset the players y position
+        self.TempPlayer.update(2, tempGroup) #update the player
+        self.assertEqual(self.TempPlayer.rect.y, tempPosY + 5) #check that the player moved down
+        self.assertEqual(self.TempPlayer.rect.x, tempPosX + 2) #check that the player moved right
         tempBlock = block.Block(gs.blockSize,(8 * gs.blockSize,7 * gs.blockSize),0,textureNames[itemIDs[0]],
-                                0,breakSpeed[0])
-        tempGroup.add(tempBlock)
-        self.TempPlayer.rect.x = 8 * gs.blockSize - 1
-        self.TempPlayer.rect.y = 7 * gs.blockSize
-        self.TempPlayer.direction.x = 1
+                                0,breakSpeed[0]) #create a block
+        tempGroup.add(tempBlock) #add the block to the group
+        self.TempPlayer.rect.x = 8 * gs.blockSize - 1 #move the player to the left of the block
+        self.TempPlayer.rect.y = 7 * gs.blockSize #move the player to the top of the block
+        self.TempPlayer.direction.x = 1 #move the player right
 
-        self.TempPlayer.update(1, tempGroup)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(8 * gs.blockSize - 1, self.TempPlayer.rect.x)
-        self.TempPlayer.rect.x = 8 * gs.blockSize + 1
-        self.TempPlayer.rect.y = 7 * gs.blockSize
-        self.TempPlayer.direction.x = -1
-        self.TempPlayer.update(1, tempGroup)
-        self.TempPlayer.update(0, tempGroup)
-        self.assertEqual(8 * gs.blockSize + 1, self.TempPlayer.rect.x)
-        self.TempPlayer.jumped = True
-        self.TempPlayer.rect.x = 8 * gs.blockSize
-        self.TempPlayer.rect.y = 7 * gs.blockSize
-        self.TempPlayer.direction.y = -3
-        self.TempPlayer.update(1, tempGroup)
-        self.assertEqual(tempBlock.rect.bottom, self.TempPlayer.rect.top)
-        self.assertFalse(self.TempPlayer.jumped)
-        self.TempPlayer.rect.x = 8 * gs.blockSize
-        self.TempPlayer.rect.y = 7 * gs.blockSize - 1
-        self.TempPlayer.direction.y = 3
+        self.TempPlayer.update(1, tempGroup) #update the player
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(8 * gs.blockSize - 1, self.TempPlayer.rect.x) #check that the player is not moving right
+        self.TempPlayer.rect.x = 8 * gs.blockSize + 1 #move the player to the right of the block
+        self.TempPlayer.rect.y = 7 * gs.blockSize #move the player to the top of the block
+        self.TempPlayer.direction.x = -1 #move the player left
+        self.TempPlayer.update(1, tempGroup) #update the player
+        self.TempPlayer.update(0, tempGroup) #update the player
+        self.assertEqual(8 * gs.blockSize + 1, self.TempPlayer.rect.x) #check that the player is not moving left
+        self.TempPlayer.jumped = True #set jumped to true
+        self.TempPlayer.rect.x = 8 * gs.blockSize #move the player to the left of the block
+        self.TempPlayer.rect.y = 7 * gs.blockSize #move the player to the top of the block
+        self.TempPlayer.direction.y = -3 #move the player up
+        self.TempPlayer.update(1, tempGroup) #update the player
+        self.assertEqual(tempBlock.rect.bottom, self.TempPlayer.rect.top) #check that the player is on top of the block
+        self.assertFalse(self.TempPlayer.jumped) #check that jumped is false
+        self.TempPlayer.rect.x = 8 * gs.blockSize #move the player to the left of the block
+        self.TempPlayer.rect.y = 7 * gs.blockSize - 1 #move the player to the top of the block
+        self.TempPlayer.direction.y = 3 #move the player down
 
-        self.TempPlayer.update(1, tempGroup)
-        self.assertEqual(tempBlock.rect.top, self.TempPlayer.rect.bottom)
+        self.TempPlayer.update(1, tempGroup) #update the player
+        self.assertEqual(tempBlock.rect.top, self.TempPlayer.rect.bottom) #check that the player is under the block
 
     #tests that when the user stops moving the player, the player stops moving
     def test_StopOnX(self):
@@ -315,15 +315,15 @@ class TestPlayer(unittest.TestCase):
     #test that when the player collides witha a block they stop moving
     def test_willcolide(self):
         tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
-        tempGroup = pygame.sprite.Group()
-        tempGroup.add(tempBlock)
+        tempGroup = pygame.sprite.Group() #create a group
+        tempGroup.add(tempBlock) #add the block to the group
 
-        self.TempPlayer.rect.x = 8
-        self.TempPlayer.rect.y = 7
-        self.assertTrue(self.TempPlayer.willcollide(tempBlock))
-        self.TempPlayer.rect.x = 22 * gs.blockSize
-        self.TempPlayer.rect.y = 22 * gs.blockSize
-        self.assertFalse(self.TempPlayer.willcollide(tempBlock))
+        self.TempPlayer.rect.x = 8 #move the player to the left of the block
+        self.TempPlayer.rect.y = 7 #move the player to the top of the block
+        self.assertTrue(self.TempPlayer.willcollide(tempBlock)) #check that the player will collide with the block
+        self.TempPlayer.rect.x = 22 * gs.blockSize #move the player to the right of the block
+        self.TempPlayer.rect.y = 22 * gs.blockSize #move the player to the bottom of the block
+        self.assertFalse(self.TempPlayer.willcollide(tempBlock)) #check that the player will not collide with the block
 
 #tests involving the crafting menu
 class TestCraftingMenu(unittest.TestCase):
@@ -365,23 +365,23 @@ class TestCraftingMenu(unittest.TestCase):
         NullItem = itemArr[0]  # Null item, id -1
         self.crafter.emptyTable()
         self.crafter.doCraft()
-        self.assertEqual(self.crafter.canCraft, False)
-        self.assertEqual(self.crafter.craftID, -1)
+        self.assertEqual(self.crafter.canCraft, False) # check that the craft is not valid because the table is empty
+        self.assertEqual(self.crafter.craftID, -1) # check that the craft is not valid because the table is empty
         self.crafter.craftArray[1][1] = itemArr[8]  # Item("Logs", 7)
-        ih.invArray = np.full(40,NullItem,dtype=itemNew.Item)
-        curr = ih.getItemCount(8)
-        self.crafter.doCraft()
-        self.assertEqual(ih.getItemCount(8), curr + 4)
+        ih.invArray = np.full(40,NullItem,dtype=itemNew.Item) #fill the inventory with null items
+        curr = ih.getItemCount(8) #get the current number of logs
+        self.crafter.doCraft() #craft the item
+        self.assertEqual(ih.getItemCount(8), curr + 4) #check that the number of logs has increased by 4
         for i in range(3):
             for j in range(3):
-                self.assertEqual(self.crafter.craftArray[i][j].itemID, -1)
-        self.assertEqual(self.crafter.canCraft, False)
-        self.assertEqual(self.crafter.craftID, -1)
+                self.assertEqual(self.crafter.craftArray[i][j].itemID, -1) #check that the crafting table is empty
+        self.assertEqual(self.crafter.canCraft, False) #check that the craft is not valid because the table is empty
+        self.assertEqual(self.crafter.craftID, -1) #check that the craft is not valid because the table is empty
         self.crafter.craftArray[1][1] = itemArr[47]  # Item("Gold Ore", 46)
-        curr = ih.getItemCount(47)
-        self.crafter.doCraft()
-        self.assertEqual(ih.getItemCount(47), curr + 1)
-        ih.invArray = np.full(40,NullItem,dtype=itemNew.Item)
+        curr = ih.getItemCount(47) #get the current number of gold ore
+        self.crafter.doCraft() #craft the item
+        self.assertEqual(ih.getItemCount(47), curr + 1) #check that the number of gold ore has increased by 1
+        ih.invArray = np.full(40,NullItem,dtype=itemNew.Item) #fill the inventory with null items
         for i in itemArr:
             if(i.amount>0):
                 i.amount=0
@@ -407,68 +407,68 @@ class TestCraftingMenu(unittest.TestCase):
 #tests that game settings intilizes correctly
 class TestGameSettings(unittest.TestCase):
     def test_properties(self):
-        self.assertIsInstance(gs.blockSize, int)
-        self.assertGreaterEqual(gs.blockSize, 1)
+        self.assertIsInstance(gs.blockSize, int) # checks that the block size is an int
+        self.assertGreaterEqual(gs.blockSize, 1) # checks that the block size is greater than 1
 
-        self.assertIsInstance(gs.playerRange, int)
-        self.assertGreaterEqual(gs.playerRange, 1)
+        self.assertIsInstance(gs.playerRange, int) # checks that the player range is an int
+        self.assertGreaterEqual(gs.playerRange, 1) # checks that the player range is greater equal than 1
 
-        self.assertIsInstance(gs.width, int)
-        self.assertGreaterEqual(gs.width, 1)
-        self.assertIsInstance(gs.height, int)
-        self.assertGreaterEqual(gs.height, 1)
+        self.assertIsInstance(gs.width, int) # checks that the width is an int
+        self.assertGreaterEqual(gs.width, 1) # checks that the width is greater equal than 1
+        self.assertIsInstance(gs.height, int) # checks that the height is an int
+        self.assertGreaterEqual(gs.height, 1) # checks that the height is greater equal than 1
 
-        self.assertIsInstance(gs.drawCrafting, bool)
+        self.assertIsInstance(gs.drawCrafting, bool) # checks that the draw crafting is a bool
 
-        self.assertIsInstance(gs.craftingTablePos[0], int)
-        self.assertGreaterEqual(gs.craftingTablePos[0], 1)
-        self.assertIsInstance(gs.craftingTablePos[1], int)
-        self.assertGreaterEqual(gs.craftingTablePos[1], 1)
+        self.assertIsInstance(gs.craftingTablePos[0], int) # checks that the crafting table x position is an int
+        self.assertGreaterEqual(gs.craftingTablePos[0], 1) # checks that the crafting table x position is greater equal than 1
+        self.assertIsInstance(gs.craftingTablePos[1], int) # checks that the crafting table y position is an int
+        self.assertGreaterEqual(gs.craftingTablePos[1], 1) # checks that the crafting table y position is greater equal than 1
 
-        self.assertIsInstance(itemIDs, dict)
-        self.assertIsInstance(craftingIDs, dict)
-        self.assertIsInstance(converterIDs, dict)
-        self.assertIsInstance(textureNames, dict)
+        self.assertIsInstance(itemIDs, dict) # checks that the item ids is a dict
+        self.assertIsInstance(craftingIDs, dict) # checks that the crafting ids is a dict
+        self.assertIsInstance(converterIDs, dict) # checks that the converter ids is a dict
+        self.assertIsInstance(textureNames, dict) # checks that the texture names is a dict
 
-        self.assertIsInstance(immovableBlocks, list)
-        self.assertIsInstance(clickableBlocks, list)
+        self.assertIsInstance(immovableBlocks, list) # checks that the immovable blocks is a list
+        self.assertIsInstance(clickableBlocks, list) # checks that the clickable blocks is a list
 
 #tests involving the players inventory 
 class TestInv(unittest.TestCase):
     #tests that the intilization works correctly
     def testAAInit(self):  # I had to call it AAinit so it would run before the other test cases
-        inventory = ih.getInv()
-        empty = True
+        inventory = ih.getInv() # gets the inventory
+        empty = True # sets empty to true
         for i in inventory:
             if (i.getItemId() != -1):
-                empty = False
-        self.assertTrue(empty)
-        ih.initGroup()
-        self.assertIsInstance(ih.slots, pygame.sprite.Group)
-        self.assertEqual(len(ih.slots), 40)
+                empty = False 
+        self.assertTrue(empty) # checks that the inventory is empty
+        ih.initGroup() # initializes the inventory
+        self.assertIsInstance(ih.slots, pygame.sprite.Group) # checks that the slots are a group
+        self.assertEqual(len(ih.slots), 40) # checks that there are 40 slots
         ih.selected = 0
         self.assertEqual(ih.getSelected().getItemId(), 5)
     #tests that blocks get added and removed from the players inventory correctly
     def testAddBlockandRemove(self):
         tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
                                 blockHardness[7],breakSpeed[7])
-        ih.addBlock(tempBlock)
-        found = False
-        foundPos = 0
-        inv = ih.getInv()
+        ih.addBlock(tempBlock) # adds a block to the inventory
+        found = False # sets found to false
+        foundPos = 0 # sets foundPos to 0
+        inv = ih.getInv() # gets the inventory
         for i in range(len(inv)):
             if (inv[i].getItemId() == 7):
-                foundPos = i
-                found = True
-        self.assertTrue(found)
-        self.assertEqual(inv[foundPos].getCount(), 1)
-        ih.addBlock(tempBlock)
-        self.assertEqual(inv[foundPos].getCount(), 2)
-        ih.selected = foundPos
-        ih.decrease()
-        self.assertEqual(inv[foundPos].getCount(), 1)
-        ih.decrease()
-        self.assertEqual(inv[foundPos].getItemId(), -1)
+                foundPos = i # sets foundPos to the position of the block
+                found = True # sets found to true
+        self.assertTrue(found) # checks that the block was found
+        self.assertEqual(inv[foundPos].getCount(), 1) # checks that the count of the block is 1
+        ih.addBlock(tempBlock) # adds another block to the inventory
+        self.assertEqual(inv[foundPos].getCount(), 2) # checks that the count of the block is 2 
+        ih.selected = foundPos # sets the selected slot to the position of the block
+        ih.decrease() # decreases the count of the block
+        self.assertEqual(inv[foundPos].getCount(), 1) # checks that the count of the block is 1
+        ih.decrease() # decreases the count of the block
+        self.assertEqual(inv[foundPos].getItemId(), -1) # checks that the block is no longer in the inventory
     #tests that when a specific item id is decremeneted it, gets decremented correctly from the players inventory
     def testDecSpec(self):
         inv = ih.getInv()
@@ -483,43 +483,43 @@ class TestInv(unittest.TestCase):
         self.assertEqual(inv[1].getItemId(), -1)
     #tests that adding items works correctly
     def testAddItem(self):
-        found = False
-        inv = ih.getInv()
+        found = False # sets found to false
+        inv = ih.getInv() # gets the inventory
         for i in inv:
             if (i.getItemId() == 11):
-                found = True
-        self.assertFalse(found)
+                found = True # sets found to true
+        self.assertFalse(found) # checks that the item was not found
         tempItem = itemArr[12]  # Item("Wooden Pickaxe", 11)
-        ih.addItem(tempItem)
-        ih.addItem(tempItem)
-        found = False
-        inv = ih.getInv()
+        ih.addItem(tempItem) # adds the item to the inventory
+        ih.addItem(tempItem) # adds the item to the inventory
+        found = False # sets found to false
+        inv = ih.getInv() # gets the inventory
         for i in inv:
             if (i.getItemId() == 11):
-                found = True
-        self.assertTrue(found)
-        foundpos = 0
-        inv = ih.getInv()
-        for i in range(len(inv)):
+                found = True # sets found to true
+        self.assertTrue(found) # checks that the item was found
+        foundpos = 0 # sets foundpos to 0
+        inv = ih.getInv() # gets the inventory
+        for i in range(len(inv)): 
             if (inv[i].getItemId() == 11):
-                foundpos = i
+                foundpos = i # sets foundpos to the position of the item
         self.assertEqual(inv[foundpos].getCount(), 2)
-        ih.decreaseSpec(11)
-        ih.decreaseSpec(11)
+        ih.decreaseSpec(11) # decreases the count of the item
+        ih.decreaseSpec(11) # decreases the count of the item
     #tests that selecting a slot by various means all work correctly
     def testSelection(self):
-        ih.selected = 0
-        ih.selectNext()
-        self.assertEqual(ih.selected, 1)
-        ih.selected = 9
-        ih.selectNext()
-        self.assertEqual(ih.selected, 0)
-        ih.selectPrevious()
-        self.assertEqual(ih.selected, 9)
-        ih.selectPrevious()
-        self.assertEqual(ih.selected, 8)
-        ih.selectInventory(7)
-        self.assertEqual(ih.selected, 7)
+        ih.selected = 0   # crafting table is in position 0          
+        ih.selectNext() # selects the next slot
+        self.assertEqual(ih.selected, 1) # checks that the selected slot is 1
+        ih.selected = 9 # sets the selected slot to 9
+        ih.selectNext() # selects the next slot
+        self.assertEqual(ih.selected, 0) # checks that the selected slot is 0
+        ih.selectPrevious() # selects the previous slot
+        self.assertEqual(ih.selected, 9) # checks that the selected slot is 9
+        ih.selectPrevious() # selects the previous slot
+        self.assertEqual(ih.selected, 8) # checks that the selected slot is 8
+        ih.selectInventory(7) # selects the slot at position 7
+        self.assertEqual(ih.selected, 7) # checks that the selected slot is 7
         ih.selected = 0
     #tests that an item count is returned correctly
     def testGetitemCount(self):
@@ -530,33 +530,33 @@ class TestInv(unittest.TestCase):
     def testClick(self):
         ih.fullInv = False
         ih.selected = 0
-        self.assertEqual(ih.selected, 0)
+        self.assertEqual(ih.selected, 0) # checks that the selected slot is 0
         ih.onClick((12 * ih.relative + 3 * 85 * ih.relative, 30 * ih.relative + 15 * ih.relative))
-        self.assertEqual(ih.selected, 3)
+        self.assertEqual(ih.selected, 3) # checks that the selected slot is 3
         ih.fullInv = True
-        self.assertEqual(ih.getClicked(), -1)
+        self.assertEqual(ih.getClicked(), -1) # checks that the clicked slot is -1
         ih.onClick((12 * ih.relative + 0 * 85 * ih.relative, 30 * ih.relative + 15 * ih.relative))
-        self.assertEqual(ih.clicked, 0)
+        self.assertEqual(ih.clicked, 0) # checks that the clicked slot is 0
         ih.onClick((12 * ih.relative + 3 * 85 * ih.relative, 30 * ih.relative + 15 * ih.relative))
-        self.assertEqual(ih.getClicked(), -1)
+        self.assertEqual(ih.getClicked(), -1) # checks that the clicked slot is -1
         foundPos = 0
         inv = ih.getInv()
-        for i in range(len(inv)):
+        for i in range(len(inv)): 
             if (inv[i].getItemId() == 5):
-                foundPos = i
-        self.assertEqual(foundPos, 3)
+                foundPos = i # sets foundPos to the position of the block
+        self.assertEqual(foundPos, 3) # checks that the block is in position 3
         ih.onClick((12 * ih.relative + 0 * 85 * ih.relative, 30 * ih.relative + 15 * ih.relative))
-        self.assertEqual(ih.clicked, 0)
+        self.assertEqual(ih.clicked, 0) # checks that the clicked slot is 0
         ih.onClick((12 * ih.relative + 3 * 85 * ih.relative, 30 * ih.relative + 15 * ih.relative))
-        self.assertEqual(ih.clicked, -1)
-        ih.setClicked()
+        self.assertEqual(ih.clicked, -1) # checks that the clicked slot is -1
+        ih.setClicked() # sets the clicked slot to -1
         self.assertEqual(ih.getClicked(), -1)
 
 #tests functions related to the camera
 class TestCamera(unittest.TestCase):
-    TempPlayer = ph.Player((8 * gs.blockSize, 8 * gs.blockSize), 24)
-    Cam = Camera.Camera(TempPlayer)
-    screen = pygame.Surface((gs.blockSize, gs.blockSize))
+    TempPlayer = ph.Player((8 * gs.blockSize, 8 * gs.blockSize), 24) # creates a player
+    Cam = Camera.Camera(TempPlayer) # creates a camera
+    screen = pygame.Surface((gs.blockSize, gs.blockSize)) # creates a screen
     tempBlock = block.Block(gs.blockSize,(8,7),0,textureNames[itemIDs[0]],0,breakSpeed[0])
     tempBlock2 = block.Block(gs.blockSize,(20,7),1,textureNames[itemIDs[1]],0,breakSpeed[1])
     tempBlock3 = block.Block(gs.blockSize,(29,7),2,textureNames[itemIDs[1]],0,breakSpeed[2])
@@ -603,27 +603,27 @@ class testChunks(unittest.TestCase):
         self.assertIsInstance(gs.generatedChunks[1], pygame.sprite.Group)
     #tests that when the player moves to the next chunk, the chunk off screen unloads and a new chunk loads in
     def test_Load_Unload(self):
-        gs.generatedChunks[-1] = CG.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld)
-        gs.generatedChunks[0] = CG.generateChunk(0, self.testWorld)
-        gs.generatedChunks[1] = CG.generateChunk(gs.CHUNK_SIZE[0], self.testWorld)
-        testChunk = [-1, 0, 1]
-        CH.checkChunkUpdates(self.TempPlayer, self.testWorld)
-        self.assertEqual(testChunk, gs.visibleChunks)
-        self.TempPlayer.rect.x += gs.CHUNK_SIZE[0] * gs.blockSize
-        CH.checkChunkUpdates(self.TempPlayer, self.testWorld)
-        self.assertNotEqual(testChunk, gs.visibleChunks)
-        self.assertEqual([0, 1, 2], gs.visibleChunks)
-        self.TempPlayer.rect.x -= gs.CHUNK_SIZE[0] * gs.blockSize
-        CH.checkChunkUpdates(self.TempPlayer, self.testWorld)
-        self.assertEqual(testChunk, gs.visibleChunks)
-        self.TempPlayer.rect.x -= gs.CHUNK_SIZE[0] * gs.blockSize
-        CH.checkChunkUpdates(self.TempPlayer, self.testWorld)
-        self.assertNotEqual(testChunk, gs.visibleChunks)
-        self.assertEqual([-2, -1, 0], gs.visibleChunks)
-        self.TempPlayer.rect.x -= gs.CHUNK_SIZE[0] * gs.blockSize
-        CH.checkChunkUpdates(self.TempPlayer, self.testWorld)
-        self.assertNotEqual(testChunk, gs.visibleChunks)
-        self.assertEqual([-3, -2, -1], gs.visibleChunks)
+        gs.generatedChunks[-1] = CG.generateChunk(-gs.CHUNK_SIZE[0], self.testWorld) # generates a chunk
+        gs.generatedChunks[0] = CG.generateChunk(0, self.testWorld) # generates a chunk
+        gs.generatedChunks[1] = CG.generateChunk(gs.CHUNK_SIZE[0], self.testWorld) # generates a chunk
+        testChunk = [-1, 0, 1] # creates a list of the chunks
+        CH.checkChunkUpdates(self.TempPlayer, self.testWorld) # checks if the chunks need to be updated
+        self.assertEqual(testChunk, gs.visibleChunks) # checks that the chunks are the same
+        self.TempPlayer.rect.x += gs.CHUNK_SIZE[0] * gs.blockSize # moves the player to the next chunk
+        CH.checkChunkUpdates(self.TempPlayer, self.testWorld) # checks if the chunks need to be updated
+        self.assertNotEqual(testChunk, gs.visibleChunks) # checks that the chunks are not the same
+        self.assertEqual([0, 1, 2], gs.visibleChunks) # checks that the chunks are the same
+        self.TempPlayer.rect.x -= gs.CHUNK_SIZE[0] * gs.blockSize   # moves the player to the previous chunk
+        CH.checkChunkUpdates(self.TempPlayer, self.testWorld) # checks if the chunks need to be updated
+        self.assertEqual(testChunk, gs.visibleChunks) # checks that the chunks are the same
+        self.TempPlayer.rect.x -= gs.CHUNK_SIZE[0] * gs.blockSize # moves the player to the previous chunk
+        CH.checkChunkUpdates(self.TempPlayer, self.testWorld) # checks if the chunks need to be updated
+        self.assertNotEqual(testChunk, gs.visibleChunks) # checks that the chunks are not the same
+        self.assertEqual([-2, -1, 0], gs.visibleChunks) # checks that the chunks are the same 
+        self.TempPlayer.rect.x -= gs.CHUNK_SIZE[0] * gs.blockSize # moves the player to the previous chunk
+        CH.checkChunkUpdates(self.TempPlayer, self.testWorld) # checks if the chunks need to be updated
+        self.assertNotEqual(testChunk, gs.visibleChunks) # checks that the chunks are not the same
+        self.assertEqual([-3, -2, -1], gs.visibleChunks) # checks that the chunks are the same
 
 #tests related to breaking and placing of blocks
 class TestBreakPlace(unittest.TestCase):
@@ -652,50 +652,50 @@ class TestBreakPlace(unittest.TestCase):
     #else that they cannot break the block
     def test_breakBlock(self):
         tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),0,textureNames["Grass Block"],
-                                blockHardness[0],breakSpeed[0])
-        self.spriteGroup.add(tempBlock)
-        gs.generatedChunks[0] = self.spriteGroup
-        bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        inventory = ih.getInv()
-        found = False
+                                blockHardness[0],breakSpeed[0]) #creates a block
+        self.spriteGroup.add(tempBlock) #adds the block to the sprite group
+        gs.generatedChunks[0] = self.spriteGroup #adds the sprite group to the chunk
+        bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #breaks the block
+        inventory = ih.getInv() #gets the inventory
+        found = False #sets found to false
         for i in range(len(inventory)):
             if (inventory[i].itemID == 0 and inventory[i].getCount() == 1):
-                ih.selected = i
-                ih.decrease()
-                found = True
-        self.assertTrue(found)
+                ih.selected = i #sets the selected item to the item that was just added
+                ih.decrease() #decreases the count of the item
+                found = True #sets found to true
+        self.assertTrue(found) #checks that the item was found
         tempBlock = block.Block(gs.blockSize,(30 * gs.blockSize,30 * gs.blockSize),0,textureNames["Grass Block"],
-                                blockHardness[0],breakSpeed[0])
-        self.spriteGroup.add(tempBlock)
+                                blockHardness[0],breakSpeed[0]) 
+        self.spriteGroup.add(tempBlock) #adds the block to the sprite group
         bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        inventory = ih.getInv()
-        found = False
+        inventory = ih.getInv() #gets the inventory
+        found = False #sets found to false
         for i in range(len(inventory)):
             if (inventory[i].itemID == 0 and inventory[i].getCount() == 1):
-                found = True
-        self.assertFalse(found)
-        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"],
-                                blockHardness[2],breakSpeed[2])
-        self.spriteGroup.add(tempBlock)
-        bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        inventory = ih.getInv()
-        found = False
+                found = True #sets found to true
+        self.assertFalse(found) #checks that the item was not found
+        tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),2,textureNames["Stone Block"], 
+                                blockHardness[2],breakSpeed[2])     #creates a block
+        self.spriteGroup.add(tempBlock) #adds the block to the sprite group
+        bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #breaks the block
+        inventory = ih.getInv() #gets the inventory
+        found = False #sets found to false
         for i in range(len(inventory)):
             if (inventory[i].itemID == 2 and inventory[i].getCount() == 1):
-                found = True
+                found = True #sets found to true
         self.assertFalse(found)
-        tempItem = itemArr[12]  # Item("Wooden Pickaxe", 11)
-        ih.addItem(tempItem)
-        bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        inventory = ih.getInv()
-        found = False
+        tempItem = itemArr[12]  # Item("Wooden Pickaxe", 11) #creates a pickaxe
+        ih.addItem(tempItem) #adds the pickaxe to the inventory
+        bph.blockBreak((9 * gs.blockSize, 9 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #breaks the block
+        inventory = ih.getInv() #gets the inventory
+        found = False #sets found to false
         for i in range(len(inventory)):
-            if (inventory[i].itemID == 2 and inventory[i].getCount() == 1):
-                ih.decreaseSpec(tempItem.itemID)
-                ih.selected = i
-                ih.decrease()
-                found = True
-        self.assertTrue(found)
+            if (inventory[i].itemID == 2 and inventory[i].getCount() == 1): #checks that the item was found
+                ih.decreaseSpec(tempItem.itemID) #decreases the count of the item
+                ih.selected = i #sets the selected item to the item that was just added
+                ih.decrease() #decreases the count of the item
+                found = True #sets found to true
+        self.assertTrue(found) #checks that the item was found
 
     #test that when given a block in the world, we can get the item version of that block
     def test_getBlockFromPos(self):
@@ -711,131 +711,131 @@ class TestBreakPlace(unittest.TestCase):
     def test_blockPlace(self):
 
         craftableBlock = block.Block(gs.blockSize,(10 * gs.blockSize,10 * gs.blockSize),5,
-                                     textureNames[itemIDs[0]],1,breakSpeed[5])
-        self.spriteGroup.add(craftableBlock)
-        bph.blockPlace(self.pos, self.spriteGroup, self.TempPlayer, True)
-        self.assertFalse(gs.drawCrafting)
-        bph.blockPlace((craftableBlock.rect.x, craftableBlock.rect.y), self.spriteGroup, self.TempPlayer, True)
-        self.assertTrue(gs.drawCrafting)
-        self.pos = (8000, 8000)
-        bph.blockPlace(self.pos, self.spriteGroup, self.TempPlayer, True)
+                                     textureNames[itemIDs[0]],1,breakSpeed[5]) #creates a block
+        self.spriteGroup.add(craftableBlock) #adds the block to the sprite group
+        bph.blockPlace(self.pos, self.spriteGroup, self.TempPlayer, True) #places the block
+        self.assertFalse(gs.drawCrafting) #checks that the crafting menu is not open
+        bph.blockPlace((craftableBlock.rect.x, craftableBlock.rect.y), self.spriteGroup, self.TempPlayer, True) #places the block
+        self.assertTrue(gs.drawCrafting) #checks that the crafting menu is open
+        self.pos = (8000, 8000) #sets the position to a position that is not in the world
+        bph.blockPlace(self.pos, self.spriteGroup, self.TempPlayer, True) #places the block
         # empties the inventory
-        inventory = ih.getInv()
-        for i in range(len(inventory)):
-            ih.selected = i
-            if (ih.getSelected().itemID != -1):
-                for j in range(ih.getSelected().getCount()):
-                    ih.decrease()
-        ih.selected = 0
-        gs.generatedChunks[0] = self.spriteGroup
+        inventory = ih.getInv() #gets the inventory
+        for i in range(len(inventory)): #loops through the inventory
+            ih.selected = i #sets the selected item to the item that was just added
+            if (ih.getSelected().itemID != -1): #checks that the item is not empty
+                for j in range(ih.getSelected().getCount()): #loops through the count of the item
+                    ih.decrease() #decreases the count of the item
+        ih.selected = 0 #sets the selected item to the item that was just added
+        gs.generatedChunks[0] = self.spriteGroup #adds the sprite group to the chunk
         tempBlock = block.Block(gs.blockSize,(15 * gs.blockSize,15 * gs.blockSize),43,textureNames["Iron Ore"],
-                                blockHardness[43],breakSpeed[43])
-        ih.addBlock(tempBlock)
-        self.TempPlayer.rect.x = 8 * gs.blockSize
-        self.TempPlayer.rect.y = 8 * gs.blockSize
-        bph.blockPlace((6 * gs.blockSize, 6 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        found = False
-        inventory = ih.getInv()
-        for i in range(len(inventory)):
+                                blockHardness[43],breakSpeed[43]) #creates a block
+        ih.addBlock(tempBlock) #adds the block to the inventory
+        self.TempPlayer.rect.x = 8 * gs.blockSize #sets the x position of the player
+        self.TempPlayer.rect.y = 8 * gs.blockSize #sets the y position of the player
+        bph.blockPlace((6 * gs.blockSize, 6 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #places the block
+        found = False #sets found to false
+        inventory = ih.getInv() #gets the inventory
+        for i in range(len(inventory)): #loops through the inventory
             if (inventory[i].itemID == 43 and inventory[i].getCount() == 1):
+                found = True #sets found to true
+        ih.addBlock(tempBlock) #adds the block to the inventory
+        ih.addBlock(tempBlock) #adds the block to the inventory
+        bph.blockPlace((5 * gs.blockSize, 6 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #places the block
+        found = False #sets found to false
+        inventory = ih.getInv() #gets the inventory
+        for i in range(len(inventory)): #loops through the inventory
+            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1): #checks that the item was found
                 found = True
-        ih.addBlock(tempBlock)
-        ih.addBlock(tempBlock)
-        bph.blockPlace((5 * gs.blockSize, 6 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
+        bph.blockPlace((8 * gs.blockSize, 8 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #places the block
+        found = False #sets found to false
+        inventory = ih.getInv() #gets the inventory
+        for i in range(len(inventory)): #loops through the inventory
+            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1): #checks that the item was found
+                found = True #sets found to true
+        self.assertTrue(found) #checks that the item was found
+        bph.blockPlace((800000 * gs.blockSize, 800000 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #places the block
+        found = False #sets found to false
+        inventory = ih.getInv() #gets the inventory
+        for i in range(len(inventory)): #loops through the inventory
+            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1): #checks that the item was found
+                found = True
+        self.assertTrue(found) #checks that the item was found
+        bph.blockPlace((5 * gs.blockSize, 6 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #places the block
         found = False
-        inventory = ih.getInv()
-        for i in range(len(inventory)):
-            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1):
-                found = True
-        bph.blockPlace((8 * gs.blockSize, 8 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        found = False
-        inventory = ih.getInv()
-        for i in range(len(inventory)):
-            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1):
-                found = True
-        self.assertTrue(found)
-        bph.blockPlace((800000 * gs.blockSize, 800000 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        found = False
-        inventory = ih.getInv()
-        for i in range(len(inventory)):
-            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1):
-                found = True
-        self.assertTrue(found)
-        bph.blockPlace((5 * gs.blockSize, 6 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        found = False
-        inventory = ih.getInv()
-        for i in range(len(inventory)):
-            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1):
-                found = True
-        self.assertTrue(found)
-        bph.blockPlace((8 * gs.blockSize, 10 * gs.blockSize), self.spriteGroup, self.TempPlayer, True)
-        found = False
-        inventory = ih.getInv()
-        for i in range(len(inventory)):
-            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1):
-                found = True
-        self.assertFalse(found)
+        inventory = ih.getInv() #gets the inventory
+        for i in range(len(inventory)): #loops through the inventory
+            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1): #checks that the item was found
+                found = True #sets found to true
+        self.assertTrue(found) #checks that the item was found
+        bph.blockPlace((8 * gs.blockSize, 10 * gs.blockSize), self.spriteGroup, self.TempPlayer, True) #places the block
+        found = False #sets found to false
+        inventory = ih.getInv() #gets the inventory
+        for i in range(len(inventory)): #loops through the inventory
+            if (inventory[i].itemID == 43 and inventory[i].getCount() == 1): #checks that the item was found
+                found = True #sets found to true
+        self.assertFalse(found) #checks that the item was not found
 
 #tests that inventory slot class gets initlized corrected
 class TestInvinventorySlots(unittest.TestCase):
     ins = InventorySlots.slot("red",10,20,30,40)
 
     def test_everything(self):
-        self.assertEqual(self.ins.width, 30)
-        self.assertEqual(self.ins.height, 40)
-        self.assertEqual(self.ins.rect.x, 10)
-        self.assertEqual(self.ins.rect.y, 20)
-        self.assertEqual(self.ins.image.get_width(), 30)
-        self.assertEqual(self.ins.image.get_height(), 40)
+        self.assertEqual(self.ins.width, 30) #checks that the width is correct
+        self.assertEqual(self.ins.height, 40) #checks that the height is correct
+        self.assertEqual(self.ins.rect.x, 10)  #checks that the x position is correct
+        self.assertEqual(self.ins.rect.y, 20) #checks that the y position is correct
+        self.assertEqual(self.ins.image.get_width(), 30)  #checks that the image width is correct
+        self.assertEqual(self.ins.image.get_height(), 40) #checks that the image height is correct
 
 
 class TestPortal(unittest.TestCase):
     port = Portal.Portal(gs.blockSize,(8,7),26,textureNames[itemIDs[0]],999)
 
     def test_init(self):
-        self.assertEqual(self.port.textureName, textureNames[itemIDs[0]])
-        self.assertEqual(self.port.itemID, 26)
-        x = 8 - 4 * gs.blockSize
-        y = 7 - 8 * gs.blockSize
-        self.assertEqual(self.port.blockPosition, [x, y])
-        self.assertEqual(self.port.rect.x, 8 - 0.4 * gs.blockSize)
-        self.assertEqual(self.port.rect.y, 7 - 1 * gs.blockSize)
+        self.assertEqual(self.port.textureName, textureNames[itemIDs[0]]) #checks that the texture name is correct
+        self.assertEqual(self.port.itemID, 26)  #checks that the item id is correct
+        x = 8 - 4 * gs.blockSize #calculates the x position
+        y = 7 - 8 * gs.blockSize #calculates the y position
+        self.assertEqual(self.port.blockPosition, [x, y]) #checks that the block position is correct
+        self.assertEqual(self.port.rect.x, 8 - 0.4 * gs.blockSize) #checks that the x position is correct
+        self.assertEqual(self.port.rect.y, 7 - 1 * gs.blockSize) #checks that the y position is correct
 
     def test_getHardness(self):
-        self.assertEqual(self.port.getHardness(), 999)
+        self.assertEqual(self.port.getHardness(), 999) #checks that the hardness is correct
 
 
 # need to change tooltype and reqtooltype and drops when we used it
 class TestItemNew(unittest.TestCase):
     def test_getDrop(self):
-        newItems = itemNew.Item(9,"Bigblock",100,3,3,"axe","pickaxe","texture",False,"drops")
-        self.assertEqual(newItems.getCount(), 0)
-        newItems.increase()
-        self.assertEqual(newItems.getCount(), 1)
-        newItems.decrease()
-        self.assertEqual(newItems.getCount(), 0)
+        newItems = itemNew.Item(9,"Bigblock",100,3,3,"axe","pickaxe","texture",False,"drops") #creates a new item
+        self.assertEqual(newItems.getCount(), 0) #checks that the count is correct
+        newItems.increase() #increases the count
+        self.assertEqual(newItems.getCount(), 1) #checks that the count is correct
+        newItems.decrease() #decreases the count
+        self.assertEqual(newItems.getCount(), 0) #checks that the count is correct
 
-        self.assertEqual(int, type(newItems.itemID))
-        self.assertEqual(str, type(newItems.itemDisplayName))
-        self.assertEqual(int, type(newItems.breakTime))
-        self.assertEqual(int, type(newItems.blockHardness))
-        self.assertEqual(int, type(newItems.itemHardness))
-        self.assertEqual(str, type(newItems.reqToolType))
-        self.assertEqual(str, type(newItems.toolType))
-        self.assertEqual(str, type(newItems.texture))
-        self.assertEqual(bool, type(newItems.isPlaceable))
-        self.assertEqual(str, type(newItems.drops))
+        self.assertEqual(int, type(newItems.itemID)) #checks that the item id is correct
+        self.assertEqual(str, type(newItems.itemDisplayName)) #checks that the item display name is correct
+        self.assertEqual(int, type(newItems.breakTime)) #checks that the break time is correct
+        self.assertEqual(int, type(newItems.blockHardness)) #checks that the block hardness is correct
+        self.assertEqual(int, type(newItems.itemHardness)) #checks that the item hardness is correct
+        self.assertEqual(str, type(newItems.reqToolType)) #checks that the req tool type is correct
+        self.assertEqual(str, type(newItems.toolType)) #checks that the tool type is correct
+        self.assertEqual(str, type(newItems.texture)) #checks that the texture is correct
+        self.assertEqual(bool, type(newItems.isPlaceable)) #checks that the is placeable is correct
+        self.assertEqual(str, type(newItems.drops)) #checks that the drops is correct
 
-        self.assertEqual(newItems.getItemId(), 9)
-        self.assertEqual(newItems.getItemName(), "Bigblock")
-        self.assertEqual(newItems.getBreakTime(), 100)
-        self.assertEqual(newItems.getBlockHardness(), 3)
-        self.assertEqual(newItems.getItemHardness(), 3)
-        self.assertEqual(newItems.getReqToolType(), "axe")
-        self.assertEqual(newItems.getToolType(), "pickaxe")
-        self.assertEqual(newItems.getTexture(), "texture")
-        self.assertEqual(newItems.getIsPlaceable(), False)
-        self.assertEqual(newItems.getDrop(), "drops")
+        self.assertEqual(newItems.getItemId(), 9) #checks that the item id is correct
+        self.assertEqual(newItems.getItemName(), "Bigblock") #checks that the item name is correct
+        self.assertEqual(newItems.getBreakTime(), 100) #checks that the break time is correct
+        self.assertEqual(newItems.getBlockHardness(), 3) #checks that the block hardness is correct
+        self.assertEqual(newItems.getItemHardness(), 3) #checks that the item hardness is correct
+        self.assertEqual(newItems.getReqToolType(), "axe") #checks that the req tool type is correct
+        self.assertEqual(newItems.getToolType(), "pickaxe") #checks that the tool type is correct
+        self.assertEqual(newItems.getTexture(), "texture") #checks that the texture is correct
+        self.assertEqual(newItems.getIsPlaceable(), False) #checks that the is placeable is correct
+        self.assertEqual(newItems.getDrop(), "drops") #checks that the drops is correct
 
 #tests relating to minecraft gym environ,emt
 class testMinecraftEnv(unittest.TestCase):
@@ -867,65 +867,65 @@ class testMinecraftEnv(unittest.TestCase):
     #tests that when the agent performs an action, the action actually takes places, specifically for movement
     def testActionSpaceMovement(self):
         
-        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0,seed=1212)
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0,seed=1212) #creates the gym environment
         
-        obs, info = self.ENV.reset(seed=1212)
+        obs, info = self.ENV.reset(seed=1212) #resets the gym environment
         prevpos = (0, 0)
-        ih.fullInv=False
+        ih.fullInv=False 
         
-        currpos = self.ENV.pygame.player.getPlayerPos()
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
         while (prevpos != currpos):
             self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
-            prevpos = currpos
-            currpos = self.ENV.pygame.player.getPlayerPos()
+            prevpos = currpos # sets the previous position to the current position
+            currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
             
-            print(currpos," ",prevpos)
-        currpos = self.ENV.pygame.player.getPlayerPos()
-        self.ENV.step(gs.actionSpace["MOVEMENT"][1])
+            print(currpos," ",prevpos) #prints the current position and the previous position
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
+        self.ENV.step(gs.actionSpace["MOVEMENT"][1]) #moves the player forward
         
-        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
-        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
-        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
-        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos()) #checks that the player has moved
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0]) #forces the player to be on the ground
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0]) #forces the player to be on the ground
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0]) #forces the player to be on the ground
         
-        currpos = self.ENV.pygame.player.getPlayerPos()
-        self.ENV.step(gs.actionSpace["MOVEMENT"][3])
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
+        self.ENV.step(gs.actionSpace["MOVEMENT"][3]) #moves the player left
         
-        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
-        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos()) #checks that the player has moved
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0]) #forces the player to be on the ground
         
-        currpos = self.ENV.pygame.player.getPlayerPos()
-        self.ENV.step(gs.actionSpace["MOVEMENT"][2])
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
+        self.ENV.step(gs.actionSpace["MOVEMENT"][2]) #moves the player right
         
         self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
 
         prevpos = (0, 0)  # wait for the player to stop jumping
         currpos = self.ENV.pygame.player.getPlayerPos()
-        while (prevpos != currpos):
+        while (prevpos != currpos): # wait for the player to stop jumping
             self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
-            prevpos = currpos
-            currpos = self.ENV.pygame.player.getPlayerPos()
+            prevpos = currpos # sets the previous position to the current position
+            currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
             
-        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0]) #forces the player to be on the ground
         
-        currpos = self.ENV.pygame.player.getPlayerPos()
-        self.ENV.step(gs.actionSpace["MOVEMENT"][4])
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
+        self.ENV.step(gs.actionSpace["MOVEMENT"][4]) #moves the player back
         
-        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos()) #checks that the player has moved
 
         prevpos = (0, 0)  # wait for the player to stop jumping
-        currpos = self.ENV.pygame.player.getPlayerPos()
-        while (prevpos != currpos):
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
+        while (prevpos != currpos): # wait for the player to stop jumping
             self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
-            prevpos = currpos
-            currpos = self.ENV.pygame.player.getPlayerPos()
+            prevpos = currpos # sets the previous position to the current position
+            currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
             
-        self.ENV.step(gs.actionSpace["MOVEMENT"][0])
+        self.ENV.step(gs.actionSpace["MOVEMENT"][0]) #forces the player to be on the ground
         
-        currpos = self.ENV.pygame.player.getPlayerPos()
-        self.ENV.step(gs.actionSpace["MOVEMENT"][5])
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
+        self.ENV.step(gs.actionSpace["MOVEMENT"][5]) #moves the player up
         
-        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
+        self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos()) #checks that the player has moved
 
         prevpos = (0, 0)  # wait for the player to stop jumping
         currpos = self.ENV.pygame.player.getPlayerPos()
@@ -947,17 +947,17 @@ class testMinecraftEnv(unittest.TestCase):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=6942034)
         tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
-                                blockHardness[7],breakSpeed[7])
-        ih.addBlock(tempBlock)
-        inv = ih.getInv()
-        found = False
+                                blockHardness[7],breakSpeed[7]) #creates a block
+        ih.addBlock(tempBlock) #adds the block to the inventory
+        inv = ih.getInv() #gets the inventory
+        found = False #sets found to false
         for i in inv:
             if (i.itemID == 8):  # see if there are logs in the inventory
                 found = True
                 break
-        self.assertFalse(found)
-        self.ENV.step(gs.actionSpace["CRAFTING"][0])
-        found = False
+        self.assertFalse(found) #checks that there are no logs in the inventory
+        self.ENV.step(gs.actionSpace["CRAFTING"][0]) #crafts a crafting table
+        found = False #sets found to false
         for i in inv:
             if (i.itemID == 8):  # see if there are logs in the inventory
                 found = True
@@ -966,42 +966,42 @@ class testMinecraftEnv(unittest.TestCase):
         ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
 #tests that when the agent performs an action, the action actually takes places, specifically for breaking and placing blocks
     def testActionSpacePlaceAndBreak(self):
-        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
-        obs, info = self.ENV.reset(seed=1212)
+        self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0) #creates the environment
+        obs, info = self.ENV.reset(seed=1212) #resets the environment
         prevpos = (0, 0)
         #
         self.ENV.pygame.player.rect.y-=100
-        currpos = self.ENV.pygame.player.getPlayerPos()
+        currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
         while (prevpos != currpos):
             self.ENV.step(gs.actionSpace["MOVEMENT"][0])  # forces the players position to be set to the ground
-            prevpos = currpos
-            currpos = self.ENV.pygame.player.getPlayerPos()
+            prevpos = currpos # sets the previous position to the current position
+            currpos = self.ENV.pygame.player.getPlayerPos() #gets the current position of the player
             #
         ih.clearInv()
         tempBlock = block.Block(gs.blockSize,(9 * gs.blockSize,9 * gs.blockSize),7,textureNames["Oak Log"],
-                                blockHardness[7],breakSpeed[7])
+                                blockHardness[7],breakSpeed[7]) #creates a block
         for i in range(5):
-            ih.addBlock(tempBlock)
+            ih.addBlock(tempBlock) #adds the block to the inventory
         self.assertEqual(ih.getItemCount(7), 5)  # check that there are 10 logs in the inventory
         #
         inv = ih.getInv()
-        for i in range(len(inv)):
-            if (inv[i].itemID == 7):
-                ih.selected = i
-                break
-        count = 5
+        for i in range(len(inv)): #loops through the inventory
+            if (inv[i].itemID == 7): #checks if the item is a log
+                ih.selected = i #sets the selected item to the log
+                break #breaks the loop
+        count = 5 #sets the count to 5
         for i in range(5):
             playerPos=[self.ENV.pygame.player.getPlayerPos()[0],self.ENV.pygame.player.getPlayerPos()[1]]
             offset = [[-1,-1],[0,-1],[1,-1],  # offsets of player positions, top row is above player
                        [-1,0],[-1,1],[1,0],[1,1],  # left down, left up, right down, right up
                        [-1,2],[0,2],[1,2]]
-            playerPos[0] += offset[i][0] * gs.blockSize
-            playerPos[1] += offset[i][1] * gs.blockSize                       
-            bPos = bph.getBlockFromPos(playerPos, self.ENV.pygame.worldBlocks)
-            if(bPos.itemID==-1):
+            playerPos[0] += offset[i][0] * gs.blockSize # adds the offset to the player position
+            playerPos[1] += offset[i][1] * gs.blockSize     # adds the offset to the player position                          
+            bPos = bph.getBlockFromPos(playerPos, self.ENV.pygame.worldBlocks) #gets the block from the position
+            if(bPos.itemID==-1): #checks if the block is air
                 count -= 1
-                self.ENV.step(gs.actionSpace["WORLD"][10 + i])
-                self.assertEqual(ih.getItemCount(7), count)
+                self.ENV.step(gs.actionSpace["WORLD"][10 + i]) #places a block
+                self.assertEqual(ih.getItemCount(7), count) # check that there are 10 logs in the inventory
             
         count = 0
         for i in range(5):

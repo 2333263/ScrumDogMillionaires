@@ -1,10 +1,3 @@
-<!---
-<img src="assets/fullLogo.jpg" alt="FullLogo" width="400" style="
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;"/>
--->
 <img src="assets/Logo_Background.jpg" alt="FullLogo" width="400" 
 style="
   display: block;
@@ -23,10 +16,6 @@ Gym is a Python library which provides a standard API for developing reinforceme
 One is able to create custom tasks which the agent will have to complete and receive a reward thereafter. 
 In addition, you are able to make use of any of the built in tasks that the team has created for you. 
 
-
-
-<!--- Add in info about Jim & Michael (our lord and savior) here  -->
-
 ## Group Members
 * Justin (scrum master)
 * Lior
@@ -44,6 +33,7 @@ In addition, you are able to make use of any of the built in tasks that the team
 SCRUM-DOG-MILLIONAIRES
 │   setup.py    # The configuration file for the package.  
 │   MainGym.py  # Gym current setup and runner file
+│   main.py     # Main py file for the base interactive game
 │
 └───Diagrams
 │   │   ...     # Diagrams outlining the implementation
@@ -71,8 +61,7 @@ SCRUM-DOG-MILLIONAIRES
 │
 │
 └───MainGame
-│   │   main.py  # Main py file for the base interactive game
-│   │   ...      # Website Files
+│   │   ...      # Interactive Game Files
 ```
 
 ## Packages used
@@ -84,8 +73,12 @@ SCRUM-DOG-MILLIONAIRES
 
 
 ## Installing the package 
-In order to install the package locally, please run this from your local terminal after setting your current working directory using `cd /directoy/`. Then run the following command.
+In order to install the package locally, please download the latest release (currently version `2.0.0`) from [here](https://github.com/2333263/ScrumDogMillionaires/releases).  
+Once downloaded, please extract the file into the desired directory and set it as the actice directoy. 
+  
+If it is your first time running, please run the following command from the root directory (`/SCRUM-DOG-MILLIONAIRES`) of the project in the terminal:
 ```py
-pip install -e scrumdogmillionaires
+pip install -r requirements.txt
 ```
-
+  
+Once the requirements are installed, navigate to the appropriate page on the website in order to see instructions on running the interactive game, or running the gym agent. 
