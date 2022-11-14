@@ -1,0 +1,176 @@
+[
+    {
+        "craftingID" : 0,
+        "toolName" : "Wooden Planks",
+        "itemID" : 8,
+        "craftingAmount" : 4,
+        "recipe" :
+        [
+            {
+                "itemID" : 7,
+                "numBlocks" : 1
+            }
+        ],
+        "shape":
+        [-1, -1, -1,
+         -1,  7, -1,
+         -1, -1, -1]
+
+    },
+
+    {
+        "craftingID" : 1,
+        "toolName" : "Wooden Pickaxe",
+        "itemID" : 11,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID": 8,
+                "numBlocks" : 5
+            }
+        ],
+        "shape":
+        [8, 8, 8,
+        -1, 8, -1,
+        -1, 8, -1]
+    },
+
+
+    {
+        "craftingID" : 2,
+        "toolName" : "Stone Pickaxe",
+        "itemID" : 16,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 2,
+                "numBlocks" : 3
+            },
+            {
+                "itemID": 8,
+                "numBlocks" : 2
+            }
+        ],
+        "shape":
+        [2, 2, 2,
+        -1, 8, -1,
+        -1, 8, -1]
+    },
+
+    
+    {
+        "craftingID" : 3,
+        "toolName" : "Diamond",
+        "itemID" : 50,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 49,
+                "numBlocks" : 1
+            }
+        ],
+        "shape":
+        [-1, -1, -1,
+         -1, 49, -1,
+         -1, -1, -1]
+    },
+    {
+        "craftingID" : 4,
+        "toolName" : "Emerald",
+        "itemID" : 53,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 78,
+                "numBlocks" : 1
+            }
+        ],
+        "shape":
+        [-1, -1, -1,
+            -1, 78, -1,
+         -1, -1, -1]
+    },
+    {
+        "craftingID" : 5,
+        "toolName" : "Gold Ingot",
+        "itemID" : 47,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 46,
+                "numBlocks" : 1
+            }
+        ],
+        "shape":
+        [-1, -1, -1,
+         -1, 46, -1,
+         -1, -1, -1]
+    },
+    {
+        "craftingID" :6,
+        "toolName" : "Diamond Block",
+        "itemID" : 67,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 50,
+                "numBlocks" : 9
+            }
+        ],
+        "shape":
+        [50, 50, 50,
+         50, 50, 50,
+         50, 50, 50]
+    },
+   
+    {
+        "craftingID" : 7,
+        "toolName" : "Gold Block",
+        "itemID" : 64,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 47,
+                "numBlocks" : 9
+            }
+        ],
+        "shape":
+        [47, 47, 47,
+         47, 47, 47,
+         47, 47, 47]
+    },
+    {
+        "craftingID" : 8,
+        "toolName" : "End Game Block",
+        "itemID" : 83,
+        "craftingAmount" : 1,
+        "recipe" :
+        [
+            {
+                "itemID" : 64,
+                "numBlocks" : 4
+            },
+            {
+                "itemID" : 67,
+                "numBlocks" : 4
+            },
+            {
+                "itemID" : 53,
+                "numBlocks" : 1
+            }
+        ],
+        "shape":
+        [64, 67, 64,
+         67, 53, 67,
+         64, 67, 64]
+    }
+   
+
+]
