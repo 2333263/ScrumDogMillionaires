@@ -1,7 +1,0 @@
-README.md
-setup.py
-gym_MC.egg-info/PKG-INFO
-gym_MC.egg-info/SOURCES.txt
-gym_MC.egg-info/dependency_links.txt
-gym_MC.egg-info/requires.txt
-gym_MC.egg-info/top_level.txt
