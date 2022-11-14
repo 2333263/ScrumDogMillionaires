@@ -40,60 +40,59 @@ class TestItem(unittest.TestCase):
     tempItem1.itemHardness=20
  
     def test_itemID(self):
-        self.assertIsInstance(self.tempItem.itemID, int)
-        self.assertGreaterEqual(self.tempItem.itemID, 0)
-        self.assertLessEqual(self.tempItem.itemID, len(itemIDs) + 1)
-        self.assertEqual(self.tempItem.getItemId(), self.tempItem.itemID)
-        self.assertIsInstance(self.tempItem1.itemID, int)
-        self.assertGreaterEqual(self.tempItem1.itemID, 0)
-        self.assertLessEqual(self.tempItem1.itemID, len(itemIDs) + 1)
-        self.assertEqual(self.tempItem1.getItemId(), self.tempItem1.itemID)
+        self.assertIsInstance(self.tempItem.itemID, int) # itemID type is int
+        self.assertGreaterEqual(self.tempItem.itemID, 0) # itemID is greater than 0
+        self.assertLessEqual(self.tempItem.itemID, len(itemIDs) + 1) # itemID is less than the length of itemIDs
+        self.assertEqual(self.tempItem.getItemId(), self.tempItem.itemID) # itemID is equal to the itemID of the item
+        self.assertIsInstance(self.tempItem1.itemID, int) # itemID type is int
+        self.assertGreaterEqual(self.tempItem1.itemID, 0) # itemID is greater than 0
+        self.assertLessEqual(self.tempItem1.itemID, len(itemIDs) + 1) # itemID is less than the length of itemIDs
+        self.assertEqual(self.tempItem1.getItemId(), self.tempItem1.itemID) # itemID is equal to the itemID of the item
 
     def test_amount(self):
-        self.assertIsInstance(self.tempItem.amount, int)
-        self.assertGreaterEqual(self.tempItem.amount, 0)
-        self.assertIsInstance(self.tempItem1.amount, int)
-        self.assertGreaterEqual(self.tempItem1.amount, 0)
+        self.assertIsInstance(self.tempItem.amount, int) # amount type is int
+        self.assertGreaterEqual(self.tempItem.amount, 0) # amount is greater equal than 0
+        self.assertIsInstance(self.tempItem1.amount, int) # amount type is int
+        self.assertGreaterEqual(self.tempItem1.amount, 0) # amount is greater equal than 0
         oldCount = self.tempItem.amount
-        self.tempItem.increase()
-        self.assertGreaterEqual(self.tempItem.amount, oldCount)
-        self.tempItem.decrease()
-        self.assertEqual(self.tempItem.amount, oldCount)
-        self.assertEqual(self.tempItem.amount, self.tempItem.getCount())
+        self.tempItem.increase() # increase amount by 1
+        self.assertGreaterEqual(self.tempItem.amount, oldCount) # amount is greater equal than oldCount
+        self.tempItem.decrease() # decrease amount by 1
+        self.assertEqual(self.tempItem.amount, oldCount) # amount is equal to oldCount
+        self.assertEqual(self.tempItem.amount, self.tempItem.getCount()) # amount is equal to the amount of the item
 
     def test_name(self):
-        self.assertIsInstance(self.tempItem.itemDisplayName, str)
-        self.assertEqual(self.tempItem.getItemName(), "Grass Block")
-        self.assertIsInstance(self.tempItem1.itemDisplayName, str)
-        self.assertEqual(self.tempItem1.getItemName(), "Dirt Block")
+        self.assertIsInstance(self.tempItem.itemDisplayName, str) # itemDisplayName type is str
+        self.assertEqual(self.tempItem.getItemName(), "Grass Block") # itemDisplayName is equal to the itemDisplayName of the item
+        self.assertIsInstance(self.tempItem1.itemDisplayName, str) # itemDisplayName type is str
+        self.assertEqual(self.tempItem1.getItemName(), "Dirt Block") # itemDisplayName is equal to the itemDisplayName of the item
 
     def test_Hardness(self):
-        self.assertEqual(self.tempItem.getItemHardness(), 0)
-        self.assertEqual(self.tempItem1.getItemHardness(), 20)
+        self.assertEqual(self.tempItem.getItemHardness(), 0) # itemHardness is equal to the correct itemHardness of the item
+        self.assertEqual(self.tempItem1.getItemHardness(), 20) # itemHardness is equal to the correct itemHardness of the item
 
 
 class TestBlock(unittest.TestCase):
-    tempBlock = block.Block(gs.blockSize,(0,0),0,textureNames[itemIDs[0]],0,breakSpeed[0])
+    tempBlock = block.Block(gs.blockSize,(0,0),0,textureNames[itemIDs[0]],0,breakSpeed[0]) 
 
     def test_itemIDs(self):
-        self.assertIsInstance(self.tempBlock.itemID, int)
-        self.assertGreaterEqual(self.tempBlock.itemID, 0)
-        self.assertLessEqual(self.tempBlock.itemID, len(itemIDs) + 1)
+        self.assertIsInstance(self.tempBlock.itemID, int) # itemID type is int
+        self.assertGreaterEqual(self.tempBlock.itemID, 0) # itemID is greater than 0
+        self.assertLessEqual(self.tempBlock.itemID, len(itemIDs) + 1) # itemID is less than the length of itemIDs
 
     def test_positions(self):
-        self.assertGreaterEqual(self.tempBlock.blockPosition[0], 0)
-        self.assertGreaterEqual(self.tempBlock.blockPosition[1], 0)
+        self.assertGreaterEqual(self.tempBlock.blockPosition[0], 0) # x position is greater equal  than 0
+        self.assertGreaterEqual(self.tempBlock.blockPosition[1], 0)     # y position is greater equal  than 0  
 
-        self.assertLessEqual(self.tempBlock.blockPosition[0], gs.width)
-        self.assertLessEqual(self.tempBlock.blockPosition[1], gs.height)
+        self.assertLessEqual(self.tempBlock.blockPosition[0], gs.width) # x position is less equal  than width
+        self.assertLessEqual(self.tempBlock.blockPosition[1], gs.height)    # y position is less equal  than height
 
     def test_texture(self):
-        self.assertIsInstance(self.tempBlock.textureName, str)
-        self.assertIsInstance(self.tempBlock.rect, pygame.rect.Rect)
-        # Add check for texture object
+        self.assertIsInstance(self.tempBlock.textureName, str) # textureName type is str
+        self.assertIsInstance(self.tempBlock.rect, pygame.rect.Rect) # rect type is pygame.rect.Rect
 
     def test_hardness(self):
-        self.assertEqual(self.tempBlock.getHardness(), 0)
+        self.assertEqual(self.tempBlock.getHardness(), 0) # hardness is equal to 0
 
 #tests realting to the button that does the crafts
 class TestCraftingButton(unittest.TestCase):
@@ -134,7 +133,7 @@ class TestTextHandler(unittest.TestCase):
 
 class TestRecipeHandler(unittest.TestCase):
     tempHandler = recipeHandler.RecipeHandler()
-
+    #tests that the recipe handler is created correctly by checking correct types
     def test_initialiser(self):
         self.assertIsInstance(self.tempHandler.recipe, dict)
 
@@ -172,7 +171,7 @@ class TestPlayer(unittest.TestCase):
             pygame.K_a: False,
             pygame.K_d: False
         }
-        self.simulatedKeys[pygame.K_LEFT] = True
+        self.simulatedKeys[pygame.K_LEFT] = True #move left
         self.TempPlayer.MoveOnX(self.simulatedKeys)
         self.assertEqual(self.TempPlayer.direction.x, -2)
         self.simulatedKeys[pygame.K_LEFT] = False
