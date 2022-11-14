@@ -11,7 +11,6 @@ from MainGame.Player import playerHandler as ph
 from MainGame.Inventory import inventoryHandler as ih,InventorySlots
 from MainGame.Chunks import ChunkGenerator as CG,ChunkHandler as CH
 from MainGame.Portal import Portal
-# from itemHandler import populateDictionaries
 from MainGame.Items import itemHandler,itemNew
 import numpy as np
 import gym
@@ -96,35 +95,35 @@ class TestBlock(unittest.TestCase):
     def test_hardness(self):
         self.assertEqual(self.tempBlock.getHardness(), 0)
 
-
+#tests realting to the button that does the crafts
 class TestCraftingButton(unittest.TestCase):
     tempButton = CraftButtonHandler.Button(0,(0,0),50,50)
     pygame.init()
-
+    #tests that the item id of the button is set correctly
     def test_itemIDs(self):
         self.assertIsInstance(self.tempButton.itemID, int)
         self.assertGreaterEqual(self.tempButton.itemID, 0)
         self.assertLessEqual(self.tempButton.itemID, len(itemIDs) + 1)
-
+    #tests that the position of the button is set correctlt
     def test_positions(self):
         self.assertGreaterEqual(self.tempButton.pos[0], 0)
         self.assertGreaterEqual(self.tempButton.pos[1], 0)
 
         self.assertLessEqual(self.tempButton.pos[0], gs.width)
         self.assertLessEqual(self.tempButton.pos[1], gs.height)
-
+    #tests that the buttons rect is set correctly (this is so collisions work)
     def test_rectangle(self):
         self.assertIsInstance(self.tempButton.rect, pygame.rect.Rect)
 
-
+#tests that creation of text based sprites works
 class TestTextHandler(unittest.TestCase):
     testText = TextHandler.Text("TestCase", 12, "red", (0, 0))
-
+    #test that the text is set correctly
     def test_text(self):
         self.assertIsInstance(self.testText.words, str)
         self.assertIsInstance(self.testText.my_font, pygame.font.Font)
         self.assertIsInstance(self.testText.rect, pygame.rect.Rect)
-
+    #tests that the position of the text is positioned correctly on screen
     def test_positions(self):
         self.assertGreaterEqual(self.testText.pos[0], 0)
         self.assertGreaterEqual(self.testText.pos[1], 0)
@@ -778,7 +777,7 @@ class TestBreakPlace(unittest.TestCase):
                 found = True
         self.assertFalse(found)
 
-
+#tests that inventory slot class gets initlized corrected
 class TestInvinventorySlots(unittest.TestCase):
     ins = InventorySlots.slot("red",10,20,30,40)
 
@@ -839,22 +838,12 @@ class TestItemNew(unittest.TestCase):
         self.assertEqual(newItems.getIsPlaceable(), False)
         self.assertEqual(newItems.getDrop(), "drops")
 
-
-'''
-class TestItemHandler (unittest.TestCase):
-       def test_populateDictionaries(self):
-         self.assertEqual(populateDictionaries(),None); 
-         self.assertEqual(dict,  type(itemHandler.itemIDs));
-#unittest.TestLoader.sortTestMethodsUsing=None
-'''
-
-# commented out because its complaining that neither populate dictionaries and itemhandler dont exist
+#tests relating to minecraft gym environ,emt
 class testMinecraftEnv(unittest.TestCase):
     NullItem = itemArr[0]  # Item("null", -1)
     ih.invArray=np.full(40,NullItem,dtype=itemNew.Item)
-   #ENV = MCENV.MinePy(render_mode="rgb_array", easyStart=0, seed="6942034")
     ENV = gym.make("MinePy-1", render_mode="rgb_array")
-
+    #tests that the different settings actually change how the gym environment is generated
     def testStartModes(self):
         for i in itemArr:
             if(i.amount>0):
@@ -876,7 +865,7 @@ class testMinecraftEnv(unittest.TestCase):
         self.assertEqual(ih.getItemCount(50), 2)  # check if the game starts with a diamond
         self.assertEqual(ih.getItemCount(53), 2)  # check if the game starts with an emerald
         ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
-
+    #tests that when the agent performs an action, the action actually takes places, specifically for movement
     def testActionSpaceMovement(self):
         
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0,seed=1212)
@@ -884,8 +873,6 @@ class testMinecraftEnv(unittest.TestCase):
         obs, info = self.ENV.reset(seed=1212)
         prevpos = (0, 0)
         ih.fullInv=False
-        #self.ENV.pygame.player.rect.x=0
-        #self.ENV.pygame.player.rect.y=-6500
         
         currpos = self.ENV.pygame.player.getPlayerPos()
         while (prevpos != currpos):
@@ -903,12 +890,8 @@ class testMinecraftEnv(unittest.TestCase):
         self.ENV.step(gs.actionSpace["MOVEMENT"][0])
         
         currpos = self.ENV.pygame.player.getPlayerPos()
-       # self.ENV.step(gs.actionSpace["MOVEMENT"][3])
-       # self.ENV.step(gs.actionSpace["MOVEMENT"][3])
-       # self.ENV.step(gs.actionSpace["MOVEMENT"][3])
         self.ENV.step(gs.actionSpace["MOVEMENT"][3])
         
-        #self.ENV.player.update(2,self.ENV.worldBlocks)
         self.assertNotEqual(currpos, self.ENV.pygame.player.getPlayerPos())
         self.ENV.step(gs.actionSpace["MOVEMENT"][0])
         
@@ -952,7 +935,7 @@ class testMinecraftEnv(unittest.TestCase):
             
             prevpos = currpos
             currpos = self.ENV.pygame.player.getPlayerPos()
-
+   #tests that when the agent performs an action, the action actually takes places, specifically for selecting a position in the hotbar
     def testActionSpaceHotBar(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=6942034)
@@ -960,7 +943,7 @@ class testMinecraftEnv(unittest.TestCase):
         for i in range(40):
             self.ENV.step(gs.actionSpace["HOTBAR"][i])
             self.assertEqual(ih.selected, i)
-
+    #tests that when the agent performs an action, the action actually takes places, specifically for crafting items
     def testActionSpaceCrafting(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=6942034)
@@ -982,7 +965,7 @@ class testMinecraftEnv(unittest.TestCase):
                 break
         self.assertTrue(found)
         ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
-
+#tests that when the agent performs an action, the action actually takes places, specifically for breaking and placing blocks
     def testActionSpacePlaceAndBreak(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1027,7 +1010,7 @@ class testMinecraftEnv(unittest.TestCase):
             self.ENV.step(gs.actionSpace["WORLD"][i])  # break blocks around the player
             self.assertEqual(ih.getItemCount(7), count)  # see if it got readded to the inventory
         ih.invArray = np.full(40,self.NullItem,dtype=itemNew.Item)
-
+    #tests that recieving rewards work
     def testEvaluateGeneralRewards(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1041,7 +1024,7 @@ class testMinecraftEnv(unittest.TestCase):
         for i in range(40):
             Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][i])
             self.assertEqual(reward, 0.01)
-            
+    #tests that when performing the actions required for stage 1 of the rewards, the correct rewards are given
     def testEvaluateStage1(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1094,7 +1077,7 @@ class testMinecraftEnv(unittest.TestCase):
             ih.addBlock(stage1Blocks[1])
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][0])
         self.assertEqual(reward, 10)
-        
+    #tests that when performing the actions required for stage 2 of the rewards, the correct rewards are given
     def testEvaluateStage2Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1126,7 +1109,7 @@ class testMinecraftEnv(unittest.TestCase):
         
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
         self.assertEqual(reward, 20) # complete state 2 rewards
-
+    #tests that when performing the actions required for stage 3 of the rewards, the correct rewards are given
     def testEvaluateStage3Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1159,7 +1142,7 @@ class testMinecraftEnv(unittest.TestCase):
         ih.addBlock(stage3Blocks[2]) # get to stage 4
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
         self.assertEqual(reward, 30) # complete state 3 rewards
-
+#tests that when performing the actions required for stage 4 of the rewards, the correct rewards are given
     def testEvaluateStage4Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1238,7 +1221,7 @@ class testMinecraftEnv(unittest.TestCase):
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][0])
         self.assertEqual(reward, 40)
         
-    
+    #tests that when performing the actions required for stage 5 of the rewards, the correct rewards are given
     def testEvaluateStage5Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1280,11 +1263,10 @@ class testMinecraftEnv(unittest.TestCase):
         ih.addBlock(stage5Blocks[4]) # get to stage 6
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
         self.assertEqual(reward, 50) # complete state 5 rewards
-
+    #tests that when performing the actions required for stage 6 of the rewards, the correct rewards are given
     def testEvaluateStage6Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
-        #ih.invArray = np.full(40, self.NullItem, dtype=itemNew.Item) # clear the inv
         
          # logs, planks, woodenpickaxxe, stone, stonepickaxe, leaves, dirt, grass, gold, diamond, emerald
         stage6Blocks = [
@@ -1376,7 +1358,7 @@ class testMinecraftEnv(unittest.TestCase):
         ih.addBlock(stage6Blocks[10])
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
         self.assertEqual(reward, 60) # complete state 6 rewards
-        
+    #tests that when performing the actions required for stage 7 of the rewards, the correct rewards are given    
     def testEvaluateStage7Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1448,7 +1430,7 @@ class testMinecraftEnv(unittest.TestCase):
 
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
         self.assertEqual(reward, 70) # complete state 7 rewards
-
+    #tests that when performing the actions required for stage 8 of the rewards, the correct rewards are given
     def testEvaluateStage8Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
@@ -1530,7 +1512,7 @@ class testMinecraftEnv(unittest.TestCase):
 
         Obs, reward, done, boolo, infoDict = self.ENV.step(gs.actionSpace["HOTBAR"][1])
         self.assertEqual(reward, 80) # complete state 8 rewards
-
+#tests that when performing the actions required for stage 9 of the rewards, the correct rewards are given
     def testEvaluateStage9Progess(self):
         self.ENV = gym.make("MinePy-1", render_mode="rgb_array",easyStart=0)
         obs, info = self.ENV.reset(seed=1212)
